@@ -1,0 +1,62 @@
+/* 시안 공통 — 55·56 이 같이 쓰는 '약 목록 고치기' 창과 작은 부품들 */
+
+/* 시각 칸 (지금 앱은 input[type=time] 을 TDT 로 그린다 — 시안은 모양만) */
+.tbox { width: 140px; min-height: 44px; padding: 10px 6px; font-weight: 700; color: var(--primary-dark);
+  flex: 0 0 auto; text-align: center; }
+
+/* 드시는 시간 네 칸 — 같은 폭 · 48px(창 안에서는 44px) */
+.when-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.when-grid .chip { justify-content: center; min-height: 48px; padding: 10px 4px; font-size: 15px;
+  font-weight: 700; border-radius: 14px; }
+.when-grid .chip:not(.chip--on) { color: var(--on-surface); }
+.when-grid--sm { gap: 6px; }
+.when-grid--sm .chip { min-height: 44px; font-size: 14px; border-radius: 12px; }
+
+/* 아래에서 올라오는 창 — 지금 앱의 고르기 창(native.js pickStyle)과 같은 모양 */
+.pk-dim { position: absolute; inset: 0; background: rgba(20,8,14,.45); z-index: 50;
+  display: flex; align-items: flex-end; justify-content: center; }
+.pk-sheet { width: 100%; background: var(--surface); border-radius: 22px 22px 0 0;
+  padding: 18px 16px 18px; box-shadow: 0 -8px 30px rgba(0,0,0,.18); max-height: 92%;
+  display: flex; flex-direction: column; word-break: keep-all; }
+.pk-title { font-weight: 800; font-size: 17px; line-height: 1.45; text-align: center; margin: 2px 0 4px; }
+.pk-sub { font-size: 13px; line-height: 1.5; text-align: center; color: var(--on-surface-variant); margin-bottom: 12px; }
+.pk-list { overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding: 2px; }
+.pk-acts { display: flex; gap: 10px; margin-top: 14px; flex: 0 0 auto; }
+.pk-acts button { flex: 1; border: 0; border-radius: 14px; padding: 14px 0; font-family: inherit;
+  font-size: 16px; font-weight: 800; cursor: pointer; }
+.pk-cancel { background: var(--surface-3); color: var(--on-surface-variant); }
+.pk-ok { background: var(--primary); color: #fff; }
+.ro-auto { margin-bottom: 10px; flex: 0 0 auto; }
+.ro-foot { margin-top: 10px; text-align: center; flex: 0 0 auto; }
+
+/* 약 한 줄 — 위: 잡는 곳(≡ + 이름) · 아래: 드시는 시간 네 칸 */
+.ro-row { position: relative; padding: 4px 10px 10px; border: 1.5px solid var(--outline);
+  border-radius: 14px; background: var(--white);
+  transition: transform .18s ease, background .25s, border-color .25s, box-shadow .15s; }
+.ro-row.is-moved { border-color: var(--primary); background: var(--primary-tint); }
+.ro-grip { display: flex; align-items: center; gap: 10px; min-height: 46px; padding: 2px 0;
+  cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; }
+.ro-handle { flex: 0 0 18px; height: 14px;
+  background:
+    linear-gradient(var(--outline-strong) 0 0) top / 100% 2.5px no-repeat,
+    linear-gradient(var(--outline-strong) 0 0) center / 100% 2.5px no-repeat,
+    linear-gradient(var(--outline-strong) 0 0) bottom / 100% 2.5px no-repeat; }
+.ro-nm { flex: 1 1 auto; min-width: 0; font-size: 15.5px; font-weight: 700; line-height: 1.35; overflow-wrap: anywhere; }
+.ro-chg { margin-top: 8px; font-size: 13px; line-height: 1.45; font-weight: 600; color: var(--primary-dark); }
+
+/* 잡았을 때 — 카드가 들리고(그림자·살짝 커짐) 손가락을 따라온다. 다른 약은 자리를 비켜 준다 */
+.ro-list.is-dragging { overflow: visible; }
+.ro-row.is-drag { z-index: 5; border-color: var(--primary); background: var(--white);
+  box-shadow: 0 14px 30px rgba(60,20,35,.28); transition: box-shadow .15s; }
+.ro-row.is-drag .ro-grip { cursor: grabbing; }
+.ro-row.is-drag .ro-handle {
+  background:
+    linear-gradient(var(--primary) 0 0) top / 100% 2.5px no-repeat,
+    linear-gradient(var(--primary) 0 0) center / 100% 2.5px no-repeat,
+    linear-gradient(var(--primary) 0 0) bottom / 100% 2.5px no-repeat; }
+
+.toast9 { position: absolute; left: 50%; bottom: 110px; transform: translateX(-50%); z-index: 60;
+  max-width: 320px; padding: 12px 16px; border-radius: 14px; background: rgba(36,28,31,.92); color: #fff;
+  font-size: 14px; line-height: 1.45; text-align: center; white-space: pre-line; pointer-events: none;
+  opacity: 0; transition: opacity .2s; }
+.toast9.on { opacity: 1; }

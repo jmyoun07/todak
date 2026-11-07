@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 정보</title>
+<link rel="stylesheet" href="app.css">
+<style>
+/* ── 정보 탭(06 정보 · 09 음식·건강기능식품 · 17 자가관리 가이드) 전용 모양 (2026-09-28) ──
+   공용 부품은 app.css '정보 화면 디자인 시스템 v3'(.sec · .sec-t · .jump · .link-card · .feature) 를 그대로 쓴다.
+   아래는 이 탭에만 있는 것: 맨 위 네 칸, 치료·주제 상자 그림, 상자 안 타일 여백, 도착 표시, 글자를 크게 키운 폰.
+   같은 줄이 09 · 17 에도 있다 — 고칠 땐 세 화면을 같이 고친다. */
+:root {
+  --ic-cat-se: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='5.5' fill='%23C43E6B'/%3E%3Cpath d='M3.8 5.8c2-.8 3.9-.6 5.6.7v8.4c-1.7-1.2-3.6-1.4-5.6-.7zM16.2 5.8c-2-.8-3.9-.6-5.6.7v8.4c1.7-1.2 3.6-1.4 5.6-.7z' fill='%23fff'/%3E%3C/svg%3E");
+  --ic-cat-food: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='5.5' fill='%23C43E6B'/%3E%3Cpath d='M4.4 9.6h11.2a5.6 5.6 0 0 1-11.2 0z' fill='%23fff'/%3E%3Cpath d='M7.9 7.3c0-1 .8-1.2.8-2.2M11.3 7.3c0-1 .8-1.2.8-2.2' stroke='%23fff' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  --ic-cat-self: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='5.5' fill='%23C43E6B'/%3E%3Cpath d='M4.9 15.3c-.5-6.2 3.4-10.4 10.5-10.7.3 7.1-3.9 11-10.5 10.7z' fill='%23fff'/%3E%3Cpath d='M5.8 14.4l5.4-5.4' stroke='%23C43E6B' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E");
+  --ic-all: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Cpath d='M6.2 6.7h7.6M6.2 10h7.6M6.2 13.3h7.6' stroke='%23fff' stroke-width='1.9' stroke-linecap='round'/%3E%3C/svg%3E");
+  --ic-chemo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Cpath d='M8.9 3.1h2.2' stroke='%23fff' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M6.9 4.6h6.2c.6 0 1 .4 1 1v3.6a3.3 3.3 0 0 1-3.3 3.3H9.2a3.3 3.3 0 0 1-3.3-3.3V5.6c0-.6.4-1 1-1z' fill='%23fff'/%3E%3Cpath d='M7.9 7h2M7.9 9h2' stroke='%23C43E6B' stroke-width='1.1' stroke-linecap='round'/%3E%3Cpath d='M10 12.5v1.4' stroke='%23fff' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M10 14.2c-.9 1.1-1.3 1.8-1.3 2.3a1.3 1.3 0 0 0 2.6 0c0-.5-.4-1.2-1.3-2.3z' fill='%23fff'/%3E%3C/svg%3E");
+  --ic-horm: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Cg transform='rotate(-45 10 10)'%3E%3Crect x='4' y='7.4' width='12' height='5.2' rx='2.6' fill='%23fff'/%3E%3Cpath d='M10 7.4h3.4a2.6 2.6 0 0 1 0 5.2H10z' fill='%23F5D9E4'/%3E%3C/g%3E%3C/svg%3E");
+  --ic-rad: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Ccircle cx='10' cy='10' r='2.3' fill='%23fff'/%3E%3Cpath d='M14.3 10h2.2M13 13l1.6 1.6M10 14.3v2.2M7 13l-1.6 1.6M5.7 10H3.5M7 7L5.4 5.4M10 5.7V3.5M13 7l1.6-1.6' stroke='%23fff' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+  --ic-tgt: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Ccircle cx='10' cy='10' r='5.3' fill='none' stroke='%23fff' stroke-width='1.9'/%3E%3Ccircle cx='10' cy='10' r='1.9' fill='%23fff'/%3E%3C/svg%3E");
+  --ic-daily: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Cpath d='M4.6 9.9L10 5.3l5.4 4.6v5.2c0 .4-.3.7-.7.7h-2.9v-3.5H8.2v3.5H5.3c-.4 0-.7-.3-.7-.7z' fill='%23fff'/%3E%3C/svg%3E");
+  --ic-people: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Ccircle cx='7.3' cy='7.7' r='1.9' fill='%23fff'/%3E%3Ccircle cx='12.7' cy='7.7' r='1.9' fill='%23fff'/%3E%3Cpath d='M3.9 14.7c.3-2.3 1.6-3.5 3.4-3.5s3.1 1.2 3.4 3.5zM9.3 14.7c.3-2.3 1.6-3.5 3.4-3.5s3.1 1.2 3.4 3.5z' fill='%23fff'/%3E%3C/svg%3E");
+  --ic-care: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Cg transform='rotate(-45 10 10)'%3E%3Crect x='3' y='6.9' width='14' height='6.2' rx='1.9' fill='%23fff'/%3E%3Crect x='7.5' y='6.9' width='5' height='6.2' fill='%23F5D9E4'/%3E%3Ccircle cx='8.9' cy='8.9' r='.55' fill='%23C43E6B'/%3E%3Ccircle cx='11.1' cy='8.9' r='.55' fill='%23C43E6B'/%3E%3Ccircle cx='8.9' cy='11.1' r='.55' fill='%23C43E6B'/%3E%3Ccircle cx='11.1' cy='11.1' r='.55' fill='%23C43E6B'/%3E%3C/g%3E%3C/svg%3E");
+  --ic-bowl: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Cpath d='M4.6 9.6h10.8a5.4 5.4 0 0 1-10.8 0z' fill='%23fff'/%3E%3Cpath d='M8 7.4c0-1 .8-1.2.8-2.2M11 7.4c0-1 .8-1.2.8-2.2' stroke='%23fff' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  --ic-walk: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Ccircle cx='11' cy='4.9' r='1.55' fill='%23fff'/%3E%3Cpath d='M10.3 7.4l-1.4 4.3 2.5 1.9.5 3M8.9 11.7l-2 3.8M7.1 9.9l2.5-2.3 2.2 2.5 2.1.5' stroke='%23fff' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --ic-heart: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Cpath d='M10 15.5s-5.4-3.2-5.4-6.9a2.8 2.8 0 0 1 5.4-1.3 2.8 2.8 0 0 1 5.4 1.3c0 3.7-5.4 6.9-5.4 6.9z' fill='%23fff'/%3E%3C/svg%3E");
+  --ic-search: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Ccircle cx='9.1' cy='9.1' r='4' fill='none' stroke='%23fff' stroke-width='2.1'/%3E%3Cpath d='M12.1 12.1l3.2 3.2' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
+  --ic-chev-p: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M7.5 4.5l5.5 5.5-5.5 5.5' stroke='%239E2E54' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+/* 상자 제목 · 이동 단추 앞 그림 (치료·주제마다) */
+.sec.ic-cat-se { --ic: var(--ic-cat-se); }   .sec.ic-cat-food { --ic: var(--ic-cat-food); }   .sec.ic-cat-self { --ic: var(--ic-cat-self); }
+.ic-chemo { --ic: var(--ic-chemo); }  .ic-horm { --ic: var(--ic-horm); }  .ic-rad { --ic: var(--ic-rad); }
+.ic-tgt { --ic: var(--ic-tgt); }  .ic-daily { --ic: var(--ic-daily); }  .ic-all { --ic: var(--ic-all); }
+.ic-people { --ic: var(--ic-people); }  .ic-care { --ic: var(--ic-care); }  .ic-bowl { --ic: var(--ic-bowl); }
+.ic-walk { --ic: var(--ic-walk); }  .ic-heart { --ic: var(--ic-heart); }
+
+/* 치료·주제 상자 — 옅은 분홍 바탕 위에 흰 타일이 떠 보이게. 제목 테두리는 브랜드 분홍 */
+.sec--tx { --sec-bg: #FBF3F6; --sec-line: #EBD6DE; --sec-mk: var(--primary); --sec-ink: var(--on-surface); }
+/* 전체 보기에서 세 갈래가 한 덩어리처럼 보이지 않게 간격·바탕·제목 크기를 분명히 나눈다. */
+.content[data-info] > [data-cat] { margin-top:24px; }
+.content[data-info] > [data-cat] + [data-cat] { margin-top:38px; }
+.content[data-info] > [data-cat="se"] { --sec-bg:var(--primary-tint); --sec-line:var(--primary-light); --sec-mk:var(--primary); }
+.content[data-info] > [data-cat="food"] { --sec-bg:var(--good-bg); --sec-line:var(--good-line); --sec-mk:var(--good); --sec-ink:var(--good-ink); }
+.content[data-info] > [data-cat="self"] { --sec-bg:var(--secondary-tint); --sec-line:#BDD8DF; --sec-mk:var(--info); --sec-ink:var(--info-ink); }
+.content[data-info] > [data-cat] > .sec-t { font-size:20px; font-size:clamp(18px,5.1282cqw,22px); border-width:2px; }
+.content[data-info] > [data-cat]::before { border-width:2px; }
+/* 상자 안 2열 타일 — 홈 기능 타일 그대로. 칸이 좁아 좌우 여백만 조금 줄인다 */
+.sec .feature {
+  padding-left:  clamp(8px, calc(16.667cqw - 55px), 12px);
+  padding-right: clamp(8px, calc(16.667cqw - 55px), 12px);
+}
+.sec .feature .f-ic--caution { background: var(--caution-bg); }
+
+/* ── 맨 위 네 칸 — 전체 / 부작용 정보 / 음식·건강기능식품 / 자가관리 가이드 ──
+   라디오(.flt-in) + 형제 선택자(~)만으로 고른다(스크립트 없이도 동작). 고른 칸만 보이고, '전체'는 세 갈래를 다 보인다.
+   라디오·네 칸·세 갈래 상자는 모두 .content 의 바로 아래 형제여야 한다. */
+.content > .info-tabs { flex: 0 0 auto; }
+.info-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; column-gap: clamp(7px, calc(16.667cqw - 54px), 11px); }
+.info-tab {
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  min-height: 48px; padding: 7px 10px; border-radius: 999px;
+  background: var(--white); border: 1.5px solid var(--outline); color: var(--on-surface-variant);
+  box-shadow: 0 2px 0 var(--surface-3);
+  font-size: 15px; font-size: clamp(14px, 3.8462cqw, 16.5px); font-weight: 700; line-height: 1.3;
+  overflow-wrap: normal; cursor: pointer; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent;
+}
+#info-all:checked  ~ .info-tabs label[for="info-all"],
+#info-se:checked   ~ .info-tabs label[for="info-se"],
+#info-food:checked ~ .info-tabs label[for="info-food"],
+#info-self:checked ~ .info-tabs label[for="info-self"] {
+  background: var(--primary); border-color: var(--primary); color: var(--white); box-shadow: 0 2px 0 var(--primary-dark);
+}
+#info-all:focus-visible  ~ .info-tabs label[for="info-all"],
+#info-se:focus-visible   ~ .info-tabs label[for="info-se"],
+#info-food:focus-visible ~ .info-tabs label[for="info-food"],
+#info-self:focus-visible ~ .info-tabs label[for="info-self"] { outline: 2.5px solid var(--primary-dark); outline-offset: 2px; }
+#info-se:checked   ~ [data-cat]:not([data-cat="se"]),
+#info-food:checked ~ [data-cat]:not([data-cat="food"]),
+#info-self:checked ~ [data-cat]:not([data-cat="self"]) { display: none; }
+
+/* 이거 먹어도 되나요? — 음식·건강기능식품 맨 앞의 큰 칸 */
+.link-card--ask { --ic: var(--ic-search); --lc-line: var(--primary); --lc-edge: #E7B9CA; --lc-ink: var(--primary-dark); background: var(--primary-tint); padding-top: 14px; padding-bottom: 14px; }
+.link-card--ask .link-card-ic { width: 40px; height: 40px; }
+.link-card--ask .link-card-t { font-size: 16.5px; font-size: clamp(15px, 4.2308cqw, 18.2px); }
+.link-card--ask::after { background-image: var(--ic-chev-p); }
+
+/* 이동해 온 상자 제목이 잠깐 빛난다 — info.js 가 .is-arrive 를 붙인다(주소 # 를 바꾸지 않아 :target 이 켜지지 않으므로) */
+.sec.is-arrive > .sec-t { animation: sec-arrive 1.8s ease-out 1; }
+.sec-t[tabindex="-1"]:focus { outline: none; }
+
+/* 글자를 크게 키운 폰(대략 125% 이상) — 두 칸이면 낱말이 쪼개져 한 칸으로 편다. 타일은 그림 옆에 이름 */
+@container (max-width: 20em) {
+  .info-tabs, .sec .feature-grid, .jump.jump--tx { grid-template-columns: 1fr; }
+  .sec .feature { flex-direction: row; align-items: center; gap: 12px; }
+  .sec .feature .f-ic { flex: 0 0 auto; width: 1.5em; height: 1.5em; }   /* 그림 글자가 커진 만큼 칸도 — 그림 글자는 1.46em 높이라 1.5em 이어야 칸 안에 든다(46px 고정이면 칸 밖으로 삐져나온다) */
+}
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="05-home.html">‹</a>
+    <div><div class="appbar-title">정보</div></div>
+  </div>
+
+  <!-- 정보 탭 (2026-09-28 교수님 말씀)
+       · 맨 위 네 칸: 전체(처음) = 세 갈래를 내용까지 다 / 부작용 정보 · 음식·건강기능식품 · 자가관리 가이드 = 그 갈래만.
+       · 부작용 정보 안의 '바로 가기'(전체·항암·호르몬·방사선·표적·일상생활)는 거르지 않고 그 상자 자리로 이동한다.
+         그래서 부작용 하나는 한 번만, 처음 적힌 치료(주된 치료) 상자에 둔다. 공통은 일상생활.
+       · 타일은 홈 기능 타일과 같은 2열. 한 줄 설명은 뺐다. 누르면 ?from=06 으로 가서 ‹ 가 여기로 돌아오고,
+         돌아오면 고른 칸과 보던 자리가 그대로다(js/info.js). -->
+  <div class="content content--tight content--jump" data-info="hub">
+    <input class="flt-in" type="radio" name="info" id="info-all" checked>
+    <input class="flt-in" type="radio" name="info" id="info-se">
+    <input class="flt-in" type="radio" name="info" id="info-food">
+    <input class="flt-in" type="radio" name="info" id="info-self">
+    <div class="info-tabs" role="group" aria-label="보고 싶은 정보 고르기">
+      <label class="info-tab" for="info-all">전체</label>
+      <label class="info-tab" for="info-se">부작용 정보</label>
+      <label class="info-tab" for="info-food">음식·<wbr>건강기능식품</label>
+      <label class="info-tab" for="info-self">자가관리 가이드</label>
+    </div>
+
+    <!-- ═══ ① 부작용 정보 — 치료별 큰 상자 다섯 ═══ -->
+    <section class="sec sec--group ic-cat-se" id="cat-se" data-cat="se">
+      <h2 class="sec-t section-label">부작용 정보</h2>
+
+      <nav class="sec sec--jump" aria-label="치료별 상자로 이동">
+        <div class="sec-t">바로 가기</div>
+        <div class="jump jump--tx">
+          <a class="jump-b ic-all" href="#cat-se"><span>부작용 전체</span></a>
+          <a class="jump-b ic-chemo" href="#tx-chemo"><span>항암</span></a>
+          <a class="jump-b ic-horm" href="#tx-horm"><span>호르몬</span></a>
+          <a class="jump-b ic-rad" href="#tx-rad"><span>방사선</span></a>
+          <a class="jump-b ic-tgt" href="#tx-tgt"><span>표적</span></a>
+          <a class="jump-b ic-daily" href="#tx-daily"><span>일상생활</span></a>
+        </div>
+      </nav>
+
+      <div class="sec sec--tx ic-chemo" id="tx-chemo">
+        <h3 class="sec-t">항암치료</h3>
+        <div class="feature-grid">
+          <a class="feature" href="31-detail-nausea.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🤢</span><span class="f-title">오심·구토</span></a>
+          <a class="feature" href="32-detail-hairloss.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">💇‍♀️</span><span class="f-title">탈모</span></a>
+          <a class="feature" href="15-sideeffect-detail.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🖐️</span><span class="f-title">말초신경병증<br>(손발 저림)</span></a>
+          <a class="feature" href="36-detail-mucositis.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">😷</span><span class="f-title">구내염</span></a>
+          <a class="feature" href="37-detail-myelo.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🦠</span><span class="f-title">골수억제·<br>감염 위험</span></a>
+          <a class="feature" href="50-detail-taste.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">👅</span><span class="f-title">미각·후각 변화</span></a>
+          <a class="feature" href="51-detail-handfoot.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🦶</span><span class="f-title">수족증후군·<br>손발톱</span></a>
+        </div>
+      </div>
+
+      <div class="sec sec--tx ic-horm" id="tx-horm">
+        <h3 class="sec-t">호르몬치료</h3>
+        <div class="feature-grid">
+          <a class="feature" href="34-detail-arthralgia.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🦴</span><span class="f-title">관절통·근육통</span></a>
+          <a class="feature" href="35-detail-hotflash.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🔥</span><span class="f-title">안면홍조·열감</span></a>
+          <a class="feature" href="43-detail-dryness.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🌸</span><span class="f-title">질건조·성 건강</span></a>
+          <a class="feature" href="44-detail-bone.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🩻</span><span class="f-title">골밀도 감소</span></a>
+        </div>
+      </div>
+
+      <div class="sec sec--tx ic-rad" id="tx-rad">
+        <h3 class="sec-t">방사선치료</h3>
+        <div class="feature-grid">
+          <a class="feature" href="39-detail-skinrad.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🔆</span><span class="f-title">방사선<br>피부 반응</span></a>
+          <a class="feature" href="40-detail-lymphedema.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">💧</span><span class="f-title">림프부종</span></a>
+        </div>
+      </div>
+
+      <div class="sec sec--tx ic-tgt" id="tx-tgt">
+        <h3 class="sec-t">표적치료</h3>
+        <div class="feature-grid">
+          <a class="feature" href="41-detail-cardio.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">❤️</span><span class="f-title">심장 기능 저하</span></a>
+          <a class="feature" href="38-detail-diarrhea.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🚽</span><span class="f-title">설사</span></a>
+          <a class="feature" href="42-detail-skintgt.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🌡️</span><span class="f-title">표적치료<br>피부 반응</span></a>
+        </div>
+      </div>
+
+      <div class="sec sec--tx ic-daily" id="tx-daily">
+        <h3 class="sec-t">일상생활</h3>
+        <div class="feature-grid">
+          <a class="feature" href="33-detail-fatigue.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🔋</span><span class="f-title">피로</span></a>
+          <a class="feature" href="45-detail-constipation.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🚻</span><span class="f-title">변비</span></a>
+          <a class="feature" href="46-detail-sleep.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">😴</span><span class="f-title">수면장애</span></a>
+          <a class="feature" href="47-detail-anxiety.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">💭</span><span class="f-title">불안·재발 걱정</span></a>
+          <a class="feature" href="49-detail-cognitive.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🧠</span><span class="f-title">인지 변화<br>(항암 브레인)</span></a>
+          <a class="feature" href="52-detail-weight.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">⚖️</span><span class="f-title">체중 변화</span></a>
+        </div>
+      </div>
+
+      <!-- 예전 목록 한 줄 설명의 '발열 시 응급'을 옮긴 자리 — 한 줄 설명은 뺐지만 응급 기준은 이 화면에도 남긴다(31 등과 같은 칸) -->
+      <a class="link-card link-card--emg" href="48-emergency.html?from=06-sideeffects.html">
+        <span class="link-card-ic" aria-hidden="true"></span>
+        <span class="link-card-body">
+          <span class="link-card-t">응급 상황일 땐 이렇게 하세요</span>
+          <span class="link-card-s">열이 38.0도 이상일 때<br>(겨드랑이는 37.5도 이상)<br>숨이 차거나 정신이 흐릿할 때</span>
+        </span>
+      </a>
+    </section>
+
+    <!-- ═══ ② 음식·건강기능식품 — 09 의 내용(식사 카드 · 약·건강기능식품 주의)을 타일로, 맨 앞에 '이거 먹어도 되나요?'(69) ═══ -->
+    <section class="sec sec--group ic-cat-food" id="cat-food" data-cat="food">
+      <h2 class="sec-t section-label">음식·건강기능식품</h2>
+
+      <a class="link-card link-card--ask" href="69-supplement-check.html?from=06-sideeffects.html">
+        <span class="link-card-ic" aria-hidden="true"></span>
+        <span class="link-card-body">
+          <span class="link-card-t">이거 먹어도 되나요?</span>
+          <span class="link-card-s">건강기능식품·한약을<br>이름으로 찾아보세요</span>
+        </span>
+      </a>
+
+      <div class="sec sec--caution" id="fd-warn">
+        <h3 class="sec-t">먹기 전에 알아 두세요</h3>
+        <div class="feature-grid">
+          <a class="feature" href="09-food-supplement.html?from=06-sideeffects.html#s-drug"><span class="f-ic f-ic--caution" aria-hidden="true">🍊</span><span class="f-title">약과 함께<br>조심할 것</span></a>
+          <a class="feature" href="09-food-supplement.html?from=06-sideeffects.html#s-supp"><span class="f-ic f-ic--caution" aria-hidden="true">💊</span><span class="f-title">건강기능식품·<br>한약</span></a>
+          <a class="feature" href="09-food-supplement.html?from=06-sideeffects.html#s-myth"><span class="f-ic f-ic--caution" aria-hidden="true">🤔</span><span class="f-title">이런 이야기,<br>근거 있나요?</span></a>
+          <a class="feature" href="71-my-drug-cautions.html?from=06-sideeffects.html"><span class="f-ic f-ic--caution" aria-hidden="true">📋</span><span class="f-title">내 약의<br>주의 보기</span></a>
+        </div>
+      </div>
+
+      <div class="sec sec--tx ic-chemo" id="fd-chemo">
+        <h3 class="sec-t">항암치료 중이라면</h3>
+        <div class="feature-grid">
+          <a class="feature" href="60-food-nausea.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🤢</span><span class="f-title">속이 울렁거려요</span></a>
+          <a class="feature" href="61-food-appetite.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🍽️</span><span class="f-title">입맛이 없어요</span></a>
+          <a class="feature" href="62-food-mucositis.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">😷</span><span class="f-title">입안이 헐었어요</span></a>
+          <a class="feature" href="63-food-diarrhea.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🚽</span><span class="f-title">설사를 해요</span></a>
+          <a class="feature" href="64-food-constipation.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🚻</span><span class="f-title">변비가 있어요</span></a>
+          <a class="feature" href="65-food-taste.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">👅</span><span class="f-title">맛이 이상해요</span></a>
+          <a class="feature" href="66-food-immune.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🍳</span><span class="f-title">면역이<br>약한 시기</span></a>
+        </div>
+      </div>
+
+      <div class="sec sec--tx ic-horm" id="fd-horm">
+        <h3 class="sec-t">호르몬치료 중이라면</h3>
+        <div class="feature-grid">
+          <a class="feature" href="67-food-bone.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🥛</span><span class="f-title">뼈가 걱정돼요</span></a>
+          <a class="feature" href="94-food-soy.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🫛</span><span class="f-title">콩, 먹어도<br>될까요</span></a>
+        </div>
+      </div>
+
+      <div class="sec sec--tx ic-people" id="fd-all">
+        <h3 class="sec-t">모두에게</h3>
+        <div class="feature-grid">
+          <a class="feature" href="68-food-weight.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">⚖️</span><span class="f-title">살이 쪄요</span></a>
+          <a class="feature" href="95-food-alcohol.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🍶</span><span class="f-title">술, 어떻게<br>할까요</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ③ 자가관리 가이드 — 17 과 같은 타일 ═══ -->
+    <section class="sec sec--group ic-cat-self" id="cat-self" data-cat="self">
+      <h2 class="sec-t section-label">자가관리 가이드</h2>
+
+      <div class="sec sec--tx ic-care" id="sf-se">
+        <h3 class="sec-t">부작용별 관리</h3>
+        <div class="feature-grid">
+          <a class="feature" href="15-sideeffect-detail.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🖐️</span><span class="f-title">손발 저림 관리</span></a>
+          <a class="feature" href="34-detail-arthralgia.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🦴</span><span class="f-title">관절통 완화<br>스트레칭</span></a>
+          <a class="feature" href="31-detail-nausea.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🤢</span><span class="f-title">메스꺼움<br>다스리기</span></a>
+          <a class="feature" href="36-detail-mucositis.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">😷</span><span class="f-title">구내염<br>입안 관리</span></a>
+          <a class="feature" href="32-detail-hairloss.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">💇‍♀️</span><span class="f-title">탈모 준비와<br>두피 관리</span></a>
+          <a class="feature" href="40-detail-lymphedema.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">💪</span><span class="f-title">림프부종 예방<br>팔 운동</span></a>
+        </div>
+      </div>
+
+      <div class="sec sec--tx ic-bowl" id="sf-food">
+        <h3 class="sec-t">영양</h3>
+        <div class="feature-grid">
+          <a class="feature" href="09-food-supplement.html?from=06-sideeffects.html#s-meal"><span class="f-ic" aria-hidden="true">🍱</span><span class="f-title">치료에 맞춘<br>식사</span></a>
+          <a class="feature" href="61-food-appetite.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🍚</span><span class="f-title">입맛 없을 때</span></a>
+          <a class="feature" href="66-food-immune.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🧼</span><span class="f-title">안전한<br>식품 위생</span></a>
+          <a class="feature" href="09-food-supplement.html?from=06-sideeffects.html#s-supp"><span class="f-ic" aria-hidden="true">💊</span><span class="f-title">건강기능식품<br>안전하게</span></a>
+        </div>
+      </div>
+
+      <div class="sec sec--tx ic-walk" id="sf-act">
+        <h3 class="sec-t">활동</h3>
+        <div class="feature-grid">
+          <a class="feature" href="33-detail-fatigue.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🚶‍♀️</span><span class="f-title">걷기·활동으로<br>피로 줄이기</span></a>
+          <a class="feature" href="44-detail-bone.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🦴</span><span class="f-title">골밀도를<br>지키는 운동</span></a>
+        </div>
+      </div>
+
+      <div class="sec sec--tx ic-heart" id="sf-mind">
+        <h3 class="sec-t">마음</h3>
+        <div class="feature-grid">
+          <a class="feature" href="47-detail-anxiety.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">🧘‍♀️</span><span class="f-title">불안·재발 걱정<br>다스리기</span></a>
+          <a class="feature" href="46-detail-sleep.html?from=06-sideeffects.html"><span class="f-ic" aria-hidden="true">😴</span><span class="f-title">잠 못 드는 밤<br>수면 관리</span></a>
+        </div>
+      </div>
+    </section>
+
+    <p class="disclaimer">교육·자가관리 참고용이에요. 나에게 맞는지는 담당 의사와 상의하세요.</p>
+  </div>
+
+  <div class="bottomnav">
+    <a class="nav-item" href="05-home.html"><span class="ni-ic">🏠</span><span>홈</span></a>
+    <a class="nav-item nav-item--on" href="06-sideeffects.html" aria-current="page"><span class="ni-ic">📖</span><span>정보</span></a>
+    <a class="fab" href="07-chat.html"><span class="fab-btn">💬</span><span class="fab-label">상담</span></a>
+    <a class="nav-item" href="16-checkin.html"><span class="ni-ic">📈</span><span>기록</span></a>
+    <a class="nav-item" href="13-settings.html"><span class="ni-ic">👤</span><span>내 정보</span></a>
+  </div>
+</div>
+<script src="js/info.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 병원 자세히 (출시안)</title>
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="launch.css">
+<style>
+.care-tbl { display: flex; flex-direction: column; }
+.care-tbl > div { display: flex; align-items: flex-start; gap: 10px; padding: 11px 0; }
+.care-tbl > div + div { border-top: 1px solid var(--outline); }
+.care-tbl .mk { flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: 14px; font-weight: 800; }
+.care-tbl .yes .mk { background: var(--good-bg); color: var(--good-ink); border: 1px solid var(--good-line); }
+.care-tbl .no .mk { background: var(--surface-2); color: var(--on-surface-variant); }
+.care-tbl .ct { font-size: 15px; font-size: clamp(14px, 3.8462cqw, 16.5px); font-weight: 700; line-height: 1.4; }
+.care-tbl .cs { margin-top: 2px; font-size: 13px; font-size: clamp(13px, 3.3333cqw, 14.3px); color: var(--on-surface-variant); line-height: 1.5; }
+.care-tbl .no .ct { color: var(--on-surface-variant); font-weight: 600; }
+</style>
+</head>
+<body>
+<!-- 병원 자세히 — 제휴 여부와 상관없이 모든 병원이 같은 칸 · 같은 질문지 답 · 같은 전화 대본을 쓴다(제휴 병원만 더 보여 주지 않는다).
+     글은 토닥이 병원을 홍보하는 말이 아니라 질문지 답을 옮긴 사실만 — 비의료인의 의료광고가 되지 않게. 시안은 2번(제휴) 병원 화면 -->
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="C1-care-search.html">‹</a>
+    <div><div class="appbar-title">△△병원 재활의학과</div><div class="appbar-sub">종합병원 · 3.4km</div></div>
+  </div>
+
+  <div class="content content--tight" style="padding-bottom:150px;">
+    <div class="ad-line"><span class="partner">제휴·광고</span><span>토닥에 정해진 제휴비를 내는 병원이에요. 목록에 오르는 기준·순서와는 상관없어요.</span></div>
+
+    <div class="card">
+      <div class="card-title" style="margin-bottom:2px;">해 주는 관리</div>
+      <div class="checked-on" style="margin-bottom:4px;"><b>2026년 10월 21일</b> 토닥이 전화로 확인했어요</div>
+      <div class="care-tbl">
+        <div class="yes"><span class="mk">✓</span><div class="grow"><div class="ct">림프부종 도수치료</div><div class="cs">림프 마사지 · 예약제 · 횟수는 진료 뒤 정해요</div></div></div>
+        <div class="yes"><span class="mk">✓</span><div class="grow"><div class="ct">압박 스타킹·슬리브 맞춤</div><div class="cs">팔 둘레를 재서 치수를 맞춰 처방해요</div></div></div>
+        <div class="yes"><span class="mk">✓</span><div class="grow"><div class="ct">저출력 레이저</div><div class="cs">저출력 레이저 치료를 한다고 답했어요</div></div></div>
+        <div class="no"><span class="mk">–</span><div class="grow"><div class="ct">스펀지 압박 패드</div><div class="cs">이 병원에서는 다루지 않아요</div></div></div>
+      </div>
+    </div>
+
+    <div class="hosp" style="margin-top:0;">
+      <div class="hosp-meta">
+        <div class="kv-row"><span class="k">진료</span><span><span class="hosp-open on">지금 진료 중</span><br>평일 08:30~17:30<br>토 08:30~12:30</span></div>
+        <div class="kv-row"><span class="k">주소</span><span>서울 ○○구 △△대로 120, 본관 3층</span></div>
+        <div class="kv-row"><span class="k">전화</span><span>02-000-0000</span></div>
+      </div>
+      <div class="row gap-8" style="margin-top:12px;">
+        <a class="btn btn-primary grow btn-sm" href="tel:0200000000">📞 전화</a>
+        <a class="btn btn-outline grow btn-sm" href="javascript:void(0)">🗺 길찾기</a>
+        <a class="btn btn-ghost btn-sm" href="javascript:void(0)">📋 주소복사</a>
+      </div>
+    </div>
+
+    <div class="banner banner--info">
+      <span class="b-ic">💬</span>
+      <div class="small">전화로 이렇게 물어보세요.<br><b>“림프부종 클리닉 진료를 받고 싶어요.<br>예약은 어떻게 하나요?”</b><br><b>“압박 슬리브 치수도 재 주시나요?”</b></div>
+    </div>
+
+    <p class="tiny muted center">[의료광고 심의 번호 — 심의 대상이면 심의를 받은 뒤 이&nbsp;자리에 표시]</p>
+
+    <p class="disclaimer">토닥은 특정 병원을 추천하거나 진료 결과를 보장하지 않아요.<br>가시기 전에 꼭 전화로 확인해 주세요.</p>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-outline btn-block" href="C3-care-criteria.html">목록은 어떻게 만드나요?</a>
+  </div>
+</div>
+</body>
+</html>

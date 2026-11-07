@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 비밀번호 재설정</title>
+<link rel="stylesheet" href="app.css">
+<style>
+/* 보낸 주소('jiy****@example.com으로')는 띄어쓰기가 없는 한 덩이라 줄을 바꿀 자리가 없다 —
+   휴대폰 글자를 200% 로 쓰시면 360px 에서 27px 잘려, 어디로 보냈는지 못 읽으셨다 (2026-09-29 검수).
+   배선(native.js page81)이 이 줄을 진짜 주소로 다시 쓰므로 주소가 길면 앱에서도 잘린다 — 넘칠 때만 주소 안에서 줄을 바꾼다. */
+.card--tint .card-title { word-wrap: break-word; overflow-wrap: break-word; overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="97-email-login.html">‹</a>
+    <div><div class="appbar-title">비밀번호 재설정</div></div>
+  </div>
+
+  <div class="content" style="padding-bottom:150px;">
+    <div class="banner banner--info">
+      <span class="b-ic">📧</span>
+      <div class="small">가입하신 <b>이메일</b>로 재설정 링크를 보내 드려요.</div>
+    </div>
+
+    <div class="field field--suggest">
+      <label>이메일 주소</label>
+      <input class="input" type="email" inputmode="email" autocapitalize="off" spellcheck="false" value="jiyoung@example.com" placeholder="가입하신 이메일 주소" aria-label="이메일 주소">
+    </div>
+
+    <a class="btn btn-primary btn-block" href="javascript:void(0)">재설정 링크 보내기</a>
+
+    <!-- 결과 예시 -->
+    <div class="card card--tint">
+      <div class="tiny strong" style="color:var(--primary-dark);">보냈어요</div>
+      <div class="card-title" style="margin-top:5px;">jiy****@example.com으로<br>재설정 링크를 보냈어요</div>
+      <div class="card-sub">링크는 <b>30분</b> 동안 쓰실 수 있어요.<br>메일이 안 보이면 <b>스팸함</b>도 확인해 주세요.</div>
+    </div>
+
+    <div class="banner banner--warn">
+      <span class="b-ic">💬</span>
+      <div class="small"><b>카카오·네이버·구글로 시작하셨다면</b><br>따로 만드신 비밀번호가 없어요.<br><a href="01-splash.html" style="color:inherit; font-weight:700;">시작 화면</a>에서 <b>같은 버튼으로</b> 다시 들어오세요.</div>
+    </div>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-primary btn-block btn-lg" href="97-email-login.html">로그인하러 가기</a>
+  </div>
+</div>
+</body>
+</html>

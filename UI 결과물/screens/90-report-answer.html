@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 답변 신고</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="07-chat.html">‹</a>
+    <div><div class="appbar-title">답변 신고</div></div>
+  </div>
+
+  <!-- 2026-09-28 정보 화면 디자인 시스템 v3 (STYLE.md). more2.js page90 이 쓰는 것 — 그대로 둔다:
+       첫 .card--flat(신고할 답변: p·.tiny) · '접수되었어요' 가 든 .card--flat(접수 완료) · .selectable[role=checkbox](.s-box·.s-title) · textarea · .footer-actions .btn -->
+  <div class="content content--tight" style="padding-bottom:150px;">
+    <section class="sec sec--info">
+      <h2 class="sec-t section-label">신고할 답변</h2>
+      <div class="card card--flat" style="border:1px solid var(--outline); background:var(--surface-2);">
+        <p class="small" style="color:var(--on-surface-variant);" data-demo>“홍삼은 치료약과 부딪힐 수 있다는 보고가 있어, 지금은 권해 드리기 어려워요…”</p>
+        <div class="tiny muted" style="margin-top:6px;" data-demo>오늘 오전 9:43</div>
+      </div>
+    </section>
+
+    <section class="sec sec--info">
+      <h2 class="sec-t section-label">어떤 점이 문제였나요?</h2>
+      <p class="sec-sub">하나만 골라 주세요.</p>
+      <div class="selectable selectable--on" role="checkbox" tabindex="0" aria-checked="true">
+        <span class="s-box s-radio">✓</span>
+        <div class="grow"><div class="s-title">정보가 틀린 것 같아요</div><div class="s-sub">사실과 다른 내용이 있어요</div></div>
+      </div>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box s-radio"></span>
+        <div class="grow"><div class="s-title">위험해 보여요</div><div class="s-sub">따라 하면 해로울 수 있어요</div></div>
+      </div>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box s-radio"></span>
+        <div class="grow"><div class="s-title">이해하기 어려워요</div><div class="s-sub">말이 어렵거나 헷갈려요</div></div>
+      </div>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box s-radio"></span>
+        <div class="grow"><div class="s-title">제 상황과 안 맞아요</div><div class="s-sub">제 치료·상태와 다른 이야기예요</div></div>
+      </div>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box s-radio"></span>
+        <div class="grow"><div class="s-title">기타</div></div>
+      </div>
+      <div class="field">
+        <label>더 알려 주실 내용 <span class="muted small">(선택)</span></label>
+        <textarea class="textarea" rows="3" placeholder="어떤 점이 문제였는지 적어 주세요"></textarea>
+      </div>
+    </section>
+
+    <section class="sec sec--info">
+      <h2 class="sec-t section-label">신고 뒤에는 이렇게 해요</h2>
+      <p class="sec-p">안전에 문제가 될 수 있는 답변이면<br><b>바로 내리고</b> 토닥 담당자가 확인해요.</p>
+    </section>
+
+    <!-- 접수 완료 (예시) — page90 이 처음에 숨기고, 보낸 뒤에 보인다 -->
+    <div class="card card--flat" style="border:1px solid var(--safe); background:var(--safe-tint);">
+      <div class="row gap-8" style="align-items:center;">
+        <span style="font-size:20px;">✅</span>
+        <div>
+          <div class="small strong" style="color:#1c5a40;">신고가 접수되었어요</div>
+          <div class="tiny" style="color:#1c5a40;">보내 주신 내용은 답변을 고치는 데 반영할게요. 감사합니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="disclaimer">신고 내용은 앱을 고치고<br>안전을 지키는 데만 써요.</p>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-primary btn-block btn-lg" href="07-chat.html">신고하기</a>
+  </div>
+</div>
+</body>
+</html>

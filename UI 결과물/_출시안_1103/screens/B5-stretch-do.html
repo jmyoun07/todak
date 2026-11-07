@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 따라 하기 (출시안)</title>
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="launch.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="B4-stretch-plan.html">‹</a>
+    <div><div class="appbar-title">막대 들어 올리기</div><div class="appbar-sub" data-demo>5동작 중 1번째</div></div>
+  </div>
+  <div style="padding:0 18px;">
+    <div class="steps"><span class="step step--on"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span></div>
+  </div>
+
+  <!-- 따라 하기 — 그림 · 횟수 · 방법 세 줄. 시안에서는 '다음 동작'이 바로 끝 화면(B6)으로 간다(실제 앱은 5번째 동작에서만 B6).
+       '아파서 멈출게요'는 이 동작 이름을 적어 두고 B6 의 '아팠던 동작'에 미리 표시한다. 5초 세기는 앱이 소리·진동으로 알려 준다(시안에서는 멈춘 그림) -->
+  <div class="content content--tight" style="padding-bottom:150px;">
+    <div class="do-fig">
+      <svg class="fig" viewBox="0 0 120 120" aria-hidden="true"><circle class="hl" cx="33" cy="84" r="12"/><path class="base" d="M4 100H116"/><rect x="6" y="88" width="28" height="10" rx="5" style="fill:var(--surface-3);stroke:var(--outline-strong);stroke-width:2"/><circle cx="20" cy="80" r="8"/><path d="M28 86H68L84 64L98 98"/><path d="M33 85L62 79" style="opacity:.3"/><circle class="dot" cx="62" cy="79" r="4.5" style="opacity:.3"/><path d="M33 85L22 57"/><circle class="dot" cx="22" cy="57" r="4.5"/><path class="aux" d="M58 70Q50 34 30 49"/><path class="arw" d="M37 48.3L30 49L32.8 42.6"/></svg>
+    </div>
+
+    <div class="banner banner--warn">
+      <span class="b-ic">✋</span>
+      <div class="small">당기는 느낌은 괜찮아요. <b>아프면 바로 멈추고</b> 아래 ‘아파서 멈출게요’를 눌러 주세요.</div>
+    </div>
+
+    <div class="card">
+      <div class="do-count" data-demo>
+        <div class="center"><div class="unit">5~7번 중</div><div class="big">3번째</div></div>
+        <div class="ring" style="--p:60%;"><div class="ring-in" aria-label="2초 남았어요"><b>2초</b></div></div>
+      </div>
+    </div>
+
+    <ol class="do-steps">
+      <li>누워서 무릎을 세우고 발바닥을 바닥에 붙여요. 막대(빗자루 자루도 돼요)를 손바닥이 위를 보게 두 손으로 배 위에 잡아요.</li>
+      <li>안 아픈 팔이 끌어 주듯 막대를 머리 위로 천천히 올려요.</li>
+      <li>당기는 느낌이 들면 멈추고 5까지 센 뒤 천천히 내려요.</li>
+    </ol>
+
+    <a class="btn btn-ghost btn-sm btn-block" href="javascript:void(0)">이 동작 건너뛰기</a>
+  </div>
+
+  <div class="footer-actions">
+    <div class="row gap-8">
+      <a class="btn btn-outline btn-outline--lv2 grow" href="B6-stretch-done.html">✋ 아파서 멈출게요</a>
+      <a class="btn btn-primary grow" href="B6-stretch-done.html">다음 동작 ›</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

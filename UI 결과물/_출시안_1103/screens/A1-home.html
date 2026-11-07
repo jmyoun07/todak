@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 홈 (출시안)</title>
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="launch.css">
+<style>
+/* 05 홈의 묶음 모양을 그대로 옮겨 온다(05 의 <style> 과 같은 값) — 출시안에서 바뀐 것은 내용뿐이다 */
+.brandhead .greet { position: relative; }
+.brandhead .greet .bell { position: absolute !important; top: -3px; right: 22px; }
+.brandhead .greet h1 { margin-top: 0; }
+.brandhead .greet .greet-who { display: inline-block; max-width: calc(100% - 56px); }
+.home-grp { flex: 0 0 auto; display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+.content > .brandhead + .home-grp { margin-top: 2px; }
+.content .home-h { margin: 0; font-size: 18.5px; font-size: clamp(16.5px, 4.7436cqw, 20.4px); font-weight: 800; line-height: 1.35; letter-spacing: -.3px; color: var(--on-surface); }
+.now-card { border: 1.5px solid var(--primary-light); padding-bottom: 4px; }
+.now-card .card-title { margin-bottom: 2px; }
+.now-card .now-go { margin-top: 12px; }
+.now-rows { display: flex; flex-direction: column; margin-top: 14px; border-top: 1px solid var(--outline); }
+.now-rows > * + * { border-top: 1px solid var(--outline); }
+.now-row { display: flex; align-items: center; gap: 14px; padding: 12px 0; text-decoration: none; color: inherit; }
+.now-row .ring { font-size: 13px; width: clamp(66px, 5.08em, 96px); height: clamp(66px, 5.08em, 96px); }
+.now-row .ring .ring-in { font-size: 13px; width: calc(100% - 14px); height: calc(100% - 14px); }
+.now-rows > a::after { content: none !important; }
+#tip-card { display: block; text-decoration: none; color: inherit; }
+#tip-card .card-title { margin-bottom: 6px; line-height: 1.45; }
+#tip-card .card-sub { font-size: 14px; font-size: clamp(13px, 3.5897cqw, 15.4px); line-height: 1.7; color: #4A3C42; }
+#tip-card .card-sub .tip-l { display: block; }
+#tip-card .card-sub .tip-l + .tip-l { margin-top: 3px; }
+#tip-card .tip-go { margin-top: 10px; color: var(--primary-dark); }
+.home-grp .feature-grid { grid-auto-rows: 1fr; }
+.home-grp .feature { align-items:center; text-align:center; position: relative; }
+.home-grp .feature .f-title, .home-grp .feature .f-sub { width:100%; text-align:center; }
+.home-grp .feature .f-ic { width: clamp(46px, 1.92em, 72px); height: clamp(46px, 1.92em, 72px); }
+/* 새 칸 표시 — 출시안에서 새로 생긴 기능 */
+.feature .f-new { position: absolute; top: 8px; right: 8px; padding: 1px 7px; border-radius: 6px; background: var(--primary); color: #fff; font-size: 13px; font-weight: 800; line-height: 1.5; }
+.content > .link-card { margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="content">
+    <div class="brandhead">
+    <div class="statusbar statusbar--light"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+    <div class="greet">
+      <a class="bell" href="20-notifications.html" aria-label="알림">알림</a>
+      <h1 data-demo><span class="greet-who">지영님,</span><br>오늘 컨디션은 어떠세요?</h1>
+      <a href="A5-visit-report.html" style="display:block; text-decoration:none; margin-top:12px; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.28); border-radius:var(--r-pill); padding:10px 15px;">
+        <span style="color:#fff; font-size:13px; font-weight:700;" data-demo>다음 진료까지 9일</span>
+        <span style="color:rgba(255,255,255,.85); font-size:13px;" data-demo> · 11월 13일(금) ›</span>
+      </a>
+    </div>
+    </div>
+
+    <!-- 지금 할 일 — 팔 점검 요일(수요일) 저녁이면 컨디션 기록 문구만 '팔도 같이'로 바뀐다. 체크리스트 카드를 새로 두지 않는다.
+         아래 줄에 오늘의 복약과 '오늘의 스트레칭'을 함께 둔다(컨디션 줄은 위 버튼과 겹치니 접는다) -->
+    <section class="home-grp" aria-labelledby="h-now">
+      <h2 class="home-h" id="h-now">지금 할 일</h2>
+      <div class="card now-card">
+        <div class="now-main">
+          <div class="card-title" data-demo>오늘은 팔도 같이 봐요</div>
+          <div class="card-sub" data-demo>수요일은 팔 점검하는 날이에요. 컨디션을 남기실 때 수술한 왼쪽 팔도 함께 눌러 주세요.</div>
+          <a class="btn btn-primary btn-block now-go" href="A2-checkin-arm.html" data-demo>📝 오늘 컨디션 남기기</a>
+        </div>
+        <div class="now-rows">
+          <a class="now-row" href="55-med-today.html">
+            <div class="ring" style="--p:100%;" data-demo><div class="ring-in">2/2<br>완료</div></div>
+            <div class="grow">
+              <div class="card-title">오늘의 복약</div>
+              <div class="card-sub">오늘 약을 모두 챙기셨어요</div>
+            </div>
+            <span class="li-chev" aria-hidden="true">›</span>
+          </a>
+          <a class="now-row" href="B1-stretch-home.html">
+            <div class="ring" style="--p:0%;" data-demo><div class="ring-in">오늘<br>아직</div></div>
+            <div class="grow">
+              <div class="card-title">오늘의 스트레칭</div>
+              <div class="card-sub">1분 질문 뒤 맞는 동작을 골라 드려요</div>
+            </div>
+            <span class="li-chev" aria-hidden="true">›</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-grp" aria-labelledby="h-one">
+      <h2 class="home-h" id="h-one">오늘의 한 가지</h2>
+      <a class="card card--tint" id="tip-card" href="B1-stretch-home.html">
+        <div class="card-title" data-demo>아침 손이 뻣뻣하면 쥐었다 펴기부터 해요</div>
+        <div class="card-sub" data-demo><span class="tip-l">일어나서 손을 천천히 쥐었다 펴기를 15~25번 해 보세요.</span> <span class="tip-l">호르몬치료약에 따라 아침에 손과 관절이 뻣뻣할 수 있어요.</span></div>
+        <div class="small strong tip-go" data-demo>오늘의 스트레칭 보기 ›</div>
+      </a>
+    </section>
+
+    <section class="home-grp" aria-labelledby="h-help">
+      <h2 class="home-h" id="h-help">무엇을 도와드릴까요?</h2>
+      <div class="feature-grid">
+        <a class="feature" href="55-med-today.html">
+          <span class="f-ic" aria-hidden="true">💊</span><span class="f-title">복약 관리</span><span class="f-sub">오늘 챙길 약&#8288;·약 추가</span>
+        </a>
+        <a class="feature" href="B1-stretch-home.html">
+          <span class="f-new">새</span>
+          <span class="f-ic" aria-hidden="true">🤸</span><span class="f-title">스트레칭</span><span class="f-sub">내게 맞는 동작 골라 주기</span>
+        </a>
+        <a class="feature" href="06-sideeffects.html">
+          <span class="f-ic" aria-hidden="true">📖</span><span class="f-title">부작용 정보</span><span class="f-sub">내 치료별 부작용&#8288;·관리</span>
+        </a>
+        <a class="feature" href="09-food-supplement.html">
+          <span class="f-ic" aria-hidden="true">🥗</span><span class="f-title">음식&#8288;·건강기능식품</span><span class="f-sub">식사&#8288;·먹어도 되나요?</span>
+        </a>
+        <a class="feature" href="A5-visit-report.html">
+          <span class="f-ic" aria-hidden="true">📝</span><span class="f-title">진료 준비</span><span class="f-sub">증상 요약&#8288;·질문 만들기</span>
+        </a>
+        <a class="feature" href="C1-care-search.html">
+          <span class="f-ic" aria-hidden="true">🏥</span><span class="f-title">병원 찾기</span><span class="f-sub">진료과&#8288;·관리해 주는 곳</span>
+        </a>
+      </div>
+    </section>
+
+    <a class="link-card link-card--emg" href="48-emergency.html">
+      <span class="link-card-ic" aria-hidden="true"></span>
+      <span class="link-card-body"><span class="link-card-t">응급 상황일 땐 이렇게 하세요</span></span>
+    </a>
+
+    <p class="disclaimer">토닥은 의료기기가 아니며, 진단·처방·치료를 제공하지 않아요. 건강정보 참고용이에요.</p>
+  </div>
+
+  <div class="bottomnav">
+    <a class="nav-item nav-item--on" href="A1-home.html"><span class="ni-ic">🏠</span><span>홈</span></a>
+    <a class="nav-item" href="06-sideeffects.html"><span class="ni-ic">📖</span><span>정보</span></a>
+    <a class="fab" href="07-chat.html"><span class="fab-btn">💬</span><span class="fab-label">상담</span></a>
+    <a class="nav-item" href="A2-checkin-arm.html"><span class="ni-ic">📈</span><span>기록</span></a>
+    <a class="nav-item" href="13-settings.html"><span class="ni-ic">👤</span><span>내 정보</span></a>
+  </div>
+</div>
+</body>
+</html>

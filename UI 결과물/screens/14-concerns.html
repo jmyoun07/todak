@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 맞춤 설정</title>
+<link rel="stylesheet" href="app.css">
+<style>
+/* 걱정 주제 칩 — 누르기 쉽게 한 단 크게 (글자는 폭에 맞춰 · 13px 아래로 내려가지 않게) */
+.concern-chips { gap: 10px; }
+.concern-chips .chip { padding: 11px 15px; font-size: 14px; font-size: clamp(13px, 3.5897cqw, 15.4px); }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="04-treatment.html">‹</a>
+    <div><div class="appbar-title">맞춤 설정</div></div>
+  </div>
+  <div style="padding:0 18px;">
+    <div class="steps"><span class="step step--on"></span><span class="step step--on"></span><span class="step step--on"></span><span class="step step--on"></span></div>
+    <p class="small muted" style="margin-top:8px;">마지막 단계 · 거의 다 됐어요!</p>
+  </div>
+
+  <!-- 2026-09-28 글 다듬기 — 안심 문장 배너('걱정되는 게 많아도 괜찮아요…')는 빼고, 제목·풀이는 폭에 맞춰 커지는
+       .page-title·.page-sub(clamp + cqw) 로 바꿨다(예전엔 21px·13.5px 고정). 칩 글자는 저장값이라 그대로. -->
+  <div class="content" style="padding-bottom:150px;">
+    <div class="auth-head">
+      <h1 class="page-title">지금 가장 걱정되거나<br>궁금한 부분은 무엇인가요?</h1>
+      <p class="page-sub">고르신 주제로 홈 화면을 맞춰 드려요.<br>여러 개 고르셔도 되고, 나중에 바꿀 수 있어요.</p>
+    </div>
+
+    <div class="chips concern-chips">
+      <span class="chip chip--on">머리카락 빠짐</span>
+      <span class="chip chip--on">손발 저림</span>
+      <span class="chip">메스꺼움·구토</span>
+      <span class="chip chip--on">관절통</span>
+      <span class="chip">안면홍조·열감</span>
+      <span class="chip">피로</span>
+      <span class="chip">수면 문제</span>
+      <span class="chip">입안 헐음</span>
+      <span class="chip chip--on">불안·재발 걱정</span>
+      <span class="chip">음식·영양</span>
+      <span class="chip">건강기능식품</span>
+      <span class="chip">성 건강</span>
+    </div>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-primary btn-block btn-lg" href="19-tutorial.html">완료하고 시작하기</a>
+  </div>
+</div>
+</body>
+</html>

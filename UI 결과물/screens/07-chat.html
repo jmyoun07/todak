@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · AI 상담</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="05-home.html">‹</a>
+    <div>
+      <div class="appbar-title">AI 상담</div>
+      <div class="appbar-sub">🤖 생성형 AI 답변 · 비의료기기</div>
+    </div>
+    <span class="spacer"></span>
+    <a class="action" href="21-chat-history.html" style="text-decoration:none; color:inherit;">⋯</a>
+  </div>
+
+  <div class="content content--chat">
+    <!-- 앱·웹앱에서만 보이는 자리표시(data-app-only). 스크립트 열한 개를 다 읽기 전까지 이 화면이
+         텅 비어 보이지 않게 한 줄만 둔다. chat.js 가 대화를 그리기 시작하면(clearChat) 함께 지워진다 -->
+    <div class="center small muted" data-app-only style="padding:28px 0;">대화를 불러오고 있어요…</div>
+
+    <!-- ↓ 여기부터는 시안 예시 대화다. 갤러리에는 그대로 보이고, 앱·웹앱에서는 통째로 숨는다(data-demo-box).
+         예전에는 이 예시 대화가 0.2초쯤 화면에 서 있다가 실제 대화로 바뀌어 '잔상'처럼 보였다.
+         chat.js 는 여기 있는 첫 .ai-row 와 첫 .bubble--user 를 말풍선 틀로 복제해 간다(chat.js:948).
+         숨기는 표식은 감싸개에만 붙어 있으므로 복제한 말풍선은 그대로 보인다 — 이 상자를 없애면 상담이 깨진다. -->
+    <div data-demo-box>
+    <div class="center small muted">오늘</div>
+
+    <!-- AI 인사 -->
+    <div class="ai-row">
+      <div class="ai-avatar" style="background:none;"><img src="icon-192.png" alt="토닥" style="width:30px; height:30px; border-radius:50%; display:block;"></div>
+      <div class="bubble bubble--ai">
+        안녕하세요 지영님 🙂 치료 중 불편한 점이나 궁금한 걸 편하게 말씀해 주세요. 증상, 음식, 건강기능식품 무엇이든 좋아요.
+      </div>
+    </div>
+
+    <!-- 사용자 · 주제가 둘인 질문 -->
+    <div class="bubble bubble--user">구내염인데 매운 거 먹어도 되나요? 그리고 홍삼은요?</div>
+
+    <!-- AI 응답 — 주제별 블록. 앱에 해당 화면이 있으면 그 화면 카드가 출처 역할을 한다
+         (실제 앱에서는 chat.js 가 서버의 blocks 로 이 모양을 다시 그린다) -->
+    <div class="ai-row">
+      <div class="ai-avatar" style="background:none;"><img src="icon-192.png" alt="토닥" style="width:30px; height:30px; border-radius:50%; display:block;"></div>
+      <div class="bubble bubble--ai">
+        <div>
+          <div class="tiny strong" style="color:var(--primary-dark); margin-bottom:3px;">구내염 때 매운 음식</div>
+          <div>입안이 헐었을 땐 <b>매운맛·신맛·뜨거운 온도·거친 음식</b>이 헌 자리를 건드려 더 아파요. 지금은 잠깐 쉬어 가시고, 흰죽·계란찜·순두부처럼 부드럽고 미지근한 음식이 편해요. 입안이 나으면 다시 드셔도 괜찮아요.</div>
+          <a class="listitem" href="62-food-mucositis.html" style="margin-top:8px; padding:10px 12px; gap:10px;">
+            <span class="li-ic" style="width:34px; height:34px; font-size:17px;">🍽️</span>
+            <div class="li-body"><div class="li-title" style="font-size:14px;">입안이 헐었을 때 식사</div><div class="li-sub">토닥 화면에서 자세히 보기</div></div>
+            <span class="li-chev">›</span>
+          </a>
+        </div>
+        <div style="margin-top:10px; padding-top:10px; border-top:1px solid var(--outline);">
+          <div class="tiny strong" style="color:var(--primary-dark); margin-bottom:3px;">홍삼 · 인삼</div>
+          <div>피가 잘 멎지 않게 할 수 있다는 보고가 있어요. 호르몬과 관련해서는 세포 실험 단계의 보고만 있고 사람에서의 영향은 아직 분명하지 않아요. 드시기 전에 꼭 담당 의사에게 확인해 주세요.</div>
+          <a class="listitem" href="69-supplement-check.html" style="margin-top:8px; padding:10px 12px; gap:10px;">
+            <span class="li-ic" style="width:34px; height:34px; font-size:17px;">🍽️</span>
+            <div class="li-body"><div class="li-title" style="font-size:14px;">이거 먹어도 되나요? (건강기능식품 확인)</div><div class="li-sub">토닥 화면에서 자세히 보기</div></div>
+            <span class="li-chev">›</span>
+          </a>
+        </div>
+        <div class="src row" style="justify-content:space-between; align-items:center; gap:8px;">
+          <span class="muted">🤖 생성형 AI 답변 · 진단이 아니에요</span>
+          <a href="90-report-answer.html" style="color:var(--on-surface-variant); white-space:nowrap;">🚩신고</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 사용자 · 토닥 자료에 없는 질문 -->
+    <div class="bubble bubble--user">주사 맞는 날 옷은 어떻게 입고 가면 편해요?</div>
+
+    <!-- AI 응답 — 화면도 토닥 자료도 없으면 '일반 정보' 표시 -->
+    <div class="ai-row">
+      <div class="ai-avatar" style="background:none;"><img src="icon-192.png" alt="토닥" style="width:30px; height:30px; border-radius:50%; display:block;"></div>
+      <div class="bubble bubble--ai">
+        <div>
+          <div>소매를 걷기 쉬운 헐렁한 옷이나 앞이 열리는 옷이 편해요. 주사실이 서늘할 수 있으니 얇은 겉옷을 챙기시면 좋아요.</div>
+          <div class="src muted">ℹ️ 토닥 자료에 없는 일반 정보예요. 담당 의사에게 확인해 주세요</div>
+        </div>
+        <div class="src row" style="justify-content:space-between; align-items:center; gap:8px;">
+          <span class="muted">🤖 생성형 AI 답변 · 진단이 아니에요</span>
+          <a href="90-report-answer.html" style="color:var(--on-surface-variant); white-space:nowrap;">🚩신고</a>
+        </div>
+      </div>
+    </div>
+    </div><!-- /시안 예시 대화 -->
+  </div>
+
+  <div class="chat-input">
+    <div class="chips" style="justify-content:center;">
+      <span class="chip chip--soft">관절이 아파요</span>
+      <span class="chip chip--soft">입안이 헐었어요</span>
+      <span class="chip chip--soft">진료 질문 만들어줘</span>
+    </div>
+    <!-- 새로 물어보기 — 지금까지 나눈 이야기를 접고 빈 화면에서 새로 시작한다.
+         지운 것이 아니라 ⋯ 「대화 기록」에 그대로 남는다. 추천 칩이 사라진 자리에만 나타난다(chat.js 가 켜고 끈다) -->
+    <div class="ci-newrow" style="display:none; justify-content:center;">
+      <button type="button" class="ci-new" style="display:inline-flex; align-items:center; gap:7px; min-height:44px; padding:0 18px; border-radius:999px; border:1px solid var(--outline); background:var(--white); color:var(--on-surface-variant); font-family:inherit; font-size:14px; font-weight:600; cursor:pointer;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg>새로 물어보기
+      </button>
+    </div>
+    <div class="ci-bar">
+      <input type="text" placeholder="증상이나 궁금한 점을 입력하세요" maxlength="1000">
+      <button class="send" aria-label="보내기">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 12l15-7-6 7 6 7-15-7z" fill="#fff"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

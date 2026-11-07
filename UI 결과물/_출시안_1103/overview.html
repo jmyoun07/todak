@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 — 출시안 화면 시안 (2026-11-03)</title>
+<!-- 이 파일은 출시안 갤러리의 '카드 원본'이다. _build_gallery_launch.py 가 여기서 묶음·순서·제목을 읽어
+     overview_출시안_YYMMDD.html(한 파일로 열리는 갤러리)을 만든다. 화면을 더하면 여기에도 카드를 더해야 빌드가 된다.
+     이 묶음은 연구 앱에 들어가지 않는다(UI 결과물/screens 와 별개). -->
+<style>
+  body { font-family: 'Noto Sans KR', sans-serif; background: #FCF8F9; color: #241C1F; margin: 0; padding: 24px 32px; line-height: 1.5; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-top: 30px; padding-bottom: 10px; border-bottom: 2px solid #C43E6B; }
+  .section-header h2 { font-size: 20px; margin: 0; }
+  .section-header .tag { background: #F5D9E4; color: #9E2E54; padding: 3px 11px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+  .section-header .step-badge { background: #C43E6B; color: #fff; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 900; }
+  .section-desc { color: #6B5860; font-size: 13px; margin: 12px 0 18px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(216px, 1fr)); gap: 22px; }
+  .card { background: #fff; border-radius: 16px; overflow: hidden; border: 1px solid #E1D2D8; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+  .thumb-wrap { background: #F4ECEF; padding: 14px 14px 0; display: flex; justify-content: center; }
+  .thumb { width: 184px; height: 398px; overflow: hidden; border-radius: 15px 15px 0 0; background: #fff; }
+  .thumb iframe { width: 390px; height: 844px; border: 0; transform: scale(0.4718); transform-origin: top left; pointer-events: none; }
+  .info { padding: 12px 14px 14px; border-top: 1px solid #E1D2D8; }
+  .num { background: #C43E6B; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 700; display: inline-block; margin-bottom: 6px; }
+  .title { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+  .subtitle { font-size: 11px; color: #6B5860; line-height: 1.45; }
+</style>
+</head>
+<body>
+
+  <div class="section-header"><span class="step-badge">1</span><h2>자가 점검을 컨디션·복약과 섞어 관리</h2><span class="tag">따로 떨어진 화면 대신 기록 안에</span></div>
+  <p class="section-desc">팔 점검을 따로 떼지 않고 저녁 컨디션 기록 안에 넣었어요(주 1회 요일에만 펼침, 해당하는 것만 누르기). 결과 안내는 림프부종 화면의 세 단계를 답과 상관없이 늘 같은 순서로 보여 주고(앱이 단계를 골라 판정하지 않게), 복약·컨디션·팔 점검·스트레칭이 진료 전 리포트 한 장에 모여요. 홈에는 체크리스트를 새로 두지 않고 ‘지금 할 일’ 문구만 바뀌어요.</p>
+  <div class="grid">
+    <a class="card" href="screens/A1-home.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/A1-home.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">A1</span><div class="title">홈</div><div class="subtitle">점검 요일엔 ‘오늘은 팔도 같이 봐요’ · 오늘의 스트레칭 줄 · 스트레칭 칸</div></div></a>
+    <a class="card" href="screens/A2-checkin-arm.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/A2-checkin-arm.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">A2</span><div class="title">컨디션 기록 + 팔 점검</div><div class="subtitle">수술한 쪽 팔 4가지 중 해당하는 것만 · 이상 없어요 · 관절통→스트레칭</div></div></a>
+    <a class="card" href="screens/A3-arm-result.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/A3-arm-result.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">A3</span><div class="title">팔 점검 뒤 안내</div><div class="subtitle">최근 4주 · 세 단계(🔴🟠🟢)를 늘 같은 순서로 · 판정하지 않음</div></div></a>
+    <a class="card" href="screens/A4-treatment-surgery.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/A4-treatment-surgery.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">A4</span><div class="title">받으신 치료 + 수술 정보</div><div class="subtitle">수술한 쪽 · 감시림프절/곽청술 · 수술한 때</div></div></a>
+    <a class="card" href="screens/A5-visit-report.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/A5-visit-report.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">A5</span><div class="title">진료 전 리포트</div><div class="subtitle">증상·팔 점검·스트레칭·컨디션·복약 한 장 · 여쭤볼 질문</div></div></a>
+    <a class="card" href="screens/A6-lymphedema.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/A6-lymphedema.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">A6</span><div class="title">림프부종 (보강)</div><div class="subtitle">수술 방식별 위험 · 운동은 천천히 늘리면 괜찮아요 · 슬리브·레이저</div></div></a>
+  </div>
+
+  <div class="section-header"><span class="step-badge">2</span><h2>스트레칭 + AI 코칭</h2><span class="tag">1분 질문 → 정해 둔 9동작 안에서 골라 주기</span></div>
+  <p class="section-desc">오늘 불편한 곳과 팔 높이를 묻고, 위험 신호면 동작 대신 안내를 띄워요. AI는 오늘 고르신 답·수술한 쪽과 때·아팠다고 남긴 동작만 보고 <b>정해 둔 9동작 안에서만</b> 골라 까닭을 설명해요(무엇을 보고 골랐는지도 보여 줌). 횟수는 바꾸지 않아요. 하고 난 뒤 통증 변화가 컨디션 기록과 리포트에 남아요. 동작은 미국암학회 ‘유방암 수술 후 운동’을 따랐어요. <b>지금 동작·문구는 의료진 검토 전</b>이라 화면에도 ‘미국암학회 안내에서 고른 9동작’으로 적었어요(검토가 끝나면 검토한 사람을 밝혀 바꿈).</p>
+  <div class="grid">
+    <a class="card" href="screens/B1-stretch-home.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/B1-stretch-home.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">B1</span><div class="title">스트레칭 첫 화면</div><div class="subtitle">이번 주 한 날 · 오늘 시작 · 어제 한 동작 · 알림</div></div></a>
+    <a class="card" href="screens/B2-stretch-ask.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/B2-stretch-ask.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">B2</span><div class="title">1분 질문</div><div class="subtitle">불편한 곳 · 팔 높이 그림 3칸 · 안전 확인 4가지(미국암학회 멈춤 신호)</div></div></a>
+    <a class="card" href="screens/B3-stretch-stop.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/B3-stretch-stop.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">B3</span><div class="title">오늘은 쉬어요</div><div class="subtitle">안전 확인에 ‘네’ → 코칭 대신 고르신 것별 안내</div></div></a>
+    <a class="card" href="screens/B4-stretch-plan.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/B4-stretch-plan.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">B4</span><div class="title">AI 코칭 결과</div><div class="subtitle">오늘의 5동작 · 고른 까닭 · 고를 때 쓴 기록 · 횟수는 정해 둔 대로</div></div></a>
+    <a class="card" href="screens/B5-stretch-do.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/B5-stretch-do.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">B5</span><div class="title">따라 하기</div><div class="subtitle">그림 · 안전 문구 · 횟수·5초 세기 · 방법 · 아파서 멈출게요</div></div></a>
+    <a class="card" href="screens/B6-stretch-done.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/B6-stretch-done.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">B6</span><div class="title">다 하셨어요</div><div class="subtitle">통증 변화 · 아팠던 동작 고르기·다음엔 빼기 · 컨디션·리포트에 함께</div></div></a>
+    <a class="card" href="screens/B7-stretch-library.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/B7-stretch-library.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">B7</span><div class="title">동작 모음</div><div class="subtitle">정해 둔 9동작(검토 전) · 동작마다 시작 시점 · 언제부터 해도 되나요?</div></div></a>
+  </div>
+
+  <div class="section-header"><span class="step-badge">3</span><h2>병원찾기 업그레이드</h2><span class="tag">관리해 주는 곳을 태그로</span></div>
+  <p class="section-desc">진료과로 찾기 옆에 ‘관리로 찾기’를 두었어요. 림프부종 도수치료·압박 스타킹·슬리브 맞춤·스펀지 압박 패드·저출력 레이저를 고르면, 토닥이 전화로 확인한 병원만 가까운 순으로 보여요. 제휴 병원은 ‘제휴’(광고) 표시만 달고 순서는 바꾸지 않아요(정해진 제휴비, 환자 수·진료비에 따른 대가 없음). 제휴 여부와 상관없이 같은 칸·같은 대본을 쓰고, 제휴비는 전화·예약 건수와도 상관없어요.</p>
+  <div class="grid">
+    <a class="card" href="screens/C1-care-search.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/C1-care-search.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">C1</span><div class="title">관리로 찾기</div><div class="subtitle">관리 태그 · 확인한 달 · 제휴·광고 표시 · 가까운 순</div></div></a>
+    <a class="card" href="screens/C2-care-detail.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/C2-care-detail.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">C2</span><div class="title">병원 자세히</div><div class="subtitle">해 주는 관리 표 · 확인한 날 · 전화로 물어볼 말</div></div></a>
+    <a class="card" href="screens/C3-care-criteria.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/C3-care-criteria.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">C3</span><div class="title">목록 기준</div><div class="subtitle">확인하는 것 · 6개월마다 · ‘제휴·광고’ 뜻 · 전문병원과 다름</div></div></a>
+  </div>
+
+  <div class="section-header"><span class="step-badge">4</span><h2>관리 제품 제휴</h2><span class="tag">출시 단계</span></div>
+  <p class="section-desc">고르는 법(정보)을 먼저 두고, 그 아래에 제휴 제품을 ‘광고’ 표시와 함께 보여 줘요. 토닥은 직접 팔지 않고 업체 홈페이지로 보내요. 업체 이름은 예시이고, 의료기기 광고 심의 번호는 자리만 잡아 두었어요. 시안에서는 첫 제품만 ‘자세히’가 이어져요.</p>
+  <div class="grid">
+    <a class="card" href="screens/D1-products.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/D1-products.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">D1</span><div class="title">압박 슬리브 고르기</div><div class="subtitle">고르는 법(붓기 없으면 꼭 입지 않아도) · 제휴 제품 · 광고 표시 · 신고번호 자리</div></div></a>
+    <a class="card" href="screens/D2-product-detail.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/D2-product-detail.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">D2</span><div class="title">제휴 제품 자세히</div><div class="subtitle">치수 재는 법 · 신고번호·광고 심의 번호 자리 · 업체 홈페이지</div></div></a>
+  </div>
+
+</body>
+</html>

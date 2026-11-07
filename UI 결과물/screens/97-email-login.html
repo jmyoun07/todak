@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 이메일로 로그인</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="01-splash.html">‹</a>
+  </div>
+
+  <!-- app.js pageLogin() 이 칸을 aria-label, 버튼을 #loginBtn, 실패 안내를 #loginError 로 찾는다 -->
+  <div class="content" style="padding-bottom:130px;">
+    <div class="auth-head">
+      <h1 class="page-title">이메일로 로그인</h1>
+    </div>
+
+    <div class="field field--suggest">
+      <label for="liEmail">이메일</label>
+      <input class="input" id="liEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="이메일 주소" aria-label="이메일">
+    </div>
+
+    <div class="field">
+      <label for="liPw">비밀번호</label>
+      <div class="pw-wrap">
+        <input class="input" id="liPw" type="password" autocomplete="current-password" placeholder="비밀번호" aria-label="비밀번호">
+        <button type="button" class="pw-eye" aria-label="비밀번호 표시">👁</button>
+      </div>
+      <p class="field-hint bad" id="loginError" role="alert" hidden></p>
+    </div>
+
+    <div class="auth-links small">
+      <a href="81-account-recovery.html">비밀번호 찾기</a>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="strong" href="96-email-signup.html">처음이면 이메일로 가입하기</a>
+    </div>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-primary btn-block btn-lg" id="loginBtn" href="05-home.html" aria-disabled="true">로그인</a>
+  </div>
+</div>
+</body>
+</html>

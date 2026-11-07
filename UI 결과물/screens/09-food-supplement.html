@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 음식·건강기능식품</title>
+<link rel="stylesheet" href="app.css">
+<style>
+/* ── 정보 탭(06 · 09 · 17) 전용 모양 (2026-09-28) — 공용 부품은 app.css '정보 화면 디자인 시스템 v3' 를 그대로 쓴다.
+   같은 줄이 06 · 17 에도 있다 — 고칠 땐 세 화면을 같이 고친다. */
+:root {
+  --ic-cat-food: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='5.5' fill='%23C43E6B'/%3E%3Cpath d='M4.4 9.6h11.2a5.6 5.6 0 0 1-11.2 0z' fill='%23fff'/%3E%3Cpath d='M7.9 7.3c0-1 .8-1.2.8-2.2M11.3 7.3c0-1 .8-1.2.8-2.2' stroke='%23fff' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  --ic-pill-sq: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='5.5' fill='%23C43E6B'/%3E%3Cg transform='rotate(-45 10 10)'%3E%3Crect x='3.8' y='7.3' width='12.4' height='5.4' rx='2.7' fill='%23fff'/%3E%3Cpath d='M10 7.3h3.5a2.7 2.7 0 0 1 0 5.4H10z' fill='%23F5D9E4'/%3E%3C/g%3E%3C/svg%3E");
+  --ic-chemo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Cpath d='M8.9 3.1h2.2' stroke='%23fff' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M6.9 4.6h6.2c.6 0 1 .4 1 1v3.6a3.3 3.3 0 0 1-3.3 3.3H9.2a3.3 3.3 0 0 1-3.3-3.3V5.6c0-.6.4-1 1-1z' fill='%23fff'/%3E%3Cpath d='M7.9 7h2M7.9 9h2' stroke='%23C43E6B' stroke-width='1.1' stroke-linecap='round'/%3E%3Cpath d='M10 12.5v1.4' stroke='%23fff' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M10 14.2c-.9 1.1-1.3 1.8-1.3 2.3a1.3 1.3 0 0 0 2.6 0c0-.5-.4-1.2-1.3-2.3z' fill='%23fff'/%3E%3C/svg%3E");
+  --ic-horm: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Cg transform='rotate(-45 10 10)'%3E%3Crect x='4' y='7.4' width='12' height='5.2' rx='2.6' fill='%23fff'/%3E%3Cpath d='M10 7.4h3.4a2.6 2.6 0 0 1 0 5.2H10z' fill='%23F5D9E4'/%3E%3C/g%3E%3C/svg%3E");
+  --ic-people: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Ccircle cx='7.3' cy='7.7' r='1.9' fill='%23fff'/%3E%3Ccircle cx='12.7' cy='7.7' r='1.9' fill='%23fff'/%3E%3Cpath d='M3.9 14.7c.3-2.3 1.6-3.5 3.4-3.5s3.1 1.2 3.4 3.5zM9.3 14.7c.3-2.3 1.6-3.5 3.4-3.5s3.1 1.2 3.4 3.5z' fill='%23fff'/%3E%3C/svg%3E");
+  --ic-search: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Ccircle cx='9.1' cy='9.1' r='4' fill='none' stroke='%23fff' stroke-width='2.1'/%3E%3Cpath d='M12.1 12.1l3.2 3.2' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
+  --ic-list: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='5.5' fill='%234E7A86'/%3E%3Crect x='5.2' y='4' width='9.6' height='12' rx='1.6' fill='%23fff'/%3E%3Cpath d='M7.4 7.4h5.2M7.4 10h5.2M7.4 12.6h3.4' stroke='%234E7A86' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E");
+  --ic-chev-p: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M7.5 4.5l5.5 5.5-5.5 5.5' stroke='%239E2E54' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --ic-chev-g: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M7.5 4.5l5.5 5.5-5.5 5.5' stroke='%236B5860' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.ic-cat-food { --ic: var(--ic-cat-food); }  .ic-pill-sq { --ic: var(--ic-pill-sq); }
+.ic-chemo { --ic: var(--ic-chemo); }  .ic-horm { --ic: var(--ic-horm); }  .ic-people { --ic: var(--ic-people); }  .ic-why { --ic: var(--ic-why); }
+
+/* 치료 상자 — 옅은 분홍 바탕 위에 흰 타일이 떠 보이게. 제목 테두리는 브랜드 분홍 */
+.sec--tx { --sec-bg: #FBF3F6; --sec-line: #EBD6DE; --sec-mk: var(--primary); --sec-ink: var(--on-surface); }
+/* 상자 안 2열 타일 — 홈 기능 타일 그대로. 칸이 좁아 좌우 여백만 조금 줄인다 */
+.sec .feature {
+  padding-left:  clamp(8px, calc(16.667cqw - 55px), 12px);
+  padding-right: clamp(8px, calc(16.667cqw - 55px), 12px);
+}
+
+/* 이거 먹어도 되나요? — 맨 위의 큰 칸 */
+.link-card--ask { --ic: var(--ic-search); --lc-line: var(--primary); --lc-edge: #E7B9CA; --lc-ink: var(--primary-dark); background: var(--primary-tint); padding-top: 14px; padding-bottom: 14px; }
+.link-card--ask .link-card-ic { width: 40px; height: 40px; }
+.link-card--ask .link-card-t { font-size: 16.5px; font-size: clamp(15px, 4.2308cqw, 18.2px); }
+.link-card--ask::after { background-image: var(--ic-chev-p); }
+/* 내 약의 주의 보기(71) — 약 상자 안의 보통 칸 */
+.link-card--my { --ic: var(--ic-list); }
+.link-card--my::after { background-image: var(--ic-chev-g); }
+
+/* 풀이 밑 '… 보기 ›' 글 링크 (누르는 칸은 44px 가깝게) */
+.more-link {
+  align-self: flex-start; display: inline-flex; align-items: center; min-height: 40px;
+  margin: -6px 0 -8px 11px;
+  font-size: 14px; font-size: clamp(13px, 3.5897cqw, 15.4px); font-weight: 700;
+  color: var(--primary-dark); text-decoration: none;
+}
+
+/* 이동해 온 상자 제목이 잠깐 빛난다 — info.js 가 .is-arrive 를 붙인다 */
+.sec.is-arrive > .sec-t { animation: sec-arrive 1.8s ease-out 1; }
+.sec-t[tabindex="-1"]:focus { outline: none; }
+
+/* 글자를 크게 키운 폰(대략 125% 이상) — 타일은 한 칸으로 펴고 그림 옆에 이름 */
+@container (max-width: 20em) {
+  .sec .feature-grid, .sec--jump .jump { grid-template-columns: 1fr; }
+  .sec .feature { flex-direction: row; align-items: center; gap: 12px; }
+  .sec .feature .f-ic { flex: 0 0 auto; width: 1.5em; height: 1.5em; }   /* 그림 글자가 커진 만큼 칸도 — 그림 글자는 1.46em 높이라 1.5em 이어야 칸 안에 든다(46px 고정이면 칸 밖으로 삐져나온다) */
+}
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="05-home.html">‹</a>
+    <div><div class="appbar-title">음식·건강기능식품</div></div>
+  </div>
+
+  <!-- 음식·건강기능식품 (2026-09-28 · 정보 화면 디자인 시스템 v3 · 31 이 본보기)
+       정보 탭(06)의 '음식·건강기능식품' 갈래가 이 화면의 타일을 모아 보여 주고, 06 의 타일이 이 화면의 상자(#s-drug · #s-supp · #s-myth · #s-meal)로 바로 온다.
+       문장은 모든 사용자에게 같다 — 개인 약을 단정하지 않는다. 내 약 기준은 71 에서.
+       69 의 이름 찾기 안내(more2.js)가 '지금은 쉬어가요'·'면역이 약한 시기' 이름을 쓴다 — 두 이름은 바꾸지 않는다. -->
+  <div class="content content--tight content--jump" data-info="food">
+
+    <a class="link-card link-card--ask" href="69-supplement-check.html?from=09-food-supplement.html">
+      <span class="link-card-ic" aria-hidden="true"></span>
+      <span class="link-card-body">
+        <span class="link-card-t">이거 먹어도 되나요?</span>
+        <span class="link-card-s">건강기능식품·한약을<br>이름으로 찾아보세요</span>
+      </span>
+    </a>
+
+    <nav class="sec sec--jump" aria-label="이 화면 바로 가기">
+      <div class="sec-t">바로 가기</div>
+      <div class="jump">
+        <a class="jump-b jump-b--avoid" href="#s-drug"><span>약과 안 맞는 것</span></a>
+        <a class="jump-b ic-cat-food" href="#s-meal"><span>치료별 식사</span></a>
+        <a class="jump-b ic-pill-sq" href="#s-supp"><span>건강기능식품</span></a>
+        <a class="jump-b jump-b--why" href="#s-myth"><span>근거가 있나요?</span></a>
+      </div>
+    </nav>
+
+    <!-- ═══ ① 약과 함께 조심하세요 (옅은 장미) — 제목 = 조심할 것 / 풀이 = 까닭 / → = 이렇게 ═══ -->
+    <section class="sec sec--avoid" id="s-drug">
+      <h2 class="sec-t section-label">약과 함께 조심하세요</h2>
+      <div class="it">
+        <div class="it-t">자몽·자몽주스</div>
+        <div class="it-b"><b>함께 드시면 안 되는 약</b>이 있어요.<br>약이 몸에 필요 이상으로 남을 수 있어요.</div>
+        <div class="it-b">자몽에이드·자몽청·자몽맛 음료·젤리에도 <span class="nw">들어 있을 수 있어요.</span></div>
+        <div class="it-do"><span>드시는 약이 해당하는지<br>담당 의사나 약사에게 확인하세요.</span></div>
+        <div class="it-do"><span>확인하기 전까지는 쉬어 주세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">약 먹는 시간만 피해서는 부족해요</div>
+        <div class="it-b">자몽의 영향은 하루가 지나도 남고,<br>사라지는 데 <b>3~7일</b>이 걸려요.</div>
+        <div class="it-do"><span>해당하는 약이라면 치료 중에는<br>아예 쉬어 가세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">세비야오렌지·포멜로</div>
+        <div class="it-b">마멀레이드에 쓰는 쓴 오렌지(세비야오렌지)와<br>포멜로에도 자몽과 비슷한 성분이 있어요.</div>
+        <div class="it-b">포멜로는 ‘문단’이라고도 불러요.</div>
+        <div class="it-do"><span>자몽처럼 쉬어 가세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">다른 감귤류</div>
+        <div class="it-b">괜찮은지는 약마다 달라요.</div>
+        <div class="it-do"><span>담당 의사나 약사에게 확인하세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">세인트존스워트(성요한풀)</div>
+        <div class="it-b">타목시펜·항암제 <b>효과를 떨어뜨린다</b>는<br>사람 대상 연구가 있어요.</div>
+        <div class="it-do"><span>함께 드시면 안 돼요.</span></div>
+        <div class="it-do"><span>우울감이 있으면 담당 의사와 상의하세요.</span></div>
+      </div>
+      <a class="link-card link-card--my" href="71-my-drug-cautions.html?from=09-food-supplement.html">
+        <span class="link-card-ic" aria-hidden="true"></span>
+        <span class="link-card-body"><span class="link-card-t">내가 등록한 약의 주의 보기</span></span>
+      </a>
+    </section>
+
+    <!-- ═══ ② 치료에 맞춘 식사 — 큰 상자 안에 치료별 상자 셋, 증상 타일(홈 기능 타일 모양) ═══ -->
+    <section class="sec sec--group ic-cat-food" id="s-meal">
+      <h2 class="sec-t section-label">치료에 맞춘 식사</h2>
+
+      <div class="sec sec--tx ic-chemo">
+        <h3 class="sec-t">항암치료 중이라면</h3>
+        <p class="sec-sub">주사로 맞는 항암, 먹는 항암 모두요.</p>
+        <div class="feature-grid">
+          <a class="feature" href="60-food-nausea.html?from=09-food-supplement.html"><span class="f-ic" aria-hidden="true">🤢</span><span class="f-title">속이 울렁거려요</span></a>
+          <a class="feature" href="61-food-appetite.html?from=09-food-supplement.html"><span class="f-ic" aria-hidden="true">🍽️</span><span class="f-title">입맛이 없어요</span></a>
+          <a class="feature" href="62-food-mucositis.html?from=09-food-supplement.html"><span class="f-ic" aria-hidden="true">😷</span><span class="f-title">입안이 헐었어요</span></a>
+          <a class="feature" href="63-food-diarrhea.html?from=09-food-supplement.html"><span class="f-ic" aria-hidden="true">🚽</span><span class="f-title">설사를 해요</span></a>
+          <a class="feature" href="64-food-constipation.html?from=09-food-supplement.html"><span class="f-ic" aria-hidden="true">🚻</span><span class="f-title">변비가 있어요</span></a>
+          <a class="feature" href="65-food-taste.html?from=09-food-supplement.html"><span class="f-ic" aria-hidden="true">👅</span><span class="f-title">맛이 이상해요</span></a>
+          <a class="feature" href="66-food-immune.html?from=09-food-supplement.html"><span class="f-ic" aria-hidden="true">🍳</span><span class="f-title">면역이<br>약한 시기</span></a>
+        </div>
+      </div>
+
+      <div class="sec sec--tx ic-horm">
+        <h3 class="sec-t">호르몬치료 중이라면</h3>
+        <p class="sec-sub">타목시펜·아로마타제 억제제·<br>난소억제 주사를 쓰실 때예요.</p>
+        <div class="feature-grid">
+          <a class="feature" href="67-food-bone.html?from=09-food-supplement.html"><span class="f-ic" aria-hidden="true">🥛</span><span class="f-title">뼈가 걱정돼요</span></a>
+          <a class="feature" href="94-food-soy.html?from=09-food-supplement.html"><span class="f-ic" aria-hidden="true">🫛</span><span class="f-title">콩, 먹어도<br>될까요</span></a>
+        </div>
+      </div>
+
+      <div class="sec sec--tx ic-people">
+        <h3 class="sec-t">모두에게</h3>
+        <div class="feature-grid">
+          <a class="feature" href="68-food-weight.html?from=09-food-supplement.html"><span class="f-ic" aria-hidden="true">⚖️</span><span class="f-title">살이 쪄요</span></a>
+          <a class="feature" href="95-food-alcohol.html?from=09-food-supplement.html"><span class="f-ic" aria-hidden="true">🍶</span><span class="f-title">술, 어떻게<br>할까요</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ③ 건강기능식품·한약 — 큰 상자 안에 세 상자: 쉬어가요(옅은 장미) / 물어보고(노랑) / 대체로 괜찮아요(초록) ═══
+         세 상자 제목에는 section-label 을 붙이지 않는다 — AI 상담 색인에서 '건강기능식품·한약' 한 묶음으로 남게(예전과 같다) -->
+    <section class="sec sec--group ic-pill-sq" id="s-supp">
+      <h2 class="sec-t section-label">건강기능식품·한약</h2>
+      <p class="sec-p">건강기능식품과 한약은 치료 중에<br><b>치료약과 겹치거나 몸에 부담</b>이 될 수 있어요.</p>
+      <p class="sec-p">드시기 전에 <b>꼭 담당 의사나 약사와 상의</b>하세요.</p>
+
+      <div class="sec sec--avoid">
+        <h3 class="sec-t">지금은 쉬어가요</h3>
+        <p class="sec-sub">치료가 끝나면 달라질 수 있어요.</p>
+        <div class="it">
+          <div class="it-t">이소플라본·석류 고농축 보충제</div>
+          <div class="it-b">호르몬치료 효과를 방해할 수 있다는<br>우려가 있어요.</div>
+          <div class="it-b">음식으로 드시는 콩은 괜찮아요.</div>
+        </div>
+        <div class="it">
+          <div class="it-t">승마(블랙코호시)</div>
+          <div class="it-b">홍조 때문에 많이 찾으시지만<br><b>유방암 환자에게는 권하지 않아요.</b></div>
+        </div>
+        <div class="it">
+          <div class="it-t"><span>고용량 항산화제<br>(비타민 A·C·E·베타카로틴)</span></div>
+          <div class="it-b">항암·방사선 중에 드시면<br>재발 위험과 연관됐다는 연구가 있어요.</div>
+          <div class="it-b">채소·과일로 드시는 건 해당하지 않아요.</div>
+        </div>
+        <div class="it">
+          <div class="it-t">고용량 커큐민(강황) 보충제</div>
+          <div class="it-b">타목시펜 혈중 농도를 낮춘다는<br>사람 연구가 있어요.</div>
+          <div class="it-b">카레·양념 수준은 괜찮아요.</div>
+        </div>
+      </div>
+
+      <div class="sec sec--caution">
+        <h3 class="sec-t">꼭 물어보고 드세요</h3>
+        <p class="sec-sub">사람마다 상황이 달라요.</p>
+        <div class="it">
+          <div class="it-t">홍삼·인삼</div>
+          <div class="it-b">피가 잘 멎지 않을 수 있고,<br>호르몬과 관련된 우려도 있어요.</div>
+          <div class="it-do"><span>수술·항암 시기엔 특히 조심하세요.</span></div>
+        </div>
+        <div class="it">
+          <div class="it-t">오메가3·은행·비타민E</div>
+          <div class="it-b">수술 앞뒤로 피가 잘 멎지 않을 수 있어요.</div>
+        </div>
+        <div class="it">
+          <div class="it-t">버섯 추출물·밀크씨슬</div>
+          <div class="it-b">근거가 부족하고, 간에 부담을 주거나<br>약 효과에 <span class="nw">영향을 줄 수</span> 있어요.</div>
+        </div>
+        <div class="it">
+          <div class="it-t"><span>성분이 분명하지 않은<br>한약·건강원·달인 물</span></div>
+          <div class="it-b">간에 무리가 가거나 약과 겹칠 수 있어요.</div>
+        </div>
+      </div>
+
+      <div class="sec sec--good">
+        <h3 class="sec-t">대체로 괜찮아요</h3>
+        <p class="sec-sub">그래도 용량은 확인하세요.</p>
+        <div class="it">
+          <div class="it-t">칼슘·비타민 D</div>
+          <div class="it-b">특히 호르몬치료 중 <b>뼈 건강에 권해요.</b><br>용량은 검사 결과에 따라 정해요.</div>
+        </div>
+        <div class="it">
+          <div class="it-t">일반 용량 종합비타민</div>
+          <div class="it-b">고용량이 아니면 대체로 괜찮아요.</div>
+          <div class="it-do"><span>성분은 확인하세요.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ④ 이런 이야기, 근거가 있나요? — 근거가 약한 것(정보) / 근거가 없는 말(정보) ═══ -->
+    <!--     두 상자 제목에는 section-label 을 붙인다 — AI 상담 색인에서 예전처럼 두 섹션('근거가 아직 약해요'·'이런 말은 근거가 없어요')으로 나뉘게 -->
+    <section class="sec sec--group ic-why" id="s-myth">
+      <h2 class="sec-t section-label">이런 이야기, 근거가 있나요?</h2>
+
+      <div class="sec sec--info">
+        <h3 class="sec-t section-label">근거가 아직 약해요</h3>
+        <div class="it">
+          <div class="it-t">호르몬치료 관절통과 식사</div>
+          <div class="it-b">식사만으로 좋아진다는<br>확실한 근거는 아직 없어요.</div>
+          <div class="it-b">오메가3 캡슐은 249명이 참여한 시험에서<br><b>가짜 약과 차이가 없었어요.</b></div>
+          <div class="it-b">통증이 줄어든 것이 확인된 건 <b>운동</b>이에요.<br>주 150분 걷기와 주 2회 근력 운동을<br>1년 했을 때예요.</div>
+          <div class="it-do"><span>통증이 심해도 약을 끊기 전에<br>꼭 담당 의사와 상의하세요.</span></div>
+          <a class="more-link" href="34-detail-arthralgia.html?from=09-food-supplement.html">관절통 관리 보기 ›</a>
+        </div>
+        <div class="it">
+          <div class="it-t">안면홍조와 음식</div>
+          <div class="it-b">커피·술·매운 음식·뜨거운 국물이<br>홍조를 ‘일으킨다’고 말할 만한 연구는<br><span class="nw">거의 없어요.</span></div>
+          <div class="it-do"><span>2주쯤 먹은 것과 홍조를 적어 보고<br>나에게 맞지 않는 것을 찾아보세요.</span></div>
+          <a class="more-link" href="35-detail-hotflash.html?from=09-food-supplement.html">안면홍조 관리 보기 ›</a>
+        </div>
+      </div>
+
+      <div class="sec sec--why">
+        <h3 class="sec-t section-label">이런 말은 근거가 없어요</h3>
+        <div class="it">
+          <div class="it-t">“해독주스·디톡스로 몸을 비워야 한다”</div>
+          <div class="it-b">암 치료 결과를 좋게 만든다는 근거가 없어요.</div>
+          <div class="it-b">오히려 <b>먹는 양이 줄어<br>근육이 빠질 수</b> 있어요.</div>
+        </div>
+        <div class="it">
+          <div class="it-t">“고기는 아예 끊어야 한다”</div>
+          <div class="it-b">근거가 없어요.<br>치료 중엔 <b>단백질이 오히려 필요</b>해요.</div>
+          <div class="it-b">가공육·붉은 고기는 ‘금지’가 아니라<br>‘줄이기’를 권해요.</div>
+        </div>
+        <div class="it">
+          <div class="it-t">“설탕을 끊으면 암세포가 굶는다”</div>
+          <div class="it-b">사실이 아니에요.<br>단 음료·과자를 줄이시라는 건<br><b>체중 관리 때문</b>이에요.</div>
+        </div>
+        <div class="it">
+          <div class="it-t">“단식하면 항암 효과가 올라간다”</div>
+          <div class="it-b">치료 중 단식·케톤식·저탄수화물식은<br>권할 근거도, 반대할 근거도 부족해요.</div>
+          <div class="it-do"><span>혼자 시작하지 마시고<br>담당 의사와 상의하세요.</span></div>
+        </div>
+        <div class="it">
+          <div class="it-t"><span>“면역이 낮으면 생채소·생과일을<br>다 끊어야 한다”</span></div>
+          <div class="it-b">권하지 않는 방법이에요.<br>다 끊는다고 감염이 줄어든다는<br>근거는 없어요.</div>
+          <div class="it-do"><span>깨끗이 씻어 드세요.</span></div>
+          <a class="more-link" href="66-food-immune.html?from=09-food-supplement.html">위생 요령 보기 ›</a>
+        </div>
+        <div class="it">
+          <div class="it-t">“유방암이면 우유·유제품은 안 된다”</div>
+          <div class="it-b">근거가 없어요.<br>오히려 <b>뼈 건강에 도움</b>이 돼요.</div>
+        </div>
+        <div class="it">
+          <div class="it-t">“유방암이면 콩을 먹지 말라”</div>
+          <div class="it-b">두부·두유·된장 같은 일상 콩 음식은<br><b>끊을 필요가 없어요.</b></div>
+          <div class="it-b">도움이 된다는 연구도 있어요.<br>다만 고농축 이소플라본 ‘보충제’는 달라요.</div>
+          <a class="more-link" href="94-food-soy.html?from=09-food-supplement.html">콩 식사 카드 보기 ›</a>
+        </div>
+        <div class="it">
+          <div class="it-t"><span>“알칼리 음식으로 체질을 바꾼다”<br>“노니·차가버섯·개똥쑥이 암에 좋다”</span></div>
+          <div class="it-b">사람을 대상으로 확인된 근거가 없어요.</div>
+        </div>
+      </div>
+    </section>
+
+    <a class="btn btn-primary btn-block" href="07-chat.html?from=09-food-supplement.html">💬 음식·건강기능식품 물어보기</a>
+    <div class="tiny muted rf-src">근거: 미국 FDA 허가사항 · 식품의약품안전처 · 세계암연구기금(WCRF) · 임상시험·메타분석 — 자세한 출처는 <b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요</div>
+
+    <p class="disclaimer">토닥은 특정 제품을 권하거나 안전성을 판정하지 않아요. 최종 판단은 담당 의사나 약사와 상의하세요.</p>
+  </div>
+
+  <div class="bottomnav">
+    <a class="nav-item" href="05-home.html"><span class="ni-ic">🏠</span><span>홈</span></a>
+    <a class="nav-item nav-item--on" href="06-sideeffects.html" aria-current="page"><span class="ni-ic">📖</span><span>정보</span></a>
+    <a class="fab" href="07-chat.html"><span class="fab-btn">💬</span><span class="fab-label">상담</span></a>
+    <a class="nav-item" href="16-checkin.html"><span class="ni-ic">📈</span><span>기록</span></a>
+    <a class="nav-item" href="13-settings.html"><span class="ni-ic">👤</span><span>내 정보</span></a>
+  </div>
+</div>
+<script src="js/info.js"></script>
+</body>
+</html>

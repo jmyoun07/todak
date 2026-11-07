@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 개인정보·데이터</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  /* 항목별 삭제 펼쳐보기 (app.css 토큰만 사용) */
+  .pv-more > summary { list-style: none; cursor: pointer; }
+  .pv-more > summary::-webkit-details-marker { display: none; }
+  .pv-body {
+    border: 1px solid var(--outline); border-top: 0;
+    border-radius: 0 0 var(--r) var(--r);
+    background: var(--white); padding: 14px 15px;
+    /* 권리·요청 안내는 본문이라 .small 과 같은 크기(13px 이상) */
+    font-size: clamp(13px, 3.4615cqw, 14.9px); line-height: 1.75; color: var(--on-surface-variant);
+  }
+  .pv-body b { color: var(--on-surface); }
+  .pv-more[open] > summary .listitem { border-radius: var(--r) var(--r) 0 0; border-bottom-color: transparent; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="13-settings.html">‹</a>
+    <div><div class="appbar-title">개인정보·데이터</div></div>
+  </div>
+
+  <div class="content content--tight">
+    <div class="banner banner--safe">
+      <span class="b-ic">🔒</span>
+      <div class="small">내 정보는 <b>암호화되어 안전하게 보관</b>돼요.<br>성함·연락처는 <b>외부로 보내지 않아요.</b></div>
+    </div>
+
+    <div class="section-label">내 권리 · 내 데이터</div>
+    <a class="listitem" href="03-profile-type.html?from=24-privacy-data.html">
+      <span class="li-ic">✏️</span>
+      <div class="li-body"><div class="li-title">내 정보 보기·고치기</div><div class="li-sub">진단 정보·치료·약·동반질환 정정</div></div>
+      <span class="li-chev">›</span>
+    </a>
+    <a class="listitem" href="25-terms.html?tab=privacy&amp;from=24-privacy-data.html">
+      <span class="li-ic">📄</span>
+      <div class="li-body"><div class="li-title">약관 · 개인정보 처리방침 보기</div><div class="li-sub">이용약관과 처리를 맡기는 곳 안내</div></div>
+      <span class="li-chev">›</span>
+    </a>
+    <details class="pv-more">
+      <summary>
+        <div class="listitem">
+          <span class="li-ic">💬</span>
+          <div class="li-body">
+            <div class="li-title">보기·고치기·지우기 요청하기</div>
+            <div class="li-sub">어디로, 어떻게 말씀드리면 되는지 안내해 드려요</div>
+          </div>
+          <span class="li-chev">▾</span>
+        </div>
+      </summary>
+      <div class="pv-body">
+        <b>어디로 말씀드리면 되나요?</b><br>
+        개인정보 보호책임자 이메일 <a href="mailto:jamesyoun@dju.kr"><b>jamesyoun@dju.kr</b></a><br>
+        요청을 받고 처리하는 일도 보호책임자가 함께 맡고 있어요.<br><br>
+
+        <b>무엇을 적어 보내시면 되나요?</b><br>
+        ① 가입하실 때 쓰신 <b>이메일 주소</b>(이메일 없이 간편로그인으로 시작하셨다면 <b>성함·생년월일과 로그인 방법</b>)
+        ② 원하시는 것(내 기록 <b>보기</b> · <b>고치기</b> · <b>지우기</b> · <b>그만 쓰기</b> · <b>필수 동의 철회</b>)
+        ③ 해당되는 기록의 <b>종류나 기간</b>. 이 세 가지만 적어 주시면 충분해요.
+        위치·알림 선택 동의는 <b>내 정보 › 내가 동의한 내용 보기</b>에서 직접 끄고 켜실 수 있어요.
+        가족이나 대리인이 대신 요청하실 수도 있고, 이때는 위임하신 사실을 확인할 수 있는 자료가 필요해요.<br><br>
+
+        <b>들어드리지 못하는 경우도 있어요</b><br>
+        법령에 따라 보관해야 하거나 다른 분의 권리를 해칠 우려가 있어 들어드리지 못하는 부분이 있으면,
+        <b>그 이유와 이의를 제기하실 수 있는 방법</b>을 함께 알려드려요.<br><br>
+
+        <b>동의를 그만두고 싶으실 때</b><br>
+        동의를 철회하시면 모아 둔 개인정보를 <b>곧바로 폐기</b>해요.
+        다만 이미 이름을 지운 뒤 분석에 쓰인 자료는 되돌릴 수 없다는 점만 미리 알려드려요.<br><br>
+
+        비용은 들지 않고, 요청하셨다고 해서 어떤 불이익도 없어요.
+        이 이메일은 <b>개인정보에 관한 요청을 받는 곳</b>이에요. 앱 사용법이 궁금하시면 <b>도움말</b>을 봐 주세요.
+      </div>
+    </details>
+
+    <div class="card card--flat" style="border:1px solid var(--outline);">
+      <div class="strong small">무엇을, 얼마나 보관하나요?</div>
+      <p class="small muted" style="margin-top:6px; line-height:1.8;">
+        · <b>계정 정보(이메일·이름·생년월일 등)·건강정보·앱 사용기록</b> — 「생명윤리 및 안전에 관한 법률」 제15조·제16조에 따라 <b>연구가 끝난 뒤 최소 3년</b> 보관하고, 그 기간이 지나면 지체 없이 복구할 수 없는 방법으로 파기해요(종이로 출력한 자료는 파쇄해요).<br>
+        · <b>앱 사용기록</b> — 접속 횟수·사용 일수·주간 사용 빈도·질문 수·평균 사용 시간처럼 <b>숫자로 된 기록</b>만 모아요. <b>질문 내용과 AI 답변의 원문은 연구용 앱 사용기록으로 수집하지 않습니다.</b><br>
+        · <b>위치</b> — 근처 병원을 찾으신 <b>그 순간에만</b> 쓰고 <b>저장하지 않아요.</b> 지도를 보여 드릴 때에는 지도를 그리려고 <b>카카오맵에 현재 위치가 전달돼요.</b> 병원 목록을 받아올 때는 <b>지역 코드만</b> 쓰고 좌표는 보내지 않아요.<br>
+        · <b>장소로 찾기</b> — 장소 이름으로 찾으실 때에는 위치 대신 <b>적어 주신 장소 이름이 카카오맵에 전달</b>되고, 카카오맵이 알려 준 그 장소의 자리는 <b>휴대폰 안에서</b> 가까운 순으로 세우는 데만 써요. 적어 주신 말에는 <b>성함·연락처·건강정보가 들어가지 않고</b>, 토닥 서버에도 남지 않아요.<br>
+        · <b>AI 상담 대화</b> — <b>회원님 계정에만</b> 암호화해 보관하고, <b>회원님과 회원님이 신고하신 답변을 확인하는 토닥 담당자</b> 외에는 볼 수 없어요. 다른 용도로는 쓰지 않고, 원하시면 위 <b>‘보기·고치기·지우기 요청하기’</b>로 말씀해 주시면 토닥 담당자가 지워드려요.
+      </p>
+    </div>
+
+    <p class="disclaimer">보기·고치기·지우기·처리 그만하기 요청은 위 안내의 이메일로 받아요. 법령에서 보관하도록 정한 정보는 정해진 기간이 지난 뒤 파기됩니다.</p>
+  </div>
+</div>
+</body>
+</html>

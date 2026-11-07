@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 대화 기록</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="07-chat.html">‹</a>
+    <div><div class="appbar-title">대화 기록</div></div>
+    <span class="spacer"></span>
+    <a class="action" href="22-search.html" style="text-decoration:none;" aria-label="지난 대화 검색">🔎</a>
+  </div>
+
+  <div class="content content--tight">
+    <a class="row" href="22-search.html" style="text-decoration:none; color:inherit; background:var(--white); border:1.5px solid var(--outline); border-radius:var(--r-pill); padding:11px 16px;">
+      <span style="font-size:16px;">🔎</span>
+      <span class="grow muted small">지난 대화 검색</span>
+    </a>
+
+    <!-- ↓ 시안 예시 덩이. 갤러리에는 그대로 보이고 앱·웹앱에서는 통째로 숨는다(data-demo-box).
+         배선이 이 자리를 실제 기록으로 다시 그리기 전까지 남의 기록이 비치지 않게 한다 -->
+    <div data-demo-box>
+    <div class="section-label">오늘</div>
+    <a class="listitem" href="07-chat.html">
+      <span class="li-ic">💬</span>
+      <div class="li-body"><div class="li-title">손발 저림 관리</div><div class="li-sub">“손발이 저리고 찌릿한데…” · 오전 9:41</div></div>
+      <span class="li-chev">›</span>
+    </a>
+    <a class="listitem" href="07-chat.html">
+      <span class="li-ic">🫚</span>
+      <div class="li-body"><div class="li-title">홍삼 먹어도 되는지</div><div class="li-sub">“홍삼 먹어도 돼요?” · 오전 9:43</div></div>
+      <span class="li-chev">›</span>
+    </a>
+
+    <div class="section-label">지난주</div>
+    <a class="listitem" href="07-chat.html">
+      <span class="li-ic">🦴</span>
+      <div class="li-body"><div class="li-title">관절통 상담</div><div class="li-sub">“관절이 아침에 특히 아파요” · 7월 22일</div></div>
+      <span class="li-chev">›</span>
+    </a>
+    <a class="listitem" href="07-chat.html">
+      <span class="li-ic">😷</span>
+      <div class="li-body"><div class="li-title">구내염 관리</div><div class="li-sub">“입안이 헐어서 아파요” · 7월 20일</div></div>
+      <span class="li-chev">›</span>
+    </a>
+
+    </div><!-- /시안 예시 -->
+    <!-- 안내 한 줄은 감싸개 밖에 둔다 — 배선이 이 줄을 기준으로 목록을 끼워 넣는다(more.js page21 insertBefore) -->
+    <p class="disclaimer">대화 기록은 회원님 계정에만 암호화해 보관해요.<br>지우고 싶으시면 <b>내 정보 › 계정 관리</b>에서 요청하세요.</p>
+  </div>
+</div>
+</body>
+</html>

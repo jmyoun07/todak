@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 수족증후군·손발톱 변화</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="06-sideeffects.html">‹</a>
+    <div><div class="appbar-title">수족증후군·손발톱</div><div class="appbar-sub">손발 피부·손발톱 변화</div></div>
+  </div>
+
+  <!-- 정보 화면 디자인 시스템 v3 (2026-09-28 · 본보기 31 · app.css '정보 화면 디자인 시스템 v3' · STYLE.md)
+       모든 묶음은 상자(.sec) · 제목(.sec-t)은 상자 윗선에 걸친다 · 색: 초록=하세요 / 흰 바탕=정보 / 진한 빨강=응급
+       젤로다 복용 중 '다음 복용분 전에 먼저 확인' 경고는 🟠 상자 안 사례(.case)로 옮겼다(지우지 않음). -->
+  <div class="content content--tight content--jump" style="padding-bottom:150px;">
+    <div class="row wrap" style="gap:8px;">
+      <span class="pill pill--brand">💉 항암 · 🎯 표적</span>
+      <span class="sev sev--mod">약에 따라 흔함</span>
+    </div>
+
+    <!-- ═══ 바로 가기 — 여섯 칸 같은 크기(2열) · 누르면 그 상자로 내려간다(다른 내용을 숨기지 않는다) ═══ -->
+    <nav class="sec sec--jump" aria-label="이 화면 바로 가기">
+      <div class="sec-t">바로 가기</div>
+      <div class="jump">
+        <a class="jump-b jump-b--why" href="#s-why"><span>이게 왜 생겨요?</span></a>
+        <a class="jump-b jump-b--info" href="#s-xeloda"><span>젤로다 드신다면</span></a>
+        <a class="jump-b jump-b--good" href="#s-care"><span>이렇게 관리해요</span></a>
+        <a class="jump-b jump-b--info" href="#s-finger"><span>지문이 옅어져요</span></a>
+        <a class="jump-b jump-b--hosp" href="#s-call"><span>이럴 땐 병원에</span></a>
+        <a class="jump-b jump-b--emg" href="#s-emg"><span>응급 상황일 땐</span></a>
+      </div>
+    </nav>
+
+    <!-- ═══ ① 이게 왜 생겨요? ═══ -->
+    <section class="sec sec--why" id="s-why">
+      <h2 class="sec-t section-label">이게 왜 생겨요?</h2>
+      <p class="sec-p">일부 항암제·표적치료제 때문에 생겨요.</p>
+      <div class="it">
+        <div class="it-t">수족증후군</div>
+        <div class="it-b">손바닥·발바닥이 붉어지고<br>화끈거리거나 벗겨져요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">손발톱 변화</div>
+        <div class="it-b">손발톱 색이 변하거나 약해지고,<br>주위가 아플 수 있어요.</div>
+      </div>
+    </section>
+
+    <!-- ═══ ② 젤로다(카페시타빈)를 드신다면 (정보) ═══ -->
+    <section class="sec sec--info" id="s-xeloda">
+      <h2 class="sec-t section-label">젤로다(카페시타빈)를 드신다면</h2>
+      <div class="it">
+        <div class="it-t">얼마나 흔한가요</div>
+        <div class="it-b">드시는 분의 <b>절반 이상</b>이 겪어요.<br>다른 항암제와 함께 쓰면 조금 더 흔해요.</div>
+        <div class="it-b">심한 정도까지 가는 분은 <b>열에 한두 분</b>이에요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">언제 오나요</div>
+        <div class="it-b">보통 <b>두세 달째</b>에 나타나요.<br>빠르면 열흘, 늦으면 1년 만에도 와요.</div>
+        <div class="it-b">첫 주기에 괜찮았어도 나중에 생길 수 있어요.</div>
+      </div>
+    </section>
+
+    <!-- ═══ ③ 이렇게 관리해요 (초록) — 예전 ✓ 세 줄과 아래 카드를 한 상자로 합쳤다 ═══ -->
+    <section class="sec sec--good" id="s-care">
+      <h2 class="sec-t section-label">이렇게 관리해요</h2>
+      <div class="it">
+        <div class="it-t">손발은 시원하게</div>
+        <div class="it-do"><span>세게 누르거나 문지르지 말고,<br>뜨거운 물도 피하세요.</span></div>
+        <div class="it-do"><span>화끈거릴 땐 차가운 물수건이나<br>천으로 감싼 냉팩을 대세요.</span></div>
+        <div class="it-do"><span>얼음은 피부에 직접 대지 마세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">설거지·청소엔 고무장갑</div>
+        <div class="it-b">뜨거운 물과 세제가 오래 닿으면<br>손발톱과 피부가 가장 빨리 상해요.</div>
+        <div class="it-do"><span>꼭 고무장갑을 끼세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">씻고 나서 바로 보습</div>
+        <div class="it-do"><span>샤워는 미지근한 물로 짧게 하세요.</span></div>
+        <div class="it-do"><span>물기가 살짝 남아 있을 때<br>보습제를 바르고, 자주 덧바르세요.</span></div>
+        <div class="it-do"><span>알코올·향료가 든 제품은 피하세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">발볼이 넉넉한 신발</div>
+        <div class="it-b">오래 서 있거나 많이 걷는 날은<br>발바닥에 압력이 몰려요.</div>
+        <div class="it-do"><span>꽉 끼는 신발은 이 시기만이라도 넣어 두고,<br>편한 신발에 면 양말을 신으세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">손발톱은 짧고 깨끗하게</div>
+        <div class="it-do"><span>끝이 걸리지 않게 짧게 다듬으세요.</span></div>
+        <div class="it-do"><span>매니큐어·네일아트는 쉬어 가세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ④ 지문이 옅어질 수 있어요 (정보) ═══ -->
+    <section class="sec sec--info" id="s-finger">
+      <h2 class="sec-t section-label">지문이 옅어질 수 있어요</h2>
+      <div class="it">
+        <div class="it-t">지문 인증이 안 될 수 있어요</div>
+        <div class="it-b">손발이 벗겨지는 시기에는<br>휴대폰·은행 앱의 <b>지문 인증</b>이<br>갑자기 안 될 수 있어요.</div>
+        <div class="it-b">출입국·관공서의 지문 확인도 어려울 수 있어요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">이렇게 대비하세요</div>
+        <div class="it-do"><span>비밀번호나 얼굴 인식 같은 다른 방법을<br>미리 등록해 두세요.</span></div>
+        <div class="it-do"><span>해외에 나가실 일이 있다면<br>진료 때 미리 말씀해 두세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ⑤ 이럴 땐 병원에 — 큰 상자 하나에 세 단계(🔴·🟠·🟢) 중간 상자 ═══
+         단계 제목의 🔴·🟠·🟢 글자는 지우지 않는다(화면에서는 둥근 점으로 그림) — AI 상담 자료 색인이 이 글자로 단계를 나눈다.
+         단계 제목에는 section-label 을 붙이지 않는다(_build_kb.py split_risk).
+         예전 '이럴 땐 전화 말고 119'·열 기준 덩이는 응급 안내(48) 칸 하나로 바꿨다. -->
+    <section class="sec sec--group" id="s-call">
+      <h2 class="sec-t section-label">이럴 땐 병원에</h2>
+      <p class="sec-sub">세 단계로 나눴어요. 위에서부터 급한 순서예요.</p>
+
+      <!-- 🔴 1단계 -->
+      <div class="sec sec--lv1" id="s-119">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🔴</span> <span>지금 바로 119</span></div>
+        <!-- 응급 상황 전반은 홈의 응급 안내(48)에 모여 있다 — 열 기준(부위별)·해열제 주의·숨참·의식 흐림·소변 줄어듦 -->
+        <a class="link-card link-card--emg" id="s-emg" href="48-emergency.html?from=51-detail-handfoot.html">
+          <span class="link-card-ic" aria-hidden="true"></span>
+          <span class="link-card-body">
+            <span class="link-card-t">응급 상황일 땐 이렇게 하세요</span>
+            <span class="link-card-s">열이 38.0도 이상일 때<br>(겨드랑이는 37.5도 이상)<br>숨이 차거나 정신이 흐릿할 때</span>
+          </span>
+        </a>
+        <a class="btn btn-danger btn-block" href="tel:119">📞 119 응급전화</a>
+      </div>
+
+      <!-- 🟠 2단계 -->
+      <div class="sec sec--lv2" id="s-today">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟠</span> <span>그날 안에 연락하세요</span></div>
+        <div class="it">
+          <div class="it-t">손발이 이런 모습이면</div>
+        </div>
+        <ul class="dots">
+          <li><b>물집이 잡히거나 껍질이 벗겨져 진물이 나고</b>,<br>아파서 걷거나 물건을 잡기 어려울 때</li>
+          <li><b>손발톱 주위에 고름이 보이거나</b><br>붉게 부었을 때<span class="dots-b">감염일 때 나타나는 모습이에요.</span></li>
+        </ul>
+        <div class="case">
+          <div class="case-t">젤로다(카페시타빈)를 드시는 중인데<br>손발에 물집·진물이 생기거나<br>아파서 걷기 어려울 때</div>
+          <div class="case-b">환자용 설명서에는 평소 하던 일을<br>못 할 정도라면 <b>복용을 멈추고</b><br><b>바로 담당 의사에게 연락하라</b>고 돼 있어요.</div>
+          <div class="case-do">
+            <div class="case-do-h">이렇게 하세요</div>
+            <div class="it-do"><span>다음 복용분을 드시기 전에<br>담당 의사에게 먼저 확인하세요.</span></div>
+            <div class="it-do"><span>끊을지 이어 드실지<br>혼자 정하지 마세요.</span></div>
+            <div class="it-do"><span>손발 사진을 찍어 두세요.</span></div>
+            <div class="case-note">쉬는 기간과 다시 시작할 용량은<br>담당 의사가 정해요.</div>
+          </div>
+        </div>
+        <!-- 저장해 두신 병원 번호가 있으면 features.js(wireCallMine)가 '병원 이름 + 번호' 로 바로 걸리는 단추로 바꾼다.
+             번호가 없으면 글자를 '🏥 내 병원 번호 등록하기'로 바꾸고 84 등록 화면으로 보낸다. -->
+        <a class="btn btn-outline btn-outline--lv2 btn-block" href="84-care-contacts.html?from=51-detail-handfoot.html" data-role="call-mine">📞 내 병원으로 연락하기</a>
+      </div>
+
+      <!-- 🟢 3단계 -->
+      <div class="sec sec--lv3" id="s-next">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟢</span> <span>다음 진료 때 말씀하세요</span></div>
+        <div class="it">
+          <div class="it-t"><span>손바닥·발바닥이 붉고 저릿하거나<br>건조하고 따끔한 정도일 때</span></div>
+          <div class="it-do"><span>언제부터 어느 정도였는지 적어 두세요.</span></div>
+        </div>
+        <!-- 가벼울 때만 근처 병원 — 피부과는 심평원 진료과목코드 14 -->
+        <div class="it">
+          <div class="it-t">담당 병원이 멀다면</div>
+          <div class="it-b">건조하고 저린 정도라면<br>가까운 피부과에서 먼저 보셔도 돼요.</div>
+          <div class="it-b">물집·갈라짐이면 담당 의사에게 보이세요.</div>
+        </div>
+        <a class="btn btn-outline btn-outline--good btn-block" href="92-nearby-list.html?dept=14&amp;from=51-detail-handfoot.html">🏥 근처 피부과 찾기</a>
+      </div>
+    </section>
+
+    <div class="tiny muted rf-src">근거: CTCAE v5.0 · 미국 국립암연구소(NCI) · 미국 FDA 허가사항 · 대한종양간호학회 · 대한감염학회 — 자세한 출처는 <b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요</div>
+
+    <p class="disclaimer">본 제품은 의료기기가 아니므로 질병 유무를 판단할 수 없으며, 질병 유무 판단을 위해서는 의사의 검진이 필요합니다.</p>
+  </div>
+
+  <div class="footer-actions">
+    <div class="row gap-8">
+      <a class="btn btn-outline grow" href="10-consult-questions.html">📝 진료 질문 만들기</a>
+      <a class="btn btn-primary grow" href="07-chat.html">💬 이 증상 물어보기</a>
+    </div>
+  </div>
+
+  <!-- 전화 걸기 확인 — 실수로 눌러도 바로 걸리지 않게 -->
+  <div class="callpop" id="callpop" role="dialog" aria-modal="true" aria-label="전화 걸기 확인" hidden>
+    <div class="callpop-card">
+      <div style="font-size:34px;">📞</div>
+      <div class="strong" style="font-size:17px;" id="callpop-title">전화를 걸까요?</div>
+      <a class="btn btn-primary btn-block btn-lg" id="callpop-go" href="tel:119" data-direct="1">📞 지금 전화 걸기</a>
+      <button class="btn btn-outline btn-block" id="callpop-no" type="button">닫기</button>
+    </div>
+  </div>
+</div>
+<script>(function(){
+var NAMES={"119":"119 구급대","109":"자살예방 상담전화 109","1577-0199":"정신건강 위기상담 1577-0199"};
+var pop=document.getElementById("callpop");if(!pop)return;
+var go=document.getElementById("callpop-go"),no=document.getElementById("callpop-no"),tt=document.getElementById("callpop-title");
+document.addEventListener("click",function(e){
+  var a=e.target&&e.target.closest?e.target.closest("a"):null;if(!a)return;
+  var h=a.getAttribute("href")||"";
+  if(h.indexOf("tel:")!==0||a.hasAttribute("data-direct"))return;
+  e.preventDefault();e.stopImmediatePropagation();e.stopPropagation();
+  var num=h.slice(4);
+  pop.__opener=a;
+  /* 배선 JS 가 붙인 병원 이름(data-callname)이 있으면 그 이름으로 묻는다 — 숫자만 보면 어디로 거는지 모른다 (48 과 같은 방식) */
+  tt.textContent=(a.getAttribute("data-callname")||NAMES[num]||num)+"에 전화할까요?";
+  go.setAttribute("href","tel:"+num);
+  pop.hidden=false;no.focus();
+},true);
+function close(){pop.hidden=true;
+  if(pop.__opener&&pop.__opener.focus){pop.__opener.focus();}}
+no.addEventListener("click",close);
+go.addEventListener("click",function(){setTimeout(close,150);});
+pop.addEventListener("click",function(e){if(e.target===pop)close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!pop.hidden){e.stopPropagation();close();}},true);
+})()</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 진료 전 리포트</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="10-consult-questions.html">‹</a>
+    <div><div class="appbar-title">진료 전 리포트</div><div class="appbar-sub" data-demo>8월 13일 진료용</div></div>
+  </div>
+
+  <!-- 2026-09-28 정보 화면 디자인 시스템 v3 (STYLE.md). 앱에서는 more2.js page77 이 .content 를 비우고 최근 14일 실제 기록으로 다시 그린다. -->
+  <div class="content content--tight" style="padding-bottom:150px;">
+    <p class="small muted">최근 기록을 정리했어요.<br>진료 때 이 화면을 보여 드리세요.</p>
+
+    <!-- ↓ 시안 예시 덩이. 갤러리에는 그대로 보이고 앱·웹앱에서는 통째로 숨는다(data-demo-box).
+         배선이 이 자리를 실제 기록으로 다시 그리기 전까지 남의 기록이 비치지 않게 한다 -->
+    <p class="small" data-kb-only>진료 전 리포트에는 최근 2주 기록을 한 장으로 정리해요 — 가장 자주 있었던 증상과 세기, 컨디션(좋음·보통·힘듦 날수), 최근 7일 복약 체크, 진료 때 여쭤볼 질문. 진료실에서 이 화면을 보여 드리면 돼요. 홈의 ‘진료 준비’나 치료 일정 화면에서 열어요.</p>
+    <div data-demo-box>
+
+    <!-- 리포트 본문 — 한 상자 안에 소제목(막대)으로 나눈다 -->
+    <section class="sec sec--info" id="s-report">
+      <h2 class="sec-t section-label">진료 전 요약</h2>
+      <div class="row" style="justify-content:space-between; align-items:center;">
+        <div class="small muted">김지영 · 7월 31일 ~ 8월 13일 (14일)</div>
+        <span><img src="icon-192.png" alt="토닥" style="width:22px; height:22px; border-radius:6px; display:block;"></span>
+      </div>
+
+      <div class="it">
+        <div class="it-t">가장 자주 있었던 증상</div>
+        <div class="col gap-6" style="padding-left:11px; margin-top:2px;">
+          <div class="row" style="align-items:center; gap:8px;">
+            <span class="sev sev--mod" style="flex:0 0 auto;">보통</span>
+            <span class="small grow">관절통 — 14일 중 <b>9일</b></span>
+          </div>
+          <div class="row" style="align-items:center; gap:8px;">
+            <span class="sev sev--mild" style="flex:0 0 auto;">약함</span>
+            <span class="small grow">손발 저림 — 14일 중 <b>6일</b></span>
+          </div>
+          <div class="row" style="align-items:center; gap:8px;">
+            <span class="sev sev--mild" style="flex:0 0 auto;">약함</span>
+            <span class="small grow">피로 — 14일 중 <b>5일</b></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="it">
+        <div class="it-t">컨디션</div>
+        <div class="it-b">좋음 <b>4일</b> · 보통 <b>6일</b> · 힘듦 <b>3일</b><br>(기록한 날 13일)</div>
+      </div>
+
+      <div class="it">
+        <div class="it-t">복약 (최근 7일)</div>
+        <div class="it-b">예정된 복약 <b>14회 중 12회</b> 체크하셨어요<br>모두 챙긴 날 <b>5일</b> / 7일</div>
+      </div>
+
+      <div class="it">
+        <div class="it-t">여쭤볼 질문</div>
+        <ul class="dots" style="padding-left:11px;">
+          <li>손발 저림이 계속돼요. 치료약과 관련이 있는지, 조절이 필요한 정도인지 봐 주실 수 있나요?</li>
+          <li>관절통이 아침에 특히 심해 일상이 불편해요. 도움이 될 방법이나 약이 있을까요?</li>
+          <li>홍삼과 비타민 D를 지금 치료 중에 먹어도 되는지 확인하고 싶어요.</li>
+        </ul>
+      </div>
+
+      <p class="tiny muted" style="padding-top:10px; border-top:1px solid var(--outline);">이 요약은 회원님이 기록하신 내용을 그대로 정리한 것으로, 진단이나 평가가 아니에요.</p>
+    </section>
+    </div><!-- /시안 예시 -->
+
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-primary btn-block btn-lg" href="28-note-archive.html">🗂️ 진료 메모 보관함 보기</a>
+  </div>
+</div>
+</body>
+</html>

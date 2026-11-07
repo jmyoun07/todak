@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 진료 질문 만들기</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="05-home.html">‹</a>
+    <div><div class="appbar-title">진료 준비</div><div class="appbar-sub">여쭤볼 질문 만들기</div></div>
+  </div>
+
+  <!-- 2026-09-28 정보 화면 디자인 시스템 v3 (STYLE.md). more.js page10 이 첫 .field 의 .chips(증상)와
+       .s-box 가 든 .card(질문 카드 틀)를 찾아 쓴다 — 칩 글자·카드 구조는 그대로 둔다. -->
+  <div class="content" style="padding-bottom:150px;">
+    <section class="sec sec--info" id="s-sym">
+      <h2 class="sec-t section-label">최근 겪은 증상</h2>
+      <p class="sec-sub">고르시면 여쭤볼 질문으로 정리해 드려요.<br>여러 개 고르셔도 돼요.</p>
+      <div class="field">
+        <div class="chips">
+          <span class="chip chip--on">손발 저림</span>
+          <span class="chip chip--on">관절통</span>
+          <span class="chip">열감</span>
+          <span class="chip">구내염</span>
+          <span class="chip">피로</span>
+          <span class="chip">＋ 직접 입력</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec sec--good" id="s-q">
+      <h2 class="sec-t section-label">이렇게 여쭤보세요</h2>
+      <p class="sec-sub">고르신 증상으로 만든 질문이에요.<br>누르면 넣고 뺄 수 있어요.</p>
+      <div class="card">
+        <div class="row" style="align-items:flex-start; gap:11px;">
+          <span class="s-box" style="background:var(--primary); border-color:var(--primary); color:#fff;">✓</span>
+          <div class="small grow">손발 저림이 계속돼요. 치료약과 관련이 있는지, <b>조절이 필요한 정도</b>인지 봐 주실 수 있나요?</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="row" style="align-items:flex-start; gap:11px;">
+          <span class="s-box" style="background:var(--primary); border-color:var(--primary); color:#fff;">✓</span>
+          <div class="small grow">관절통이 아침에 특히 심해 일상이 불편해요. <b>도움이 될 방법이나 약</b>이 있을까요?</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="row" style="align-items:flex-start; gap:11px;">
+          <span class="s-box" style="border-color:var(--outline-strong);"></span>
+          <div class="small grow"><b>홍삼과 비타민 D</b>를 지금 치료 중에 먹어도 되는지 확인하고 싶어요.</div>
+        </div>
+      </div>
+      <a class="btn btn-outline btn-outline--good btn-block" href="07-chat.html">💬 대화로 질문 더 만들기</a>
+    </section>
+  </div>
+
+  <div class="footer-actions">
+    <div class="row gap-8">
+      <a class="btn btn-outline grow" href="28-note-archive.html">🗂️ 보관함</a>
+      <a class="btn btn-primary grow" href="77-visit-report.html">📋 진료 전 리포트</a>
+    </div>
+    <p class="disclaimer">여기서 만든 질문은 참고용이에요.<br>실제 상담은 담당 의사와 하세요.</p>
+  </div>
+</div>
+</body>
+</html>

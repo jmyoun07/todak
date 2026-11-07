@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 사진에서 찾은 약</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="53-med-scan.html">‹</a>
+    <div><div class="appbar-title">사진에서 찾은 약</div></div>
+  </div>
+
+  <div class="content content--tight" style="padding-bottom:124px;">
+
+    <!-- ── 1단계 · 어떤 약이 들어가는지 이름만 본다 ── -->
+    <div class="step-pane" data-step="1">
+      <div style="display:flex; flex-direction:column; gap:4px;">
+        <div class="strong" style="font-size:15.5px;" id="found-msg">사진에서 약 2개를 찾았어요</div>
+        <p class="tiny muted">맞는지 보시고 아래 <b>확인</b>을 눌러 주세요.<br>이름이 틀렸으면 <b>이름을 눌러</b> 고쳐 주세요.</p>
+      </div>
+
+      <div class="medpick" data-role="med-list">
+        <div class="medrow">
+          <span class="mr-box">✓</span>
+          <button type="button" class="mr-name">목펜정</button>
+          <button type="button" class="mr-del">빼기</button>
+        </div>
+        <div class="medrow">
+          <span class="mr-box">✓</span>
+          <button type="button" class="mr-name">히아린점안액</button>
+          <button type="button" class="mr-del">빼기</button>
+        </div>
+      </div>
+
+      <p class="tiny muted" data-role="inj-note" hidden>병원에서 맞는 주사약으로 보이는 약은 빼 두었어요.<br>집에서 직접 쓰시는 약이면 <b>되돌리기</b>를 눌러 주세요.</p>
+    </div>
+
+    <!-- ── 2단계 · 약마다 몇 번·언제·며칠분 ── -->
+    <div class="step-pane" data-step="2" hidden style="gap:10px;">
+      <div style="display:flex; flex-direction:column; gap:4px;">
+        <div class="strong" style="font-size:15.5px;" data-role="s2-title">약마다 하루 몇 번·언제 쓰시는지 골라 주세요</div>
+        <p class="tiny muted">빈 칸을 누르면 고르실 수 있어요.</p>
+      </div>
+
+      <div class="detlist" data-role="det-list">
+        <div class="detrow">
+          <div class="dr-top">
+            <div class="dr-name">목펜정</div>
+            <span class="dr-route">먹는 약</span><button type="button" class="pickbtn pb-route" data-k="route" hidden>먹는 약 ▾</button>
+          </div>
+          <div class="dr-picks">
+            <button type="button" class="pickbtn" data-k="freq">하루 3번 ▾</button>
+            <button type="button" class="pickbtn" data-k="when">아침·점심·저녁 ▾</button>
+            <button type="button" class="pickbtn" data-k="days">7일분 ▾</button>
+          </div>
+        </div>
+        <div class="detrow need">
+          <div class="dr-top">
+            <div class="dr-name">히아린점안액</div>
+            <span class="dr-need">확인 필요</span><button type="button" class="pickbtn pb-route is-empty" data-k="route">어떤 약? ▾</button>
+          </div>
+          <div class="dr-picks">
+            <button type="button" class="pickbtn is-empty" data-k="freq">하루 몇 번?</button>
+            <button type="button" class="pickbtn is-empty" data-k="when">언제?</button>
+            <button type="button" class="pickbtn is-empty" data-k="days">며칠분?</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="tiny muted" data-role="s2-note">며칠분을 골라 두시면 약이 떨어지기 전에 알려 드려요.<br>나중에 <b>복약 설정</b>에서 바꾸실 수 있어요.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-actions">
+    <div class="row gap-8 foot-2btn" data-foot="1">
+      <a class="btn btn-outline grow" style="min-height:52px;" href="58-med-manual.html?add=1&amp;from=54-med-confirm.html">＋ 빠진 약 넣기</a>
+      <button type="button" class="btn btn-primary grow" style="min-height:52px;" data-act="step2">확인</button>
+    </div>
+    <div data-foot="2" hidden>
+      <button type="button" class="btn btn-primary btn-block btn-lg" style="min-height:56px;" data-act="save">약 2개 등록하기</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

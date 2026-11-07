@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 내 약과 부작용</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  /* 70·74·75 공통 — 약 카드 안 '함께 볼 것' 띠(노랑 = 주의). 상자 색 변수(--sec-*)를 노랑으로 두어 .it-t·.it-b·.it-do 가 주의 상자와 같은 결로 보인다 */
+  .mwarn { --sec-mk: var(--caution); --sec-ink: var(--caution-ink); --sec-line: var(--caution-line);
+           display: flex; flex-direction: column; gap: 3px; margin-top: 10px; padding: 10px 11px 11px;
+           border-radius: 12px; background: var(--caution-bg); border: 1px solid var(--caution-line); }
+  /* 배지 풀이 — 배지 한 칸 / 뜻 (배지 글자 크기는 앱 전체 .sev 그대로) */
+  .bdg { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--sec-line); border-radius: 12px; overflow: hidden; }
+  .bdg-row { display: flex; align-items: flex-start; gap: 10px; padding: 9px 11px; }
+  .bdg-row + .bdg-row { border-top: 1px dashed var(--sec-line); }
+  .bdg-row .sev { flex: 0 0 auto; width: 7.6em; justify-content: center; margin-top: .2em; }
+  .bdg-t { flex: 1 1 auto; min-width: 0; font-size: 14px; font-size: clamp(13px, 3.5897cqw, 15.4px); line-height: 1.55; color: var(--on-surface); }
+  .bdg-s { display: block; margin-top: 1px; font-size: 13px; font-size: clamp(13px, 3.3333cqw, 14.3px); line-height: 1.55; color: #4A3C42; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="55-med-today.html">‹</a>
+    <div><div class="appbar-title">내 약과 부작용</div><div class="appbar-sub" data-demo>등록한 약 4개 기준</div></div>
+    <span class="spacer"></span>
+    <a class="action" href="58-med-manual.html" style="text-decoration:none; color:inherit;">＋</a>
+  </div>
+
+  <!-- 2026-09-28 정보 화면 디자인 시스템 v3 (STYLE.md). 앱에서는 more2.js page70 이 .content 를 비우고 등록하신 약으로 다시 그린다 —
+       아래는 갤러리 시안(예시 약 4개). 공통 덩이 M-A(맨 위 '스스로 줄이거나 끊지 마세요')·M-B(맨 아래 '불편이 생기면')는 70·74·75 가 같은 글이다. -->
+  <div class="content content--tight content--jump" style="padding-bottom:150px;">
+
+    <!-- ═══ 공통 M-A · med-guard-top [70·74·75 공통] — 약 바꾸기 경고(안전) ═══ -->
+    <section class="sec sec--never" id="med-guard-top">
+      <h2 class="sec-t section-label">약을 스스로 줄이거나 끊지 마세요</h2>
+      <p class="sec-p">스스로 끊으면 오히려 더 힘들어지는 약도 있어요.</p>
+      <p class="sec-p">얼마나, 언제까지, 멈출지 말지는<br><b>담당 의사</b>가 지금 상태를 보고 정해요.</p>
+    </section>
+
+    <!-- ═══ 배지가 뜻하는 것 (정보) ═══ -->
+    <section class="sec sec--info" id="s-badge">
+      <h2 class="sec-t section-label">배지가 뜻하는 것</h2>
+      <div class="bdg">
+        <div class="bdg-row"><span class="sev sev--sev">자주 있어요</span><span class="bdg-t">100명 중 <b>1명 이상</b><span class="bdg-s">허가사항의 ‘매우 흔하게’·‘흔하게’</span></span></div>
+        <div class="bdg-row"><span class="sev sev--mod">가끔 있어요</span><span class="bdg-t">1,000명 중 1명 ~ 100명 중 1명<span class="bdg-s">허가사항의 ‘흔하지 않게’</span></span></div>
+        <div class="bdg-row"><span class="sev sev--mild">드물어요</span><span class="bdg-t">1,000명 중 <b>1명 미만</b><span class="bdg-s">허가사항의 ‘드물게’·‘매우 드물게’</span></span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">배지는 얼마나 자주인지만 뜻해요</div>
+        <div class="it-b">드물어도 바로 연락할 증상이 있어요.<br>약별 안내의 <b>이럴 땐 병원에</b>를 보세요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">빈도가 적혀 있지 않으면</div>
+        <div class="it-b">허가사항에 빈도가 없는 항목에는<br>배지를 붙이지 않아요.</div>
+      </div>
+    </section>
+
+    <nav class="sec sec--jump" aria-label="이 화면 바로 가기">
+      <div class="sec-t">바로 가기</div>
+      <div class="jump">
+        <a class="jump-b jump-b--info" href="#s-meds"><span>약별로 보기</span></a>
+        <a class="jump-b jump-b--info" href="#s-overlap"><span>증상별로 보기</span></a>
+      </div>
+    </nav>
+
+    <!-- ═══ 약별로 보기 — 등록한 약 ═══ -->
+    <section class="sec sec--info" id="s-meds">
+      <h2 class="sec-t section-label">등록한 약</h2>
+
+      <!-- 약 1 · S1 완전 (유방암 약) -->
+      <a class="card" href="74-med-effect-detail.html" style="text-decoration:none; color:inherit; display:block;">
+        <div class="row" style="justify-content:space-between; align-items:flex-start;">
+          <div class="grow">
+            <div class="strong" style="font-size:16px;">타목시펜정 20mg</div>
+            <div class="tiny muted" style="margin-top:3px;">성분 tamoxifen · 아침 1번 복용 중</div>
+          </div>
+          <span class="li-chev" style="color:var(--primary);">›</span>
+        </div>
+        <div class="row wrap" style="gap:6px; margin-top:10px;">
+          <span class="pill pill--brand">💊 호르몬치료</span>
+        </div>
+        <div class="row wrap" style="gap:6px; margin-top:9px;">
+          <span class="chip chip--soft" style="padding:5px 11px;">🔥 안면홍조</span>
+          <span class="chip chip--soft" style="padding:5px 11px;">🌸 질건조</span>
+          <span class="chip chip--soft" style="padding:5px 11px;">😴 수면장애</span>
+          <span class="chip chip--soft" style="padding:5px 11px;">＋4</span>
+        </div>
+        <div class="tiny" style="margin-top:9px; color:var(--primary-dark); font-weight:700;">부작용 안내 보기 ›</div>
+      </a>
+
+      <!-- 약 2 · S1 완전 (유방암 약) -->
+      <a class="card" href="74-med-effect-detail.html" style="text-decoration:none; color:inherit; display:block;">
+        <div class="row" style="justify-content:space-between; align-items:flex-start;">
+          <div class="grow">
+            <div class="strong" style="font-size:16px;">입랜스캡슐 125mg</div>
+            <div class="tiny muted" style="margin-top:3px;">성분 palbociclib · 21일 드시고 7일 쉬어요</div>
+          </div>
+          <span class="li-chev" style="color:var(--primary);">›</span>
+        </div>
+        <div class="row wrap" style="gap:6px; margin-top:10px;">
+          <span class="pill pill--brand">🎯 표적치료</span>
+        </div>
+        <div class="row wrap" style="gap:6px; margin-top:9px;">
+          <span class="chip chip--soft" style="padding:5px 11px;">🦠 골수억제</span>
+          <span class="chip chip--soft" style="padding:5px 11px;">🔋 피로</span>
+          <span class="chip chip--soft" style="padding:5px 11px;">😷 구내염</span>
+          <span class="chip chip--soft" style="padding:5px 11px;">＋3</span>
+        </div>
+        <div class="row gap-6" style="margin-top:9px; align-items:flex-start;">
+          <span class="sev sev--mild" style="flex:0 0 auto; margin-top:2px;">드물어요</span>
+          <span class="tiny muted">마른기침·숨참이 새로 생기면<br>바로 연락하세요.</span>
+        </div>
+        <div class="tiny" style="margin-top:9px; color:var(--primary-dark); font-weight:700;">부작용 안내 보기 ›</div>
+      </a>
+
+      <!-- 약 3 · S3 비유방암 + 상호작용 (노랑 = 주의 — 진한 빨강은 119·응급에만) -->
+      <a class="card" href="74-med-effect-detail.html#interact" style="text-decoration:none; color:inherit; display:block; border-color:var(--caution);">
+        <div class="row" style="justify-content:space-between; align-items:flex-start;">
+          <div class="grow">
+            <div class="strong" style="font-size:16px;">팍실정 20mg</div>
+            <div class="tiny muted" style="margin-top:3px;">성분 paroxetine · 우울·불안으로 드시는 약</div>
+          </div>
+          <span class="li-chev" style="color:var(--caution-ink);">›</span>
+        </div>
+        <div class="row wrap" style="gap:6px; margin-top:10px;">
+          <span class="pill pill--info">🩺 다른 질환 약</span>
+          <span class="pill pill--warn">함께 볼 것이 있어요</span>
+        </div>
+        <div class="mwarn">
+          <div class="it-t">호르몬치료 약과 겹치는 부분이 있어요</div>
+          <div class="it-do"><span>그래도 이 약을 스스로 끊지 마세요.</span></div>
+          <div class="it-b">갑자기 끊으면 금단 증상이 생길 수 있어요.</div>
+          <div class="it-do"><span>다음 진료 때 두 약을 함께 말씀하세요.</span></div>
+        </div>
+        <div class="tiny" style="margin-top:9px; color:var(--primary-dark); font-weight:700;">무엇이 겹치는지 보기 ›</div>
+      </a>
+
+      <!-- 약 4 · S4 비유방암 + 경고 없음 (★ 초록 체크 금지 · 회색 ⚪) -->
+      <a class="card" href="75-med-effect-none.html" style="text-decoration:none; color:inherit; display:block; border-color:var(--outline-strong);">
+        <div class="row" style="justify-content:space-between; align-items:flex-start;">
+          <div class="grow">
+            <div class="strong" style="font-size:16px;">암로디핀정 5mg</div>
+            <div class="tiny muted" style="margin-top:3px;">성분 amlodipine · 혈압약</div>
+          </div>
+          <span class="li-chev">›</span>
+        </div>
+        <div class="row wrap" style="gap:6px; margin-top:10px;">
+          <span class="pill pill--info">🩺 다른 질환 약</span>
+        </div>
+        <div class="row gap-6" style="margin-top:10px; align-items:flex-start;">
+          <span style="color:var(--outline-strong);">⚪</span>
+          <div class="small grow">유방암 치료약이 아니라서<br><b>부작용 안내는 따로 없어요.</b><br>암 치료약과 겹치는 약이 있는지 볼 때 써요.</div>
+        </div>
+        <div class="tiny" style="margin-top:9px; color:var(--primary-dark); font-weight:700;">무슨 뜻인가요? ›</div>
+      </a>
+    </section>
+
+    <!-- ═══ S0 미확정 — 아직 확인하지 못한 약 ═══ -->
+    <section class="sec sec--info" id="s-unknown">
+      <h2 class="sec-t section-label">아직 확인하지 못한 약</h2>
+      <div class="card" style="border-color:var(--outline-strong); border-style:dashed;">
+        <div class="row gap-8" style="align-items:center;">
+          <span style="width:34px;height:34px;border-radius:50%;background:var(--surface-3);display:grid;place-items:center;font-size:17px;flex:0 0 auto;">🔎</span>
+          <div class="grow">
+            <div class="small strong">사진에서 읽은 약 1개는<br>어떤 약인지 찾지 못했어요</div>
+            <div class="tiny muted" style="margin-top:2px;">“<span class="nw">○○정 5mg</span>”<br>글자가 흐려 이름을 다 읽지 못했어요</div>
+          </div>
+        </div>
+        <p class="tiny muted" style="margin-top:9px;">어떤 약인지 모르면 부작용 안내도,<br>겹치는 약 확인도 해 드릴 수 없어요.<br>이름을 직접 넣어 주시면 바로 확인해 드려요.</p>
+        <div class="row gap-8" style="margin-top:10px;">
+          <a class="btn btn-outline btn-sm grow" href="58-med-manual.html">⌨️ 이름으로 입력</a>
+          <a class="btn btn-outline btn-sm grow" href="59-med-scan-fail.html">📷 다시 찍기</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 증상별로 보기 — 여러 약에서 겹치는 증상 ═══ -->
+    <section class="sec sec--info" id="s-overlap">
+      <h2 class="sec-t section-label">증상별로 보면 이렇게 겹쳐요</h2>
+      <div class="it">
+        <div class="it-t">겹친다고 더 심해지는 건 아니에요</div>
+        <div class="it-b">어느 약 때문인지<br>하나로 정하기 어렵다는 뜻이에요.</div>
+        <div class="it-do"><span>다음 진료 때 증상과 드시는 약을<br>함께 말씀하세요.</span></div>
+      </div>
+
+      <a class="listitem" href="33-detail-fatigue.html">
+        <span class="li-ic">🔋</span>
+        <div class="li-body">
+          <div class="li-title">피로 <span class="sev sev--sev">자주 있어요</span></div>
+          <div class="li-sub">타목시펜 · 입랜스 · 팍실 <b>3개 약에 함께</b> 적혀 있어요</div>
+        </div>
+        <span class="li-chev">›</span>
+      </a>
+      <a class="listitem" href="35-detail-hotflash.html">
+        <span class="li-ic">🔥</span>
+        <div class="li-body">
+          <div class="li-title">안면홍조·열감 <span class="sev sev--sev">자주 있어요</span></div>
+          <div class="li-sub">타목시펜 · 팍실 <b>2개 약에 함께</b> 적혀 있어요</div>
+        </div>
+        <span class="li-chev">›</span>
+      </a>
+      <a class="listitem" href="46-detail-sleep.html">
+        <span class="li-ic">😴</span>
+        <div class="li-body">
+          <div class="li-title">수면장애 <span class="sev sev--sev">자주 있어요</span></div>
+          <div class="li-sub">타목시펜 · 팍실 <b>2개 약에 함께</b> 적혀 있어요</div>
+        </div>
+        <span class="li-chev">›</span>
+      </a>
+      <a class="listitem" href="37-detail-myelo.html">
+        <span class="li-ic">🦠</span>
+        <div class="li-body">
+          <div class="li-title">골수억제·감염 위험 <span class="sev sev--sev">자주 있어요</span></div>
+          <div class="li-sub">입랜스 1개 약 · <b>열이 나면 그 자체가 응급</b>이에요</div>
+        </div>
+        <span class="li-chev">›</span>
+      </a>
+      <a class="listitem" href="36-detail-mucositis.html">
+        <span class="li-ic">😷</span>
+        <div class="li-body">
+          <div class="li-title">구내염 <span class="sev sev--sev">자주 있어요</span></div>
+          <div class="li-sub">입랜스 <b>1개 약에</b> 적혀 있어요</div>
+        </div>
+        <span class="li-chev">›</span>
+      </a>
+
+      <div class="tip">
+        <span class="tip-lab">팁</span>
+        <div class="it-t">여기 없는 불편이 생겼다면</div>
+        <div class="it-b">허가사항에 적힌 것만 모았어요.<br>적혀 있지 않아도 겪으실 수 있어요.</div>
+        <div class="it-do"><span><a href="16-checkin.html" style="color:inherit;">오늘 컨디션</a>에 적어 두세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ 음식·건강기능식품 — 74 와 같은 모양(상자 + 한 줄) ═══ -->
+    <section class="sec sec--info" id="s-food">
+      <h2 class="sec-t section-label">이 약들과 음식·건강기능식품</h2>
+      <a class="listitem" href="71-my-drug-cautions.html">
+        <span class="li-ic" style="background:var(--warn-tint);">🍊</span>
+        <div class="li-body">
+          <div class="li-title">음식·건강기능식품 확인하기</div>
+          <div class="li-sub">드시려는 것이 괜찮은지<br>확인하는 방법을 알려 드려요</div>
+        </div>
+        <span class="li-chev">›</span>
+      </a>
+    </section>
+
+    <!-- ═══ 공통 M-B · med-guard-bottom [70·74·75 공통] — 참지 말고 정도에 따라 연락 (🟠·🟢) ═══
+         단계 제목에는 section-label 을 붙이지 않는다 — 색인에서 '불편이 생기면' 한 묶음으로 가게 -->
+    <section class="sec sec--group" id="med-guard-bottom">
+      <h2 class="sec-t section-label">불편이 생기면</h2>
+      <p class="sec-sub">스스로 거르지도, 참지도 마세요.<br>정도에 따라 이렇게 하세요.</p>
+      <a class="link-card link-card--emg" href="48-emergency.html?from=70-med-effects.html">
+        <span class="link-card-ic" aria-hidden="true"></span>
+        <span class="link-card-body">
+          <span class="link-card-t">열이 나면 그 자체가 응급이에요</span>
+          <span class="link-card-s">귀 38.0도 · 겨드랑이 37.5도<br>입 38.3도 이상<br>해열제를 드시기 전에 바로 연락하세요</span>
+        </span>
+      </a>
+      <div class="sec sec--lv2">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟠</span> <span>그날 안에 연락하세요</span></div>
+        <div class="it">
+          <div class="it-t">심하거나 새로 생긴 불편</div>
+          <div class="it-b">설사·구토·심한 손발 통증처럼<br>약을 잠시 멈춰야 할 수도 있어요.</div>
+          <div class="it-do"><span>다음 약을 드시기 전에<br>치료받는 병원에 전화하세요.</span></div>
+        </div>
+      </div>
+      <div class="sec sec--lv3">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟢</span> <span>다음 진료 때 말씀하세요</span></div>
+        <div class="it">
+          <div class="it-t">견딜 만한 정도라면</div>
+          <div class="it-do"><span>기록해 두셨다가 보여 주세요.</span></div>
+          <div class="it-b">용량이나 약을 조정할지 정할 때 도움이 돼요.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="tiny muted rf-src">근거: 식품의약품안전처 — 자세한 출처는 <b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요</div>
+
+    <p class="disclaimer">본 제품은 의료기기가 아니므로 질병 유무를 판단할 수 없으며, 질병 유무 판단을 위해서는 의사의 검진이 필요합니다.</p>
+  </div>
+
+  <div class="footer-actions">
+    <div class="row gap-8">
+      <a class="btn btn-outline grow" href="10-consult-questions.html">📝 진료 질문 만들기</a>
+      <a class="btn btn-primary grow" href="07-chat.html">💬 내 약에 대해 묻기</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

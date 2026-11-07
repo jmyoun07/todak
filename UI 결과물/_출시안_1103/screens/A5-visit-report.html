@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 진료 전 리포트 (출시안)</title>
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="launch.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="A1-home.html">‹</a>
+    <div><div class="appbar-title">진료 전 리포트</div><div class="appbar-sub" data-demo>11월 13일 진료용 · 오늘까지 기록</div></div>
+  </div>
+
+  <!-- 77 진료 전 리포트에 '팔 점검'과 '스트레칭' 줄을 더한 출시안 — 복약·컨디션·팔·스트레칭을 한 장으로 -->
+  <div class="content content--tight" style="padding-bottom:150px;">
+    <p class="small muted">최근 기록을 정리했어요.<br>진료 때 이 화면을 보여 드리세요.</p>
+    <a class="small strong tap" href="#s-q" style="color:var(--primary-dark); text-decoration:none;">❓ 여쭤볼 질문 4개 바로 보기 ↓</a>
+
+    <section class="sec sec--info" id="s-report">
+      <h2 class="sec-t section-label">진료 전 요약</h2>
+      <div class="small muted" data-demo>김지영 · 10월 22일 ~ 11월 4일 (14일)</div>
+
+      <div class="it">
+        <div class="it-t">가장 자주 있었던 증상</div>
+        <div class="col gap-6" style="padding-left:11px; margin-top:2px;">
+          <div class="row" style="align-items:center; gap:8px;">
+            <span class="sev sev--mild" style="flex:0 0 auto;">약함</span>
+            <span class="small grow">관절통 — 14일 중 <b>8일</b></span>
+          </div>
+          <div class="row" style="align-items:center; gap:8px;">
+            <span class="sev sev--mild" style="flex:0 0 auto;">약함</span>
+            <span class="small grow">피로 — 14일 중 <b>4일</b></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="it">
+        <div class="it-t">수술한 왼쪽 팔 (주 1회 점검)</div>
+        <div class="it-b">4주 중 <b>1주</b> ‘무겁거나 뻐근해요’ — <b>11월 4일</b><br>붓기·조임·붉어짐은 없었어요.</div>
+        <div class="wk4" style="margin-top:8px;" data-demo>
+          <div class="ok"><span class="wk-d">10월 14일</span><span class="wk-v">이상 없음</span></div>
+          <div class="ok"><span class="wk-d">10월 21일</span><span class="wk-v">이상 없음</span></div>
+          <div class="ok"><span class="wk-d">10월 28일</span><span class="wk-v">이상 없음</span></div>
+          <div class="watch now"><span class="wk-d">11월 4일</span><span class="wk-v">무거움</span></div>
+        </div>
+      </div>
+
+      <div class="it">
+        <div class="it-t">스트레칭</div>
+        <div class="it-b">14일 중 <b>9일</b> · 하고 난 뒤<br>나아졌어요 <b>5번</b> · 비슷해요 <b>4번</b> · 더 아파요 <b>0번</b></div>
+        <div class="it-b">아팠다고 남긴 동작: <b>날개 펴기</b>(10월 30일) — 그 뒤로 코칭에서 뺐어요</div>
+      </div>
+
+      <div class="it">
+        <div class="it-t">컨디션</div>
+        <div class="it-b">좋음 <b>5일</b> · 보통 <b>7일</b> · 힘듦 <b>1일</b> (기록한 날 13일)</div>
+      </div>
+
+      <div class="it">
+        <div class="it-t">복약 (최근 7일)</div>
+        <div class="it-b">예정된 복약 <b>14회 중 13회</b> 체크하셨어요</div>
+      </div>
+
+      <div class="it" id="s-q">
+        <div class="it-t">여쭤볼 질문</div>
+        <ul class="dots" style="padding-left:11px;">
+          <li>11월 4일에 왼팔이 무겁고 뻐근했어요. 림프부종인지 확인이 필요할까요?</li>
+          <li>압박 슬리브를 써야 하는지, 쓴다면 어디서 맞추면 되는지 알고 싶어요.</li>
+          <li>수술한 지 6개월인데 왼팔이 어깨 높이까지만 올라가요. 재활 치료를 받아 보는 게 좋을까요?</li>
+          <li>아침에 손과 관절이 뻣뻣해요. 지금 하는 스트레칭을 계속해도 될까요?</li>
+        </ul>
+      </div>
+
+      <p class="tiny muted" style="padding-top:10px; border-top:1px solid var(--outline);">이 요약은 회원님이 기록하신 내용을 그대로 정리한 것으로, 진단이나 평가가 아니에요.</p>
+    </section>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-primary btn-block btn-lg" href="28-note-archive.html">🗂️ 진료 메모 보관함 보기</a>
+  </div>
+</div>
+</body>
+</html>

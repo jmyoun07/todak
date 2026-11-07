@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 약 직접 입력</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="56-med-schedule.html">‹</a>
+    <div><div class="appbar-title">약 직접 입력</div></div>
+  </div>
+
+  <div class="content content--tight" style="padding-bottom:150px;">
+    <div class="photo-block" data-role="photo-entry">
+      <div class="pb-head">
+        <span class="pb-ic">📷</span>
+        <div class="grow">
+          <div class="pb-t">약 봉투를 찍으면<br>손으로 적지 않으셔도 돼요</div>
+          <div class="pb-s">약 이름·하루 몇 번·며칠분을 읽어 드려요</div>
+        </div>
+      </div>
+      <a class="pb-btn" href="53-med-scan.html">📷 약 봉투 사진 찍기</a>
+    </div>
+
+    <div class="or-line" data-role="photo-entry-or">또는 이름으로 직접 입력</div>
+
+    <div class="field">
+      <label>약 이름</label>
+      <input class="input" type="text" value="아나스트로졸" placeholder="약 봉투에 적힌 이름" aria-label="약 이름" maxlength="60">
+      <p class="tiny muted" style="margin-top:-2px;">두 글자만 넣으셔도 찾아 드려요.</p>
+    </div>
+
+    <!-- 자동완성 결과 -->
+    <div class="card card--flat" style="border:1px solid var(--outline); padding:0; overflow:hidden; flex:0 0 auto;">
+      <div class="listitem" style="border:none; border-radius:0; background:var(--primary-tint);">
+        <span class="li-ic" style="background:var(--white);">💊</span>
+        <div class="li-body"><div class="li-title">아나스트로졸정 1mg</div><div class="li-sub">호르몬치료제 · 아리미덱스 등</div></div>
+        <span style="color:var(--primary);">✓</span>
+      </div>
+      <div class="listitem" style="border:none; border-radius:0; border-top:1px solid var(--outline);">
+        <span class="li-ic">💊</span>
+        <div class="li-body"><div class="li-title">아나스트로졸정 1mg (다른 제조사)</div><div class="li-sub">성분이 같아요</div></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>어떤 약인가요</label>
+      <div class="chips" data-role="route">
+        <span class="chip chip--on">먹는 약</span>
+        <span class="chip">눈에 넣는 약</span>
+        <span class="chip">바르는 약</span>
+        <span class="chip">붙이는 약</span>
+        <span class="chip">기타</span>
+      </div>
+    </div>
+
+    <!-- 언제 드시나요 (2026-10-26 사용 의견) — 예전 '사용 횟수'(하루 1~4번)는 고르면 아침·저녁처럼 정해져
+         아침·점심에 드시는 약을 넣을 수 없었다. 약 봉투의 복용 시간표처럼 드시는 시간을 바로 누르고, 횟수는 고른 개수로 정한다.
+         배선: features.js page58 (안약이면 '언제 넣으시나요'로 말을 바꾼다) -->
+    <div class="field">
+      <label>언제 드시나요 <span style="font-weight:500; color:var(--on-surface-variant);">· 모두 눌러 주세요</span></label>
+      <div class="when-grid" data-role="when">
+        <span class="chip chip--on">아침</span>
+        <span class="chip chip--on">점심</span>
+        <span class="chip">저녁</span>
+        <span class="chip">자기 전</span>
+      </div>
+      <span class="chip when-prn" data-role="when-prn">정해진 시간 없이 필요할 때만</span>
+      <div class="when-sum" data-role="when-sum">하루 2번 · 아침·점심</div>
+    </div>
+
+    <div class="field">
+      <label>며칠분</label>
+      <div class="row" style="align-items:center; gap:8px;">
+        <input class="input" type="number" inputmode="numeric" min="1" max="365" value=""
+               placeholder="7" aria-label="며칠분" style="width:90px; text-align:center;">
+        <span class="small" style="flex:0 0 auto;">일</span>
+        <span class="tiny muted" style="margin-left:4px;">모르시면 비워 두셔도 돼요</span>
+      </div>
+      <!-- 며칠분을 알면 떨어지기 3일 전·하루 전에 알린다 (native.js RX · 교수님 2026-09-30) -->
+      <p class="tiny muted" style="margin-top:6px;">넣어 두시면 약이 떨어지기 3일 전·하루 전에 알려 드려요.</p>
+    </div>
+
+    <div class="field">
+      <label>알림 시간</label>
+      <div class="listitem">
+        <span class="li-ic">🌅</span>
+        <div class="li-body"><div class="li-title">아침</div><div class="li-sub"></div></div>
+        <span class="strong" style="color:var(--primary-dark);">오전 8:00</span>
+      </div>
+      <!-- 시안 그림용 둘째 줄 — 배선이 첫 줄을 틀로 고른 시간만큼 다시 만든다(이 줄은 앱에서 지운다) -->
+      <div class="listitem" data-demo-off>
+        <span class="li-ic">☀️</span>
+        <div class="li-body"><div class="li-title">점심</div><div class="li-sub"></div></div>
+        <span class="strong" style="color:var(--primary-dark);">오후 1:00</span>
+      </div>
+    </div>
+
+    <div class="banner banner--info">
+      <span class="b-ic">💡</span>
+      <div class="small"><b>평소 드시는 약</b>도 함께 넣어 주세요.<br>암 치료약과 겹치는 약이 있는지 볼 수 있어요.</div>
+    </div>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-primary btn-block btn-lg" href="56-med-schedule.html">추가하기</a>
+  </div>
+</div>
+</body>
+</html>

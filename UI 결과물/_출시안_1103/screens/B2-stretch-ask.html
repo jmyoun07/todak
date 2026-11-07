@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 스트레칭 전 질문 (출시안)</title>
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="launch.css">
+<style>
+/* 안전 질문 — 한 줄에 물음, 오른쪽에 아니요/네 */
+.safe-q { display: flex; flex-direction: column; gap: 8px; padding: 12px 0; }
+.safe-q + .safe-q { border-top: 1px solid var(--outline); }
+.safe-q .q { font-size: 15px; font-size: clamp(14px, 3.8462cqw, 16.5px); font-weight: 700; line-height: 1.45; }
+.safe-q .seg { align-self: stretch; }
+.safe-q .seg a.seg-item { text-decoration: none; }
+/* 안전 답은 화면에서 가장 중요한 단추 — 글자 15px·높이 44px 이상. 기본값 없이 비워 두고 다 답해야 다음으로 */
+.safe-q .seg .seg-item { font-size: 15px; font-size: clamp(14px, 3.8462cqw, 16.5px); padding: 11px 6px; min-height: 44px; display: grid; place-items: center; color: var(--on-surface); }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="B1-stretch-home.html">‹</a>
+    <div><div class="appbar-title">오늘 어디가 불편하세요?</div><div class="appbar-sub">1분이면 끝나요</div></div>
+  </div>
+  <div style="padding:0 18px;">
+    <div class="steps"><span class="step step--on"></span><span class="step"></span></div>
+  </div>
+
+  <!-- 1분 질문 — 오늘 불편한 곳 · 팔 높이 · 안전 확인 네 가지(미국암학회 '멈추고 연락할 신호'). 하나라도 '네'면 동작 대신 안내(B3).
+       AI 에는 그날 답 · 수술한 쪽과 때 · 아팠다고 남긴 동작만 보낸다(처음 쓸 때 보내는 곳·보관 기간을 밝히고 따로 동의 — 민감정보·국외 이전).
+       B1 '어제 동작으로 하기'로 들어오면 안전 확인만 묻고, 아래 버튼이 '어제 동작으로 시작'으로 바뀌어 AI 를 거치지 않고 B5 로 간다 -->
+  <div class="content content--tight" style="padding-bottom:150px;">
+    <div class="l-h">오늘 불편한 곳 <span class="l-hint">여러 개 고를 수 있어요</span></div>
+    <div class="chips">
+      <span class="chip chip--on" data-demo>어깨·겨드랑이</span>
+      <span class="chip chip--on" data-demo>수술한 쪽 팔</span>
+      <span class="chip">목·등</span>
+      <span class="chip chip--on" data-demo>손·손목</span>
+      <span class="chip">무릎·발</span>
+      <span class="chip">없어요</span>
+    </div>
+
+    <div class="l-h">수술한 왼팔은 어디까지 올라가나요? <span class="l-hint">아프지 않게 올렸을 때</span></div>
+    <div class="rom" role="radiogroup" aria-label="수술한 왼팔이 올라가는 높이">
+      <div role="radio" aria-checked="false">
+        <svg class="fig" viewBox="0 0 120 120" aria-hidden="true"><circle class="hl" cx="68" cy="40" r="10"/><circle cx="60" cy="22" r="9"/><path d="M60 32V74M60 74L50 110M60 74L70 110"/><path d="M60 40L76 22L80 4"/><path d="M60 40L50 58L48 74"/></svg>
+        <span class="rom-t">머리 위까지</span>
+      </div>
+      <div class="on" role="radio" aria-checked="true" data-demo>
+        <svg class="fig" viewBox="0 0 120 120" aria-hidden="true"><circle class="hl" cx="68" cy="40" r="10"/><circle cx="60" cy="22" r="9"/><path d="M60 32V74M60 74L50 110M60 74L70 110"/><path d="M60 40H98"/><path d="M60 40L50 58L48 74"/></svg>
+        <span class="rom-t">어깨 높이까지</span>
+      </div>
+      <div role="radio" aria-checked="false">
+        <svg class="fig" viewBox="0 0 120 120" aria-hidden="true"><circle class="hl" cx="68" cy="40" r="10"/><circle cx="60" cy="22" r="9"/><path d="M60 32V74M60 74L50 110M60 74L70 110"/><path d="M60 40L82 54L92 62"/><path d="M60 40L50 58L48 74"/></svg>
+        <span class="rom-t">그보다 아래</span>
+      </div>
+    </div>
+
+    <div class="l-h">먼저 확인할게요 <span class="l-hint">네 가지에 모두 답해 주세요. 하나라도 ‘네’면 오늘은 동작 대신 안내를 드려요</span></div>
+    <div class="card" style="padding-top:4px; padding-bottom:4px;">
+      <div class="safe-q">
+        <div class="q">팔이 갑자기 붉어지고 뜨거워졌나요?</div>
+        <div class="seg"><span class="seg-item" role="radio" aria-checked="false">아니요</span><a class="seg-item" role="radio" aria-checked="false" href="B3-stretch-stop.html">네</a></div>
+      </div>
+      <div class="safe-q">
+        <div class="q">팔의 무거움·조임·붓기가 점점 심해지나요?</div>
+        <div class="seg"><span class="seg-item" role="radio" aria-checked="false">아니요</span><a class="seg-item" role="radio" aria-checked="false" href="B3-stretch-stop.html">네</a></div>
+      </div>
+      <div class="safe-q">
+        <div class="q">수술 상처가 덜 아물었거나 배액관을 차고 계신가요?</div>
+        <div class="seg"><span class="seg-item" role="radio" aria-checked="false">아니요</span><a class="seg-item" role="radio" aria-checked="false" href="B3-stretch-stop.html">네</a></div>
+      </div>
+      <div class="safe-q">
+        <div class="q">힘이 빠지거나 비틀거리나요? 두통·어지러움·흐린 시야, 처음 겪는 저림이나 점점 심해지는 통증이 있나요?</div>
+        <div class="seg"><span class="seg-item" role="radio" aria-checked="false">아니요</span><a class="seg-item" role="radio" aria-checked="false" href="B3-stretch-stop.html">네</a></div>
+      </div>
+    </div>
+
+    <p class="tiny muted">AI 코칭에는 오늘 고르신 답과 수술한 쪽·수술한 때·아팠던 동작만 보내요. 처음 쓰실 때 보내는 곳과 보관 기간을 알려 드리고 따로 동의를 받아요.</p>
+  </div>
+
+  <div class="footer-actions">
+    <!-- 네 가지에 다 답하기 전엔 흐린 모양(aria-disabled). 시안에서는 흐름을 보려고 눌리게 둔다 -->
+    <p class="tiny muted center" style="margin:0 0 8px;">네 가지에 답하면 눌러져요</p>
+    <a class="btn btn-primary btn-block btn-lg is-wait" aria-disabled="true" href="B4-stretch-plan.html">맞는 동작 골라 받기</a>
+  </div>
+</div>
+</body>
+</html>

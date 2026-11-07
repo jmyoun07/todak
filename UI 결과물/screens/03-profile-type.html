@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 기본 정보</title>
+<link rel="stylesheet" href="app.css">
+<style>
+/* 질문 상자 (2026-09-28 · 정보 화면 디자인 시스템 v3) — app.css 의 .sec 상자·걸친 제목을 그대로 쓰고,
+   입력 화면이라 제목 앞 그림만 뺀다. 제목이 <label> 이라(.field label 이 더 강하다) 제목 크기로 되돌린다.
+   글자 크기는 .sec-t 와 같은 값(clamp + cqw) — 상자 선이 제목 첫 줄 가운데에 오게. */
+.sec--q > .sec-t::before { display: none; }
+.sec--q > .sec-t { padding-left: .85em; }
+.sec--q > label.sec-t { font-size: 16.5px; font-size: clamp(15px, 4.2308cqw, 18.2px); font-weight: 800; }
+.sec--q .sec-t .opt { font-size: 13px; font-size: clamp(13px, 3.4615cqw, 14.9px); font-weight: 600; color: var(--on-surface-variant); }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="02-consent.html">‹</a>
+    <div><div class="appbar-title">기본 정보</div></div>
+  </div>
+  <div style="padding:0 18px;">
+    <div class="steps"><span class="step step--on"></span><span class="step step--on"></span><span class="step"></span><span class="step"></span></div>
+    <p class="small muted" style="margin-top:8px;">2단계 · 기본 정보</p>
+  </div>
+
+  <!-- 2026-09-28 정보 화면 디자인 시스템 v3 적용 — 질문 하나 = 상자 하나(.sec · 제목은 상자 윗선에 걸친다).
+       질문 제목은 그대로 <label> 이다: features.js page03 이 fieldByLabel('단계'·'병기'·'유형'·'함께 앓')로 칸을 찾는다.
+       .chip·.s-title 글자는 저장값이라 바꾸지 않는다. -->
+  <div class="content">
+    <!-- 이름·생년월일은 가입 경로(간편 로그인·이메일)와 상관없이 약관 동의 뒤 여기서 한 번만 받는다.
+         생년월일은 년·월·일 목록(app.js bindBirthSelect)이고, 만 19세 미만이면 저장하지 않는다. -->
+    <section class="sec sec--q">
+      <h2 class="sec-t"><span>이름과 생년월일</span></h2>
+      <div class="field">
+        <label>이름</label>
+        <input class="input" type="text" placeholder="이름" aria-label="이름" maxlength="20">
+      </div>
+      <div class="field">
+        <label>생년월일</label>
+        <div class="birth-sel">
+          <select aria-label="태어난 해" class="is-empty"><option value="">년도</option></select>
+          <select aria-label="태어난 달" class="is-empty"><option value="">월</option></select>
+          <select aria-label="태어난 날" class="is-empty"><option value="">일</option></select>
+        </div>
+        <input type="hidden" aria-label="생년월일" value="">
+      </div>
+    </section>
+
+    <div class="field sec sec--q">
+      <label class="sec-t"><span>지금 어느 단계에 계신가요?</span></label>
+      <div class="chips">
+        <span class="chip">진단·수술 준비 중</span>
+        <span class="chip chip--on">치료 중</span>
+        <span class="chip">치료 종료 후</span>
+      </div>
+    </div>
+
+    <div class="field sec sec--q">
+      <label class="sec-t"><span>병기를 몇 기로 들으셨나요? <span class="opt">(선택)</span></span></label>
+      <p class="sec-sub">담당 의사에게 <b>들으신 대로</b> 골라 주세요.<br>짐작해서 고르시면 안내가 맞지 않을 수 있어요.</p>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box s-radio"></span>
+        <div class="grow"><div class="s-title">1기</div><div class="s-sub">종양이 작고, 퍼진 곳이 없거나 아주 적은 초기예요</div></div>
+      </div>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box s-radio"></span>
+        <div class="grow"><div class="s-title">2기</div><div class="s-sub">종양이 조금 크거나, 겨드랑이 림프절 일부에 퍼진 경우예요</div></div>
+      </div>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box s-radio"></span>
+        <div class="grow"><div class="s-title">3기</div><div class="s-sub">종양이 크거나 림프절 여러 곳에 퍼져, 치료를 더 적극적으로 하는 시기예요</div></div>
+      </div>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box s-radio"></span>
+        <div class="grow"><div class="s-title">4기</div><div class="s-sub">뼈·폐 등 다른 장기에서도 발견된 경우예요</div></div>
+      </div>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box s-radio"></span>
+        <div class="grow"><div class="s-title">잘 모르겠어요</div><div class="s-sub">모르셔도 안내는 그대로 받으실 수 있어요</div></div>
+      </div>
+      <div class="tip">
+        <span class="tip-lab">팁</span>
+        <div class="it-t">수술 전과 뒤에 들은 값이 다를 때</div>
+        <div class="it-b">수술 전에 들으신 값과 수술 뒤 조직검사 값은<br>다를 수 있어요. <b>둘 다 맞는 값이에요.</b></div>
+      </div>
+    </div>
+
+    <div class="field sec sec--q">
+      <label class="sec-t"><span>유방암 유형 (아형)</span></label>
+      <p class="sec-sub">유형마다 부작용이 달라서 여쭤봐요.<br><b>진단서나 담당 의사</b>에게 확인하신 대로 골라 주세요.</p>
+      <div class="selectable selectable--on" role="checkbox" tabindex="0" aria-checked="true">
+        <span class="s-box s-radio">✓</span>
+        <div class="grow"><div class="s-title">호르몬수용체(HR) 양성</div><div class="s-sub">에스트로겐·프로게스테론 수용체 양성</div></div>
+      </div>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box s-radio"></span>
+        <div class="grow"><div class="s-title">HER2 양성</div></div>
+      </div>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box s-radio"></span>
+        <div class="grow"><div class="s-title">호르몬수용체 양성 + HER2 양성</div><div class="s-sub">둘 다 양성이라고 들으셨다면</div></div>
+      </div>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box s-radio"></span>
+        <div class="grow"><div class="s-title">삼중음성 (TNBC)</div></div>
+      </div>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box s-radio"></span>
+        <div class="grow"><div class="s-title">잘 모르겠어요</div><div class="s-sub">나중에 진단서 보고 입력할게요</div></div>
+      </div>
+    </div>
+
+    <div class="field sec sec--q">
+      <label class="sec-t"><span>함께 앓고 계신 질환 <span class="opt">(있는 것 모두)</span></span></label>
+      <p class="sec-sub">치료제·음식 안내를 드릴 때 함께 살펴봐요.</p>
+      <div class="chips">
+        <span class="chip chip--on">고혈압</span>
+        <span class="chip">당뇨</span>
+        <span class="chip">고지혈증</span>
+        <span class="chip">갑상선 질환</span>
+        <span class="chip">골다공증</span>
+        <span class="chip">심장 질환</span>
+        <span class="chip">혈전(다리·폐)</span>
+        <span class="chip chip--on">우울·불안</span>
+        <span class="chip">간 질환·간염</span>
+        <span class="chip">신장 질환</span>
+        <span class="chip">관절염·류마티스</span>
+        <span class="chip">위·식도 질환</span>
+        <span class="chip">자궁 질환</span>
+        <span class="chip">천식·호흡기 질환</span>
+        <span class="chip">뇌혈관 질환</span>
+        <span class="chip">없어요</span>
+      </div>
+      <!-- 헷갈리기 쉬운 질환만 풀이 — 순서가 아니라 점 목록 -->
+      <ul class="dots">
+        <li><b>심장 질환</b> — 부정맥, 협심증·심근경색, 심부전, 판막, 스텐트 시술 포함</li>
+        <li><b>혈전</b> — 다리가 붓고 아파서, 또는 숨이 차서 진단받은 적이 있는 경우</li>
+        <li><b>위·식도 질환</b> — 역류성 식도염, 위염, 위궤양</li>
+        <li><b>자궁 질환</b> — 자궁근종, 자궁내막증 등</li>
+        <li><b>뇌혈관 질환</b> — 뇌졸중(중풍), 일과성 허혈 발작</li>
+      </ul>
+
+      <input class="input" type="text" placeholder="그 외 앓고 계신 질환 (예: 녹내장, 빈혈)" aria-label="그 외 앓고 계신 질환">
+
+      <div class="banner banner--safe">
+        <span class="b-ic">🧠</span>
+        <div class="small"><b>우울·불안</b>은 마음 건강에 관한 민감정보라서<br>더 조심해서 보관해요.</div>
+      </div>
+    </div>
+
+    <p class="disclaimer">적어 주신 내용은 맞춤 안내에만 쓰여요.<br>진단 목적이 아니에요.</p>
+
+    <!-- 가입 도중에만 보여요 (app.js page03Switch — 설정에서 고치러 온 경우에는 감춰 둔다).
+         다른 계정으로 잘못 들어오셨을 때 기본 정보를 다 넣지 않고도 로그아웃하고 처음 화면으로 가실 수 있게. -->
+    <p class="small muted" id="signupSwitch" style="text-align:center; margin-top:4px;" hidden>
+      다른 계정으로 들어오셨나요?
+      <a href="01-splash.html" id="signupSwitchBtn" style="display:inline-flex; align-items:center; min-height:44px; padding:0 6px; vertical-align:middle; color:var(--primary-dark); font-weight:700;">로그아웃하고 처음으로</a>
+    </p>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-primary btn-block btn-lg" href="04-treatment.html">다음</a>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 응급 안내</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  /* 부위별 열 기준 표 — 이 화면(48)과 08 에만 쓴다. 한 줄 = '부위 + 숫자'(AI 상담 색인이 이 한 줄을 그대로 읽는다) */
+  .temp { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--sec-line); border-radius: 12px; overflow: hidden; }
+  .temp-row { display: flex; align-items: baseline; gap: 10px; padding: 9px 12px; }
+  .temp-row + .temp-row { border-top: 1px dashed var(--sec-line); }
+  .temp-site { flex: 0 0 5.4em; font-size: 14px; font-size: clamp(13px, 3.5897cqw, 15.4px); font-weight: 700; color: #4A3C42; }
+  .temp-val { flex: 1 1 auto; min-width: 0; font-size: 16px; font-size: clamp(14.5px, 4.1026cqw, 17.6px); font-weight: 800; line-height: 1.45; color: var(--sec-ink); }
+  .temp-note { display: block; margin-top: 1px; font-size: 13.5px; font-size: clamp(13px, 3.4615cqw, 14.9px); font-weight: 500; line-height: 1.55; color: #4A3C42; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="05-home.html">‹</a>
+    <div><div class="appbar-title">응급 안내</div></div>
+  </div>
+
+  <!-- 응급 안내 — 부작용 화면마다 되풀이하던 '이럴 땐 전화 말고 119'·열 기준·'열이 없어도'·'지금 치료받는 병원에 연락' 덩이가 모두 여기로 모였다
+       (2026-09-28 정보 화면 디자인 시스템 v3 · STYLE.md). 부작용 화면들은 '응급 상황일 땐 이렇게 하세요' 칸으로 이 화면에 온다(?from=).
+       급한 순서대로: 🔴 지금 바로 119 → 병원에 바로 연락(열·열이 없어도·그 밖의 증상) → 빨리 알릴 것 → 마음이 힘들 때 -->
+  <div class="content content--tight content--jump">
+    <nav class="sec sec--jump" aria-label="이 화면 바로 가기">
+      <div class="sec-t">바로 가기</div>
+      <div class="jump">
+        <a class="jump-b jump-b--emg" href="#s-119"><span>지금 바로 119</span></a>
+        <a class="jump-b jump-b--hosp" href="#s-fever"><span>열이 날 때</span></a>
+        <a class="jump-b jump-b--caution" href="#s-nofever"><span>열이 없어도</span></a>
+        <a class="jump-b jump-b--hosp" href="#s-other"><span>그 밖의 증상</span></a>
+        <a class="jump-b jump-b--caution" href="#s-soon"><span>빨리 알릴 증상</span></a>
+        <a class="jump-b jump-b--info" href="#s-mind"><span>마음이 힘들 때</span></a>
+      </div>
+    </nav>
+
+    <!-- ═══ 🔴 지금 바로 119 — 부작용 화면의 '이럴 땐 전화 말고 119'(정신 흐림·숨참·핑 돎·차고 축축·소변 없음)와 예전 48 의 119 줄을 한데 ═══ -->
+    <section class="sec sec--emg" id="s-119">
+      <h2 class="sec-t section-label">지금 바로 119</h2>
+      <p class="sec-p">병원에 전화하거나 직접 가지 말고<br><b>바로 119를 부르세요.</b></p>
+      <!-- 아홉 줄을 한 목록으로 두면 훑어보기 어렵다 — 세 갈래 소제목(막대)으로 나눴다. 줄 글·기준은 그대로 -->
+      <div class="it">
+        <div class="it-t">정신·말·움직임이 달라질 때</div>
+      </div>
+      <ul class="dots">
+        <li><b>정신이 흐릿하거나</b> 말이 어눌해질 때</li>
+        <li>갑자기 <b>한쪽 팔다리에 힘이 빠질 때</b></li>
+        <li><b>경련</b>하거나 <b>쓰러졌을 때</b></li>
+      </ul>
+      <div class="it">
+        <div class="it-t">숨·가슴이 이상할 때</div>
+      </div>
+      <ul class="dots">
+        <li><b>가만히 있어도 숨이 차거나</b>,<br>똑바로 누우면 숨쉬기 힘들 때</li>
+        <li><b>가슴이 아프거나</b> 심장이 몹시 두근거릴 때 <span class="dots-b">아픈 정도와 상관없이 119예요.<br>항암 주사를 맞는 중이면 주사를 멈춰 달라고 하세요.</span></li>
+        <li>두드러기와 함께 <b>숨이 차거나</b><br><b>얼굴·입술이 부을 때</b> (심한 알레르기)</li>
+      </ul>
+      <div class="it">
+        <div class="it-t">혈압이 떨어지는 신호일 때</div>
+      </div>
+      <ul class="dots">
+        <li>일어서면 <b>핑 돌거나 쓰러질 것 같을 때</b></li>
+        <li>몸이 차고 축축하며 <b>손발이 파랗게 될 때</b></li>
+        <li>하루 종일 <b>소변이 거의 안 나올 때</b></li>
+      </ul>
+      <a class="btn btn-danger btn-block btn-lg" href="tel:119">📞 119 응급전화</a>
+    </section>
+
+    <!-- ═══ 병원에 바로 연락하세요 — 부작용 화면의 🟠 '지금 치료받는 병원에 연락' 단계 전부 (열 기준 · 열이 없어도 · 그 밖의 증상) ═══
+         중간 상자 제목에는 section-label 을 붙이지 않는다 — 색인에서 이 묶음 제목('병원에 바로 연락하세요')과 함께 가게 -->
+    <section class="sec sec--group" id="s-hosp">
+      <h2 class="sec-t section-label">병원에 바로 연락하세요</h2>
+      <p class="sec-sub">밤이든 주말이든 치료받는 병원에 연락하세요.<br>연락이 안 되면 가까운 응급실로 가세요.</p>
+
+      <!-- 열 — 부위별 기준은 그대로(대한감염학회 외 호중구감소성 발열 지침) -->
+      <div class="sec sec--lv2" id="s-fever">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟠</span> <span>열이 날 때</span></div>
+        <p class="sec-p">항암치료 중에 나는 열은<br><b>그 자체가 응급이에요.</b></p>
+        <div class="temp">
+          <div class="temp-row"><span class="temp-site">귀(고막)</span> <span class="temp-val">38.0도 이상</span></div>
+          <div class="temp-row"><span class="temp-site">겨드랑이</span> <span class="temp-val">37.5도 이상</span></div>
+          <div class="temp-row"><span class="temp-site">입(구강)</span> <span class="temp-val">38.3도가 한 번 <span class="temp-note">또는 38.0도가<br>1시간 넘게 이어질 때</span></span></div>
+        </div>
+        <div class="it">
+          <div class="it-t">기다리지 마세요</div>
+          <div class="it-b">귀·겨드랑이 기준과 입 38.3도는<br>한 번만 나와도 해당돼요.</div>
+          <div class="it-do"><span>입으로 잰 38.0도만 1시간 지켜보고,<br>그 밖에는 바로 연락하세요.</span></div>
+        </div>
+        <div class="it">
+          <div class="it-t">어디로 쟀는지 헷갈리면</div>
+          <div class="it-do"><span>38.0도를 기준으로 보세요.</span></div>
+        </div>
+        <div class="it">
+          <div class="it-t">해열제를 먼저 드시지 마세요</div>
+          <div class="it-b">타이레놀·부루펜으로 열이 가려지면<br>상황을 놓쳐요.</div>
+        </div>
+        <div class="it">
+          <div class="it-t">병원에 전화하면</div>
+          <div class="it-do"><span>“항암치료 중인데 열이 납니다”라고<br>먼저 말씀하세요.</span></div>
+          <div class="it-do"><span>어디로, 몇 시에 쟀는지 알려 주세요.</span></div>
+        </div>
+      </div>
+
+      <!-- 열이 없어도 — 해열제·스테로이드·탈수로 열이 가려질 때 -->
+      <div class="sec sec--caution" id="s-nofever">
+        <div class="sec-t"><span>열이 없어도 연락하세요</span></div>
+        <div class="it">
+          <div class="it-t">체온이 정상이어도 감염일 수 있어요</div>
+          <div class="it-b">해열제나 스테로이드를 이미 드셨거나 몸에 수분이 부족하면 <span class="nw">열이 가려져요.</span></div>
+        </div>
+        <div class="it">
+          <div class="it-t"><span>오한이 나고 몸살처럼 아프고<br>기운이 쭉 빠질 때</span></div>
+          <div class="it-do"><span>열이 없더라도 연락하세요.</span></div>
+        </div>
+        <div class="it">
+          <div class="it-t">귀 체온이 36.0도 아래일 때</div>
+          <div class="it-do"><span>그냥 넘기지 말고 연락하세요.</span></div>
+        </div>
+      </div>
+
+      <!-- 그 밖의 증상 — 예전 48 '이런 증상은 즉시 병원에' 가운데 119 줄을 뺀 나머지 -->
+      <div class="sec sec--lv2" id="s-other">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟠</span> <span>그 밖의 증상일 때</span></div>
+        <ul class="dots">
+          <li><b>멈추지 않는 출혈</b>이나 심한 멍</li>
+          <li><b>심한 설사·구토</b>로 탈수가 올 때 <span class="dots-b">입이 바싹 마르고 소변이 줄어들 때예요.</span></li>
+          <li><b>한쪽 다리·종아리만</b> 붓고 아프며 붉어질 때 <span class="dots-b">피가 굳어 막혔을 수 있어요(혈전).<br>갑자기 숨이 차거나 가슴이 아프면 119예요.</span></li>
+          <li>갑자기 <b>두 다리에 힘이 빠져</b><br>서거나 걷기 어려울 때</li>
+          <li><b>소변·대변이 저절로 새거나</b>,<br>반대로 전혀 못 볼 때 <span class="dots-b">척수가 눌리는 신호일 수 있어요.<br>등·허리가 아프거나 다리에 힘이 빠지면<br>바로 119예요.</span></li>
+        </ul>
+      </div>
+
+      <!-- 담당 병원 — 등록해 두신 번호가 있으면 배선 JS(features.js page48)가 응급실(없으면 외래) 번호로 바로 걸리는 단추로 바꾼다.
+           번호가 하나도 없을 때만 84 등록 화면으로 보낸다. id="care-call" 은 그대로 둔다. -->
+      <a class="btn btn-outline btn-outline--lv2 btn-block" id="care-call" href="84-care-contacts.html?from=48-emergency.html">🏥 내 병원 번호 등록하기</a>
+    </section>
+
+    <!-- ═══ 응급은 아니지만 빨리 알리세요 (노랑) ═══ -->
+    <section class="sec sec--caution" id="s-soon">
+      <h2 class="sec-t section-label">응급은 아니지만 빨리 알리세요</h2>
+      <p class="sec-sub">다음 진료까지 기다리지 말고<br>치료받는 병원에 알리세요.</p>
+      <ul class="dots">
+        <li><b>폐경 뒤에 질 출혈</b>이 있을 때 <span class="dots-b">생리가 완전히 끊긴 뒤인데 피가 비칠 때예요.<br>호르몬치료제를 드시면 양이 적어도 꼭 알리세요.</span></li>
+        <li>며칠 사이 <b>체중이 빠르게 늘면서</b><br>다리·발목이 붓고 신발이 꽉 낄 때 <span class="dots-b">누우면 숨이 차거나 밤에 숨이 차서 깨면<br>위의 ‘지금 바로 119’예요.</span></li>
+      </ul>
+    </section>
+
+    <!-- ═══ 마음이 많이 힘들 때 — 위기 기준(119)을 먼저, 그다음 상담 전화 ═══ -->
+    <section class="sec sec--info" id="s-mind">
+      <h2 class="sec-t section-label">마음이 많이 힘들 때</h2>
+      <div class="sec sec--lv1">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🔴</span> <span>이럴 땐 109가 아니라 119</span></div>
+        <div class="it">
+          <div class="it-b">방법을 정해 두셨거나, 이미 시도하셨거나,<br>혼자서 안전을 지키기 어려울 때</div>
+          <div class="it-do"><span>기다리지 말고 119에 연락하세요.</span></div>
+          <div class="it-do"><span>또는 가까운 응급실로 가세요.</span></div>
+        </div>
+        <a class="btn btn-danger btn-block" href="tel:119">📞 119 응급전화</a>
+      </div>
+      <div class="it">
+        <div class="it-t">이야기를 나누고 싶을 때</div>
+      </div>
+      <a class="card" href="tel:109" style="text-decoration:none; color:inherit; display:flex; align-items:center; gap:13px; border-color:var(--crisis);">
+        <span style="width:42px;height:42px;border-radius:50%;background:var(--crisis);color:#fff;display:grid;place-items:center;font-size:19px;flex:0 0 auto;">📞</span>
+        <div class="grow"><div class="strong small">자살예방 상담전화</div><div class="tiny muted">24시간 무료</div></div>
+        <div class="strong" style="color:var(--crisis);">109</div>
+      </a>
+      <a class="card" href="tel:1577-0199" style="text-decoration:none; color:inherit; display:flex; align-items:center; gap:13px;">
+        <span style="width:42px;height:42px;border-radius:50%;background:var(--secondary);color:#fff;display:grid;place-items:center;font-size:19px;flex:0 0 auto;">💬</span>
+        <div class="grow"><div class="strong small">정신건강 위기상담</div><div class="tiny muted">마음이 힘들 때</div></div>
+        <div class="strong" style="color:var(--secondary);">1577-0199</div>
+      </a>
+    </section>
+
+    <div class="tiny muted rf-src">근거: CTCAE v5.0 · 대한종양간호학회 · 대한감염학회 — 자세한 출처는 <b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요</div>
+
+    <p class="disclaimer">본 제품은 의료기기가 아니므로 질병 유무를 판단할 수 없으며, 질병 유무 판단을 위해서는 의사의 검진이 필요합니다.</p>
+    <p class="disclaimer">토닥은 응급 상황을 판정하지 않아요. 위험하다고 느끼면 바로 119나 치료받는 병원에 연락하세요.</p>
+  </div>
+
+  <!-- 전화 걸기 확인 — 실수로 눌러도 바로 걸리지 않게 -->
+  <div class="callpop" id="callpop" role="dialog" aria-modal="true" aria-label="전화 걸기 확인" hidden>
+    <div class="callpop-card">
+      <div style="font-size:34px;">📞</div>
+      <div class="strong" style="font-size:17px;" id="callpop-title">전화를 걸까요?</div>
+      <a class="btn btn-primary btn-block btn-lg" id="callpop-go" href="tel:119" data-direct="1">📞 지금 전화 걸기</a>
+      <button class="btn btn-outline btn-block" id="callpop-no" type="button">닫기</button>
+    </div>
+  </div>
+</div>
+<script>(function(){
+var NAMES={"119":"119 구급대","109":"자살예방 상담전화 109","1577-0199":"정신건강 위기상담 1577-0199"};
+var pop=document.getElementById("callpop");if(!pop)return;
+var go=document.getElementById("callpop-go"),no=document.getElementById("callpop-no"),tt=document.getElementById("callpop-title");
+document.addEventListener("click",function(e){
+  var a=e.target&&e.target.closest?e.target.closest("a"):null;if(!a)return;
+  var h=a.getAttribute("href")||"";
+  if(h.indexOf("tel:")!==0||a.hasAttribute("data-direct"))return;
+  e.preventDefault();e.stopImmediatePropagation();e.stopPropagation();
+  var num=h.slice(4);
+  pop.__opener=a;
+  /* 배선 JS 가 붙인 병원 이름(data-callname)이 있으면 그 이름으로 묻는다 — 숫자만 보면 어디로 거는지 모른다 */
+  tt.textContent=(a.getAttribute("data-callname")||NAMES[num]||num)+"에 전화할까요?";
+  go.setAttribute("href","tel:"+num);
+  pop.hidden=false;no.focus();
+},true);
+function close(){pop.hidden=true;
+  if(pop.__opener&&pop.__opener.focus){pop.__opener.focus();}}
+no.addEventListener("click",close);
+go.addEventListener("click",function(){setTimeout(close,150);});
+pop.addEventListener("click",function(e){if(e.target===pop)close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!pop.hidden){e.stopPropagation();close();}},true);
+})()</script>
+</body>
+</html>

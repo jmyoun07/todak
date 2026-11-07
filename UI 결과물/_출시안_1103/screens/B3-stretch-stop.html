@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 오늘은 스트레칭을 쉬어요 (출시안)</title>
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="launch.css">
+<style>
+/* 고르신 답 표시 — 네 경우를 다 보여 주되 고르신 것에 표시를 단다(색만으로 전하지 않게 글자도 붙인다) */
+.why-row { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border-radius: var(--r); border: 1px solid var(--outline); background: var(--white); }
+.why-row.picked { border: 1.5px solid var(--lv2-line); background: var(--lv2-bg); }
+.why-row .w-t { font-size: 15px; font-size: clamp(14px, 3.8462cqw, 16.5px); font-weight: 800; line-height: 1.45; }
+.why-row .w-b { font-size: 14px; font-size: clamp(13px, 3.5897cqw, 15.4px); line-height: 1.6; color: #4A3C42; }
+.why-row .w-pick { align-self: flex-start; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="B2-stretch-ask.html">‹</a>
+    <div><div class="appbar-title">오늘은 쉬어요</div></div>
+  </div>
+
+  <!-- 안전 확인에서 '네'가 하나라도 나오면 AI 코칭을 부르지 않고 이 화면을 띄운다 — 코드가 정하는 안전 장치.
+       어느 물음에 '네'라고 하셨는지에 따라 할 일이 달라서, 네 경우를 다 적고 고르신 것에 표시를 단다(시안은 첫째를 고른 상태) -->
+  <div class="content content--tight" style="padding-bottom:150px;">
+    <div class="res-hero res-hero--stop">
+      <span class="rh-ic" aria-hidden="true">✋</span>
+      <div class="grow">
+        <div class="rh-t">오늘은 스트레칭을 쉬어요</div>
+        <div class="rh-s">먼저 확인할 것에 ‘네’라고 하셨어요.<br>오늘은 동작보다 아래 안내가 먼저예요.</div>
+      </div>
+    </div>
+
+    <div class="why-row picked" data-demo>
+      <span class="pill pill--warn w-pick">고르신 것</span>
+      <div class="w-t">팔이 갑자기 붉어지고 뜨거워졌어요</div>
+      <div class="w-b">봉와직염이나 혈전일 수 있어요. 열이 없어도 <b>오늘 안에</b> 진료를 받으세요.<br>열&#8288;·&#8288;오한이 나거나 몸이 많이 안 좋으면 밤·주말엔 응급실로 가세요.</div>
+      <a class="btn btn-outline btn-outline--lv2 btn-block" href="84-care-contacts.html">📞 내 병원에 연락하기</a>
+    </div>
+
+    <div class="why-row">
+      <div class="w-t">팔의 무거움·조임·붓기가 점점 심해져요</div>
+      <div class="w-b">림프부종이 시작되거나 심해지는 신호일 수 있어요. 오늘은 스트레칭을 쉬고, 다음 진료 전이라도 치료받는 병원에 알려 두세요.</div>
+    </div>
+
+    <div class="why-row">
+      <div class="w-t">수술 상처가 덜 아물었거나 배액관을 차고 있어요</div>
+      <div class="w-b">수술한 병원에서 알려 준 동작만 하세요. 배액관·실밥을 뺀 뒤 병원에서 괜찮다고 하면 그때 시작해요.</div>
+    </div>
+
+    <div class="why-row">
+      <div class="w-t">힘이 빠지거나 비틀거려요 · 두통·어지러움·흐린 시야, 처음 겪는 저림이나 심해지는 통증이 있어요</div>
+      <div class="w-b">스트레칭 때문에 생긴 게 아닐 수도 있어요. 오늘 안에 치료받는 병원에 알리세요.<br><b>갑자기 한쪽 팔다리에 힘이 빠지거나 말이 어눌하면 바로 119</b>에 전화하세요.</div>
+    </div>
+
+    <a class="link-card link-card--emg" href="48-emergency.html">
+      <span class="link-card-ic" aria-hidden="true"></span>
+      <span class="link-card-body">
+        <span class="link-card-t">응급 상황일 땐 이렇게 하세요</span>
+        <span class="link-card-s">숨이 차거나 가슴이 아플 때 · 한쪽 힘이 빠지거나 말이 어눌할 때 · 정신이 흐릿할 때</span>
+      </span>
+    </a>
+
+    <div class="card">
+      <div class="card-title">오늘 컨디션에 적어 둘까요?</div>
+      <div class="card-sub">언제부터 그랬는지 남겨 두면 진료 때 도움이 돼요.</div>
+      <a class="btn btn-outline btn-block" href="A2-checkin-arm.html" style="margin-top:10px;">📝 컨디션에 남기기</a>
+    </div>
+
+    <p class="small muted center">괜찮아지고 의사가 괜찮다고 하면<br>그때 다시 시작해요.</p>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-primary btn-block btn-lg" href="A1-home.html">홈으로</a>
+  </div>
+</div>
+</body>
+</html>

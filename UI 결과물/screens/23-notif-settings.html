@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 알림 설정</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="13-settings.html">‹</a>
+    <div><div class="appbar-title">알림 설정</div></div>
+  </div>
+
+  <div class="content content--tight">
+    <!-- 안내는 이 한 칸만 둔다 (교수님 2026-09-28: 위 두 칸 삭제 · '건강 관리'·'알림이 늦게 올 때' 제목 삭제).
+         줄을 누르면 시간을 바꾼다 — 마음 건강 체크·컨디션 기록은 이 화면에서 시간 고르기가 열리고(native.js page23 · timepick.js),
+         복약은 56 복약 시간, 진료 전은 73 진료 일정으로 간다. 스위치는 켜고 끄기만 한다.
+         알림 수신 동의가 꺼져 있을 때만 native.js(page23)가 맨 위에 '알림이 오지 않아요' 한 줄을 붙이고 동의 줄을 그 밑으로 올린다. -->
+    <div class="banner banner--info" id="bn-tap">
+      <span class="b-ic">👆</span>
+      <div class="small">알림을 누르면 시간을 바꿀 수 있어요.</div>
+    </div>
+
+    <div class="listitem">
+      <span class="li-ic">🌤️</span>
+      <div class="li-body"><div class="li-title">마음 건강 체크 알림</div><div class="li-sub">매주 월요일 오전 10:00</div></div>
+      <span class="switch" role="switch" tabindex="0" aria-checked="true"></span>
+    </div>
+    <div class="listitem">
+      <span class="li-ic">📈</span>
+      <div class="li-body"><div class="li-title">컨디션 기록 알림</div><div class="li-sub">매일 오후 8:00</div></div>
+      <span class="switch" role="switch" tabindex="0" aria-checked="true"></span>
+    </div>
+    <a class="listitem" href="56-med-schedule.html?from=23-notif-settings.html">
+      <span class="li-ic">💊</span>
+      <div class="li-body"><div class="li-title">복약 알림</div><div class="li-sub">약 드실 시간 · 약이 떨어지기 3일 전·하루 전</div></div>
+      <span class="switch" role="switch" tabindex="0" aria-checked="true"></span>
+    </a>
+    <a class="listitem" href="73-cycle-setup.html?from=23-notif-settings.html">
+      <span class="li-ic">📅</span>
+      <div class="li-body"><div class="li-title">진료 전 알림</div><div class="li-sub">7일 전 · 하루 전</div></div>
+      <span class="switch" role="switch" tabindex="0" aria-checked="true"></span>
+    </a>
+
+    <!-- 알림 수신 선택 동의를 이 화면에서 바로 다시 설정하실 수 있게 (02 열람 모드로) -->
+    <a class="listitem" href="02-consent.html?review=1&amp;from=23-notif-settings.html">
+      <span class="li-ic">✅</span>
+      <div class="li-body"><div class="li-title">알림 수신 동의 다시 설정하기</div><div class="li-sub">‘맞춤 정보·알림 수신(선택)’ 동의를<br>켜고 끌 수 있어요</div></div>
+      <span class="li-chev">›</span>
+    </a>
+
+    <!-- 알림이 늦게 오는 가장 큰 까닭은 휴대폰의 절전(앱 절전 관리)이다. 어르신이 스스로 바꾸실 수 있게 길을 적어 둔다.
+         앱이 묻지도 않고 시스템 설정 화면을 띄우면 놀라시므로, 여기에 안내만 두고 누르실 때만 보낸다.
+         안드로이드 앱에만 맞는 말이라 웹앱에서는 native.js(page23)가 뺀다.
+         '알람 및 리마인더'가 꺼져 있을 때만 native.js(page23)가 이 아래에 '설정 열기' 안내를 하나 더 붙인다. -->
+    <div class="banner banner--info" id="bn-late">
+      <span class="b-ic">⏰</span>
+      <div class="small"><b>복약 알림이 늦게 오면</b><br>
+        휴대폰 설정 › 배터리에서 <b>‘앱 절전 관리’</b>를 찾아<br>
+        토닥을 <b>‘제한 없음’</b>으로 바꿔 주세요.<br>
+        ‘백그라운드 사용 제한’으로 적힌 휴대폰도 있어요.</div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

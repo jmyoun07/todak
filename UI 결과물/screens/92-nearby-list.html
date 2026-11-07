@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 근처 병원 찾기</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  /* 병원 카드 — app.css 토큰만 사용 */
+  .hosp { background: var(--white); border: 1px solid var(--outline); border-radius: var(--r);
+          padding: 14px 15px; margin-bottom: 10px; box-shadow: var(--shadow-sm); }
+  .hosp-top { display: flex; align-items: flex-start; gap: 10px; }
+  .hosp-name { font-size: 16px; font-weight: 700; line-height: 1.35; }
+  .hosp-dist { flex: 0 0 auto; font-size: 13px; font-weight: 700; color: var(--primary-dark);
+               background: var(--primary-tint); border-radius: var(--r-pill); padding: 4px 10px; white-space: nowrap; }
+  .hosp-meta { margin-top: 9px; display: flex; flex-direction: column; gap: 5px;
+               font-size: 13px; color: var(--on-surface-variant); line-height: 1.6; }
+  .hosp-meta .k { display: inline-block; width: 46px; color: var(--outline-strong); font-weight: 700; }
+  .hosp-open { font-weight: 700; }
+  .hosp-open.on { color: var(--safe); }
+  .hosp-open.off { color: var(--on-surface-variant); }
+  /* 방향 지도의 점 번호와 짝이 되는 카드 번호 — 지도를 접어도 순서가 보입니다 */
+  .hosp-no { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+             min-width: 26px; height: 26px; padding: 0 5px; border-radius: var(--r-pill);
+             background: var(--primary-tint); color: var(--primary-dark); font-size: 13px; font-weight: 800; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="91-nearby-gate.html">‹</a>
+    <div><div class="appbar-title">근처 병원 찾기</div></div>
+  </div>
+
+  <div class="content content--tight" style="padding-bottom:150px;">
+
+    <!-- 담당 병원 우선 — 목록 화면에도 접힌 형태로 계속 남습니다 -->
+    <div class="banner banner--warn">
+      <span class="b-ic">🚩</span>
+      <div class="small"><b>열이 나거나 물조차 못 삼키신다면</b><br>아래 목록이 아니라<br><a href="84-care-contacts.html" style="color:var(--danger); font-weight:700;">담당 병원(○○대학교병원)</a>으로 먼저 연락해 주세요.</div>
+    </div>
+
+    <!-- ① 진료과 고르기 — 누르면 큰 팝업이 떠서 하나만 고릅니다
+         (앱에서는 배선 JS(page92)가 이 자리에 진짜 버튼을 만들어 넣습니다) -->
+    <div id="nb-demo-dept" style="margin:13px 2px 10px;">
+      <div class="small muted" style="margin-bottom:7px;">어떤 진료과를 찾으세요?</div>
+      <a class="btn btn-outline btn-block" href="javascript:void(0)" style="justify-content:space-between;">
+        <span>전체 보기</span><span aria-hidden="true">고르기 ›</span>
+      </a>
+    </div>
+
+    <!-- ② 다른 지역에서 찾기 — 진료과 바로 아래입니다. 위 '전체 보기 … 고르기 ›' 와 같은 큰 박스 버튼이에요
+         (앱에서는 위치로 찾는 중이면 이 버튼이, 지역으로 찾는 중이면 '📍 내 위치에서 다시 찾기'가 이 자리에 보입니다) -->
+    <a class="btn btn-outline btn-block" id="nb-demo-other" href="93-nearby-fallback.html" style="margin:0 0 10px; justify-content:space-between;">
+      <span>🗺 다른 지역에서 찾기</span><span aria-hidden="true">고르기 ›</span>
+    </a>
+
+    <div class="row" style="margin:14px 2px 8px; align-items:center;">
+      <div class="tiny muted grow">내 위치에서 가까운 순</div>
+      <span class="tiny muted">자료 기준 2026-08-20</span>
+    </div>
+
+    <!-- ③ 지도 — 상태 줄 아래, 목록 위입니다. 앱에서는 배선 JS(page92)가 이 자리에
+         카카오맵(진짜 지도)을 띄우고, 내 위치를 가운데에 두고 병원마다 번호를 찍습니다.
+         번호를 누르면 아래 그 병원 칸으로 내려가고, 크게·작게는 지도 밑 두 버튼으로 합니다.
+         아래 그림은 지도를 못 불러올 때(키 거부·인터넷 끊김) 조용히 되돌아가는 '방향 지도'입니다 —
+         지도 그림(타일)을 받아오지 않고 앱이 직접 그려 내 위치가 밖으로 나가지 않습니다.
+         (위치를 쓸 수 없을 때는 둘 다 그리지 않아요) -->
+    <!-- 지도 자리 — 앱에서는 카카오맵을 띄우고 번호 마커를 찍는다(nearby.js drawKakaoMap).
+         카카오를 못 불러올 때만 옛 동서남북 방향 지도(drawDirMap)로 조용히 되돌아간다.
+         아래는 갤러리에서 보여 주기 위한 정지 그림이다 — 실제 지도는 폰에서만 보인다. -->
+    <div id="nb-demo-map">
+      <div class="card" style="padding-top:12px; padding-bottom:12px;">
+        <div class="small strong" style="color:var(--primary-dark);">내 위치와 가까운 병원</div>
+        <div style="position:relative; margin-top:10px; height:190px; border-radius:var(--r); overflow:hidden; background:#EDE9E2;">
+          <svg viewBox="0 0 320 190" style="position:absolute; inset:0; width:100%; height:100%;" role="img"
+               aria-label="가까운 병원 다섯 곳을 번호로 표시한 지도예요. 가운데 진한 점이 내 위치예요.">
+            <rect x="0" y="0" width="320" height="190" fill="#F2EEE7"></rect>
+            <path d="M0 118 H320" stroke="#F6C26B" stroke-width="9" fill="none"></path>
+            <path d="M0 62 H320" stroke="#FFFFFF" stroke-width="6" fill="none"></path>
+            <path d="M118 0 V190" stroke="#FFFFFF" stroke-width="6" fill="none"></path>
+            <path d="M232 0 V190" stroke="#F6C26B" stroke-width="7" fill="none"></path>
+            <path d="M0 160 H320" stroke="#BFD9F2" stroke-width="11" fill="none"></path>
+            <rect x="24" y="14" width="66" height="34" rx="4" fill="#E6E1D8"></rect>
+            <rect x="150" y="18" width="52" height="30" rx="4" fill="#E6E1D8"></rect>
+            <rect x="252" y="76" width="50" height="30" rx="4" fill="#E6E1D8"></rect>
+            <rect x="34" y="78" width="54" height="28" rx="4" fill="#DDEBDC"></rect>
+            <text x="12" y="182" font-size="11" fill="#8A8178">kakao</text>
+          </svg>
+          <div style="position:absolute; left:50%; top:52%; transform:translate(-50%,-50%); width:15px; height:15px; border-radius:50%; background:var(--primary-dark); border:3px solid #fff;"></div>
+          <div style="position:absolute; left:34%; top:28%; transform:translate(-50%,-50%); width:30px; height:30px; border-radius:50%; background:var(--primary); color:#fff; font-size:14px; font-weight:700; display:grid; place-items:center;">1</div>
+          <div style="position:absolute; left:63%; top:34%; transform:translate(-50%,-50%); width:30px; height:30px; border-radius:50%; background:var(--primary); color:#fff; font-size:14px; font-weight:700; display:grid; place-items:center;">2</div>
+          <div style="position:absolute; left:26%; top:70%; transform:translate(-50%,-50%); width:30px; height:30px; border-radius:50%; background:var(--primary); color:#fff; font-size:14px; font-weight:700; display:grid; place-items:center;">3</div>
+          <div style="position:absolute; left:72%; top:66%; transform:translate(-50%,-50%); width:30px; height:30px; border-radius:50%; background:var(--primary); color:#fff; font-size:14px; font-weight:700; display:grid; place-items:center;">4</div>
+          <div style="position:absolute; left:47%; top:82%; transform:translate(-50%,-50%); width:30px; height:30px; border-radius:50%; background:var(--primary); color:#fff; font-size:14px; font-weight:700; display:grid; place-items:center;">5</div>
+          <div style="position:absolute; right:10px; bottom:10px; display:flex; flex-direction:column; gap:6px;">
+            <span style="width:46px; height:46px; border-radius:12px; background:#fff; border:1px solid var(--outline); color:var(--primary-dark); font-size:22px; font-weight:700; display:grid; place-items:center;">＋</span>
+            <span style="width:46px; height:46px; border-radius:12px; background:#fff; border:1px solid var(--outline); color:var(--primary-dark); font-size:22px; font-weight:700; display:grid; place-items:center;">－</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 병원 카드 ① -->
+    <div class="hosp">
+      <div class="hosp-top">
+        <span class="hosp-no" aria-hidden="true">1</span>
+        <div class="grow">
+          <div class="hosp-name">○○연합치과의원</div>
+          <div class="tiny muted" style="margin-top:3px;">치과의원 · 치과, 구강내과</div>
+        </div>
+        <span class="hosp-dist">북쪽 320m</span>
+      </div>
+      <div class="hosp-meta">
+        <div><span class="k">진료</span><span class="hosp-open on">지금 진료 중</span> · 평일 09:30~18:30 (점심 13:00~14:00)</div>
+        <div><span class="k">주소</span>서울 ○○구 ○○로 12, 3층</div>
+        <div><span class="k">전화</span>02-000-0000</div>
+      </div>
+      <div class="row gap-8" style="margin-top:12px;">
+        <a class="btn btn-primary grow btn-sm" href="javascript:void(0)">📞 전화</a>
+        <a class="btn btn-outline grow btn-sm" href="javascript:void(0)">🗺 길찾기</a>
+        <a class="btn btn-ghost btn-sm" href="javascript:void(0)">📋 주소복사</a>
+      </div>
+    </div>
+
+    <!-- 병원 카드 ② -->
+    <div class="hosp">
+      <div class="hosp-top">
+        <span class="hosp-no" aria-hidden="true">2</span>
+        <div class="grow">
+          <div class="hosp-name">△△치과병원</div>
+          <div class="tiny muted" style="margin-top:3px;">치과병원 · 치과, 구강내과, 구강악안면외과</div>
+        </div>
+        <span class="hosp-dist">남쪽 1.1km</span>
+      </div>
+      <div class="hosp-meta">
+        <div><span class="k">진료</span><span class="hosp-open off">진료 시간 아님</span> · 평일 09:00~18:00 · 토 09:00~13:00 · 일요일 휴진</div>
+        <div><span class="k">주소</span>서울 ○○구 △△대로 88</div>
+        <div><span class="k">전화</span>02-000-0000</div>
+      </div>
+      <div class="row gap-8" style="margin-top:12px;">
+        <a class="btn btn-primary grow btn-sm" href="javascript:void(0)">📞 전화</a>
+        <a class="btn btn-outline grow btn-sm" href="javascript:void(0)">🗺 길찾기</a>
+        <a class="btn btn-ghost btn-sm" href="javascript:void(0)">📋 주소복사</a>
+      </div>
+    </div>
+
+    <!-- 병원 카드 ③ — 진료시간 정보가 없는 경우 -->
+    <div class="hosp">
+      <div class="hosp-top">
+        <span class="hosp-no" aria-hidden="true">3</span>
+        <div class="grow">
+          <div class="hosp-name">□□치과의원</div>
+          <div class="tiny muted" style="margin-top:3px;">치과의원 · 치과</div>
+        </div>
+        <span class="hosp-dist">서쪽 1.8km</span>
+      </div>
+      <div class="hosp-meta">
+        <div><span class="k">진료</span><span class="hosp-open off">시간 정보 없음 — 전화로 확인해 주세요</span></div>
+        <div><span class="k">주소</span>서울 ○○구 □□길 5</div>
+        <div><span class="k">전화</span>02-000-0000</div>
+      </div>
+      <div class="row gap-8" style="margin-top:12px;">
+        <a class="btn btn-primary grow btn-sm" href="javascript:void(0)">📞 전화</a>
+        <a class="btn btn-outline grow btn-sm" href="javascript:void(0)">🗺 길찾기</a>
+        <a class="btn btn-ghost btn-sm" href="javascript:void(0)">📋 주소복사</a>
+      </div>
+    </div>
+
+    <!-- 한 번에 10곳까지만 보여 주고, 나머지는 이 버튼으로 (앱에서는 배선 JS가 이 줄을 대신 만듭니다) -->
+    <a class="btn btn-outline btn-block btn-sm" id="nb-demo-more" href="javascript:void(0)" style="margin:4px 0 10px;">10곳 더 보기</a>
+
+    <div class="banner banner--info" style="margin-top:14px;">
+      <span class="b-ic">💬</span>
+      <div class="small">헛걸음하지 않게, 전화로 먼저 물어보세요.<br><b>“항암치료 중인데 ○○ 증상으로<br>진료가 될까요?”</b></div>
+    </div>
+    <div class="tiny muted rf-src">근거: 건강보험심사평가원 · 의료법 시행규칙 — 자세한 출처는 <b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요</div>
+
+    <p class="disclaimer">병원 정보는 건강보험심사평가원의<br>공공데이터 그대로예요.<br>토닥은 특정 병원을 추천하거나<br>진료 가능 여부를 보장하지 않아요.<br>가시기 전에 꼭 전화로 확인해 주세요.</p>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-outline btn-block" href="84-care-contacts.html?from=92-nearby-list.html">📞 내 병원 연락처 보기</a>
+  </div>
+</div>
+
+</body>
+</html>

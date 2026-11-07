@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 내 병원 연락처</title>
+<link rel="stylesheet" href="app.css">
+<style>
+/* 묶음 상자 (2026-09-28 · 정보 화면 디자인 시스템 v3) — 입력·목록 묶음은 제목 앞 그림 없이 */
+.sec--set { gap: 10px; }
+.sec--set > .sec-t::before { display: none; }
+.sec--set > .sec-t { padding-left: .85em; }
+/* 내 병원 상자는 nearby.js 가 '첫 .card' 로 찾는다 — 카드 모양(흰 바탕·테두리·그림자)은 끄고 상자 모양만 쓴다 */
+.sec.card { background: transparent; border: 0; border-radius: 0; box-shadow: none; padding-top: 0; padding-bottom: 16px; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="13-settings.html">‹</a>
+    <div><div class="appbar-title">내 병원 연락처</div><div class="appbar-sub">내가 등록해 둔 병원</div></div>
+    <span class="spacer"></span>
+    <span class="action">✏️</span>
+  </div>
+
+  <!-- 2026-09-28 정보 화면 디자인 시스템 v3 — 묶음마다 제목 걸친 상자(.sec).
+       · 맨 위 안내 띠('이 화면은…')·'가벼운 증상으로…' 풀이 카드는 같은 말을 되풀이해 지웠다.
+       · 아래 빨강 띠(열 기준 · 119 기준)는 지우지 않고 '어디로 전화할까요?' 세 단계 상자로 옮겼다 —
+         이 화면은 어느 번호로 걸지 고르는 곳이라 열 기준이 이 화면 고유 판단이다(STYLE.md 4-5 예외).
+       · nearby.js page84 가 찾는 것: 첫 .card(= 내 병원 상자 · 이름 .strong · 주소 [data-nb-addr] · 진료과 첫 .small.muted ·
+         검색 .input · #nb-pick) · a.listitem 가운데 '외래'·'응급실' 글자가 든 첫 줄. 그래서 내 병원 상자는 .sec 이면서 .card 다. -->
+  <div class="content content--tight" style="padding-bottom:120px;">
+    <section class="sec sec--set card" id="s-mine">
+      <h2 class="sec-t section-label">내 병원 등록</h2>
+      <p class="sec-sub">등록해 두시면 급할 때 바로 전화할 수 있어요.</p>
+      <div class="strong" style="font-size:16px;">○○대학교병원</div>
+      <div class="small" data-nb-addr style="color:var(--on-surface-variant); margin-top:-6px;">서울 ○○구 ○○로 12</div>
+      <div class="small muted" style="margin-top:-8px;">종양내과</div>
+      <div class="row gap-8">
+        <span class="input grow" style="display:flex; align-items:center; gap:8px; padding:11px 13px; font-size:13.5px; color:var(--on-surface-variant);">🔎 병원 이름으로 찾기</span>
+      </div>
+      <a class="btn btn-outline btn-block" id="nb-pick" href="javascript:void(0)">🔎 내 병원 선택하기</a>
+      <p class="sec-p">고르시면 <b>이름·주소·대표전화</b>가 채워져요.<br>지역으로 찾고, 위치(GPS)는 쓰지 않아요.</p>
+      <p class="sec-p"><b>진료과</b>와 <b>응급실 번호</b>는 직접 적어 주세요.</p>
+    </section>
+
+    <section class="sec sec--set" id="s-saved">
+      <h2 class="sec-t section-label">저장된 번호</h2>
+      <a class="listitem" href="84-care-contacts.html">
+        <span class="li-ic">🏥</span>
+        <div class="li-body"><div class="li-title">진료과 · 외래</div><div class="li-sub">평일 낮에 연락할 때</div></div>
+        <span class="strong small" style="color:var(--primary-dark);">전화 ›</span>
+      </a>
+      <a class="listitem" href="84-care-contacts.html">
+        <span class="li-ic" style="background:var(--danger-tint);">🚑</span>
+        <div class="li-body"><div class="li-title">응급실</div><div class="li-sub">밤·주말에 급할 때</div></div>
+        <span class="strong small" style="color:var(--danger);">전화 ›</span>
+      </a>
+      <a class="listitem" href="tel:119">
+        <span class="li-ic" style="background:var(--danger-tint);">📞</span>
+        <div class="li-body"><div class="li-title">119</div><div class="li-sub">생명이 위급할 때</div></div>
+        <span class="strong small" style="color:var(--danger);">119</span>
+      </a>
+    </section>
+
+    <!-- 어디로 전화할까요 — 큰 묶음 하나 안에 세 단계(🔴🟠🟢). 단계 제목에는 section-label 을 붙이지 않는다(STYLE.md 2-1) -->
+    <section class="sec sec--group" id="s-call">
+      <h2 class="sec-t section-label">어디로 전화할까요?</h2>
+      <p class="sec-sub">세 단계로 나눴어요. 위에서부터 급한 순서예요.</p>
+
+      <div class="sec sec--lv1" id="s-119">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🔴</span> <span>지금 바로 119</span></div>
+        <ul class="dots">
+          <li><b>가만히 있어도</b> 숨이 찰 때</li>
+          <li><b>가슴이 아플 때</b></li>
+          <li>의식이 흐려질 때</li>
+        </ul>
+        <a class="btn btn-danger btn-block" href="tel:119">📞 119 응급전화</a>
+      </div>
+
+      <div class="sec sec--lv2" id="s-today">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟠</span> <span>치료받는 병원에 바로 연락하세요</span></div>
+        <div class="it">
+          <div class="it-t">열이 날 때</div>
+          <ul class="dots">
+            <li>귀 <b>38.0도</b> 이상 · 겨드랑이 <b>37.5도</b> 이상</li>
+            <li>입 <b>38.3도</b> 이상</li>
+            <li>또는 <b>입 38.0도</b>가 1시간 넘게 이어질 때</li>
+          </ul>
+          <div class="it-do"><span>119가 아니라 치료받는 병원에<br>바로 전화하세요.</span></div>
+          <div class="it-do"><span>밤이든 주말이든 미루지 마세요.</span></div>
+        </div>
+        <div class="it">
+          <div class="it-t">움직일 때만 새로 숨이 찰 때</div>
+          <div class="it-do"><span>어디로 갈지 고민하지 마시고<br>치료받는 병원에 먼저 전화하세요.</span></div>
+        </div>
+      </div>
+
+      <div class="sec sec--lv3" id="s-light">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟢</span> <span>가벼우면 근처 병원도 돼요</span></div>
+        <p class="sec-p">관절통·구내염처럼 <b>열이 없는 가벼운 증상</b>일 때만<br>근처 병원을 찾아보세요.</p>
+        <a class="btn btn-outline btn-outline--good btn-block" href="85-nearby-clinic.html">📍 근처 병원 찾기</a>
+      </div>
+    </section>
+
+    <section class="sec sec--good" id="s-howto">
+      <h2 class="sec-t section-label">전화하실 땐 이렇게 말씀하세요</h2>
+      <p class="sec-p"><b>“항암치료 중인데요, ○○ 증상이 있어요.”</b></p>
+      <p class="sec-sub">이어서 이 순서로 말씀하시면 빨라요.</p>
+      <ol class="nsteps">
+        <li><div class="it-t">마지막 항암 날짜</div></li>
+        <li><div class="it-t">지금 체온</div></li>
+        <li><div class="it-t">언제부터인지</div></li>
+      </ol>
+    </section>
+
+    <div class="tiny muted rf-src">근거: 대한종양간호학회 · 대한감염학회 · 보건복지부 · 암생존자통합지지사업 — 자세한 출처는 <b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요</div>
+    <p class="disclaimer">토닥은 응급실 자리를 확인하거나<br>어디로 갈지 대신 판단해 드리지 않아요.</p>
+  </div>
+
+  <!-- 전화 걸기 확인 — 실수로 눌러도 바로 걸리지 않게 -->
+  <div class="callpop" id="callpop" role="dialog" aria-modal="true" aria-label="전화 걸기 확인" hidden>
+    <div class="callpop-card">
+      <div style="font-size:34px;">📞</div>
+      <div class="strong" style="font-size:17px;" id="callpop-title">전화를 걸까요?</div>
+      <a class="btn btn-primary btn-block btn-lg" id="callpop-go" href="tel:119" data-direct="1">📞 지금 전화 걸기</a>
+      <button class="btn btn-outline btn-block" id="callpop-no" type="button">닫기</button>
+    </div>
+  </div>
+</div>
+<script>(function(){
+var NAMES={"119":"119 구급대","109":"자살예방 상담전화 109","1577-0199":"정신건강 위기상담 1577-0199"};
+var pop=document.getElementById("callpop");if(!pop)return;
+var go=document.getElementById("callpop-go"),no=document.getElementById("callpop-no"),tt=document.getElementById("callpop-title");
+document.addEventListener("click",function(e){
+  var a=e.target&&e.target.closest?e.target.closest("a"):null;if(!a)return;
+  var h=a.getAttribute("href")||"";
+  if(h.indexOf("tel:")!==0||a.hasAttribute("data-direct"))return;
+  e.preventDefault();e.stopImmediatePropagation();e.stopPropagation();
+  var num=h.slice(4);
+  pop.__opener=a;
+  tt.textContent=(NAMES[num]||num)+"에 전화할까요?";
+  go.setAttribute("href","tel:"+num);
+  pop.hidden=false;no.focus();
+},true);
+function close(){pop.hidden=true;
+  if(pop.__opener&&pop.__opener.focus){pop.__opener.focus();}}
+no.addEventListener("click",close);
+go.addEventListener("click",function(){setTimeout(close,150);});
+pop.addEventListener("click",function(e){if(e.target===pop)close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!pop.hidden){e.stopPropagation();close();}},true);
+})()</script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 사용법</title>
+<link rel="stylesheet" href="app.css">
+<style>
+/* 19 앱 사용법 — 실제 화면을 보여 주며 5장으로 넘긴다 (교수님 2026-09-30: 한 장짜리 → 8장 시안 → 5장 확정).
+   장마다 '언제 하는 일'인지(처음 한 번만·매일·궁금할 때·진료 전)를 맨 위 표시로 보여 홈의 흐름이 읽히게 한다.
+   화면 사진은 데모 자료로 찍은 것(img/tutorial, _qa/tutorial/capture.py → make_app_imgs.py). 넘기기는 more2.js page19. */
+.tut-brand { font-weight: 800; color: var(--primary-dark); font-size: 17px; font-size: clamp(15.3px, 4.359cqw, 18.7px); }
+.tut-skip { display: inline-flex; align-items: center; min-height: 44px; padding: 0 8px; margin-right: -8px; text-decoration: none;
+  color: var(--on-surface-variant); font-size: 15px; font-size: clamp(13.5px, 3.846cqw, 16.5px); font-weight: 700; }
+.content.tut-stage { padding-top: 2px; padding-bottom: calc(128px + env(safe-area-inset-bottom)); gap: 0; }
+/* 옆으로 밀기는 앱이 받는다(more2.js page19 가 장을 넘김) — 크롬은 오른쪽으로 밀면 '뒤로 가기'로 먼저 받아 사용법에서 나가 버린다
+   (2026-10-01 새벽 검증). 위아래 밀기(작은 화면 스크롤)는 그대로 된다. */
+.tut-stage { touch-action: pan-y; }
+.tut-slide { flex: 1 0 auto; display: flex; flex-direction: column; }
+.tut-slide[hidden] { display: none; }
+.tut-shot { flex: 1 1 auto; min-height: 170px; border-radius: 22px; overflow: hidden; background: var(--white); position: relative;
+  box-shadow: 0 10px 28px rgba(60,20,35,.14), 0 0 0 1px rgba(60,20,35,.07); }
+.tut-shot img { position: absolute; left: 0; top: 0; width: 100%; height: auto; display: block; }
+.tut-panes { flex: 1 1 auto; display: flex; flex-direction: column; gap: 12px; }
+.tut-pane { flex: 1 1 0; display: flex; flex-direction: column; gap: 6px; }
+.tut-pane .tut-shot { min-height: 110px; border-radius: 18px; }
+.tut-plabel { flex: 0 0 auto; display: flex; align-items: center; gap: 6px; font-weight: 700; color: var(--on-surface);
+  font-size: 15px; font-size: clamp(13.5px, 3.846cqw, 16.5px); }
+.tut-pn { color: var(--primary); font-size: 1.12em; }
+.tut-txt { flex: 0 0 auto; padding: 16px 2px 0; }
+.tut-chip { display: inline-block; font-weight: 700; color: var(--primary-dark); background: var(--primary-tint);
+  border: 1px solid var(--primary-light); border-radius: 999px; padding: 3px 11px; font-size: 13px; font-size: clamp(12px, 3.3333cqw, 14.3px); }
+.tut-h { font-weight: 800; letter-spacing: -0.4px; line-height: 1.38; margin-top: 10px; color: var(--on-surface);
+  font-size: 23px; font-size: clamp(20.7px, 5.8974cqw, 25.3px); overflow-wrap: normal; text-wrap: balance; }
+.tut-h em { font-style: normal; color: var(--primary); }
+.tut-desc { color: var(--on-surface-variant); line-height: 1.6; margin-top: 8px; font-size: 16px; font-size: clamp(14.4px, 4.1026cqw, 17.6px); }
+.tut-warn { display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; padding: 10px 12px; border-radius: 14px;
+  background: var(--danger-tint); color: #7E2410; line-height: 1.5; font-size: 14.5px; font-size: clamp(13px, 3.7179cqw, 16px); }
+.tut-fine { color: var(--on-surface-variant); line-height: 1.5; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--outline);
+  font-size: 13px; font-size: clamp(12px, 3.3333cqw, 14.3px); }
+.tut-dots { display: flex; justify-content: center; gap: 7px; }
+.tut-dots i { width: 7px; height: 7px; border-radius: 99px; background: var(--outline); transition: width .2s, background .2s; }
+.tut-dots i.on { width: 22px; background: var(--primary); }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <span class="tut-brand">토닥 사용법</span>
+    <span class="spacer"></span>
+    <a class="tut-skip" href="05-home.html" data-role="tut-skip">건너뛰기</a>
+  </div>
+
+  <!-- 화면 사진은 data-mid(사진 안에서 강조 칸 가운데, css px)·data-h(사진 높이, css px) 로 칸 가운데에 맞춰 올린다(more2.js) -->
+  <div class="content tut-stage" data-role="tut-stage">
+
+    <section class="tut-slide" data-role="tut-slide" role="group" aria-label="사용법 1 / 5">
+      <div class="tut-shot"><img src="img/tutorial/home.jpg" data-mid="164.7" data-h="700" alt="홈 화면 맨 위 ‘지금 할 일’ 칸"></div>
+      <div class="tut-txt">
+        <span class="tut-chip">매일 여기부터</span>
+        <h2 class="tut-h">하루는 홈의<br><em>‘지금 할 일’</em>부터</h2>
+        <p class="tut-desc">약 챙길 때, 컨디션 남길 때에 맞춰<br>지금 챙길 일을 맨 위에 알려 드려요.</p>
+      </div>
+    </section>
+
+    <section class="tut-slide" data-role="tut-slide" role="group" aria-label="사용법 2 / 5" hidden>
+      <div class="tut-panes">
+        <div class="tut-pane"><div class="tut-plabel"><span class="tut-pn">①</span>다음 진료일 넣기</div>
+          <div class="tut-shot"><img src="img/tutorial/visit2.jpg" data-mid="220" data-h="440" alt="치료 일정 화면의 다음 진료 날짜·시간 칸과 진료 추가하기"></div></div>
+        <div class="tut-pane"><div class="tut-plabel"><span class="tut-pn">②</span>약 봉투 찍기 (이름으로 넣어도 돼요)</div>
+          <div class="tut-shot"><img src="img/tutorial/scan.jpg" data-mid="297" data-h="440" alt="약 봉투 찍기 화면의 앨범·찍기·직접 입력 단추"></div></div>
+      </div>
+      <div class="tut-txt">
+        <span class="tut-chip">처음 한 번만</span>
+        <h2 class="tut-h"><em>다음 진료일</em>과<br><em>먹는 약</em>을 기록해 두세요</h2>
+        <p class="tut-desc">진료 전과 약 드실 시간에 알려 드려요.<br>먹는 약이 없으면 건너뛰셔도 괜찮아요.</p>
+      </div>
+    </section>
+
+    <section class="tut-slide" data-role="tut-slide" role="group" aria-label="사용법 3 / 5" hidden>
+      <div class="tut-panes">
+        <div class="tut-pane"><div class="tut-plabel"><span class="tut-pn">①</span>약을 드시면 눌러서 표시</div>
+          <div class="tut-shot"><img src="img/tutorial/medtoday.jpg" data-mid="195.8" data-h="440" alt="오늘의 복약 표에서 드신 약에 표시한 모습"></div></div>
+        <div class="tut-pane"><div class="tut-plabel"><span class="tut-pn">②</span>저녁엔 오늘 기분과 증상</div>
+          <div class="tut-shot"><img src="img/tutorial/checkin.jpg" data-mid="220" data-h="440" alt="컨디션 기록 화면의 오늘 기분 고르기"></div></div>
+      </div>
+      <div class="tut-txt">
+        <span class="tut-chip">매일</span>
+        <h2 class="tut-h">약을 드시면 <em>표시</em>하고<br>저녁엔 <em>컨디션</em>을 기록해요</h2>
+        <p class="tut-desc">정한 시간이 되면 알림으로 알려 드려요.</p>
+      </div>
+    </section>
+
+    <section class="tut-slide" data-role="tut-slide" role="group" aria-label="사용법 4 / 5" hidden>
+      <div class="tut-panes">
+        <div class="tut-pane"><div class="tut-plabel"><span class="tut-pn">①</span>‘상담’에 궁금한 점 물어보기</div>
+          <div class="tut-shot"><img src="img/tutorial/chat2.jpg" data-mid="219.4" data-h="440" alt="상담 화면에서 질문하고 답을 받은 모습"></div></div>
+        <div class="tut-pane"><div class="tut-plabel"><span class="tut-pn">②</span>‘정보’ 탭에서 부작용·음식 찾아보기</div>
+          <div class="tut-shot"><img src="img/tutorial/info.jpg" data-mid="134" data-h="440" alt="정보 탭의 전체·부작용 정보·음식·건강기능식품·자가관리 가이드 단추"></div></div>
+      </div>
+      <div class="tut-txt">
+        <span class="tut-chip">궁금할 때</span>
+        <h2 class="tut-h"><em>‘상담’</em>에 물어보거나<br><em>‘정보’</em>에서 찾아보세요</h2>
+        <p class="tut-warn"><span aria-hidden="true">🚨</span><span>위험 신호가 있으면 앱보다<br><b>119나 치료받는 병원</b>에 먼저 연락하세요.</span></p>
+      </div>
+    </section>
+
+    <section class="tut-slide" data-role="tut-slide" role="group" aria-label="사용법 5 / 5" hidden>
+      <div class="tut-shot"><img src="img/tutorial/report.jpg" data-mid="345.4" data-h="700" alt="진료 전 리포트의 증상·컨디션·복약 요약"></div>
+      <div class="tut-txt">
+        <span class="tut-chip">진료 전</span>
+        <h2 class="tut-h">남긴 기록은<br><em>진료 전 리포트</em>로 모여요</h2>
+        <p class="tut-desc">홈의 ‘진료 준비’에서 열어<br>진료 때 이 화면을 보여 주세요.</p>
+        <p class="tut-fine">토닥은 의료기기가 아닌 건강정보 참고용이에요.<br>진단·처방은 담당 의사와 상의하세요.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="footer-actions">
+    <div class="tut-dots" data-role="tut-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+    <a class="btn btn-primary btn-block btn-lg" href="05-home.html" data-role="tut-next">다음</a>
+  </div>
+</div>
+</body>
+</html>

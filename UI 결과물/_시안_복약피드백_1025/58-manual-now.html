@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 약 직접 입력 (지금 앱)</title>
+<link rel="stylesheet" href="../screens/app.css">
+<style>
+/* 지금 앱(features.js page58)이 '하루 2번'을 고르면 그리는 모양을 그대로 옮겼다 */
+.tbox { width: 140px; min-height: 44px; padding: 10px 6px; font-weight: 700; color: var(--primary-dark);
+  flex: 0 0 auto; text-align: center; }
+.when-u { text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+  <div class="appbar">
+    <a class="back" href="#">‹</a>
+    <div><div class="appbar-title">약 직접 입력</div></div>
+  </div>
+
+  <div class="content content--tight" style="padding-bottom:150px;">
+    <div class="photo-block">
+      <div class="pb-head">
+        <span class="pb-ic">📷</span>
+        <div class="grow">
+          <div class="pb-t">약 봉투를 찍으면<br>손으로 적지 않으셔도 돼요</div>
+          <div class="pb-s">약 이름·하루 몇 번·며칠분을 읽어 드려요</div>
+        </div>
+      </div>
+      <a class="pb-btn" href="#">📷 약 봉투 사진 찍기</a>
+    </div>
+    <div class="or-line">또는 이름으로 직접 입력</div>
+
+    <div class="field" id="at">
+      <label>약 이름</label>
+      <input class="input" type="text" value="레바미피드정 100mg" aria-label="약 이름">
+    </div>
+
+    <div class="field">
+      <label>어떤 약인가요</label>
+      <div class="chips">
+        <span class="chip chip--on">먹는 약</span>
+        <span class="chip">눈에 넣는 약</span>
+        <span class="chip">바르는 약</span>
+        <span class="chip">붙이는 약</span>
+        <span class="chip">기타</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>사용 횟수</label>
+      <div class="chips">
+        <span class="chip">하루 1번</span>
+        <span class="chip chip--on">하루 2번</span>
+        <span class="chip">하루 3번</span>
+        <span class="chip">하루 4번</span>
+        <span class="chip">필요할 때만</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>며칠분</label>
+      <div class="row" style="align-items:center; gap:8px;">
+        <input class="input" type="number" value="30" aria-label="며칠분" style="width:90px; text-align:center;">
+        <span class="small" style="flex:0 0 auto;">일</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>알림 시간</label>
+      <div class="listitem">
+        <span class="li-ic">🌅</span>
+        <div class="li-body"><div class="li-title"><span class="when-u">아침</span> ▾</div></div>
+        <div class="input tbox">오전 8:00</div>
+      </div>
+      <div class="listitem">
+        <span class="li-ic">🌙</span>
+        <div class="li-body"><div class="li-title"><span class="when-u">저녁</span> ▾</div></div>
+        <div class="input tbox">오후 8:00</div>
+      </div>
+    </div>
+
+    <div class="banner banner--info">
+      <span class="b-ic">💡</span>
+      <div class="small"><b>평소 드시는 약</b>도 함께 넣어 주세요.<br>암 치료약과 겹치는 약이 있는지 볼 수 있어요.</div>
+    </div>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-primary btn-block btn-lg" href="#">추가하기</a>
+  </div>
+</div>
+<script>
+/* 시안 그림용 — 사진 칸을 지나 '어떤 약인가요'부터 보이게 */
+(function () {
+  var c = document.querySelector('.content'), t = document.getElementById('at');
+  if (c && t) c.scrollTop = t.offsetTop - c.offsetTop - 8;
+})();
+</script>
+</body>
+</html>

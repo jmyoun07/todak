@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 오류 상태</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="07-chat.html">‹</a>
+    <div><div class="appbar-title">AI 상담</div></div>
+  </div>
+
+  <!-- 오프라인 배너 -->
+  <div style="padding:0 18px;">
+    <div class="banner banner--warn" style="margin-bottom:4px;">
+      <span class="b-ic">📶</span>
+      <div class="small"><b>인터넷 연결이 불안정해요.</b> 저장된 정보는 계속 보실 수 있어요.</div>
+    </div>
+  </div>
+
+  <div class="content" style="padding-bottom:150px;">
+    <div class="bubble bubble--user">손발이 저린데 어떻게 해야 하나요?</div>
+
+    <!-- 응답 실패 -->
+    <div class="ai-row">
+      <div class="ai-avatar" style="background:none;"><img src="icon-192.png" alt="토닥" style="width:30px; height:30px; border-radius:50%; display:block;"></div>
+      <div class="bubble bubble--ai" style="border-color:var(--warn);">
+        <div class="row gap-6" style="align-items:center;">
+          <span>⚠️</span><span class="strong small">답변을 불러오지 못했어요</span>
+        </div>
+        <p class="small" style="margin-top:6px; color:var(--on-surface-variant);">잠시 후 다시 시도해 주세요.</p>
+        <div class="row gap-8" style="margin-top:10px;">
+          <span class="btn btn-primary btn-sm grow">🔄 다시 시도</span>
+          <a class="btn btn-outline btn-sm grow" href="15-sideeffect-detail.html" style="text-decoration:none;">📖 손발 저림 안내</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2026-09-28 정보 화면 디자인 시스템 v3 (STYLE.md) — 급할 때 갈 곳은 응급 상자 하나로 -->
+    <section class="sec sec--emg">
+      <h2 class="sec-t">급한 증상이라면</h2>
+      <p class="sec-p">앱을 기다리지 말고<br><b>치료받는 병원이나 119로</b> 바로 연락하세요.</p>
+      <a class="link-card link-card--emg" href="48-emergency.html?from=87-error-retry.html">
+        <span class="link-card-ic" aria-hidden="true"></span>
+        <span class="link-card-body">
+          <span class="link-card-t">응급 상황일 땐 이렇게 하세요</span>
+          <span class="link-card-s">119를 부를 때와<br>병원에 연락할 때</span>
+        </span>
+      </a>
+      <a class="btn btn-outline btn-block" href="84-care-contacts.html?from=87-error-retry.html">🏥 내 병원 연락처 보기</a>
+    </section>
+
+    <section class="sec sec--info">
+      <h2 class="sec-t">기록을 저장하지 못했을 때 (예시)</h2>
+      <div class="card card--flat" style="border:1px solid var(--warn); background:var(--warn-tint);">
+        <div class="row gap-8" style="align-items:center;">
+          <span style="font-size:18px;">💾</span>
+          <div class="grow">
+            <div class="small strong" style="color:#7a4708;">기록을 저장하지 못했어요</div>
+            <div class="tiny" style="color:#7a4708;">연결되면 자동으로 저장돼요</div>
+          </div>
+          <span class="btn btn-outline btn-sm">재시도</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="chat-input">
+    <div class="ci-bar">
+      <input type="text" placeholder="증상이나 궁금한 점을 입력하세요">
+      <button class="send" aria-label="보내기">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 12l15-7-6 7 6 7-15-7z" fill="#fff"/></svg>
+      </button>
+    </div>
+    <div class="ci-note">연결이 불안정해 답변이 늦을 수 있어요</div>
+  </div>
+</div>
+</body>
+</html>

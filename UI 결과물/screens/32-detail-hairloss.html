@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 탈모</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="06-sideeffects.html">‹</a>
+    <div><div class="appbar-title">탈모</div><div class="appbar-sub">머리카락 빠짐</div></div>
+  </div>
+
+  <!-- 정보 화면 디자인 시스템 v3 (2026-09-28 · 본보기 31-detail-nausea · app.css '정보 화면 디자인 시스템 v3' · STYLE.md)
+       모든 묶음은 상자(.sec) · 제목(.sec-t)은 상자 윗선에 걸친다 · 색: 초록=하세요 / 노랑=주의 / 옅은 장미=피하세요 / 진한 빨강=응급 -->
+  <div class="content content--tight content--jump" style="padding-bottom:150px;">
+    <div class="row wrap" style="gap:8px;">
+      <span class="pill pill--brand">💉 항암화학요법</span>
+      <span class="sev sev--mild">흔함 · 대개 일시적</span>
+    </div>
+
+    <!-- ═══ 바로 가기 — 여덟 칸 같은 크기(2열) · 누르면 그 상자로 내려간다(다른 내용을 숨기지 않는다) ═══ -->
+    <nav class="sec sec--jump" aria-label="이 화면 바로 가기">
+      <div class="sec-t">바로 가기</div>
+      <div class="jump">
+        <a class="jump-b jump-b--why" href="#s-why"><span>이게 왜 생겨요?</span></a>
+        <a class="jump-b jump-b--info" href="#s-regrow"><span>언제 자라나요</span></a>
+        <a class="jump-b jump-b--good" href="#s-prep"><span>미리 준비해요</span></a>
+        <a class="jump-b jump-b--good" href="#s-care"><span>이렇게 관리해요</span></a>
+        <a class="jump-b jump-b--avoid" href="#s-avoid"><span>피해야 할 것</span></a>
+        <a class="jump-b jump-b--info" href="#s-cool"><span>두피냉각</span></a>
+        <a class="jump-b jump-b--good" href="#s-ask"><span>물어볼 것</span></a>
+        <a class="jump-b jump-b--hosp" href="#s-call"><span>이럴 땐 병원에</span></a>
+      </div>
+    </nav>
+
+    <!-- ═══ ① 이게 왜 생겨요? ═══ -->
+    <section class="sec sec--why" id="s-why">
+      <h2 class="sec-t section-label">이게 왜 생겨요?</h2>
+      <p class="sec-p">일부 항암제가 <b>빠르게 자라는<br>머리카락 뿌리(모낭)</b>에 영향을 줘서 생겨요.</p>
+      <p class="sec-p">보통 <b>치료 시작 2~3주 뒤</b>부터 빠져요.</p>
+      <p class="sec-p">머리카락뿐 아니라 <b>눈썹·속눈썹과<br>몸의 다른 털</b>도 빠질 수 있어요.</p>
+    </section>
+
+    <!-- ═══ ② 언제 다시 자라나요 (정보) ═══ -->
+    <section class="sec sec--info" id="s-regrow">
+      <h2 class="sec-t section-label">언제 다시 자라나요</h2>
+      <div class="it">
+        <div class="it-t">치료가 끝나고 2~3개월 뒤</div>
+        <div class="it-b">대개 이때부터 다시 자라기 시작해요.<br>처음 나오는 머리카락은 <b>아주 가늘어요.</b></div>
+      </div>
+      <div class="it">
+        <div class="it-t">머릿결과 색이 달라질 수 있어요</div>
+        <div class="it-b">전보다 곱슬해지거나 반대로 곧아지고,<br>색이 달라지기도 해요.</div>
+        <div class="it-b">시간이 지나면서 또 바뀌기도 해요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">드물게 오래 가기도 해요</div>
+        <div class="it-b">치료 중에는 <b>10명 중 9명</b>이 탈모를 겪었고,<br>끝난 뒤에도 이어진 분은 <b>100명 중 4명</b>이었어요.</div>
+        <div class="it-b">수술 뒤 도세탁셀을 쓴 임상 연구를<br>8년까지 따라간 결과예요.</div>
+      </div>
+    </section>
+
+    <!-- ═══ ③ 빠지기 전에 준비해요 (초록) ═══ -->
+    <section class="sec sec--good" id="s-prep">
+      <h2 class="sec-t section-label">빠지기 전에 준비해요</h2>
+      <div class="it">
+        <div class="it-t">치료 전에 짧게 자르기</div>
+        <div class="it-b">빠질 때 마음의 부담을 줄이는 데 도움이 돼요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">가발은 머리카락이 남아 있을 때</div>
+        <div class="it-b">원래 머리 색과 맞추기가 훨씬 쉬워요.</div>
+        <div class="it-do"><span>살 생각이라면 미리 보러 가세요.</span></div>
+      </div>
+      <div class="tip">
+        <span class="tip-lab">팁</span>
+        <div class="it-t">가발이 가렵고 더울 땐</div>
+        <div class="it-b">편한 스카프나 두건도 좋아요.</div>
+      </div>
+    </section>
+
+    <!-- ═══ ④ 이렇게 관리해요 (초록) — 순서가 아니라 번호 없이 막대 표시 ═══ -->
+    <section class="sec sec--good" id="s-care">
+      <h2 class="sec-t section-label">이렇게 관리해요</h2>
+      <div class="it">
+        <div class="it-t">머리 감을 땐</div>
+        <div class="it-do"><span>순한 샴푸로 평소보다 덜 자주,<br>아주 부드럽게 감으세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">두피가 가렵거나 따끔할 땐</div>
+        <div class="it-do"><span>순한 보습 로션을 발라 주세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">밖에 나갈 땐</div>
+        <div class="it-b">머리카락이 없으면 두피가 햇빛을 그대로 받아요.</div>
+        <div class="it-do"><span>자외선차단제를 바르거나 모자를 쓰세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">머리가 춥게 느껴질 땐</div>
+        <div class="it-b">머리로 열이 많이 빠져나가 유난히 추워요.</div>
+        <div class="it-do"><span>계절과 상관없이 <span class="nw">따뜻한 모자를</span> <span class="nw">하나 두세요.</span></span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">음식·영양</div>
+        <div class="it-b">특정 음식으로 탈모를 막을 수는 없어요.</div>
+        <div class="it-do"><span>회복을 위해 단백질을 골고루 드세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ⑤ 두피엔 이런 것을 피하세요 (옅은 장미) — 제목 = 피할 것 / 풀이 = 까닭 / → = 대신 이렇게 ═══ -->
+    <section class="sec sec--avoid" id="s-avoid">
+      <h2 class="sec-t section-label">두피엔 이런 것을 피하세요</h2>
+      <div class="it">
+        <div class="it-t">헤어드라이어·고데기</div>
+        <div class="it-b">뜨거운 열이 두피를 상하게 할 수 있어요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t"><span><span class="nw">파마·염색,</span> <span class="nw">젤·왁스·집게핀</span></span></div>
+        <div class="it-b">파마약·염색약은 두피를 자극하고,<br>집게핀은 약해진 머리카락을 당겨요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">세게 빗기</div>
+        <div class="it-b">머리카락이 약해져 있어 더 빠질 수 있어요.</div>
+        <div class="it-do"><span>빗질은 줄이고 두피를 부드럽게 다뤄 주세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ⑥ 두피냉각 — 방법·효과(정보) / 국내 사정(노랑) / 물어볼 것(초록) ═══ -->
+    <section class="sec sec--info" id="s-cool">
+      <h2 class="sec-t section-label">두피냉각이라는 방법도 있어요</h2>
+      <div class="it">
+        <div class="it-t">어떤 방법인가요</div>
+        <div class="it-b">항암제를 맞기 전·맞는 동안·맞은 뒤까지<br><b>두피를 차갑게 하는 모자</b>를 써요.</div>
+        <div class="it-b">두피 혈관이 좁아져서<br><b>모낭에 닿는 항암제 양이 줄어요.</b></div>
+      </div>
+      <div class="it">
+        <div class="it-t">얼마나 효과가 있나요</div>
+        <div class="it-b">받으신 분 <b>10명 중 6~7명</b>은<br>탈모가 없거나 가벼웠어요.</div>
+        <div class="it-b">그래도 10명 중 3명쯤은 가발을 쓰셨어요.</div>
+        <div class="it-b"><b>‘안 빠지게’보다 ‘덜 빠지게’</b>에 가까워요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">국내 자료</div>
+        <div class="it-b">국내 병원 연구에서 항암이 끝나고<br>6개월 뒤까지 탈모가 남은 분은<br>냉각모자를 쓴 쪽 <b>10명 중 1명</b>,<br>쓰지 않은 쪽 <b>2명 중 1명</b>이었어요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">불편한 점</div>
+        <div class="it-b">차가워서 생기는 두통, 목·어깨 결림,<br>모자를 오래 써서 오는 통증이 가장 흔해요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">두피로 암이 퍼질까 걱정되신다면</div>
+        <div class="it-b">두피로 암이 퍼진다는 근거는<br>연구에서 확인되지 않았어요.</div>
+      </div>
+    </section>
+
+    <section class="sec sec--caution" id="s-coolkr">
+      <h2 class="sec-t section-label">국내에서는 먼저 확인하세요</h2>
+      <ul class="dots">
+        <li><b>평가유예 신의료기술</b>로 지정돼 있어요.<span class="dots-b">효과를 더 지켜보는 기간이라는 뜻이에요.<br>2025년 11월 1일부터 2027년 10월 31일까지</span></li>
+        <li>대상은 <b>탁센 계열·안트라사이클린 계열</b><br>항암제를 쓰는 유방암 환자예요.</li>
+        <li><b>건강보험이 적용되지 않는 비급여</b>예요.</li>
+        <li><b>장비를 갖춘 병원이 아직 많지 않아요.</b><span class="dots-b">치료받는 병원에서 되는지 먼저 물어보세요.</span></li>
+      </ul>
+    </section>
+
+    <section class="sec sec--good" id="s-coolask">
+      <h2 class="sec-t section-label">두피냉각, 이 세 가지를 물어보세요</h2>
+      <p class="sec-sub">토닥은 두피냉각을 권하지도, 말리지도 않아요.</p>
+      <ul class="dots">
+        <li>“제 항암제가 두피냉각 대상인가요?”</li>
+        <li>“이 병원에서 할 수 있나요?<br>안 되면 어디로 가야 하나요?”</li>
+        <li>“비급여면 한 번에 얼마고,<br>항암 전체로는 몇 번을 하게 되나요?”</li>
+      </ul>
+      <div class="it">
+        <div class="it-t">첫 항암 전에 물어보세요</div>
+        <div class="it-b">항암을 시작한 뒤에는<br>고를 수 있는 것이 줄어요.</div>
+      </div>
+    </section>
+
+    <!-- ═══ ⑦ 진료 때 이렇게 물어보세요 (초록 · 두피냉각 질문 상자와 같은 색) ═══ -->
+    <section class="sec sec--good" id="s-ask">
+      <h2 class="sec-t section-label">진료 때 이렇게 물어보세요</h2>
+      <ul class="dots">
+        <li>“제 치료로 머리가 빠질 가능성이 큰가요?”</li>
+        <li>“두피는 어떻게 보호하고 관리할까요?<br>추천하시는 제품이 있나요?”</li>
+        <li>“가발이나 헤어피스는 어디서 구할 수 있나요?”</li>
+        <li>“만나볼 만한 환자 모임이 있을까요?”</li>
+        <li>“머리는 언제쯤 다시 자랄까요?”</li>
+      </ul>
+      <div class="it">
+        <div class="it-t"><span>가발·두건 지원이나<br>마음 돌봄이 필요하면</span></div>
+        <div class="it-do"><span>치료받는 병원의 담당 의사나<br>상담실에 요청하세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ⑧ 이럴 땐 병원에 — 큰 상자 하나에 세 단계(🔴·🟠·🟢) 중간 상자 ═══
+         단계 제목의 🔴·🟠·🟢 글자는 지우지 않는다(화면에서는 둥근 점으로 그림) — AI 상담 자료 색인이 이 글자로 단계를 나눈다.
+         단계 제목에는 section-label 을 붙이지 않는다 — 세 단계가 색인에서 '이럴 땐 병원에' 한 묶음으로 남아야 한다. -->
+    <section class="sec sec--group" id="s-call">
+      <h2 class="sec-t section-label">이럴 땐 병원에</h2>
+      <p class="sec-sub">세 단계로 나눴어요. 위에서부터 급한 순서예요.</p>
+
+      <!-- 🔴 1단계 — 부작용 화면마다 되풀이하던 '이럴 땐 전화 말고 119'·열 기준 덩이는 응급 안내(48) 한 칸으로 바꿨다 -->
+      <div class="sec sec--lv1" id="s-119">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🔴</span> <span>지금 바로 119</span></div>
+        <a class="link-card link-card--emg" id="s-emg" href="48-emergency.html?from=32-detail-hairloss.html">
+          <span class="link-card-ic" aria-hidden="true"></span>
+          <span class="link-card-body">
+            <span class="link-card-t">응급 상황일 땐 이렇게 하세요</span>
+            <span class="link-card-s">열이 38.0도 이상일 때<br>(겨드랑이는 37.5도 이상)<br>숨이 차거나 정신이 흐릿할 때</span>
+          </span>
+        </a>
+        <a class="btn btn-danger btn-block" href="tel:119">📞 119 응급전화</a>
+      </div>
+
+      <!-- 🟠 2단계 -->
+      <div class="sec sec--lv2" id="s-today">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟠</span> <span>그날 안에 연락하세요</span></div>
+        <div class="it">
+          <div class="it-t">두피가 이런 모습이면</div>
+        </div>
+        <ul class="dots">
+          <li><b>빨갛게 붓고</b> 진물·고름이 나오거나,<br><b>누르면 아플 때</b><span class="dots-b">두피 감염일 수 있어요.<br>열도 나면 밤·주말에도 바로 연락하세요.</span></li>
+        </ul>
+        <!-- 저장해 두신 병원 번호가 있으면 features.js(wireCallMine)가 '병원 이름 + 번호' 로 바로 걸리는 단추로 바꾼다.
+             번호가 없으면 글자를 '🏥 내 병원 번호 등록하기'로 바꾸고 84 등록 화면으로 보낸다. -->
+        <a class="btn btn-outline btn-outline--lv2 btn-block" href="84-care-contacts.html?from=32-detail-hairloss.html" data-role="call-mine">📞 내 병원으로 연락하기</a>
+        <!-- 담당 병원 바로 아래에 근처 병원 — 피부과는 심평원 진료과목코드 14 -->
+        <div class="it">
+          <div class="it-t">담당 병원이 멀거나 문 닫았다면</div>
+          <div class="it-b">두피가 가렵거나 뾰루지가 나는 정도면<br>가까운 피부과에서 먼저 보셔도 돼요.</div>
+        </div>
+        <a class="btn btn-outline btn-block" href="92-nearby-list.html?dept=14&amp;from=32-detail-hairloss.html">🏥 근처 피부과 찾기</a>
+      </div>
+
+      <!-- 🟢 3단계 -->
+      <div class="sec sec--lv3" id="s-next">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟢</span> <span>다음 진료 때 말씀하세요</span></div>
+        <ul class="dots">
+          <li>머리카락이 빠지거나<br>눈썹·속눈썹이 얇아질 때</li>
+          <li>두피가 가렵고 각질이 이는 정도일 때</li>
+          <li><b>치료가 끝나고 6개월이 지나도</b><br>거의 자라지 않을 때</li>
+        </ul>
+        <div class="it">
+          <div class="it-do"><span>언제부터인지 적어 두세요.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="tiny muted rf-src">근거: CTCAE v5.0 · 미국 국립암연구소(NCI) ·<br>미국 FDA 허가사항 · 대한감염학회 · 보건복지부 —<br>자세한 출처는 <b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요</div>
+
+    <p class="disclaimer">본 제품은 의료기기가 아니므로 질병 유무를 판단할 수 없으며, 질병 유무 판단을 위해서는 의사의 검진이 필요합니다.</p>
+  </div>
+
+  <div class="footer-actions">
+    <div class="row gap-8">
+      <a class="btn btn-outline grow" href="10-consult-questions.html">📝 진료 질문 만들기</a>
+      <a class="btn btn-primary grow" href="07-chat.html">💬 이 증상 물어보기</a>
+    </div>
+  </div>
+
+  <!-- 전화 걸기 확인 — 실수로 눌러도 바로 걸리지 않게 -->
+  <div class="callpop" id="callpop" role="dialog" aria-modal="true" aria-label="전화 걸기 확인" hidden>
+    <div class="callpop-card">
+      <div style="font-size:34px;">📞</div>
+      <div class="strong" style="font-size:17px;" id="callpop-title">전화를 걸까요?</div>
+      <a class="btn btn-primary btn-block btn-lg" id="callpop-go" href="tel:119" data-direct="1">📞 지금 전화 걸기</a>
+      <button class="btn btn-outline btn-block" id="callpop-no" type="button">닫기</button>
+    </div>
+  </div>
+</div>
+<script>(function(){
+var NAMES={"119":"119 구급대","109":"자살예방 상담전화 109","1577-0199":"정신건강 위기상담 1577-0199"};
+var pop=document.getElementById("callpop");if(!pop)return;
+var go=document.getElementById("callpop-go"),no=document.getElementById("callpop-no"),tt=document.getElementById("callpop-title");
+document.addEventListener("click",function(e){
+  var a=e.target&&e.target.closest?e.target.closest("a"):null;if(!a)return;
+  var h=a.getAttribute("href")||"";
+  if(h.indexOf("tel:")!==0||a.hasAttribute("data-direct"))return;
+  e.preventDefault();e.stopImmediatePropagation();e.stopPropagation();
+  var num=h.slice(4);
+  pop.__opener=a;
+  /* 배선 JS 가 붙인 병원 이름(data-callname)이 있으면 그 이름으로 묻는다 — 숫자만 보면 어디로 거는지 모른다 (48 과 같은 방식) */
+  tt.textContent=(a.getAttribute("data-callname")||NAMES[num]||num)+"에 전화할까요?";
+  go.setAttribute("href","tel:"+num);
+  pop.hidden=false;no.focus();
+},true);
+function close(){pop.hidden=true;
+  if(pop.__opener&&pop.__opener.focus){pop.__opener.focus();}}
+no.addEventListener("click",close);
+go.addEventListener("click",function(){setTimeout(close,150);});
+pop.addEventListener("click",function(e){if(e.target===pop)close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!pop.hidden){e.stopPropagation();close();}},true);
+})()</script>
+</body>
+</html>

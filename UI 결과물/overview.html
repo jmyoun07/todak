@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 — 유방암 부작용 케어 앱 · 화면 시안 v2.5</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #C43E6B; --primary-dark: #9E2E54; --primary-fixed: #F5D9E4;
+    --surface: #FCF8F9; --surface-container: #F4ECEF;
+    --on-surface: #241C1F; --on-surface-variant: #6B5860;
+    --outline: #B79CA6; --outline-variant: #E1D2D8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans KR', sans-serif; background: var(--surface); color: var(--on-surface); min-height: 100vh; line-height: 1.5; }
+
+  .top-bar { background: linear-gradient(120deg, var(--primary-dark), var(--primary)); color: white; padding: 18px 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; box-shadow: 0 2px 12px rgba(60,20,35,0.15); position: sticky; top: 0; z-index: 100; }
+  .top-bar .brand-mark { font-size: 11px; color: var(--primary-fixed); letter-spacing: 2px; font-weight: 700; }
+  .top-bar h1 { font-size: 19px; font-weight: 900; margin-top: 2px; }
+  .top-bar .meta { font-size: 12px; color: rgba(255,255,255,0.9); }
+
+  .section { max-width: 1500px; margin: 0 auto; padding: 30px 32px; }
+  .section-header { margin-bottom: 8px; padding-bottom: 12px; border-bottom: 2px solid var(--primary); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .section-header h2 { font-size: 20px; font-weight: 700; }
+  .section-header .tag { background: var(--primary-fixed); color: var(--primary-dark); padding: 3px 11px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+  .section-header .step-badge { background: var(--primary); color:#fff; width:26px; height:26px; border-radius:50%; display:grid; place-items:center; font-size:13px; font-weight:900; flex:0 0 auto; }
+  .section-desc { color: var(--on-surface-variant); font-size: 13px; margin: 14px 0 22px; }
+  .flow-hint { display:inline-block; background:var(--surface-container); color:var(--primary-dark); font-size:11.5px; font-weight:700; padding:3px 10px; border-radius:999px; margin-bottom:4px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(216px, 1fr)); gap: 22px; }
+  .card { background: white; border-radius: 16px; overflow: hidden; border: 1px solid var(--outline-variant); transition: transform 0.15s, box-shadow 0.15s; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(60,20,35,0.14); }
+  .thumb-wrap { background: var(--surface-container); padding: 14px 14px 0; display: flex; justify-content: center; overflow: hidden; }
+  .thumb { width: 184px; height: 398px; overflow: hidden; border-radius: 15px 15px 0 0; box-shadow: 0 0 0 1px var(--outline-variant), 0 6px 18px rgba(60,20,35,0.12); background: #fff; }
+  .thumb iframe { width: 390px; height: 844px; border: 0; transform: scale(0.4718); transform-origin: top left; pointer-events: none; }
+  .card .info { padding: 12px 14px 14px; border-top: 1px solid var(--outline-variant); background: white; }
+  .card .num { background: var(--primary); color: white; font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 700; display: inline-block; margin-bottom: 6px; letter-spacing: 0.5px; }
+  .card .num.fig { background: var(--primary-dark); }
+  .card .num.sub { background: var(--secondary, #4E7A86); }
+  .card .num.new { background: #E3F3EC; color: #1E6B4A; }
+  .card .title { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+  .card .subtitle { font-size: 11px; color: var(--on-surface-variant); line-height: 1.45; }
+
+  .palette { background: white; border-radius: 14px; padding: 20px; border: 1px solid var(--outline-variant); }
+  .palette-title { font-size: 13px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .palette-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+  .color-chip { display: flex; align-items: center; gap: 9px; padding: 8px; border-radius: 8px; border: 1px solid var(--outline-variant); }
+  .color-chip .swatch { width: 30px; height: 30px; border-radius: 6px; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.1); }
+  .color-chip .name { font-weight: 700; font-size: 11px; }
+  .color-chip .hex { color: var(--on-surface-variant); font-family: Consolas, monospace; font-size: 10.5px; }
+
+  .intro-note { background: var(--primary-fixed); color: var(--primary-dark); border-radius: 12px; padding: 14px 18px; font-size: 13px; line-height: 1.6; margin-bottom: 22px; }
+
+  footer { background: var(--primary-dark); color: white; padding: 24px 32px; text-align: center; margin-top: 50px; font-size: 12px; }
+  footer .flow { color: var(--primary-fixed); margin-top: 8px; font-size: 11.5px; }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div>
+    <div class="brand-mark">TODAK · BREAST CANCER SIDE-EFFECT CARE APP</div>
+    <h1>🎀 토닥 — 화면 시안 (UI 시안 v2.5)</h1>
+  </div>
+  <div class="meta">홈 흐름 순서로 정리 · 88개 화면 · 2026-08-26 갱신</div>
+</div>
+
+<div class="section">
+
+  <div class="intro-note" style="border-left:4px solid #C43E6B;">
+    🔄 <b>v2.5에서 달라진 것</b> — 화면을 실제 앱처럼 간결하게 정리했어요.<br>
+    · <b>근거 표기 200곳 → 46곳</b> — <b>화면 맨 아래 한 줄</b>로 모으고 기관명만 남겼어요. 박스 안에 박혀 있던 근거는 전부 걷어냈어요<br>
+    · <b>「연구팀이 자체 작성」 63곳 삭제</b> · 반복되던 국제자료 안내 카드 27곳 삭제<br>
+    · <b>임상시험 인원수·설계 설명 삭제</b> — 환자에게 필요한 결론만<br>
+    · 로그인을 <b>카카오 · 네이버 · 구글 · 이메일</b>로 · 휴대폰 본인인증 제거<br>
+    · 근처 병원 화면에서 불필요한 안내 제거 (3,115자 → 1,816자)
+  </div>
+
+    <div class="intro-note">
+    💡 <b>사용 흐름 순서대로 정리했어요.</b> 온보딩(가입~설정)을 마치면 <b>홈</b>에 도착하고,
+    홈에서 <b>① 증상 상담 → ② 부작용 정보 → ③ 자가관리 가이드 → ④ 음식·건기식 → ⑤ 진료 준비 → ⑥ 증상 기록</b> 순으로 기능을 씁니다.
+    그 뒤 마음 건강·알림·설정이 이어져요. 각 카드를 클릭하면 실제 화면이 열립니다.
+  </div>
+
+  <!-- 온보딩 -->
+  <div class="section-header"><h2>🌱 온보딩</h2><span class="tag">가입/로그인 → 개인화</span></div>
+  <p class="section-desc">시작 화면 하나에서 카카오·네이버·구글·이메일로 가입(또는 로그인) → 약관 동의(만 19세 확인) → 유형·치료 → ‘걱정되는 부작용’ 선택 → 사용법 → <b>홈 도착</b>.</p>
+  <div class="grid">
+    <a class="card" href="screens/01-splash.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/01-splash.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">1</span><div class="title">시작 · 로그인·가입</div><div class="subtitle">카카오·네이버·구글 + 이메일 버튼</div></div></a>
+    <a class="card" href="screens/97-email-login.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/97-email-login.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">2</span><div class="title">이메일로 로그인</div><div class="subtitle">뒷주소 추천 · 실패 안내</div></div></a>
+    <a class="card" href="screens/96-email-signup.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/96-email-signup.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">3</span><div class="title">이메일로 가입하기</div><div class="subtitle">이메일·비밀번호만</div></div></a>
+    <a class="card" href="screens/02-consent.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/02-consent.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">4</span><div class="title">약관 동의</div><div class="subtitle">만 19세 · 필수 3 · 선택 2 · 보기</div></div></a>
+    <a class="card" href="screens/99-patient-verify.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/99-patient-verify.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new">4-1</span><div class="title">환자 확인 서류</div><div class="subtitle">진단서·소견서 사진 · 주민번호 뒷자리 가리기 · 받는 자리 동의</div></div></a>
+    <a class="card" href="screens/03-profile-type.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/03-profile-type.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">5</span><div class="title">기본 정보 · 유형</div><div class="subtitle">단계·아형·병기(들으신 값)·동반질환 10종</div></div></a>
+    <a class="card" href="screens/04-treatment.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/04-treatment.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">6</span><div class="title">현재 받는 치료</div><div class="subtitle">치료·복용약·주사·치료 후 변화</div></div></a>
+    <a class="card" href="screens/53-med-scan.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/53-med-scan.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new">6-1</span><div class="title">복약 정보 입력 (OCR)</div><div class="subtitle">약 봉투·처방전 찍기</div></div></a>
+    <a class="card" href="screens/54-med-confirm.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/54-med-confirm.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new">6-2</span><div class="title">사진에서 찾은 약 확인</div><div class="subtitle">맞는 약만 남기기 · 하루 몇 번 · 며칠분</div></div></a>
+    <a class="card" href="screens/14-concerns.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/14-concerns.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">7</span><div class="title">걱정되는 부작용</div><div class="subtitle">관심사로 홈 맞춤</div></div></a>
+    <a class="card" href="screens/19-tutorial.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/19-tutorial.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">8</span><div class="title">앱 사용법</div><div class="subtitle">3가지 핵심 안내</div></div></a>
+  </div>
+
+  <!-- 홈 -->
+  <div class="section-header" style="margin-top:42px;"><h2>🏠 홈 (대시보드)</h2><span class="tag">여기서 모든 기능으로</span></div>
+  <p class="section-desc">온보딩을 마치면 도착하는 중심 화면. 오늘의 체크인·관심 부작용·오늘의 팁과 함께, 아래 <b>① ~ ⑥ 기능</b> 및 마음 건강·알림·설정으로 이동합니다.</p>
+  <div class="grid">
+    <a class="card" href="screens/05-home.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/05-home.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">9</span><div class="title">홈 (대시보드)</div><div class="subtitle">체크인 · 관심 부작용 · 6대 기능</div></div></a>
+  </div>
+
+  <!-- ① 증상 상담 -->
+  <div class="section-header" style="margin-top:42px;"><span class="step-badge">①</span><h2>증상 상담 (AI 대화)</h2><span class="tag">[그림01] · 핵심</span></div>
+  <p class="section-desc"><span class="flow-hint">홈 → 증상 상담</span> 궁금한 증상·음식·건기식을 대화로 물어봐요. 대화 중 <b>응급 신호는 Red Flag</b>, <b>자해 표현은 위기 지원</b>으로 자동 전환돼요.</p>
+  <div class="grid">
+    <a class="card" href="screens/07-chat.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/07-chat.html" loading="lazy"></iframe></div></div><div class="info"><span class="num fig">10 · 그림01 중</span><div class="title">AI 대화 상담</div><div class="subtitle">자연어 상담 · 출처 · 피드백</div></div></a>
+    <a class="card" href="screens/08-redflag.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/08-redflag.html" loading="lazy"></iframe></div></div><div class="info"><span class="num fig">11 · 그림01 우</span><div class="title">Red Flag 안내</div><div class="subtitle">응급 → 의료진 연락 우선</div></div></a>
+    <a class="card" href="screens/11-crisis.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/11-crisis.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">12</span><div class="title">위기 지원</div><div class="subtitle">자해 감지 → 109·1577·119</div></div></a>
+    <a class="card" href="screens/48-emergency.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/48-emergency.html" loading="lazy"></iframe></div></div><div class="info"><span class="num" style="background:var(--danger);">응급 안내</span><div class="title">응급 안내</div><div class="subtitle">응급 신호 목록 · 119·109·1577</div></div></a>
+    <a class="card" href="screens/21-chat-history.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/21-chat-history.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">13</span><div class="title">대화 기록</div><div class="subtitle">지난 상담 다시 보기</div></div></a>
+    <a class="card" href="screens/90-report-answer.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/90-report-answer.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"> ★</span><div class="title">AI 답변 신고</div><div class="subtitle">계획서 필수 — 오류관리 절차 시작점</div></div></a>
+  </div>
+
+  <!-- ② 부작용 정보 -->
+  <div class="section-header" style="margin-top:42px;"><span class="step-badge">②</span><h2>부작용 정보 &amp; 상세</h2><span class="tag">[그림01] · 콘텐츠 18종</span></div>
+  <p class="section-desc"><span class="flow-hint">홈 → 부작용 정보</span> 내 치료 기준 부작용 목록에서 각 항목을 누르면 상세가 열려요. 상세는 <b>왜 생기나·자가관리·음식·이럴 땐 병원에</b>로 구성됩니다. ※ 전문가 검증(CVI≥0.80) 전 초안.</p>
+  <div class="grid">
+    <a class="card" href="screens/06-sideeffects.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/06-sideeffects.html" loading="lazy"></iframe></div></div><div class="info"><span class="num fig">14 · 그림01 좌</span><div class="title">부작용 정보 (목록)</div><div class="subtitle">치료별 부작용 → 상세</div></div></a>
+    <a class="card" href="screens/31-detail-nausea.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/31-detail-nausea.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">오심·구토</div><div class="subtitle">💉 항암</div></div></a>
+    <a class="card" href="screens/32-detail-hairloss.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/32-detail-hairloss.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">탈모</div><div class="subtitle">빠지는 시기 · 두피냉각 국내 현실 · 다시 자랄 때</div></div></a>
+    <a class="card" href="screens/33-detail-fatigue.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/33-detail-fatigue.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">피로</div><div class="subtitle">80%가 겪음 · 쉬는 것보다 움직이는 것 · 낮잠 1시간</div></div></a>
+    <a class="card" href="screens/15-sideeffect-detail.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/15-sideeffect-detail.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">말초신경병증</div><div class="subtitle">화상·낙상 안전 · 물 온도 확인 · 전기장판 주의 · 매일 손발 확인</div></div></a>
+    <a class="card" href="screens/36-detail-mucositis.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/36-detail-mucositis.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">구내염</div><div class="subtitle">💉 항암</div></div></a>
+    <a class="card" href="screens/37-detail-myelo.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/37-detail-myelo.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">골수억제·감염</div><div class="subtitle">💉 항암 · 발열 응급</div></div></a>
+    <a class="card" href="screens/34-detail-arthralgia.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/34-detail-arthralgia.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">관절통·근육통</div><div class="subtitle">약별 관절통 빈도 48% · 운동 근거 · 방아쇠수지</div></div></a>
+    <a class="card" href="screens/35-detail-hotflash.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/35-detail-hotflash.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">안면홍조·열감</div><div class="subtitle">열감 vs 진짜 열 구분 · 석류-타목시펜 주의</div></div></a>
+    <a class="card" href="screens/43-detail-dryness.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/43-detail-dryness.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">질건조·성 건강</div><div class="subtitle">약제별 차이 · 보습제/윤활제 구분 · 골반 근육 운동 · 치료 중 피임</div></div></a>
+    <a class="card" href="screens/44-detail-bone.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/44-detail-bone.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">골밀도 감소</div><div class="subtitle">AI 복용 중 T −2.0 기준 · 재검 주기 · 타목시펜 구분</div></div></a>
+    <a class="card" href="screens/39-detail-skinrad.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/39-detail-skinrad.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">방사선 피부 반응</div><div class="subtitle">데오도란트 허용 · 매일 씻기 · 보습제 첫날부터</div></div></a>
+    <a class="card" href="screens/40-detail-lymphedema.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/40-detail-lymphedema.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">림프부종</div><div class="subtitle">📡 방사선·수술</div></div></a>
+    <a class="card" href="screens/41-detail-cardio.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/41-detail-cardio.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">심장 기능 저하</div><div class="subtitle">심장 검사 주기 · 회복률 실제 수치 · 도세탁셀 부종 감별</div></div></a>
+    <a class="card" href="screens/38-detail-diarrhea.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/38-detail-diarrhea.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">설사</div><div class="subtitle">🎯 표적·항암</div></div></a>
+    <a class="card" href="screens/42-detail-skintgt.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/42-detail-skintgt.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">표적치료 피부 반응</div><div class="subtitle">약별 발진 빈도 차이 · 라파티닙 44% vs 트라스투주맙 4%</div></div></a>
+    <a class="card" href="screens/45-detail-constipation.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/45-detail-constipation.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">변비</div><div class="subtitle">🩺 공통</div></div></a>
+    <a class="card" href="screens/46-detail-sleep.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/46-detail-sleep.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">수면장애</div><div class="subtitle">기상시각 고정 · CBT-I · 약 시간표 점검</div></div></a>
+    <a class="card" href="screens/47-detail-anxiety.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/47-detail-anxiety.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">불안·재발 공포</div><div class="subtitle">재발 공포 · 국내 정신건강 자원 연결</div></div></a>
+    <a class="card" href="screens/50-detail-taste.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/50-detail-taste.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">미각·후각 변화</div><div class="subtitle">아연은 근거 없음 · 수저·조리도구 바꾸기</div></div></a>
+    <a class="card" href="screens/51-detail-handfoot.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/51-detail-handfoot.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">수족증후군·손발톱</div><div class="subtitle">카페시타빈 등급별 대응 · 담당의 판단 영역</div></div></a>
+    <a class="card" href="screens/49-detail-cognitive.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/49-detail-cognitive.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">인지 변화(항암 브레인)</div><div class="subtitle">🩺 공통</div></div></a>
+    <a class="card" href="screens/52-detail-weight.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/52-detail-weight.html" loading="lazy"></iframe></div></div><div class="info"><span class="num sub">상세</span><div class="title">체중 변화</div><div class="subtitle">유방암 특이 — 치료 중 증가 피하기 · 한국 BMI 기준</div></div></a>
+  </div>
+
+  <!-- ③ 자가관리 가이드 -->
+  <div class="section-header" style="margin-top:42px;"><span class="step-badge">③</span><h2>자가관리 가이드</h2><span class="tag">부작용·영양·활동·마음</span></div>
+  <p class="section-desc"><span class="flow-hint">홈 → 자가관리 가이드</span> 부작용·영양·활동·마음 주제별로 전문가 검토를 거친 가이드를 읽어요. (PINK! Coach 패턴)</p>
+  <div class="grid">
+    <a class="card" href="screens/17-selfcare-library.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/17-selfcare-library.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">15</span><div class="title">자가관리 가이드</div><div class="subtitle">세그먼트 탭 · 가이드 카드</div></div></a>
+  </div>
+
+  <!-- ④ 음식·건강기능식품 -->
+  <div class="section-header" style="margin-top:42px;"><span class="step-badge">④</span><h2>음식 · 건강기능식품</h2><span class="tag">상호작용·안전성</span></div>
+  <p class="section-desc"><span class="flow-hint">홈 → 음식·건기식</span> “이거 먹어도 되나요?”에 안전하게 답해요. 라우터(09)를 <b>「💉 항암치료 중 / 💊 호르몬치료 중 / 🩺 모두에게」로 재편</b>해, 항암을 하지 않는 호르몬치료 환자도 자기 칸을 바로 찾습니다. 식사 카드마다 <b>치료 구분 배지</b>와 <b>근거 수준</b>을 표시하고, 근거가 약한 주제는 카드로 만들지 않고 09번에 짧은 안내로만 두었습니다.</p>
+  <div class="grid">
+    <a class="card" href="screens/09-food-supplement.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/09-food-supplement.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">16</span><div class="title">음식·건기식 (치료별 라우터)</div><div class="subtitle">개편 ★ 항암 / 호르몬 / 공통 + 근거 없는 통념</div></div></a>
+    <a class="card" href="screens/60-food-nausea.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/60-food-nausea.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new">식사카드</span><div class="title">메스꺼울 때</div><div class="subtitle">담백·차가운 음식 · 5~6회 나눠서</div></div></a>
+    <a class="card" href="screens/61-food-appetite.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/61-food-appetite.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new">식사카드</span><div class="title">입맛이 없을 때</div><div class="subtitle">죽·유제품 · 가족 안내 포함</div></div></a>
+    <a class="card" href="screens/62-food-mucositis.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/62-food-mucositis.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new">식사카드</span><div class="title">입안이 헐었을 때</div><div class="subtitle">부드럽게·빨대 · 신 것 피하기</div></div></a>
+    <a class="card" href="screens/63-food-diarrhea.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/63-food-diarrhea.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new">식사카드</span><div class="title">설사를 할 때</div><div class="subtitle">바나나·흰죽 · 유제품 쉬어가기</div></div></a>
+    <a class="card" href="screens/64-food-constipation.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/64-food-constipation.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new">식사카드</span><div class="title">변비가 있을 때</div><div class="subtitle">물 먼저 · 섬유질 · 진통제 주의</div></div></a>
+    <a class="card" href="screens/65-food-taste.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/65-food-taste.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new">식사카드</span><div class="title">맛이 이상할 때</div><div class="subtitle">고기→계란·두부 · 플라스틱 수저</div></div></a>
+    <a class="card" href="screens/68-food-weight.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/68-food-weight.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new">식사카드 ★</span><div class="title">살이 쪄서 걱정될 때</div><div class="subtitle">유방암 특유 — 근육 지키기</div></div></a>
+    <a class="card" href="screens/67-food-bone.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/67-food-bone.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new">식사카드</span><div class="title">뼈 건강 챙기기</div><div class="subtitle">칼슘 800~1,000mg · 한국 급원 식품 · 섭취 실태</div></div></a>
+    <a class="card" href="screens/66-food-immune.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/66-food-immune.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new">식사카드</span><div class="title">면역이 약한 시기</div><div class="subtitle">저균식 권고 안 함 · 씻기·익히기·보관 온도</div></div></a>
+    <a class="card" href="screens/94-food-soy.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/94-food-soy.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new">식사카드 ★★</span><div class="title">콩, 먹어도 될까요</div><div class="subtitle">유방암 특이 — 콩 ‘음식’ vs 농축 ‘보충제’ / 근거 중등도</div></div></a>
+    <a class="card" href="screens/95-food-alcohol.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/95-food-alcohol.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new">식사카드 ★</span><div class="title">술, 어떻게 할까요</div><div class="subtitle">유방암 특이 — 한국 술 1잔 환산 · 회식 대처 / 근거 중등도~약함</div></div></a>
+    <a class="card" href="screens/69-supplement-check.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/69-supplement-check.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"> ★</span><div class="title">이거 먹어도 되나요?</div><div class="subtitle">건기식 → 진료 질문 생성기</div></div></a>
+    <a class="card" href="screens/71-my-drug-cautions.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/71-my-drug-cautions.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"></span><div class="title">내 약 주의사항</div><div class="subtitle">확인된 것 + 공백까지 함께 표시</div></div></a>
+    <a class="card" href="screens/72-no-info.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/72-no-info.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"> ★★</span><div class="title">정보를 찾지 못했어요</div><div class="subtitle">"없음 ≠ 안전" — 핵심 안전장치</div></div></a>
+  </div>
+
+  <!-- ⑤ 진료 준비 -->
+  <div class="section-header" style="margin-top:42px;"><span class="step-badge">⑤</span><h2>진료 준비</h2><span class="tag">질문 생성 · 공유</span></div>
+  <p class="section-desc"><span class="flow-hint">홈 → 진료 준비</span> 최근 증상으로 진료 때 여쭤볼 질문을 만들고, 요약 메모로 저장·공유해요. (OWise 패턴)</p>
+  <div class="grid">
+    <a class="card" href="screens/10-consult-questions.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/10-consult-questions.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">17</span><div class="title">진료 준비 · 질문 생성</div><div class="subtitle">증상→진료 질문</div></div></a>
+    <a class="card" href="screens/77-visit-report.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/77-visit-report.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"> ★</span><div class="title">진료 전 리포트 (풀형)</div><div class="subtitle">증상추이 + 복약순응도 + 질문</div></div></a>
+    <a class="card" href="screens/28-note-archive.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/28-note-archive.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"></span><div class="title">진료 메모 보관함</div><div class="subtitle">저장한 메모 다시 열기</div></div></a>
+    <a class="card" href="screens/27-share.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/27-share.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">18</span><div class="title">진료 준비 메모 · 공유</div><div class="subtitle">요약 카드 · 카카오·PDF</div></div></a>
+  </div>
+
+  <!-- 복약 관리 -->
+  <div class="section-header" style="margin-top:42px;"><span class="step-badge">💊</span><h2>복약 관리</h2><span class="tag">리텐션 핵심</span></div>
+  <p class="section-desc"><span class="flow-hint">홈 → 오늘의 복약</span> 호르몬치료는 5~10년 복용인데 28~73%가 중도 중단하고, <b>최대 원인이 관절통</b>입니다. 단순 알람이 아니라 <b>“못 드신 이유 → 부작용 카드 → 진료 질문”</b> 루프로 설계했습니다.<br>
+  <b>약 → 부작용 안내(70·74·75)</b>는 등록한 약을 <b>성분이 아니라 치료 분류 단위</b>로 해석해 22종 부작용 카드로 연결합니다. 화면 문구는 “타목시펜의 부작용”이 아니라 <b>“호르몬치료를 받는 동안”</b>으로 프레이밍하고, <b>중단·용량 변경을 앱이 안내하지 않는다는 금지 가드</b>를 세 화면에 공통 삽입했습니다. 유방암 약이 아닌 약은 <b>초록 체크 없이 회색 ⚪</b>로 “확인되지 않음”을 표시합니다.</p>
+  <div class="grid">
+    <a class="card" href="screens/70-med-effects.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/70-med-effects.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"> ★★</span><div class="title">내 약과 부작용 (허브)</div><div class="subtitle">약별·증상별 · 겹침 처리 · 미확정 약까지</div></div></a>
+    <a class="card" href="screens/74-med-effect-detail.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/74-med-effect-detail.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"> ★★</span><div class="title">약 하나 · 부작용 안내</div><div class="subtitle">핵심 — 자주/가끔/드물게 3단 + 병용 경고</div></div></a>
+    <a class="card" href="screens/75-med-effect-none.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/75-med-effect-none.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"> ★★</span><div class="title">안내를 준비하지 못한 약</div><div class="subtitle">“카드 없음 ≠ 안전” — 회색 ⚪ 원칙</div></div></a>
+    <a class="card" href="screens/55-med-today.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/55-med-today.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"> ★</span><div class="title">오늘의 복약</div><div class="subtitle">원탭 체크 · 주간 순응도 · 부작용 안내 진입</div></div></a>
+    <a class="card" href="screens/57-med-missed.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/57-med-missed.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"> ★★</span><div class="title">못 드신 이유</div><div class="subtitle">차별점 — 부작용·진료질문 연결</div></div></a>
+    <a class="card" href="screens/56-med-schedule.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/56-med-schedule.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"></span><div class="title">복약 시간 설정</div><div class="subtitle">타임피커 · 알림 토글</div></div></a>
+    <a class="card" href="screens/58-med-manual.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/58-med-manual.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"></span><div class="title">약 직접 입력</div><div class="subtitle">자동완성 · 모든 약 대상</div></div></a>
+    <a class="card" href="screens/59-med-scan-fail.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/59-med-scan-fail.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"></span><div class="title">인식 실패 · 로딩</div><div class="subtitle">감열지 대응 안내</div></div></a>
+    <a class="card" href="screens/73-cycle-setup.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/73-cycle-setup.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"> ★</span><div class="title">치료 일정 (사이클 D-day)</div><div class="subtitle">AI에 "치료 며칠째" 컨텍스트 제공</div></div></a>
+  </div>
+
+  <!-- ⑥ 증상 기록 -->
+  <div class="section-header" style="margin-top:42px;"><span class="step-badge">⑥</span><h2>증상 기록</h2><span class="tag">추이 · 자기 인식</span></div>
+  <p class="section-desc"><span class="flow-hint">홈 → 증상 기록 (또는 오늘의 체크인)</span> 오늘 증상·기분을 남기고 7일 추이를 봐요. (OWise·Outcomes4Me 패턴)</p>
+  <div class="grid">
+    <a class="card" href="screens/16-checkin.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/16-checkin.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">19</span><div class="title">증상 기록 · 추이</div><div class="subtitle">오늘 기록 · 7일 추이</div></div></a>
+    <a class="card" href="screens/98-checkin-month.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/98-checkin-month.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new">NEW</span><div class="title">한달 기록</div><div class="subtitle">달력 보기 · 주간에서 진입</div></div></a>
+  </div>
+
+  <!-- 알림·검색 -->
+  <div class="section-header" style="margin-top:42px;"><h2>🔔 알림 · 검색</h2><span class="tag">홈 상단 🔔·🔎</span></div>
+  <p class="section-desc"><span class="flow-hint">홈 → 🔔 / 🔎</span> 알림 목록과 통합 검색.</p>
+  <div class="grid">
+    <a class="card" href="screens/20-notifications.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/20-notifications.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">21</span><div class="title">알림 목록</div><div class="subtitle">체크·기록·가이드 소식</div></div></a>
+    <a class="card" href="screens/22-search.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/22-search.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">22</span><div class="title">검색 결과</div><div class="subtitle">정보·가이드·대화 통합</div></div></a>
+  </div>
+
+  <!-- 설정 -->
+  <div class="section-header" style="margin-top:42px;"><h2>⚙️ 내 정보 · 설정</h2><span class="tag">하단 탭 ‘내 정보’</span></div>
+  <p class="section-desc"><span class="flow-hint">홈 → 내 정보</span> 치료·진료 정보, 알림, 개인정보·데이터, 약관, 도움말까지.</p>
+  <div class="grid">
+    <a class="card" href="screens/13-settings.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/13-settings.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">23</span><div class="title">내 정보 · 설정</div><div class="subtitle">허브 화면</div></div></a>
+    <a class="card" href="screens/23-notif-settings.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/23-notif-settings.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">24</span><div class="title">알림 설정</div><div class="subtitle">토글 · 시간</div></div></a>
+    <a class="card" href="screens/24-privacy-data.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/24-privacy-data.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">25</span><div class="title">개인정보·데이터</div><div class="subtitle">보기·고치기·지우기 요청 안내</div></div></a>
+    <a class="card" href="screens/25-terms.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/25-terms.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">26</span><div class="title">약관 · 동의 내용</div><div class="subtitle">탭 6개 · 수집 항목 표</div></div></a>
+    <a class="card" href="screens/26-help.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/26-help.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">27</span><div class="title">도움말</div><div class="subtitle">자주 묻는 질문</div></div></a>
+    <a class="card" href="screens/12-sources.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/12-sources.html" loading="lazy"></iframe></div></div><div class="info"><span class="num">28</span><div class="title">이 앱이 쓰는 자료</div><div class="subtitle">출처·이용조건 일괄 고지 · 근거 191곳 집계</div></div></a>
+    <a class="card" href="screens/84-care-contacts.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/84-care-contacts.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"> ★★</span><div class="title">내 병원 연락처</div><div class="subtitle">Red Flag에서 원탭 발신 (안전 필수)</div></div></a>
+    <a class="card" href="screens/85-nearby-clinic.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/85-nearby-clinic.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"> ★★</span><div class="title">근처 병원 찾기</div><div class="subtitle">담당 병원 우선 + 진료과별 목록 · 금지 증상 상태 포함</div></div></a>
+    <a class="card" href="screens/82-account-exit.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/82-account-exit.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"> ★★</span><div class="title">계정 관리</div><div class="subtitle">로그아웃</div></div></a>
+    <a class="card" href="screens/81-account-recovery.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/81-account-recovery.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"></span><div class="title">비밀번호 재설정</div><div class="subtitle">이메일 링크</div></div></a>
+    <a class="card" href="screens/87-error-retry.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/87-error-retry.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"></span><div class="title">오류 · 재시도</div><div class="subtitle">응답 실패 · 오프라인 · 저장 실패</div></div></a>
+    <a class="card" href="screens/91-nearby-gate.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/91-nearby-gate.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"> ★★</span><div class="title">어디로 가야 할까요</div><div class="subtitle">담당 병원 우선 판정 + 진료과 안내</div></div></a>
+    <a class="card" href="screens/92-nearby-list.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/92-nearby-list.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"> ★★</span><div class="title">근처 병원 목록</div><div class="subtitle">심평원 공공데이터 · 거리순 3곳</div></div></a>
+    <a class="card" href="screens/93-nearby-fallback.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/93-nearby-fallback.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"></span><div class="title">근처 병원 예외 상태</div><div class="subtitle">권한거부·GPS실패·0건·통신오류</div></div></a>
+    <a class="card" href="screens/88-empty-states.html" target="_blank"><div class="thumb-wrap"><div class="thumb"><iframe src="screens/88-empty-states.html" loading="lazy"></iframe></div></div><div class="info"><span class="num new"></span><div class="title">빈 상태 (첫날)</div><div class="subtitle">참여자 전원이 1일차에 보는 화면</div></div></a>
+  </div>
+
+</div>
+
+<footer>
+  <div>🎀 토닥 · 유방암 부작용 케어 앱 — UI 시안 v1.0 · 2026-07-29 · 총 50개 화면 (부작용 상세 22종 포함)</div>
+  <div class="flow">온보딩(1~8) → 홈(9) → ①대화상담·응급(10~13) → ②부작용 정보·상세(14 + 상세 22종) → ③가이드(15) → ④음식(16) → ⑤진료준비(17·18) → ⑥증상기록(19) → 마음건강(20) → 알림·검색(21·22) → 설정(23~27)</div>
+  <div class="flow" style="opacity:.7; margin-top:6px;">※ 실제 환자용 케어 앱 화면 예시입니다. 토닥은 의료기기가 아니며, 진단·처방을 제공하지 않는 건강정보 참고용 앱입니다.</div>
+</footer>
+
+</body>
+</html>

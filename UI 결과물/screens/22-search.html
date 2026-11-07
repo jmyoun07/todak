@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 지난 대화 검색</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar" style="gap:10px;">
+    <a class="back" href="21-chat-history.html">‹</a>
+    <div class="grow" style="display:flex; align-items:center; gap:8px; background:var(--surface-2); border-radius:var(--r-pill); padding:9px 15px;">
+      <span style="font-size:15px;">🔎</span>
+      <span class="grow" style="font-size:14.5px;">저림</span>
+      <span style="color:var(--outline-strong); font-size:15px;">✕</span>
+    </div>
+  </div>
+
+  <div class="content content--tight">
+    <!-- ↓ 시안 예시 덩이. 갤러리에는 그대로 보이고 앱·웹앱에서는 통째로 숨는다(data-demo-box).
+         배선이 이 자리를 실제 기록으로 다시 그리기 전까지 남의 기록이 비치지 않게 한다 -->
+    <div data-demo-box>
+    <!-- 지난 대화 검색 (예시) — 앱에서는 회원님 대화에서 찾은 결과로 바뀐다 -->
+    <div class="section-label">검색 결과 2</div>
+    <a class="listitem" href="07-chat.html">
+      <span class="li-ic">🙋</span>
+      <div class="li-body"><div class="li-title">손발이 저리고 찌릿한데…</div><div class="li-sub">내 질문 · 7월 28일 (화)</div></div>
+      <span class="li-chev">›</span>
+    </a>
+    <a class="listitem" href="07-chat.html">
+      <span class="li-ic">🎀</span>
+      <div class="li-body"><div class="li-title">…손발 저림은 항암치료 중에 흔히 생겨요…</div><div class="li-sub">토닥 답변 · 7월 28일 (화)</div></div>
+      <span class="li-chev">›</span>
+    </a>
+    <a class="listitem" href="07-chat.html" style="background:var(--primary-tint); border-color:var(--primary-light);">
+      <span class="li-ic">💬</span>
+      <div class="li-body"><div class="li-title">이 내용 새로 물어보기</div><div class="li-sub">상담으로 이동</div></div>
+      <span class="li-chev">›</span>
+    </a>
+    </div><!-- /시안 예시 -->
+  </div>
+</div>
+</body>
+</html>

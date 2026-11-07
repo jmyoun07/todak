@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 근처 병원 찾기</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  /* 병원 카드 — app.css 토큰만 사용 */
+  .hosp { background: var(--white); border: 1px solid var(--outline); border-radius: var(--r);
+          padding: 14px 15px; margin-bottom: 10px; box-shadow: var(--shadow-sm); }
+  .hosp-top { display: flex; align-items: flex-start; gap: 10px; }
+  .hosp-name { font-size: 16px; font-weight: 700; line-height: 1.35; }
+  .hosp-dist { flex: 0 0 auto; font-size: 13px; font-weight: 700; color: var(--primary-dark);
+               background: var(--primary-tint); border-radius: var(--r-pill); padding: 4px 10px; white-space: nowrap; }
+  .hosp-meta { margin-top: 9px; display: flex; flex-direction: column; gap: 5px;
+               font-size: 13px; font-size: clamp(13px, 3.3333cqw, 14.3px); color: var(--on-surface-variant); line-height: 1.6; }
+  .hosp-meta .k { display: inline-block; width: 46px; color: var(--outline-strong); font-weight: 700; }
+  .hosp-open { font-weight: 700; }
+  .hosp-open.on { color: var(--safe); }
+  .hosp-open.off { color: var(--on-surface-variant); }
+  /* 방향 지도의 점 번호와 짝이 되는 카드 번호 — 지도를 접어도 순서가 보입니다 */
+  .hosp-no { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+             min-width: 26px; height: 26px; padding: 0 5px; border-radius: var(--r-pill);
+             background: var(--primary-tint); color: var(--primary-dark); font-size: 13px; font-weight: 800; }
+  /* 상태 구분용 라벨 — 시안에서 두 가지 화면 상태를 함께 보여주기 위한 것 */
+  .state-bar { border-radius: var(--r); padding: 10px 13px; font-size: 13px; font-weight: 700; line-height: 1.55;
+               background: var(--surface-3); color: var(--on-surface-variant); }
+  /* 담당 병원 상자 (2026-09-29 · 정보 화면 디자인 시스템 v3 · 91 과 같은 모양) */
+  .sec--mine { --ic: var(--ic-hosp); }
+  .sec.card { background: transparent; border: 0; border-radius: 0; box-shadow: none; padding-top: 0; padding-bottom: 16px; }
+  .mine-box { padding: 12px 13px 13px; border-radius: 12px; background: var(--surface); border: 1px solid var(--outline); }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="34-detail-arthralgia.html">‹</a>
+    <div><div class="appbar-title">근처 병원 찾기</div><div class="appbar-sub">관절통</div></div>
+  </div>
+
+  <div class="content content--tight" style="padding-bottom:150px;">
+
+    <!-- ───────── 상태 A · 동네 병원에서 봐도 되는 증상 ───────── -->
+    <div class="state-bar">상태 ⓐ · 동네에서 봐도 되는 증상일 때</div>
+
+    <!-- 2026-09-29 정보 화면 디자인 시스템 v3 — 안내 띠·카드가 이어 붙어 어디서 갈리는지 보이지 않아
+         제목 걸친 상자로 나눴다(담당 병원 → 이 증상은 → 찾아갈 곳 → 위치). 글의 사실은 그대로. -->
+    <!-- ① 담당 병원이 먼저 — 어떤 증상이든 이 상자가 화면 맨 위에 옵니다 (91 과 같은 상자) -->
+    <section class="sec sec--mine card" id="s-mine">
+      <h2 class="sec-t section-label">담당 병원이 먼저예요</h2>
+      <p class="sec-p">지금 쓰는 약과 혈액 수치를 아는 곳은<br><b>담당 병원</b>뿐이에요.<br>동네 병원은 그 기록을 볼 수 없어서<br>약을 줄이거나 멈추는 판단을<br>대신 할 수 없어요.</p>
+      <div class="mine-box">
+        <div class="tiny strong" style="color:var(--primary-dark);">내 담당 병원</div>
+        <div class="strong" style="font-size:16px; margin-top:4px;">○○대학교병원 · 종양내과</div>
+        <div class="small muted">외래 02-0000-0000 · 응급실 02-0000-0000</div>
+        <div class="row gap-8" style="margin-top:12px;">
+          <a class="btn btn-outline grow btn-sm" href="84-care-contacts.html" style="border-color:var(--danger); color:var(--danger);">📞 담당 병원에 전화</a>
+          <a class="btn btn-outline btn-sm" href="84-care-contacts.html">번호 관리</a>
+        </div>
+        <p class="tiny muted" style="margin-top:9px; line-height:1.7;">번호를 아직 안 넣으셨다면<br><a href="84-care-contacts.html" style="color:var(--primary-dark); font-weight:700;">내 병원 연락처</a>에서 먼저 저장해 주세요.</p>
+      </div>
+    </section>
+
+    <!-- ② 이 증상은 어떤가요 — 급한 쪽(담당 병원)부터. 단계 제목에는 section-label 을 붙이지 않는다(STYLE.md 2-1) -->
+    <section class="sec sec--group" id="s-call">
+      <h2 class="sec-t section-label">관절통, 어디로 가야 할까요?</h2>
+      <div class="sec sec--lv2" id="s-mine-go">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟠</span> <span>담당 병원으로 가세요</span></div>
+        <ul class="dots">
+          <li><b>한 곳만 콕 집어</b> 아프고<br><b>밤에 더 심해지는</b> 뼈 통증</li>
+          <li>넘어지지 않았는데 생긴 <span class="nw">등·허리 통증</span></li>
+          <li>열이 함께 날 때</li>
+        </ul>
+      </div>
+      <div class="sec sec--lv3" id="s-local">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟢</span> <span>가벼우면 동네 병원도 괜찮아요</span></div>
+        <div class="it">
+          <div class="it-t"><span>손가락·손목·무릎이<br>여러 군데 같이 뻣뻣할 때</span></div>
+          <div class="it-b">아침에 심했다가 움직이면 풀리는 정도예요.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ③ 동네에서 찾아갈 곳 -->
+    <section class="sec sec--good" id="s-where">
+      <h2 class="sec-t section-label">동네에서 찾아갈 곳</h2>
+      <div class="row wrap" style="gap:8px;">
+        <span class="pill pill--brand">🦴 정형외과</span>
+        <span class="pill pill--brand">🧑‍⚕️ 재활의학과</span>
+      </div>
+      <div class="it">
+        <div class="it-t">접수하실 때</div>
+        <div class="it-do"><span>“항암치료 중입니다”를 먼저 말씀하세요.</span></div>
+        <div class="it-b">지금 드시는 약 목록도 보여 주시면 좋아요.<br><a href="71-my-drug-cautions.html" style="color:var(--primary-dark); font-weight:700;">내 약 주의사항</a>에서 바로 보여 드릴 수 있어요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">수술하신 쪽 팔</div>
+        <div class="it-do"><span>채혈·혈압·주사를 하지 말아 달라고<br>미리 말씀하세요.</span></div>
+      </div>
+    </section>
+
+    <!-- 위치 사용 고지 — 목록 바로 위 (이 시안은 앱이 직접 그리는 방향 지도 상태라 위치가 휴대폰 밖으로 나가지 않는다) -->
+    <section class="sec sec--info" id="s-loc">
+      <h2 class="sec-t section-label">위치는 이렇게 써요</h2>
+      <ul class="dots">
+        <li><b>지금 이 순간에만</b> 한 번 확인해요.</li>
+        <li>위치값(위도·경도)은<br><b>휴대폰 밖으로 보내지 않아요.</b><span class="dots-b">어느 시·도인지 고르는 것도 휴대폰 안에서 해요.</span></li>
+        <li>앱을 쓰지 않을 때는 <b>위치를 보지 않아요.</b></li>
+      </ul>
+    </section>
+
+    <!-- ④ 다른 지역에서 찾기 — 진료과 고르기 바로 아래(목록 위)입니다 -->
+    <a class="btn btn-ghost btn-block btn-sm" href="93-nearby-fallback.html" style="margin:12px 0 4px;">🗺 다른 지역에서 찾기</a>
+
+    <!-- ⑤ 근처 병원 목록 — 한 번에 10곳까지만, 나머지는 '더 보기' -->
+    <div class="row" style="margin:14px 2px 8px; align-items:center;">
+      <div class="tiny muted grow">내 위치에서 가까운 순</div>
+      <span class="tiny muted">자료 기준 2026-08-20</span>
+    </div>
+
+    <!-- ⑥ 방향 지도 — 92(근처 병원 목록)와 같은 모양입니다. 상태 줄 아래, 목록 위.
+         지도 그림(타일)을 받아오지 않고 앱이 직접 그려요 — 내 위치가 지도 회사 서버로 나가지 않습니다.
+         위치를 쓸 수 없을 때(동의 안 함·권한 거부·지역으로 찾기)는 이 자리를 아예 그리지 않아요. -->
+    <div id="nb-demo-map">
+      <div class="card" style="padding-top:12px; padding-bottom:12px;">
+        <div class="row" style="align-items:center; gap:8px;">
+          <div class="small strong grow" style="color:var(--primary-dark);">내 위치에서 보는 방향</div>
+          <a class="btn btn-outline" href="javascript:void(0)" style="flex:0 0 auto;" aria-expanded="true">지도 접기</a>
+        </div>
+        <div style="margin-top:10px;">
+          <svg viewBox="0 0 320 230" role="img"
+               aria-label="내 위치에서 가까운 병원 3곳의 방향과 거리를 그린 지도예요. 가운데가 내 위치, 위쪽이 북쪽이고, 동그라미는 안쪽부터 500m · 1km · 3km예요."
+               style="display:block; width:100%; height:auto;">
+            <circle cx="160" cy="115" r="90" style="fill:var(--primary-tint);stroke:var(--outline-strong);stroke-width:1.4"></circle>
+            <circle cx="160" cy="115" r="52.0" style="fill:none;stroke:var(--outline);stroke-width:1.2;stroke-dasharray:4 4"></circle>
+            <circle cx="160" cy="115" r="36.7" style="fill:none;stroke:var(--outline);stroke-width:1.2;stroke-dasharray:4 4"></circle>
+            <line x1="160" y1="25" x2="160" y2="205" style="stroke:var(--outline);stroke-width:1"></line>
+            <line x1="70" y1="115" x2="250" y2="115" style="stroke:var(--outline);stroke-width:1"></line>
+            <text x="160" y="16" text-anchor="middle" style="font-size:13px;font-weight:800;fill:var(--primary-dark)">북</text>
+            <text x="160" y="225" text-anchor="middle" style="font-size:13px;font-weight:800;fill:var(--primary-dark)">남</text>
+            <text x="314" y="120" text-anchor="end" style="font-size:13px;font-weight:800;fill:var(--primary-dark)">동</text>
+            <text x="6" y="120" text-anchor="start" style="font-size:13px;font-weight:800;fill:var(--primary-dark)">서</text>
+            <circle cx="160" cy="115" r="8" style="fill:var(--white)"></circle>
+            <circle cx="160" cy="115" r="5.5" style="fill:var(--primary-dark)"></circle>
+            <!-- 점 자리는 앱(nearby.js)이 실제로 그리는 값 그대로입니다 — 겹칠 점이 없으면 적힌 방위(북서·북동·남동)에 정확히 찍힙니다 -->
+            <g><circle cx="136.2" cy="91.2" r="10" style="fill:var(--primary);stroke:var(--white);stroke-width:2"></circle>
+               <text x="136.2" y="95.9" text-anchor="middle" style="font-size:13px;font-weight:800;fill:var(--white)">1</text>
+               <title>1번 ○○정형외과의원 · 북서쪽 420m</title></g>
+            <g><circle cx="201.9" cy="73.1" r="10" style="fill:var(--primary);stroke:var(--white);stroke-width:2"></circle>
+               <text x="201.9" y="77.8" text-anchor="middle" style="font-size:13px;font-weight:800;fill:var(--white)">2</text>
+               <title>2번 △△재활의학과의원 · 북동쪽 1.3km</title></g>
+            <g><circle cx="213.2" cy="168.2" r="10" style="fill:var(--primary);stroke:var(--white);stroke-width:2"></circle>
+               <text x="213.2" y="172.9" text-anchor="middle" style="font-size:13px;font-weight:800;fill:var(--white)">3</text>
+               <title>3번 □□정형외과의원 · 남동쪽 2.1km</title></g>
+            <!-- 거리 눈금은 점보다 나중에 그려 위로 올립니다(글자 뒤 흰 테두리 paint-order).
+                 바깥 눈금(3km)은 테두리 선 위 빈 대각선 자리에 — 가로로 두면 '동'·'서' 글자와 붙어 '동쪽 3km'로 읽힙니다 -->
+            <text x="196.7" y="109" text-anchor="middle" style="font-size:13px;font-weight:700;fill:var(--on-surface-variant);paint-order:stroke;stroke:var(--white);stroke-width:3.5;stroke-linejoin:round">500m</text>
+            <text x="108.0" y="131" text-anchor="middle" style="font-size:13px;font-weight:700;fill:var(--on-surface-variant);paint-order:stroke;stroke:var(--white);stroke-width:3.5;stroke-linejoin:round">1km</text>
+            <text x="96.4" y="182.6" text-anchor="middle" style="font-size:13px;font-weight:700;fill:var(--on-surface-variant);paint-order:stroke;stroke:var(--white);stroke-width:3.5;stroke-linejoin:round">3km</text>
+          </svg>
+          <p class="small muted" style="margin-top:8px; line-height:1.7;">동그라미는 안쪽부터 <b>500m · 1km · 3km</b>예요.<br>가운데 진한 점이 <b>내 위치</b>, 위쪽이 <b>북쪽</b>이에요.<br>번호를 누르시면 아래 그 병원 칸으로 내려가요.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hosp">
+      <div class="hosp-top">
+        <span class="hosp-no" aria-hidden="true">1</span>
+        <div class="grow">
+          <div class="hosp-name">○○정형외과의원</div>
+          <div class="tiny muted" style="margin-top:3px;">의원 · 정형외과, 재활의학과</div>
+        </div>
+        <span class="hosp-dist">북서쪽 420m</span>
+      </div>
+      <div class="hosp-meta">
+        <div><span class="k">진료</span><span class="hosp-open on">지금 진료 중</span> · 평일 09:00~18:30 (점심 13:00~14:00)</div>
+        <div><span class="k">주소</span>서울 ○○구 ○○로 21, 2층</div>
+        <div><span class="k">전화</span>02-000-0000</div>
+      </div>
+      <div class="row gap-8" style="margin-top:12px;">
+        <a class="btn btn-primary grow btn-sm" href="javascript:void(0)">📞 전화</a>
+        <a class="btn btn-outline grow btn-sm" href="javascript:void(0)">🗺 길찾기</a>
+        <a class="btn btn-ghost btn-sm" href="javascript:void(0)">📋 주소복사</a>
+      </div>
+    </div>
+
+    <div class="hosp">
+      <div class="hosp-top">
+        <span class="hosp-no" aria-hidden="true">2</span>
+        <div class="grow">
+          <div class="hosp-name">△△재활의학과의원</div>
+          <div class="tiny muted" style="margin-top:3px;">의원 · 재활의학과</div>
+        </div>
+        <span class="hosp-dist">북동쪽 1.3km</span>
+      </div>
+      <div class="hosp-meta">
+        <div><span class="k">진료</span><span class="hosp-open off">진료 시간 아님</span> · 평일 09:30~18:00 · 토 09:30~13:00 · 일요일 휴진</div>
+        <div><span class="k">주소</span>서울 ○○구 △△대로 88</div>
+        <div><span class="k">전화</span>02-000-0000</div>
+      </div>
+      <div class="row gap-8" style="margin-top:12px;">
+        <a class="btn btn-primary grow btn-sm" href="javascript:void(0)">📞 전화</a>
+        <a class="btn btn-outline grow btn-sm" href="javascript:void(0)">🗺 길찾기</a>
+        <a class="btn btn-ghost btn-sm" href="javascript:void(0)">📋 주소복사</a>
+      </div>
+    </div>
+
+    <!-- 진료시간 정보가 비어 있는 기관 -->
+    <div class="hosp">
+      <div class="hosp-top">
+        <span class="hosp-no" aria-hidden="true">3</span>
+        <div class="grow">
+          <div class="hosp-name">□□정형외과의원</div>
+          <div class="tiny muted" style="margin-top:3px;">의원 · 정형외과</div>
+        </div>
+        <span class="hosp-dist">남동쪽 2.1km</span>
+      </div>
+      <div class="hosp-meta">
+        <div><span class="k">진료</span><span class="hosp-open off">시간 정보 없음 — 전화로 확인해 주세요</span></div>
+        <div><span class="k">주소</span>서울 ○○구 □□길 5</div>
+        <div><span class="k">전화</span>02-000-0000</div>
+      </div>
+      <div class="row gap-8" style="margin-top:12px;">
+        <a class="btn btn-primary grow btn-sm" href="javascript:void(0)">📞 전화</a>
+        <a class="btn btn-outline grow btn-sm" href="javascript:void(0)">🗺 길찾기</a>
+        <a class="btn btn-ghost btn-sm" href="javascript:void(0)">📋 주소복사</a>
+      </div>
+    </div>
+
+    <a class="btn btn-outline btn-block btn-sm" href="92-nearby-list.html">10곳 더 보기</a>
+
+    <section class="sec sec--info" id="s-before">
+      <h2 class="sec-t section-label">가시기 전에 꼭</h2>
+      <div class="it">
+        <div class="it-t">전화로 먼저 물어보세요</div>
+        <div class="it-b"><b>“항암치료 중인데 ○○ 증상으로<br>진료가 될까요?”</b></div>
+        <div class="it-b">헛걸음을 줄일 수 있어요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">피가 나는 시술은 먼저 상의하세요</div>
+        <div class="it-b">발치·스케일링·조직검사는<br>혈액 수치를 봐야 해요.</div>
+        <div class="it-do"><span>하시기 전에 담당 의사와<br>먼저 상의하세요.</span></div>
+      </div>
+    </section>
+
+    <p class="disclaimer">진료시간·휴진일은 병원이 신고한 값이라<br>실제와 다를 수 있어요.<br>거리는 직선거리라 실제 이동 거리와 달라요.<br>토닥은 특정 병원을 추천하지 않아요.</p>
+
+    <!-- ───────── 상태 B · 동네 병원으로 보내면 안 되는 증상 ───────── -->
+    <div class="state-bar" style="margin-top:26px;">상태 ⓑ · 담당 병원에만 가셔야 하는 증상일 때<br>(예: 열이 날 때)</div>
+
+    <section class="sec sec--group" id="s-fever">
+      <h2 class="sec-t section-label">이 증상은 담당 병원으로 가세요</h2>
+      <p class="sec-sub">근처 병원 목록을 보여 드리지 않아요.</p>
+      <div class="sec sec--lv2" id="s-fever-call">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟠</span> <span>바로 담당 병원에 전화하세요</span></div>
+        <div class="it">
+          <div class="it-t">열이 날 때</div>
+          <ul class="dots">
+            <li>귀 <b>38.0도</b> 이상 · 겨드랑이 <b>37.5도</b> 이상</li>
+            <li>입 <b>38.3도</b> 이상</li>
+            <li>또는 <b>입 38.0도</b>가 1시간 넘게 이어질 때</li>
+          </ul>
+          <div class="it-b">백혈구가 낮은 시기와 겹치면<br>몇 시간 안에 위험해질 수 있어요.</div>
+          <div class="it-b">항암 일정과 이전 혈액 수치를 아는 곳은<br><b>담당 병원</b>뿐이에요.</div>
+        </div>
+        <div class="it">
+          <div class="it-t">해열제를 먼저 드시지 마세요</div>
+          <div class="it-b">열이 가려지면 상황을 놓쳐요.</div>
+        </div>
+        <div class="mine-box">
+          <div class="tiny strong" style="color:var(--danger);">지금 바로 여기로</div>
+          <div class="strong" style="font-size:16px; margin-top:4px;">○○대학교병원 · 종양내과 / 응급실</div>
+          <div class="small muted">외래 02-0000-0000 · 응급실 02-0000-0000</div>
+          <a class="btn btn-primary btn-block" href="84-care-contacts.html" style="margin-top:12px;">📞 담당 병원에 전화하기</a>
+          <a class="btn btn-outline btn-block btn-sm" href="tel:119" style="margin-top:8px; border-color:var(--danger); color:var(--danger);">🚑 119</a>
+        </div>
+        <div class="it">
+          <div class="it-t">전화하시면 이 순서로 말씀하세요</div>
+        </div>
+        <ol class="nsteps">
+          <li><div class="it-t">마지막 항암 날짜</div></li>
+          <li><div class="it-t">지금 체온</div></li>
+          <li><div class="it-t">언제부터인지</div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="sec sec--info" id="s-nolist">
+      <h2 class="sec-t section-label">근처 병원 찾기가 나오지 않는 증상</h2>
+      <ul class="dots">
+        <li><b>열이 날 때</b> (골수억제)<span class="dots-b">호중구감소성 발열은 담당 병원이 먼저예요.</span></li>
+        <li><b>숨참·다리 부종·두근거림</b><br>(심장기능저하)<span class="dots-b">담당 병원 순환기 협진이 필요해요.</span></li>
+        <li><b>항암 중 설사</b><span class="dots-b">동네에서 지사제를 먼저 받으면<br>위험할 수 있어요.</span></li>
+        <li><b>손발 저림·단추가 안 잠길 때</b><br>(말초신경병증)<span class="dots-b">항암제 용량 조절 판단이 필요해요.</span></li>
+        <li><b>얼굴 화끈거림</b> (안면홍조)<span class="dots-b">동네에서 여성호르몬제를 받으시면 안 돼요.</span></li>
+        <li><b>방사선 치료 부위 피부 반응</b><span class="dots-b">동네 피부과가 아니라<br>치료받으신 병원의 방사선종양학과예요.</span></li>
+      </ul>
+      <a class="btn btn-outline btn-block btn-sm" href="84-care-contacts.html">📞 내 병원 연락처 열기</a>
+    </section>
+
+    <div class="tiny muted rf-src">근거: 건강보험심사평가원 · 대한종양간호학회 · 대한감염학회 · 의료법 시행규칙 · 국민건강보험 요양급여 규칙 — 자세한 출처는 <b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요</div>
+    <p class="disclaimer">토닥은 진단하거나 응급실 자리를 확인해 드리지 않아요.<br>어디로 갈지 망설여지실 땐<br><b>담당 병원에 먼저 전화</b>해 주세요.</p>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-primary btn-block" href="84-care-contacts.html">📞 담당 병원에 먼저 전화하기</a>
+  </div>
+
+  <!-- 전화 걸기 확인 — 실수로 눌러도 바로 걸리지 않게 -->
+  <div class="callpop" id="callpop" role="dialog" aria-modal="true" aria-label="전화 걸기 확인" hidden>
+    <div class="callpop-card">
+      <div style="font-size:34px;">📞</div>
+      <div class="strong" style="font-size:17px;" id="callpop-title">전화를 걸까요?</div>
+      <a class="btn btn-primary btn-block btn-lg" id="callpop-go" href="tel:119" data-direct="1">📞 지금 전화 걸기</a>
+      <button class="btn btn-outline btn-block" id="callpop-no" type="button">닫기</button>
+    </div>
+  </div>
+</div>
+<script>(function(){
+var NAMES={"119":"119 구급대","109":"자살예방 상담전화 109","1577-0199":"정신건강 위기상담 1577-0199"};
+var pop=document.getElementById("callpop");if(!pop)return;
+var go=document.getElementById("callpop-go"),no=document.getElementById("callpop-no"),tt=document.getElementById("callpop-title");
+document.addEventListener("click",function(e){
+  var a=e.target&&e.target.closest?e.target.closest("a"):null;if(!a)return;
+  var h=a.getAttribute("href")||"";
+  if(h.indexOf("tel:")!==0||a.hasAttribute("data-direct"))return;
+  e.preventDefault();e.stopImmediatePropagation();e.stopPropagation();
+  var num=h.slice(4);
+  pop.__opener=a;
+  tt.textContent=(NAMES[num]||num)+"에 전화할까요?";
+  go.setAttribute("href","tel:"+num);
+  pop.hidden=false;no.focus();
+},true);
+function close(){pop.hidden=true;
+  if(pop.__opener&&pop.__opener.focus){pop.__opener.focus();}}
+no.addEventListener("click",close);
+go.addEventListener("click",function(){setTimeout(close,150);});
+pop.addEventListener("click",function(e){if(e.target===pop)close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!pop.hidden){e.stopPropagation();close();}},true);
+})()</script>
+</body>
+</html>

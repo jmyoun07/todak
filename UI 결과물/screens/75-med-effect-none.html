@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 약 정보</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="70-med-effects.html">‹</a>
+    <div><div class="appbar-title">약 정보</div><div class="appbar-sub" data-demo>엔테론정</div></div>
+  </div>
+
+  <!-- 2026-09-28 정보 화면 디자인 시스템 v3 (STYLE.md). 앱에서는 more2.js page75 가 .content 를 비우고 식약처 자료로 다시 그린다 —
+       아래는 갤러리 시안: ① 식약처 허가사항 보기(엔테론정 · 교수님 지적 셋에 대한 예) ② 유방암 치료약이 아닐 때(암로디핀 예).
+       맨 위 '스스로 줄이거나 끊지 마세요'(M-A)와 맨 아래 '불편이 생기면'(M-B)은 70·74 와 같은 글(예전에는 M-A 가 화면 가운데 있었다). -->
+  <div class="content content--tight content--jump" style="padding-bottom:150px;">
+
+    <nav class="sec sec--jump" aria-label="이 화면 바로 가기">
+      <div class="sec-t">바로 가기</div>
+      <div class="jump">
+        <a class="jump-b jump-b--info" href="#s-facts"><span>약 정보</span></a>
+        <a class="jump-b jump-b--info" href="#s-dose"><span>쓰는 방법</span></a>
+        <a class="jump-b jump-b--info" href="#s-noncancer"><span>다른 질환 약</span></a>
+        <a class="jump-b jump-b--info" href="#s-check"><span>겹치는 것 확인</span></a>
+        <a class="jump-b jump-b--info" href="#s-ask"><span>진료 때 질문</span></a>
+        <a class="jump-b jump-b--hosp" href="#med-guard-bottom"><span>불편이 생기면</span></a>
+      </div>
+    </nav>
+
+    <!-- ═══ 공통 M-A · med-guard-top [70·74·75 공통] — 약 바꾸기 경고(안전) ═══ -->
+    <section class="sec sec--never" id="med-guard-top">
+      <h2 class="sec-t section-label">약을 스스로 줄이거나 끊지 마세요</h2>
+      <p class="sec-p">스스로 끊으면 오히려 더 힘들어지는 약도 있어요.</p>
+      <p class="sec-p">얼마나, 언제까지, 멈출지 말지는<br><b>담당 의사</b>가 지금 상태를 보고 정해요.</p>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+         ① 약 정보 · 식약처 공공데이터를 그대로 (more2.js page75 가 채운다)
+         정식 이름 / 성분 / 만든 곳 / 보관법 / 효능효과 / 용법용량 / 이 약의 주의(DUR) / 허가사항 보기 / 고지
+         ══════════════════════════════════════════════════════════ -->
+    <section class="sec sec--info" id="s-facts">
+      <h2 class="sec-t section-label">약 정보</h2>
+      <div class="col gap-10">
+        <div class="col" style="gap:3px;"><div class="tiny muted">정식 이름</div><div class="small strong" style="line-height:1.6;">엔테론정50밀리그램(포도씨건조엑스)</div></div>
+        <div class="col" style="gap:3px;"><div class="tiny muted">성분</div><div class="small strong" style="line-height:1.6;">포도씨건조엑스</div></div>
+        <div class="col" style="gap:3px;"><div class="tiny muted">만든 곳</div><div class="small strong" style="line-height:1.6;">한림제약(주)</div></div>
+        <div class="col" style="gap:3px;"><div class="tiny muted">보관법</div><div class="small strong" style="line-height:1.6;">기밀용기, 실온보관(1~30℃)</div></div>
+      </div>
+    </section>
+
+    <!-- ══ 효능효과 ══ more2.js page75 가 /drugdoc 으로 받아 채운다.
+         아래 글은 2026-09-27 식약처에서 실제로 받아 온 엔테론정 허가사항 본문 그대로다. -->
+    <section class="sec sec--info" id="s-eff">
+      <h2 class="sec-t section-label">이 약은 이런 약이에요</h2>
+      <p class="sec-sub">식품의약품안전처 허가사항 · 효능효과</p>
+      <div class="it">
+        <div class="it-t">번호는 허가받은 쓰임(질환)이에요</div>
+        <div class="it-b">그 가운데 어떤 이유로 드시는지는<br>담당 의사나 약사에게 여쭤보세요.</div>
+      </div>
+      <div class="card card--flat" style="border:1px solid var(--outline);">
+        <div class="small" style="line-height:1.8; white-space:pre-wrap; word-break:keep-all;">1. 정맥림프 기능부전과 관련된 증상개선(하지둔중감, 통증, 하지불안증상)
+2. 유방암 치료로 인한 림프부종(특히, 피부긴장의 자각증상)의 보조요법제로 물리 치료 시 병용
+3. 제2형 당뇨병 환자의 황반부종을 동반하지 않은 중등도 이하의 비증식성 당뇨망막병증에 당뇨 원인요법과 병용하여 보조제로 투여 ☆</div>
+        <button type="button" class="btn btn-outline btn-sm" style="margin-top:10px; font-size:13.5px;">나머지도 보기</button>
+      </div>
+    </section>
+
+    <!-- ══ 용법용량 ══ -->
+    <section class="sec sec--info" id="s-dose">
+      <h2 class="sec-t section-label">쓰는 방법</h2>
+      <p class="sec-sub">식품의약품안전처 허가사항 · 용법용량</p>
+      <div class="it">
+        <div class="it-t">번호마다 쓰임(질환)이 달라요</div>
+        <div class="it-b">쓰는 방법이 여러 가지라는 뜻이 아니에요.<br>쓰임마다 용량이 따로 적혀 있어요.</div>
+        <div class="it-b">나에게 해당하는 번호는<br>담당 의사나 약사가 정해요.</div>
+      </div>
+      <div class="card card--flat" style="border:1px solid var(--outline);">
+        <div class="small" style="line-height:1.8; white-space:pre-wrap; word-break:keep-all;">1. 정맥림프 기능부전과 관련된 증상의 개선
+성인 : 포도씨건조엑스로서 1일 300 mg을 1일 2회 분할 투여한다.
+2. 유방암 치료로 인한 림프부종 : 이 약으로서 1일 300 mg, 1일 2회 분할 투여한다.
+3. 안과질환 ☆
+성인 : 이 약으로서 1일 3정(150 mg)을 2회에 나누어 복용(아침 2정, 저녁 1정)한다.
+☆ 국내임상시험결과 추가제출</div>
+      </div>
+      <div class="it">
+        <div class="it-t">허가사항에 적힌 일반적인 방법이에요</div>
+        <div class="it-do"><span>실제로 드시는 방법은<br>담당 의사나 약사가 알려 준 대로 하세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ── 다른 약에서는 이렇게 보여요 (교수님 지적 셋에 대한 답) ──
+         ① 한 허가사항에 제형이 둘일 때 · ② 어린이 용량이 함께 적혀 있을 때 · ③ 표로 적힌 토막 -->
+    <section class="sec sec--info" id="s-other">
+      <h2 class="sec-t section-label">다른 약에서는 이렇게 보여요</h2>
+      <div class="card">
+        <div class="strong" style="font-size:15px;">쓰는 방법 — 네오덱스안연고</div>
+        <p class="tiny muted" style="margin:4px 0 0; line-height:1.6;">식품의약품안전처 허가사항 · 용법용량</p>
+        <p class="small" style="margin-top:9px; line-height:1.7; color:#4A3C42;">허가사항 하나에 점안액·안연고 두 제형이 함께 적혀 있어요.<br>등록하신 <b>안연고 부분만</b> 보여 드려요.</p>
+        <div class="small" style="margin-top:9px; line-height:1.8; white-space:pre-wrap; word-break:keep-all;">1일 3-4회 결막낭내에 소량 도포하거나 취침시 점안액과 같이 사용한다.</div>
+        <button type="button" class="btn btn-outline btn-sm" style="margin-top:10px; font-size:13.5px;">다른 제형(점안액) 내용도 보기</button>
+      </div>
+      <div class="card">
+        <div class="strong" style="font-size:15px;">쓰는 방법 — 알파아세트아미노펜정500밀리그람</div>
+        <p class="tiny muted" style="margin:4px 0 0; line-height:1.6;">식품의약품안전처 허가사항 · 용법용량</p>
+        <p class="small" style="margin-top:9px; line-height:1.7; color:#4A3C42;">어린이 용량도 함께 적혀 있어요.<br><b>어른 부분만</b> 먼저 보여 드려요.<br>어린이 용량은 아래에 접어 두었어요.</p>
+        <div class="small" style="margin-top:9px; line-height:1.8; white-space:pre-wrap; word-break:keep-all;">(경구 : 300mg, 325mg, 500mg )</div>
+        <div class="small" style="margin-top:5px; line-height:1.8; word-break:keep-all;">
+          <div style="position:relative; padding-left:13px; margin:0 0 5px; white-space:pre-wrap;"><span aria-hidden="true" style="position:absolute; left:2px; top:0; font-size:0.55em; line-height:inherit;">●</span>성인 : 아세트아미노펜으로서 1회 0.3-1.0g 1일 3-4회 경구투여한다.</div>
+          <div style="position:relative; padding-left:13px; margin:0 0 5px; white-space:pre-wrap;"><span aria-hidden="true" style="position:absolute; left:2px; top:0; font-size:0.55em; line-height:inherit;">●</span>1일 최고 4g까지 투여할 수 있다.</div>
+          <div style="position:relative; padding-left:13px; margin:0 0 5px; white-space:pre-wrap;"><span aria-hidden="true" style="position:absolute; left:2px; top:0; font-size:0.55em; line-height:inherit;">●</span>연령, 질환, 증상에 따라 적절히 증감한다.</div>
+        </div>
+        <button type="button" class="btn btn-outline btn-sm" style="margin-top:10px; font-size:13.5px;">어린이 용량 부분도 보기 (어린이용 : 80mg, 160mg)</button>
+        <button type="button" class="btn btn-outline btn-sm" style="margin-top:10px; font-size:13.5px;">표로 적힌 부분 보기 (36줄)</button>
+      </div>
+      <!-- 이 약의 주의(식약처 DUR) — 예전에는 엔테론정 자리에 아나스트로졸의 병용금기가 보여 엔테론정의 주의로 읽혔다(more2.js page75 주석과 같은 문제).
+           다른 약의 예로 옮겼다. 앱에서는 그 약의 DUR 이 있으면 노란 '이 약의 주의' 묶음으로 보인다. -->
+      <div class="card" id="s-dur">
+        <div class="strong" style="font-size:15px;">이 약의 주의 — 아나스트로졸 성분 약</div>
+        <p class="tiny muted" style="margin:4px 0 0; line-height:1.6;">식약처 DUR 품목정보 · 병용금기</p>
+        <p class="small" style="margin-top:9px; line-height:1.7; color:#4A3C42;">DUR 품목정보에 적힌 내용을<br>그대로 옮겨 보여 드려요.</p>
+        <div class="small" style="margin-top:9px; line-height:1.7;">프레미나정(결합형에스트로겐)과 함께 쓰면 — 아나스트로졸의 약리작용 감소</div>
+        <button type="button" class="btn btn-outline btn-sm" style="margin-top:10px; font-size:13.5px;">더 보기 (12건)</button>
+      </div>
+      <div class="it">
+        <div class="it-t">나에게 해당하는지는</div>
+        <div class="it-do"><span>담당 의사나 약사에게 확인하세요.</span></div>
+      </div>
+    </section>
+
+    <button type="button" class="btn btn-outline btn-block">🔗 식약처 허가사항 전체 보기</button>
+    <p class="tiny muted" style="margin-top:-4px;">주의사항까지 모두 식약처 공식 화면에서 볼 수 있어요.<br>앱 밖 인터넷 창으로 열려요.</p>
+    <p class="disclaimer">식품의약품안전처 공공데이터를 그대로 보여 드려요. 진단이나 처방이 아니고, 드시는 방법은 담당 의사나 약사가 알려 준 대로 해 주세요.</p>
+
+    <!-- ══════════════════════════════════════════════════════════
+         ② 유방암 치료약이 아닐 때 함께 보이는 안내 (암로디핀 예시)
+         결과 카드 · ★ 초록 체크 금지 · 회색 ⚪
+         ══════════════════════════════════════════════════════════ -->
+    <section class="sec sec--info" id="s-noncancer">
+      <h2 class="sec-t section-label">유방암 치료약이 아닐 때</h2>
+      <p class="sec-sub">예: 혈압약 암로디핀정 5mg을 누르셨을 때</p>
+      <div class="card" style="border-color:var(--outline-strong);">
+        <div class="row gap-8" style="align-items:center;">
+          <span style="width:38px;height:38px;border-radius:50%;background:var(--surface-3);display:grid;place-items:center;font-size:19px;flex:0 0 auto;">⚪</span>
+          <div class="grow">
+            <div class="strong" style="font-size:16px;">이 약에는 부작용 안내가 없어요</div>
+            <div class="tiny muted" style="margin-top:2px;">성분 amlodipine · 혈압약</div>
+          </div>
+        </div>
+        <div class="row wrap" style="gap:6px; margin-top:11px;">
+          <span class="pill pill--info">🩺 다른 질환 약</span>
+        </div>
+        <p class="small" style="margin-top:10px; color:var(--on-surface-variant);">유방암 치료약이 아니라서 따로 만들지 않았어요.<br>암 치료약과 <b>겹치는 약</b>이 있는지 볼 때 써요.</p>
+      </div>
+    </section>
+
+    <!-- ★ 없음 ≠ 안전 -->
+    <section class="sec sec--caution" id="s-nocard">
+      <h2 class="sec-t section-label">안내가 없다고 안전한 건 아니에요</h2>
+      <p class="sec-p">토닥의 부작용 안내 22가지는<br><b>유방암 치료로 생기는 불편</b>만 다뤄요.</p>
+      <div class="it">
+        <div class="it-t">혈압약 자체의 부작용은</div>
+        <div class="it-do"><span>담당 의사나 약사에게 여쭤보세요.</span></div>
+      </div>
+    </section>
+
+    <!-- 상호작용 라우팅 결과 -->
+    <section class="sec sec--info" id="s-check">
+      <h2 class="sec-t section-label">겹치는 것이 있는지 확인한 결과</h2>
+      <div class="card card--flat" style="border:1px solid var(--outline);">
+        <div class="col gap-10">
+          <div class="row gap-8" style="align-items:flex-start;">
+            <span style="color:var(--outline-strong);">⚪</span>
+            <div class="small grow"><b>타목시펜정 20mg</b>과 겹친다고 적힌 내용은 <b>찾지 못했어요</b></div>
+          </div>
+          <div class="row gap-8" style="align-items:flex-start;">
+            <span style="color:var(--outline-strong);">⚪</span>
+            <div class="small grow"><b>입랜스캡슐 125mg</b>과 겹친다고 적힌 내용은 <b>찾지 못했어요</b></div>
+          </div>
+          <div class="row gap-8" style="align-items:flex-start;">
+            <span style="color:var(--outline-strong);">⚪</span>
+            <div class="small grow">음식·건강기능식품과 겹친다고 적힌 내용은 <b>찾지 못했어요</b></div>
+          </div>
+        </div>
+      </div>
+      <div class="it">
+        <div class="it-t">⚪는 ‘확인되지 않았다’는 표시예요</div>
+        <div class="it-b">‘확인해 봤더니 괜찮더라’는 뜻이 아니에요.</div>
+        <div class="it-b">토닥은 안전하다고 판정하지 않아서<br>초록색 표시를 쓰지 않아요.</div>
+      </div>
+    </section>
+
+    <!-- 증상 귀인 감별 -->
+    <section class="sec sec--info" id="s-know">
+      <h2 class="sec-t section-label">그래도 알아 두면 좋은 것</h2>
+      <div class="it">
+        <div class="it-t"><span>혈압약으로도 다리·발목이 붓거나<br>기운이 없을 수 있어요</span></div>
+        <div class="it-b">치료 때문이라고만 생각하면 놓칠 수 있어요.</div>
+        <div class="it-do"><span>다음 진료 때 두 가지를 함께 말씀하세요.</span></div>
+      </div>
+      <a class="listitem" href="40-detail-lymphedema.html">
+        <span class="li-ic">💧</span>
+        <div class="li-body">
+          <div class="li-title">붓기·림프부종</div>
+          <div class="li-sub">어느 쪽 때문에 붓는지 구별하는 법</div>
+        </div>
+        <span class="li-chev">›</span>
+      </a>
+      <a class="listitem" href="33-detail-fatigue.html">
+        <span class="li-ic">🔋</span>
+        <div class="li-body">
+          <div class="li-title">피로</div>
+          <div class="li-sub">어느 쪽 때문에 피곤한지 구별하는 법</div>
+        </div>
+        <span class="li-chev">›</span>
+      </a>
+    </section>
+
+    <!-- 진료 질문 -->
+    <section class="sec sec--info" id="s-ask">
+      <h2 class="sec-t section-label">진료 때 이렇게 여쭤보세요</h2>
+      <div class="card card--flat" style="border:1px solid var(--outline); background:var(--surface-2);">
+        <p class="small">“지금 유방암 치료약을 먹고 있는데, 혈압약도 같이 먹고 있어요. 요즘 발목이 붓는데 어느 쪽 때문인지 봐 주실 수 있을까요?”</p>
+      </div>
+      <div class="row gap-8">
+        <a class="btn btn-primary grow" href="10-consult-questions.html">📝 진료 질문 만들기</a>
+        <a class="btn btn-outline grow" href="77-visit-report.html">🧾 진료 전 리포트</a>
+      </div>
+    </section>
+
+    <!-- 안내를 준비하지 못한 다른 약들 -->
+    <section class="sec sec--info" id="s-notyet">
+      <h2 class="sec-t section-label">안내를 준비하지 못한 다른 약</h2>
+      <a class="card" href="59-med-scan-fail.html" style="text-decoration:none; color:inherit; display:block; border-color:var(--outline-strong); border-style:dashed;">
+        <div class="row" style="justify-content:space-between; align-items:flex-start;">
+          <div class="grow">
+            <div class="strong" style="font-size:15.5px;">○○정 5mg</div>
+            <div class="tiny muted" style="margin-top:3px;">사진 글자가 흐려 <b>이름을 다 읽지 못했어요</b></div>
+          </div>
+          <span class="li-chev">›</span>
+        </div>
+        <p class="tiny muted" style="margin-top:8px;">어떤 약인지 모르면 부작용 안내도,<br>겹치는 약 확인도 해 드릴 수 없어요.<br><b>이름만 넣어 주셔도</b> 바로 확인해 드려요.</p>
+        <div class="tiny" style="margin-top:8px; color:var(--primary-dark); font-weight:700;">다시 확인해 보기 ›</div>
+      </a>
+      <a class="card" href="04-treatment.html?from=75-med-effect-none.html" style="text-decoration:none; color:inherit; display:block; border-color:var(--outline-strong);">
+        <div class="row" style="justify-content:space-between; align-items:flex-start;">
+          <div class="grow">
+            <div class="strong" style="font-size:15.5px;">병원에서 맞는 주사 치료</div>
+            <div class="tiny muted" style="margin-top:3px;">약 봉투가 없어 사진으로는 등록되지 않아요</div>
+          </div>
+          <span class="li-chev">›</span>
+        </div>
+        <p class="tiny muted" style="margin-top:8px;">허셉틴·파슬로덱스·졸라덱스처럼<br><b>병원에서 맞는 치료</b>도 부작용 안내가 있어요.<br>내 정보의 <b>현재 받는 치료</b>에서 골라 주세요.</p>
+        <div class="tiny" style="margin-top:8px; color:var(--primary-dark); font-weight:700;">주사 치료 고르러 가기 ›</div>
+      </a>
+    </section>
+
+    <!-- ═══ 공통 M-B · med-guard-bottom [70·74·75 공통] — 참지 말고 정도에 따라 연락 (🟠·🟢) ═══
+         단계 제목에는 section-label 을 붙이지 않는다 -->
+    <section class="sec sec--group" id="med-guard-bottom">
+      <h2 class="sec-t section-label">불편이 생기면</h2>
+      <p class="sec-sub">스스로 거르지도, 참지도 마세요.<br>정도에 따라 이렇게 하세요.</p>
+      <a class="link-card link-card--emg" href="48-emergency.html?from=75-med-effect-none.html">
+        <span class="link-card-ic" aria-hidden="true"></span>
+        <span class="link-card-body">
+          <span class="link-card-t">열이 나면 그 자체가 응급이에요</span>
+          <span class="link-card-s">귀 38.0도 · 겨드랑이 37.5도<br>입 38.3도 이상<br>해열제를 드시기 전에 바로 연락하세요</span>
+        </span>
+      </a>
+      <div class="sec sec--lv2">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟠</span> <span>그날 안에 연락하세요</span></div>
+        <div class="it">
+          <div class="it-t">심하거나 새로 생긴 불편</div>
+          <div class="it-b">설사·구토·심한 손발 통증처럼<br>약을 잠시 멈춰야 할 수도 있어요.</div>
+          <div class="it-do"><span>다음 약을 드시기 전에<br>치료받는 병원에 전화하세요.</span></div>
+        </div>
+      </div>
+      <div class="sec sec--lv3">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟢</span> <span>다음 진료 때 말씀하세요</span></div>
+        <div class="it">
+          <div class="it-t">견딜 만한 정도라면</div>
+          <div class="it-do"><span>기록해 두셨다가 보여 주세요.</span></div>
+          <div class="it-b">용량이나 약을 조정할지 정할 때 도움이 돼요.</div>
+        </div>
+      </div>
+    </section>
+    <p class="disclaimer">토닥은 약의 안전성을 판정하지 않아요. 확인되지 않은 것은 확인되지 않았다고 알려 드려요. 복용 여부·용량·치료 일정도 판단하지 않아요. 본 제품은 의료기기가 아니므로 질병 유무를 판단할 수 없으며, 질병 유무 판단을 위해서는 의사의 검진이 필요합니다.</p>
+  </div>
+
+  <div class="footer-actions">
+    <div class="row gap-8">
+      <a class="btn btn-outline grow" href="70-med-effects.html">💊 내 약 전체 보기</a>
+      <a class="btn btn-primary grow" href="07-chat.html">💬 이 약에 대해 묻기</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 복약 설정</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <!-- 2026-10-26 이름을 '복약 시간 설정' → '복약 설정'으로(사용 의견). 드시는 시간(아침·점심·저녁·자기 전)도 여기서 고친다 -->
+  <div class="appbar">
+    <a class="back" href="55-med-today.html">‹</a>
+    <div><div class="appbar-title">복약 설정</div></div>
+  </div>
+
+  <div class="content content--tight content--sched" style="padding-bottom:150px;">
+    <div class="banner banner--info">
+      <span class="b-ic">⏰</span>
+      <div class="small">약마다 <b>드시는 시간</b>과 알림을 고치실 수 있어요. 오늘의 복약 화면에서도 같이 바뀌어요.</div>
+    </div>
+
+    <!-- ↓ 여기부터 시안 예시다 — 예시 약 두 장과 예시 시간 고르개.
+         갤러리에는 그대로 보이고 앱·웹앱에서는 통째로 숨는다(data-demo-box).
+         배선 JS(features.js page56)가 실제 약 카드를 이 감싸개 앞에 끼워 넣는다.
+         숨기지 않으면 자료를 읽는 동안(느린 회선에서 5초 남짓) 약을 하나도 등록하지 않은 분께도
+         「타목시펜정 20mg · 아침 오전 8:00」이 등록해 둔 약처럼 보였다. -->
+    <p class="small" data-kb-only>복약 설정(내 정보 › 복약 설정)에서 약마다 드시는 시간(아침·점심·저녁·자기 전)과 알림 시간을 바꿀 수 있어요. 하루 2번 드시는 약도 아침·점심처럼 원하시는 때로 고를 수 있고, 바꾸면 오늘부터 적용돼요. 어떤 약인지(먹는 약·눈에 넣는 약·바르는 약·붙이는 약)도 고칠 수 있고, 다 쓴 약은 ‘이 약 그만 쓰기’로 목록과 알림에서 뺄 수 있어요. ‘약 목록 고치기’에서는 약 왼쪽 손잡이(▲▼)를 잡고 끌어 순서를 바꾸고 드시는 시간도 한 번에 고쳐요. 며칠분을 넣은 약은 언제까지인지 보여 드려요. 복약 알림을 켜고 끄는 것은 내 정보 › 알림 설정에서 해요.</p>
+    <div data-demo-box>
+    <div class="card">
+      <div class="row" style="justify-content:space-between; align-items:center;">
+        <div>
+          <div class="strong" style="font-size:16px;">레바미피드정 100mg</div>
+          <div class="tiny muted">💊 먹는 약 · 하루 2번</div>
+        </div>
+        <span class="tiny muted">30일분 · 8월 26일까지</span>
+      </div>
+      <div class="chips" data-role="route" style="margin-top:10px;">
+        <span class="chip chip--on">먹는 약</span>
+        <span class="chip">눈에 넣는 약</span>
+        <span class="chip">바르는 약</span>
+        <span class="chip">붙이는 약</span>
+        <span class="chip">기타</span>
+      </div>
+
+      <div class="when-t">드시는 시간</div>
+      <div class="when-grid">
+        <span class="chip chip--on">아침</span>
+        <span class="chip chip--on">점심</span>
+        <span class="chip">저녁</span>
+        <span class="chip">자기 전</span>
+      </div>
+      <div class="when-chg">아침·저녁 → <b>아침·점심</b> · 오늘부터 바뀌어요. 저장을 누르시면 알림도 바뀌어요.</div>
+
+      <div class="when-t">알림 시간</div>
+      <div class="listitem">
+        <span class="li-ic">🌅</span>
+        <div class="li-body"><div class="li-title">아침</div><div class="li-sub">눌러서 시간 바꾸기</div></div>
+        <span class="strong" style="color:var(--primary-dark);">오전 8:00</span>
+      </div>
+      <div class="listitem" style="margin-top:10px;">
+        <span class="li-ic">☀️</span>
+        <div class="li-body"><div class="li-title">점심</div><div class="li-sub">눌러서 시간 바꾸기</div></div>
+        <span class="strong" style="color:var(--primary-dark);">오후 1:00</span>
+      </div>
+      <!-- 다 쓴 약·잘못 넣은 약을 목록과 알림에서 빼기 (확인 창 → 기록은 남김) -->
+      <button type="button" class="btn btn-outline btn-sm btn-block" data-role="stop-med" style="margin-top:12px;">이 약 그만 쓰기</button>
+    </div>
+
+    <div class="card">
+      <div class="row" style="justify-content:space-between; align-items:center;">
+        <div>
+          <div class="strong" style="font-size:16px;">타목시펜정 20mg</div>
+          <div class="tiny muted">💊 먹는 약 · 하루 1번</div>
+        </div>
+        <span class="tiny muted">60일분</span>
+      </div>
+      <div class="when-t">드시는 시간</div>
+      <div class="when-grid">
+        <span class="chip chip--on">아침</span>
+        <span class="chip">점심</span>
+        <span class="chip">저녁</span>
+        <span class="chip">자기 전</span>
+      </div>
+      <div class="when-t">알림 시간</div>
+      <div class="listitem">
+        <span class="li-ic">🌅</span>
+        <div class="li-body"><div class="li-title">아침</div><div class="li-sub">눌러서 시간 바꾸기</div></div>
+        <span class="strong" style="color:var(--primary-dark);">오전 8:00</span>
+      </div>
+      <button type="button" class="btn btn-outline btn-sm btn-block" data-role="stop-med" style="margin-top:12px;">이 약 그만 쓰기</button>
+    </div>
+    </div><!-- /data-demo-box -->
+
+    <!-- 알림 방식 칸은 앱에서 지운다(features.js page56 — 23 알림 설정으로 모음). AI 색인에서도 뺀다(data-kb-skip) — '다시 알림'은 없는 기능 -->
+    <div class="section-label" data-kb-skip>알림 방식</div>
+    <div class="listitem" data-kb-skip>
+      <span class="li-ic">🔔</span>
+      <div class="li-body"><div class="li-title">복약 알림 받기</div><div class="li-sub">정하신 시간에 알려 드려요</div></div>
+      <span class="switch" role="switch" tabindex="0" aria-checked="true"></span>
+    </div>
+    <div class="listitem" data-kb-skip>
+      <span class="li-ic">🔁</span>
+      <div class="li-body"><div class="li-title">다시 알림</div><div class="li-sub">드셨다고 표시하지 않으면 30분 뒤 한 번 더</div></div>
+      <span class="switch" role="switch" tabindex="0" aria-checked="true"></span>
+    </div>
+
+    <!-- 목록 맨 아래에 있으면 첫 화면에서 보이지 않아 보이는 차례를 위로 올렸다(app.css .content--sched > .med-add) -->
+    <a class="listitem med-add" href="58-med-manual.html">
+      <span class="li-ic">➕</span>
+      <div class="li-body"><div class="li-title">약 추가하기</div><div class="li-sub">사진이나 이름으로 넣으실 수 있어요</div></div>
+      <span class="li-chev">›</span>
+    </a>
+    <!-- 약 목록 고치기 — 오늘의 복약 표 위 단추와 같은 창(순서 끌어 옮기기 · 드시는 시간). 2026-10-26 -->
+    <a class="listitem med-list" href="55-med-today.html" data-act="med-list-edit">
+      <span class="li-ic">⇅</span>
+      <div class="li-body"><div class="li-title">약 목록 고치기</div><div class="li-sub">끌어서 순서를 바꾸고, 드시는 시간도 한 번에 고쳐요</div></div>
+      <span class="li-chev">›</span>
+    </a>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-primary btn-block btn-lg" href="55-med-today.html">저장</a>
+  </div>
+</div>
+</body>
+</html>

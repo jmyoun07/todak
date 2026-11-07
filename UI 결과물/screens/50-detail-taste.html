@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 미각·후각 변화</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="06-sideeffects.html">‹</a>
+    <div><div class="appbar-title">미각·후각 변화</div><div class="appbar-sub">입맛 변화</div></div>
+  </div>
+
+  <!-- 정보 화면 디자인 시스템 v3 (2026-09-28 · 본보기 31 · app.css '정보 화면 디자인 시스템 v3' · STYLE.md)
+       모든 묶음은 상자(.sec) · 제목(.sec-t)은 상자 윗선에 걸친다 · 색: 초록=하세요 / 노랑=주의 / 옅은 장미=피하세요 / 진한 빨강=응급
+       두 번 나오던 아연 보충제 안내는 '아연 보충제는요?' 상자 하나로 합쳤다. -->
+  <div class="content content--tight content--jump" style="padding-bottom:150px;">
+    <div class="row wrap" style="gap:8px;">
+      <span class="pill pill--brand">💉 항암화학요법</span>
+      <span class="sev sev--mild">대개 회복돼요</span>
+    </div>
+
+    <!-- ═══ 바로 가기 — 여덟 칸 같은 크기(2열) · 누르면 그 상자로 내려간다(다른 내용을 숨기지 않는다) ═══ -->
+    <nav class="sec sec--jump" aria-label="이 화면 바로 가기">
+      <div class="sec-t">바로 가기</div>
+      <div class="jump">
+        <a class="jump-b jump-b--why" href="#s-why"><span>이게 왜 생겨요?</span></a>
+        <a class="jump-b jump-b--good" href="#s-care"><span>이렇게 관리해요</span></a>
+        <a class="jump-b jump-b--food" href="#s-food"><span>좋은 음식</span></a>
+        <a class="jump-b jump-b--caution" href="#s-foodwarn"><span>주의할 음식</span></a>
+        <a class="jump-b jump-b--avoid" href="#s-avoid"><span>피해야 할 음식</span></a>
+        <a class="jump-b jump-b--caution" href="#s-zinc"><span>아연 보충제</span></a>
+        <a class="jump-b jump-b--hosp" href="#s-call"><span>이럴 땐 병원에</span></a>
+        <a class="jump-b jump-b--emg" href="#s-emg"><span>응급 상황일 땐</span></a>
+      </div>
+    </nav>
+
+    <!-- ═══ ① 이게 왜 생겨요? ═══ -->
+    <section class="sec sec--why" id="s-why">
+      <h2 class="sec-t section-label">이게 왜 생겨요?</h2>
+      <div class="it">
+        <div class="it-t">맛봉오리는 빨리 바뀌는 세포예요</div>
+        <div class="it-b">혀의 맛봉오리는 열흘 남짓마다 새로 바뀌어요.<br>항암제가 이 교체를 늦추면 맛이 뭉개져요.</div>
+        <div class="it-b">침까지 줄면 맛 성분이 덜 녹아 더 밍밍해져요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">쇠 맛이 나고 냄새에 예민해지는 까닭</div>
+        <div class="it-b">약 성분 일부가 침으로 나와 <b>쇠 맛</b>이 나기도 해요.</div>
+        <div class="it-b">냄새에 예민해지는 것도 같은 이유예요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">언제쯤 돌아오나요</div>
+        <div class="it-b">대개 치료 뒤 <b>몇 주~몇 달에 걸쳐</b> 돌아와요.</div>
+      </div>
+    </section>
+
+    <!-- ═══ ② 맛에 따라 이렇게 관리해요 (초록) — 맛마다 한 덩이 · 어느 맛이든 통하는 것은 팁 ═══ -->
+    <section class="sec sec--good" id="s-care">
+      <h2 class="sec-t section-label">맛에 따라 이렇게 관리해요</h2>
+      <div class="it">
+        <div class="it-t">쇠 맛이 날 때</div>
+        <div class="it-do"><span>스테인리스 수저 대신<br>플라스틱·나무 수저를 써 보세요.</span></div>
+        <div class="it-do"><span>음식은 뜨겁게 말고 실온이나 차게 드세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">모든 게 쓸 때</div>
+        <div class="it-b">소고기·돼지고기가 유독 쓰게 느껴지기 쉬워요.</div>
+        <div class="it-do"><span>계란찜·두부·흰살생선·닭고기·콩으로<br>단백질을 채우세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">아무 맛도 안 날 때</div>
+        <div class="it-b">소금·간장을 더 넣으면 나트륨만 늘어요.</div>
+        <div class="it-b">참기름·들기름·깨·들깨가루,<br>마늘·생강·미나리가 <b>향을 더해 줘요.</b></div>
+        <div class="it-do"><span>소금 대신 향으로 맛을 살리세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">뭘 먹어도 짤 때</div>
+        <div class="it-b">배달·외식은 간이 세서 이 시기엔 더 힘들어요.</div>
+        <div class="it-b"><b>데치거나 삶으면</b> 짠맛이 빠져요.</div>
+        <div class="it-do"><span>국물은 덜어 내고 건더기 위주로 드세요.</span></div>
+        <div class="it-do"><span>소금·간장 대신 깨·다진 마늘·후추로<br>맛을 잡으세요.</span></div>
+        <div class="it-do"><span>그래도 밍밍하면 배·감·곶감의 단맛이나<br>꿀 한 숟가락을 더해 보세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">뭘 먹어도 달 때</div>
+        <div class="it-b"><b>식초나 레몬·유자</b>를 살짝 넣거나<br><b>소금 한 꼬집</b>을 더하면 단맛이 눌려요.</div>
+        <div class="it-do"><span>채소 반찬을 늘리세요.</span></div>
+        <div class="it-do"><span>주스는 물이나 얼음으로 묽게 드세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">냄새를 못 견딜 때</div>
+        <div class="it-b">냄새는 막는 것보다 <b>안 오게 하는 게</b> 쉬워요.</div>
+        <div class="it-do"><span>조리는 가족에게 맡기고,<br>김이 빠진 뒤 상에 올리세요.</span></div>
+        <div class="it-do"><span>조리할 땐 환기팬을 켜거나<br>베란다에서 해 달라고 하세요.</span></div>
+        <div class="it-do"><span>음식은 뚜껑을 덮어 두고,<br>음료는 뚜껑 있는 컵에 빨대로 드세요.</span></div>
+      </div>
+      <div class="tip">
+        <span class="tip-lab">팁</span>
+        <div class="it-t">어느 맛이든 통하는 것</div>
+        <div class="it-b"><b>평소보다 오래 씹으세요.</b><br>맛봉오리에 오래 닿아 남은 맛이 살아나요.</div>
+        <div class="it-b"><b>무설탕 사탕이나 껌</b>을 물고 계시면<br>쇠 맛·쓴맛이 덜해요.</div>
+        <div class="it-b">식사 전에 <b>물로 입안을 헹구면</b><br>남아 있던 맛이 씻겨 나가요.</div>
+      </div>
+    </section>
+
+    <!-- ═══ ③ 이런 음식이 좋아요 (초록) ═══ -->
+    <section class="sec sec--food" id="s-food">
+      <h2 class="sec-t section-label">이런 음식이 좋아요</h2>
+      <div class="it">
+        <div class="it-t">뒷맛이 적게 남는 것부터</div>
+        <div class="it-b">실온으로 식힌 밥, 차가운 두부, 계란찜, 흰살생선, 살얼음 낀 <span class="nw">배즙이나 식혜</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">잘 넘어간 음식 목록</div>
+        <div class="it-b">입맛이 없는 날 고민 없이 꺼내 쓸 수 있어요.</div>
+        <div class="it-do"><span>그날 잘 넘어간 음식 두세 가지를<br>적어 두세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ④ 음식, 이것만 주의하세요 (노랑) ═══ -->
+    <section class="sec sec--caution" id="s-foodwarn">
+      <h2 class="sec-t section-label">음식, 이것만 주의하세요</h2>
+      <div class="it">
+        <div class="it-t">신맛·매운맛</div>
+        <div class="it-b">치료 시작 <b>7~10일쯤 입안이 헐기 시작하면</b><br>신맛·매운맛이 오히려 입안을 아프게 해요.</div>
+        <div class="it-do"><span>귤·레몬·식초 무침·신 김치·떡볶이는<br>그때부터 멈추세요.</span></div>
+      </div>
+      <a class="link-card" href="36-detail-mucositis.html?from=50-detail-taste.html">
+        <span class="link-card-ic" aria-hidden="true"></span>
+        <span class="link-card-body">
+          <span class="link-card-t">구내염 관리 보기</span>
+          <span class="link-card-s">입안이 헐었을 때 먹는 법과 관리</span>
+        </span>
+      </a>
+      <div class="it">
+        <div class="it-t">자몽</div>
+        <div class="it-b">약에 따라 함께 드시면 안 돼요.</div>
+        <div class="it-do"><span>담당 의사나 약사에게 확인하기 전까지는<br>자몽을 쉬세요.</span></div>
+        <div class="it-do"><span>단맛을 누르려고 신 과일을 쓰실 때도<br>자몽은 빼세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ⑤ 이런 음식은 피하세요 (옅은 장미) — 제목 = 피할 것 / 풀이 = 까닭 / → = 대신 이렇게 ═══ -->
+    <section class="sec sec--avoid" id="s-avoid">
+      <h2 class="sec-t section-label">이런 음식은 피하세요</h2>
+      <div class="it">
+        <div class="it-t"><span><span class="nw">항암 맞는 날,</span> <span class="nw">가장 좋아하는 음식</span></span></div>
+        <div class="it-b">그날의 울렁거림과 그 음식이 묶이면,<br>치료가 끝난 뒤에도 못 먹게 되기 쉬워요.</div>
+        <div class="it-do"><span>좋아하는 음식은 <span class="nw">속이 편한 날로</span> <span class="nw">미뤄 두세요.</span></span></div>
+      </div>
+      <div class="it">
+        <div class="it-t"><span><span class="nw">냄새가 강한 음식,</span> <span class="nw">김이 펄펄 나는</span> <span class="nw">국·찌개</span></span></div>
+        <div class="it-b">생선구이, 마늘·양파 볶는 냄새, 청국장처럼<br>냄새가 강한 것은 뜨거울수록 더 올라와요.</div>
+        <div class="it-do"><span>한 김 식혀서 드세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">통조림처럼 금속 캔에 든 식품</div>
+        <div class="it-b">쇠 맛을 더 키울 수 있어요.</div>
+        <div class="it-do"><span>같은 음식이라면 유리병이나<br>종이팩에 든 것으로 고르세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ⑥ 아연 보충제는요? (노랑) — 예전 두 곳(💊 배너 · 아래 안내)을 하나로 ═══ -->
+    <section class="sec sec--caution" id="s-zinc">
+      <h2 class="sec-t section-label">아연 보충제는요?</h2>
+      <p class="sec-p">맛을 되찾으려고 찾는 분이 많지만<br><b>권해 드릴 근거가 없어요.</b></p>
+      <div class="it">
+        <div class="it-t">근거가 없는 까닭</div>
+        <div class="it-b">가장 큰 국제 검토(코크란 리뷰)는<br><b>항암치료로 생긴 미각 변화를 다루지 않았어요.</b></div>
+        <div class="it-b">다른 원인의 미각 변화에서도<br>아연의 근거는 <b>‘매우 낮음’</b>이었어요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">오래 드시면</div>
+        <div class="it-b">고용량 아연은 <b>구리 흡수를 방해</b>할 수 있어요.</div>
+        <div class="it-do"><span>스스로 시작하지 말고<br>담당 의사와 먼저 상의하세요.</span></div>
+      </div>
+      <div class="tip">
+        <span class="tip-lab">팁</span>
+        <div class="it-t">보충제보다 도움이 되는 건 영양 상담이에요</div>
+        <div class="it-b">먹는 양이 줄어 영양이 걱정되면<br><b>영양사</b>가 필요한 단백질·열량을 맞춰 드려요.</div>
+        <div class="it-b">대학병원 <b>영양상담실</b>이나 <span class="nw">암생존자통합지지센터</span><span class="nw">(1577-9740)</span>에 영양사가 있어요.</div>
+        <div class="it-b">진료 때 “영양 상담 받고 싶다”고 말씀하세요.</div>
+      </div>
+    </section>
+
+    <!-- ═══ ⑦ 이럴 땐 병원에 — 큰 상자 하나에 세 단계(🔴·🟠·🟢) 중간 상자 ═══
+         단계 제목의 🔴·🟠·🟢 글자는 지우지 않는다(화면에서는 둥근 점으로 그림) — AI 상담 자료 색인이 이 글자로 단계를 나눈다.
+         단계 제목에는 section-label 을 붙이지 않는다(_build_kb.py split_risk).
+         맛 변화 자체에는 이 화면만의 119 사례가 없다 — 예전 '이럴 땐 전화 말고 119'·열 기준 덩이는 응급 안내(48) 칸 하나로 바꿨다. -->
+    <section class="sec sec--group" id="s-call">
+      <h2 class="sec-t section-label">이럴 땐 병원에</h2>
+      <p class="sec-sub">맛이 변한 것보다 <b>못 드시는 것</b>이<br>더 걱정이에요. 위에서부터 급한 순서예요.</p>
+
+      <!-- 🔴 1단계 -->
+      <div class="sec sec--lv1" id="s-119">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🔴</span> <span>지금 바로 119</span></div>
+        <!-- 응급 상황 전반은 홈의 응급 안내(48)에 모여 있다 — 열 기준(부위별)·해열제 주의·숨참·의식 흐림·소변 줄어듦 -->
+        <a class="link-card link-card--emg" id="s-emg" href="48-emergency.html?from=50-detail-taste.html">
+          <span class="link-card-ic" aria-hidden="true"></span>
+          <span class="link-card-body">
+            <span class="link-card-t">응급 상황일 땐 이렇게 하세요</span>
+            <span class="link-card-s">열이 38.0도 이상일 때<br>(겨드랑이는 37.5도 이상)<br>숨이 차거나 정신이 흐릿할 때</span>
+          </span>
+        </a>
+        <a class="btn btn-danger btn-block" href="tel:119">📞 119 응급전화</a>
+      </div>
+
+      <!-- 🟠 2단계 -->
+      <div class="sec sec--lv2" id="s-today">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟠</span> <span>그날 안에 연락하세요</span></div>
+        <div class="it">
+          <div class="it-t">입안이 이런 모습이면</div>
+          <div class="it-b">맛이 아니라 입안(구내염) 문제예요.</div>
+        </div>
+        <ul class="dots">
+          <li>입안이 헐어 <b>침도 삼키기 어려울 때</b></li>
+          <li>하루 종일 <b>물조차 거의 못 마실 때</b></li>
+        </ul>
+        <a class="link-card" href="36-detail-mucositis.html?from=50-detail-taste.html">
+          <span class="link-card-ic" aria-hidden="true"></span>
+          <span class="link-card-body">
+            <span class="link-card-t">구내염 기준 보기</span>
+            <span class="link-card-s">언제 연락하는지와 열 기준</span>
+          </span>
+        </a>
+        <!-- 저장해 두신 병원 번호가 있으면 features.js(wireCallMine)가 '병원 이름 + 번호' 로 바로 걸리는 단추로 바꾼다.
+             번호가 없으면 글자를 '🏥 내 병원 번호 등록하기'로 바꾸고 84 등록 화면으로 보낸다. -->
+        <a class="btn btn-outline btn-outline--lv2 btn-block" href="84-care-contacts.html?from=50-detail-taste.html" data-role="call-mine">📞 내 병원으로 연락하기</a>
+      </div>
+
+      <!-- 🟢 3단계 -->
+      <div class="sec sec--lv3" id="s-next">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟢</span> <span>다음 진료 때 말씀하세요</span></div>
+        <div class="it">
+          <div class="it-t"><span>맛 때문에 못 드셔서<br>한 달 사이 체중이 5% 넘게 줄었을 때</span></div>
+          <div class="it-b">예: 60kg → 57kg 아래<br>6개월 사이라면 10%가 기준이에요.</div>
+          <div class="it-do"><span>영양 상담을 요청해 보세요.</span></div>
+        </div>
+        <div class="it">
+          <div class="it-t"><span>쇠 맛·쓴맛이 몇 달째 그대로이거나<br>냄새 때문에 식사 준비가 어려울 때</span></div>
+          <div class="it-do"><span>어떤 맛이 언제부터 그런지 적어 두세요.</span></div>
+        </div>
+        <a class="link-card" href="52-detail-weight.html?from=50-detail-taste.html">
+          <span class="link-card-ic" aria-hidden="true"></span>
+          <span class="link-card-body">
+            <span class="link-card-t">체중 변화 안내 보기</span>
+            <span class="link-card-s">체중이 줄고 있다면</span>
+          </span>
+        </a>
+        <!-- 가벼울 때만 근처 병원 — 이비인후과는 심평원 진료과목코드 13 -->
+        <div class="it">
+          <div class="it-t">담당 병원이 멀다면</div>
+          <div class="it-b">입안이 헐지 않았다면 가까운<br>이비인후과·치과에서 먼저 보셔도 돼요.</div>
+        </div>
+        <a class="btn btn-outline btn-outline--good btn-block" href="92-nearby-list.html?dept=13&amp;from=50-detail-taste.html">🏥 근처 이비인후과 찾기</a>
+      </div>
+    </section>
+
+    <div class="tiny muted rf-src">근거: CTCAE v5.0 · 미국 국립암연구소(NCI) · 대한감염학회 · Cochrane · ESPEN · 보건복지부 · 암생존자통합지지사업 — 자세한 출처는 <b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요</div>
+
+    <p class="disclaimer">본 제품은 의료기기가 아니므로 질병 유무를 판단할 수 없으며, 질병 유무 판단을 위해서는 의사의 검진이 필요합니다.</p>
+  </div>
+
+  <div class="footer-actions">
+    <div class="row gap-8">
+      <a class="btn btn-outline grow" href="10-consult-questions.html">📝 진료 질문 만들기</a>
+      <a class="btn btn-primary grow" href="07-chat.html">💬 이 증상 물어보기</a>
+    </div>
+  </div>
+
+  <!-- 전화 걸기 확인 — 실수로 눌러도 바로 걸리지 않게 -->
+  <div class="callpop" id="callpop" role="dialog" aria-modal="true" aria-label="전화 걸기 확인" hidden>
+    <div class="callpop-card">
+      <div style="font-size:34px;">📞</div>
+      <div class="strong" style="font-size:17px;" id="callpop-title">전화를 걸까요?</div>
+      <a class="btn btn-primary btn-block btn-lg" id="callpop-go" href="tel:119" data-direct="1">📞 지금 전화 걸기</a>
+      <button class="btn btn-outline btn-block" id="callpop-no" type="button">닫기</button>
+    </div>
+  </div>
+</div>
+<script>(function(){
+var NAMES={"119":"119 구급대","109":"자살예방 상담전화 109","1577-0199":"정신건강 위기상담 1577-0199"};
+var pop=document.getElementById("callpop");if(!pop)return;
+var go=document.getElementById("callpop-go"),no=document.getElementById("callpop-no"),tt=document.getElementById("callpop-title");
+document.addEventListener("click",function(e){
+  var a=e.target&&e.target.closest?e.target.closest("a"):null;if(!a)return;
+  var h=a.getAttribute("href")||"";
+  if(h.indexOf("tel:")!==0||a.hasAttribute("data-direct"))return;
+  e.preventDefault();e.stopImmediatePropagation();e.stopPropagation();
+  var num=h.slice(4);
+  pop.__opener=a;
+  /* 배선 JS 가 붙인 병원 이름(data-callname)이 있으면 그 이름으로 묻는다 — 숫자만 보면 어디로 거는지 모른다 (48 과 같은 방식) */
+  tt.textContent=(a.getAttribute("data-callname")||NAMES[num]||num)+"에 전화할까요?";
+  go.setAttribute("href","tel:"+num);
+  pop.hidden=false;no.focus();
+},true);
+function close(){pop.hidden=true;
+  if(pop.__opener&&pop.__opener.focus){pop.__opener.focus();}}
+no.addEventListener("click",close);
+go.addEventListener("click",function(){setTimeout(close,150);});
+pop.addEventListener("click",function(e){if(e.target===pop)close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!pop.hidden){e.stopPropagation();close();}},true);
+})()</script>
+</body>
+</html>

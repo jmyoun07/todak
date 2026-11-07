@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 컨디션 기록</title>
+<link rel="stylesheet" href="app.css">
+<style>
+/* ── 16 증상 기록 전용 (2026-09-28) ──
+   교수님: 제목이 제목으로 보이게. 묻는 줄(오늘 기분은… · 오늘 겪은 증상)을 한 단 크고 진하게 키워 칸 사이 구분을 또렷이 한다.
+   features.js page16 은 '기분'·'증상'이 든 .section-label 의 바로 다음 칸을 찾으므로 제목의 class·자리는 그대로 둔다.
+   공용 app.css 는 이번 작업에서 얼려 두었으므로 여기서만 쓴다. 글자는 clamp + cqw(390px 기준) — 360~430px 에서 줄 수가 같다. */
+.content > .section-label {
+  margin: 8px 0 -2px;
+  font-size: 16.5px;
+  font-size: clamp(15px, 4.2308cqw, 18.2px);
+  font-weight: 800; line-height: 1.35; color: var(--on-surface);
+}
+/* 풀이는 제목 아래 한 줄로 따로 — 제목 옆에 붙이면 글자를 키운 폰(200%)에서 '여러 / 개'로 갈렸다 (2026-09-29 검수) */
+.content > .section-label .lab-hint {
+  display: block; margin-top: 3px;
+  font-size: 13.5px;
+  font-size: clamp(13px, 3.4615cqw, 14.9px);
+  font-weight: 600; color: var(--on-surface-variant);
+}
+/* 증상 강도 다섯 칸 — 휴대폰 글자를 아주 크게(200%) 쓰시면 ‘매우 심함’이 칸 밖으로 나가 잘렸다.
+   글자가 커지면 칸이 저절로 두세 줄로 나뉘게 한다(보통 글자에서는 예전처럼 한 줄 다섯 칸). */
+.int-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; font-size: 13px; }
+.int-row .chip { flex: 1 1 auto; justify-content: center; text-align: center; padding: 11px 2px; font-size: 1em; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="05-home.html">‹</a>
+    <div><div class="appbar-title">컨디션 기록</div><div class="appbar-sub" data-demo>7월 28일 화요일</div></div>
+  </div>
+
+  <div class="content content--tight" style="padding-bottom:96px;">
+    <!-- 이번 주 컨디션 · 월~일 고정, 화살표로 지난주 이동 -->
+    <div class="card">
+      <div class="row" style="justify-content:space-between; align-items:center;">
+        <a href="javascript:void(0)" aria-label="지난주 보기" style="width:44px; height:44px; border-radius:12px; border:1px solid var(--outline); display:grid; place-items:center; text-decoration:none; color:var(--on-surface); font-size:17px; flex:0 0 auto;">‹</a>
+        <div class="center">
+          <div class="card-title" style="margin:0;">이번 주 컨디션</div>
+          <div class="tiny muted" style="margin-top:2px;" data-demo>7월 27일(월) ~ 8월 2일(일)</div>
+        </div>
+        <a href="javascript:void(0)" aria-label="다음 주 보기" aria-disabled="true" style="width:44px; height:44px; border-radius:12px; border:1px solid var(--outline); display:grid; place-items:center; text-decoration:none; color:var(--on-surface-variant); font-size:17px; flex:0 0 auto; opacity:.35;">›</a>
+      </div>
+      <!-- 그날 기록한 컨디션을 색+단어로 — 초록 좋음 · 주황 보통 · 빨강 힘듦. 글자는 본문 하한 13px(예전 11px · 2026-09-29) — 360px 칸(35px)에도 두 글자가 한 줄로 든다 -->
+      <div style="display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-top:12px;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:6px; padding:7px 3px;" data-demo>
+        <span class="tiny muted">월</span>
+        <span style="width:100%; text-align:center; font-size:13px; font-weight:700; border-radius:8px; padding:6px 0; line-height:1; color:var(--safe); background:var(--safe-tint);">좋음</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:6px; padding:7px 3px; background:var(--primary-tint); border:1.5px solid var(--primary); border-radius:12px;" data-demo>
+        <span class="tiny strong" style="color:var(--primary-dark);">화</span>
+        <span style="width:100%; text-align:center; font-size:13px; font-weight:700; border-radius:8px; padding:6px 0; line-height:1; color:var(--warn); background:var(--warn-tint);">보통</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:6px; padding:7px 3px;" data-demo>
+        <span class="tiny muted">수</span>
+        <span style="width:100%; text-align:center; font-size:13px; font-weight:700; border-radius:8px; padding:6px 0; line-height:1; border:1.5px dashed var(--outline); color:transparent;">·</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:6px; padding:7px 3px;" data-demo>
+        <span class="tiny muted">목</span>
+        <span style="width:100%; text-align:center; font-size:13px; font-weight:700; border-radius:8px; padding:6px 0; line-height:1; border:1.5px dashed var(--outline); color:transparent;">·</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:6px; padding:7px 3px;" data-demo>
+        <span class="tiny muted">금</span>
+        <span style="width:100%; text-align:center; font-size:13px; font-weight:700; border-radius:8px; padding:6px 0; line-height:1; border:1.5px dashed var(--outline); color:transparent;">·</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:6px; padding:7px 3px;" data-demo>
+        <span class="tiny muted">토</span>
+        <span style="width:100%; text-align:center; font-size:13px; font-weight:700; border-radius:8px; padding:6px 0; line-height:1; border:1.5px dashed var(--outline); color:transparent;">·</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:6px; padding:7px 3px;" data-demo>
+        <span class="tiny muted">일</span>
+        <span style="width:100%; text-align:center; font-size:13px; font-weight:700; border-radius:8px; padding:6px 0; line-height:1; border:1.5px dashed var(--outline); color:transparent;">·</span>
+      </div>
+      </div>
+      <div class="tiles" style="margin-top:12px;">
+        <div class="tile"><div class="t-num" data-demo>2일</div><div class="t-lab">이번 주 기록</div></div>
+        <div class="tile"><div class="t-num" data-demo>1회</div><div class="t-lab">이번 주 상담</div></div>
+      </div>
+      <a class="btn btn-outline btn-block btn-sm" href="98-checkin-month.html" style="margin-top:12px;">📅 한 달 기록 보기</a>
+    </div>
+
+    <!-- 하루를 돌아보며 남기는 기록이라 지난 일로 묻는다 (홈은 오후 5시부터 이 기록을 권한다 · 2026-09-28) -->
+    <div class="section-label">오늘 기분은 어떠셨어요?</div>
+    <div class="row mood-row">
+      <!-- 척도 이름은 보통 한 줄(칸 사이를 좁혀 360px 에서도 한 줄). 시스템 글자를 키우면 이름만 두 줄로 접히고 이모지 윗선은 맞춘다 —
+           nowrap 으로 묶으면 115~130% 글자에서 다섯째 칸이 화면 밖으로 밀렸다. 한 줄에 안 들어가면 3칸·2칸 두 줄로 내린다(features.js 가 넘침을 재서 .mood-wrap, app.css) -->
+      <div class="center"><div style="font-size:30px;">😊</div><div class="tiny muted">아주 좋음</div></div>
+      <div class="center"><div style="font-size:30px;">🙂</div><div class="tiny muted">좋음</div></div>
+      <div class="center" style="transform:scale(1.15);" data-demo><div style="font-size:30px;">😐</div><div class="tiny strong" style="color:var(--primary-dark);">보통</div></div>
+      <div class="center"><div style="font-size:30px;">😔</div><div class="tiny muted">힘듦</div></div>
+      <div class="center"><div style="font-size:30px;">😢</div><div class="tiny muted">아주 힘듦</div></div>
+    </div>
+
+    <div class="section-label">오늘 겪은 증상 <span class="lab-hint">여러 개 고를 수 있어요</span></div>
+    <div class="chips">
+      <span class="chip chip--on" data-demo>손발 저림</span>
+      <span class="chip chip--on" data-demo>피로</span>
+      <span class="chip">메스꺼움</span>
+      <span class="chip">관절통</span>
+      <span class="chip">수면 문제</span>
+      <span class="chip">＋ 추가</span>
+    </div>
+
+    <div class="card" data-demo>
+      <div class="row" style="justify-content:space-between;">
+        <span class="strong small">손발 저림 강도</span>
+        <span class="sev sev--mod">보통</span>
+      </div>
+      <div class="int-row">
+        <span class="chip">없음</span>
+        <span class="chip">약함</span>
+        <span class="chip chip--on">보통</span>
+        <span class="chip">심함</span>
+        <span class="chip">매우 심함</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>메모 <span class="muted small">(선택)</span></label>
+      <textarea class="textarea" rows="2" placeholder="오늘 특별히 남기고 싶은 말씀을 적어 주세요" maxlength="500"></textarea>
+    </div>
+
+    <div class="banner banner--info">
+      <span class="b-ic">💡</span>
+      <div class="small">기록은 <b>내 변화를 살펴보고 진료를 준비</b>하는 데 쓰여요. 진단·처방 목적이 아니에요.</div>
+    </div>
+
+    <a class="btn btn-primary btn-block btn-lg" href="05-home.html">오늘 기록 저장</a>
+  </div>
+
+  <div class="bottomnav">
+    <a class="nav-item" href="05-home.html"><span class="ni-ic">🏠</span><span>홈</span></a>
+    <a class="nav-item" href="06-sideeffects.html"><span class="ni-ic">📖</span><span>정보</span></a>
+    <a class="fab" href="07-chat.html"><span class="fab-btn">💬</span><span class="fab-label">상담</span></a>
+    <a class="nav-item nav-item--on" href="16-checkin.html"><span class="ni-ic">📈</span><span>기록</span></a>
+    <a class="nav-item" href="13-settings.html"><span class="ni-ic">👤</span><span>내 정보</span></a>
+  </div>
+</div>
+</body>
+</html>

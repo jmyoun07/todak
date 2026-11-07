@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 오늘의 스트레칭 (출시안)</title>
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="launch.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="B2-stretch-ask.html">‹</a>
+    <div><div class="appbar-title">오늘의 스트레칭</div><div class="appbar-sub" data-demo>5동작 · 10분쯤</div></div>
+  </div>
+  <div style="padding:0 18px;">
+    <div class="steps"><span class="step step--on"></span><span class="step step--on"></span></div>
+  </div>
+
+  <!-- AI 코칭 결과. AI 는 미국암학회 안내에서 고른 9동작(B7) 안에서만 고르고 설명을 쓴다.
+       AI 가 보는 것은 오늘 고르신 답(불편한 곳·팔 높이) · 수술한 쪽과 때 · 아팠다고 남긴 동작뿐이고, 횟수는 동작마다 정해 둔 대로 둔다(상태에 따라 늘리거나 줄이지 않음).
+       수술 종류·증상으로 운동을 '처방'하면 웰니스 범위를 넘을 수 있어 출시 전 식약처에 의료기기 해당 여부를 묻는다. 코드는 목록 밖 동작을 버리고,
+       '더 아파요'가 두 번 이어지면 코칭을 쉬고 치료받는 병원에 여쭤보시라고 알리며(진료과를 정하지 않음), 위험 신호면 이 화면 대신 B3 를 띄운다.
+       '고를 때 쓴 기록'은 이번 코칭에 쓴 기록을 그대로 보여 준다(무엇을 보고 골랐는지 숨기지 않는다).
+       첫 화면에서 동작 목록이 보이도록 AI 설명은 한 줄만 위에 두고, 까닭은 목록 아래 '이렇게 골랐어요'에 둔다.
+       '동작 바꾸기'는 실제 앱에서 바꿀 동작을 고른 뒤 동작 모음(B7)을 '바꾸기'로 열고, 고르면 이 화면으로 돌아온다(시안은 B7 로만 잇는다) -->
+  <div class="content content--tight" style="padding-bottom:150px;">
+    <div class="coach" data-demo>
+      <span class="ai-dot" aria-hidden="true">🤖</span>
+      <div class="grow">
+        <div class="co-t">오늘 고르신 답에 맞는 5동작이에요</div>
+        <div class="co-b">동작마다 하는 법을 한 줄씩 적었어요. 고른 까닭은 목록 아래에 있어요.</div>
+      </div>
+    </div>
+
+    <!-- 코드가 정하는 권유 — 수술 뒤 3~4주가 지나도 팔이 어깨 높이 위로 안 올라가면 코칭 위에 재활 진료 권유를 고정한다(B7 기준) -->
+    <div class="banner banner--warn">
+      <span class="b-ic">🏥</span>
+      <div class="small">수술한 지 <b>6개월</b>인데 팔이 어깨 높이까지만 올라가요. <b>재활 치료</b>가 도움이 될 수 있으니 다음 진료 때 담당 의료진에게 여쭤보세요.</div>
+    </div>
+
+    <div class="mv-list">
+      <div class="mv">
+        <span class="mv-no">1</span>
+        <span class="mv-fig"><svg class="fig" viewBox="0 0 120 120" aria-hidden="true"><circle class="hl" cx="33" cy="84" r="12"/><path class="base" d="M4 100H116"/><rect x="6" y="88" width="28" height="10" rx="5" style="fill:var(--surface-3);stroke:var(--outline-strong);stroke-width:2"/><circle cx="20" cy="80" r="8"/><path d="M28 86H68L84 64L98 98"/><path d="M33 85L62 79" style="opacity:.3"/><circle class="dot" cx="62" cy="79" r="4.5" style="opacity:.3"/><path d="M33 85L22 57"/><circle class="dot" cx="22" cy="57" r="4.5"/><path class="aux" d="M58 70Q50 34 30 49"/><path class="arw" d="M37 48.3L30 49L32.8 42.6"/></svg></span>
+        <div class="grow"><div class="mv-name">막대 들어 올리기</div><div class="mv-sub">누워서 · 5초 × 5~7번</div><div class="mv-why">안 아픈 팔이 막대를 끌어 줘요</div></div>
+      </div>
+      <div class="mv">
+        <span class="mv-no">2</span>
+        <span class="mv-fig"><svg class="fig" viewBox="0 0 120 120" aria-hidden="true"><circle class="hl" cx="34" cy="34" r="14"/><path class="base" d="M4 100H116"/><rect x="6" y="88" width="28" height="10" rx="5" style="fill:var(--surface-3);stroke:var(--outline-strong);stroke-width:2"/><circle cx="20" cy="80" r="8"/><path d="M28 86H68L84 64L98 98"/><path d="M34 85V44"/><circle class="dot" cx="34" cy="39" r="6.5" style="opacity:.3"/><path class="thin" d="M34 44L26 32M34 44L31 27M34 44L37 27M34 44L42 32"/><path class="aux" d="M49 27Q53 36 49 45"/><path class="aux" d="M19 27Q15 36 19 45"/></svg></span>
+        <div class="grow"><div class="mv-name">손 쥐었다 펴기</div><div class="mv-sub">누워서 팔을 들고 · 15~25번</div><div class="mv-why">팔을 위로 든 채 손을 쥐었다 펴요</div></div>
+      </div>
+      <div class="mv">
+        <span class="mv-no">3</span>
+        <span class="mv-fig"><svg class="fig" viewBox="0 0 120 120" aria-hidden="true"><circle class="hl" cx="56" cy="80" r="14"/><path class="base" d="M6 96H114"/><circle cx="20" cy="84" r="9"/><path d="M30 86H72L88 66L100 94"/><path d="M36 84L46 72L58 80"/><path class="aux" d="M46 60Q56 52 66 60"/><path class="aux" d="M40 48Q56 36 72 48"/></svg></span>
+        <div class="grow"><div class="mv-name">깊게 숨쉬기</div><div class="mv-sub">누워서 · 4~5번</div><div class="mv-why">배까지 천천히 숨을 들이쉬어요</div></div>
+      </div>
+      <div class="mv">
+        <span class="mv-no">4</span>
+        <span class="mv-fig"><svg class="fig" viewBox="0 0 120 120" aria-hidden="true"><circle class="hl" cx="46" cy="44" r="12"/><path class="base" d="M24 44V108M24 80H50M60 62H114M106 62V108"/><circle cx="40" cy="22" r="9"/><path d="M40 32V78H70V108"/><path d="M40 42L62 58H98"/><path class="aux" d="M72 48H104"/><path class="arw" d="M98 43L105 48L98 53"/></svg></span>
+        <div class="grow"><div class="mv-name">탁자에 팔 밀기</div><div class="mv-sub">앉아서 · 5초 × 5~7번</div><div class="mv-why">팔을 높이 들지 않고 해요</div></div>
+      </div>
+      <div class="mv">
+        <span class="mv-no">5</span>
+        <span class="mv-fig"><svg class="fig" viewBox="0 0 120 120" aria-hidden="true"><circle class="hl" cx="56" cy="40" r="13"/><path class="base" d="M100 4V112M8 112H112"/><circle cx="52" cy="22" r="9"/><path d="M52 32V72M52 72L46 110M52 72L60 110"/><path d="M52 40L74 26L96 12"/><path d="M52 40L58 58L62 74"/><circle class="pdot" cx="96" cy="60" r="2.8"/><circle class="pdot" cx="96" cy="46" r="2.8"/><circle class="pdot" cx="96" cy="32" r="2.8"/><path class="aux" d="M110 78V30"/><path class="arw" d="M105 36L110 28L115 36"/></svg></span>
+        <div class="grow"><div class="mv-name">벽 짚고 손가락 오르기</div><div class="mv-sub">서서 · 5초 × 5~7번</div><div class="mv-why">어깨 높이 위로 조금씩 올려요</div></div>
+      </div>
+    </div>
+
+    <div class="card" data-demo>
+      <div class="card-title">이렇게 골랐어요</div>
+      <ul class="dots why-dots">
+        <li>팔이 어깨 높이까지 올라간다고 고르셨고 10월 30일에 날개 펴기가 아팠다고 남기셔서, 두 손을 머리 뒤로 넘기는 동작은 뺐어요. 대신 벽을 짚고 조금씩 높이는 동작을 넣었어요.</li>
+        <li>횟수는 미국암학회 안내대로 정해 둔 그대로예요(늘이는 동작 5~7번, 손 쥐었다 펴기 15~25번). 늘이는 동작은 힘들면 5번에서 멈추세요.</li>
+        <li>손·손목이 불편하다고 고르셔서 손 쥐었다 펴기를 넣었어요.</li>
+      </ul>
+      <div class="row" style="margin:12px 0 4px; align-items:center;"><span class="tiny muted grow">이번에 고를 때 쓴 기록</span><a class="tiny strong tap" href="A4-treatment-surgery.html" style="color:var(--primary-dark); text-decoration:none;">치료 정보 고치기 ›</a></div>
+      <div class="seen">
+        <span>오늘 고르신 답</span><span>수술한 쪽 · 왼쪽</span><span>수술한 때 · 2026년 5월</span><span>아팠던 동작 · 날개 펴기</span>
+      </div>
+    </div>
+
+    <div class="banner banner--warn">
+      <span class="b-ic">✋</span>
+      <div class="small"><b>당기는 느낌까지만</b> 하세요.<br>아프면 바로 멈추세요.</div>
+    </div>
+    <p class="tiny muted center">미국암학회 안내에서 고른 9동작 안에서 AI가 고른 안내예요.<br>진단이나 처방이 아니에요.</p>
+  </div>
+
+  <div class="footer-actions">
+    <div class="row gap-8">
+      <a class="btn btn-outline grow" href="B7-stretch-library.html">동작 바꾸기</a>
+      <a class="btn btn-primary grow" href="B5-stretch-do.html">▶ 시작하기</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

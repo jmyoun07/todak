@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 스트레칭 (출시안)</title>
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="launch.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="A1-home.html">‹</a>
+    <div><div class="appbar-title">스트레칭</div><div class="appbar-sub" data-demo>수술한 왼쪽 어깨 중심</div></div>
+  </div>
+
+  <!-- 스트레칭 첫 화면 — 이번 주 한 날 · 오늘 시작 · 지난번 동작 · 동작 모음 · 알림.
+       시작을 누르면 1분 질문(B2) → AI가 감수한 동작 목록 안에서 골라 줌(B4) -->
+  <div class="content content--tight" style="padding-bottom:150px;">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:10px;">이번 주 스트레칭</div>
+      <div class="wk7" data-demo>
+        <div class="done"><span class="d">월</span><span class="m">✓</span></div>
+        <div class="done"><span class="d">화</span><span class="m">✓</span></div>
+        <div class="today"><span class="d">수</span><span class="m">·</span></div>
+        <div><span class="d">목</span><span class="m">·</span></div>
+        <div><span class="d">금</span><span class="m">·</span></div>
+        <div><span class="d">토</span><span class="m">·</span></div>
+        <div><span class="d">일</span><span class="m">·</span></div>
+      </div>
+      <div class="tiles" style="margin-top:12px;">
+        <div class="tile"><div class="t-num" data-demo>2일</div><div class="t-lab">이번 주 스트레칭한 날</div></div>
+        <div class="tile"><div class="t-num" data-demo>나아졌어요</div><div class="t-lab">어제 하고 난 뒤</div></div>
+      </div>
+    </div>
+
+    <div class="card now-card" style="border:1.5px solid var(--primary-light);">
+      <div class="card-title">오늘 스트레칭을 시작할까요?</div>
+      <div class="card-sub">오늘 불편한 곳을 1분만 여쭤보고, 맞는 동작 5개쯤을 골라 드려요.</div>
+      <a class="btn btn-primary btn-block" href="B2-stretch-ask.html" style="margin-top:12px;">🤸 오늘 스트레칭 시작</a>
+    </div>
+
+    <div class="l-h">어제 한 동작 <span class="l-hint">같은 동작으로 해도 돼요 · 안전 확인은 먼저 해요</span></div>
+    <div class="mv-list">
+      <div class="mv">
+        <span class="mv-fig"><svg class="fig" viewBox="0 0 120 120" aria-hidden="true"><circle class="hl" cx="33" cy="84" r="12"/><path class="base" d="M4 100H116"/><rect x="6" y="88" width="28" height="10" rx="5" style="fill:var(--surface-3);stroke:var(--outline-strong);stroke-width:2"/><circle cx="20" cy="80" r="8"/><path d="M28 86H68L84 64L98 98"/><path d="M33 85L62 79" style="opacity:.3"/><circle class="dot" cx="62" cy="79" r="4.5" style="opacity:.3"/><path d="M33 85L22 57"/><circle class="dot" cx="22" cy="57" r="4.5"/><path class="aux" d="M58 70Q50 34 30 49"/><path class="arw" d="M37 48.3L30 49L32.8 42.6"/></svg></span>
+        <div class="grow"><div class="mv-name">막대 들어 올리기</div><div class="mv-sub">누워서 · 어제 5번 했어요</div></div>
+        </div>
+      <div class="mv">
+        <span class="mv-fig"><svg class="fig" viewBox="0 0 120 120" aria-hidden="true"><circle class="hl" cx="56" cy="40" r="13"/><path class="base" d="M100 4V112M8 112H112"/><circle cx="52" cy="22" r="9"/><path d="M52 32V72M52 72L46 110M52 72L60 110"/><path d="M52 40L74 26L96 12"/><path d="M52 40L58 58L62 74"/><circle class="pdot" cx="96" cy="60" r="2.8"/><circle class="pdot" cx="96" cy="46" r="2.8"/><circle class="pdot" cx="96" cy="32" r="2.8"/><path class="aux" d="M110 78V30"/><path class="arw" d="M105 36L110 28L115 36"/></svg></span>
+        <div class="grow"><div class="mv-name">벽 짚고 손가락 오르기</div><div class="mv-sub">서서 · 어제 5번 했어요</div></div>
+        </div>
+      <a class="btn btn-outline btn-block" href="B2-stretch-ask.html">▶ 어제 동작으로 하기 (안전 확인 먼저)</a>
+      <a class="mv" href="B7-stretch-library.html">
+        <span class="mv-fig" style="display:grid; place-items:center; font-size:26px;">📚</span>
+        <div class="grow"><div class="mv-name">동작 모음 보기</div><div class="mv-sub">미국암학회 안내에서 고른 9동작 · 언제부터 해도 되나요?</div></div>
+        <span class="li-chev" aria-hidden="true">›</span>
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="row" role="switch" aria-checked="true" tabindex="0" aria-label="스트레칭 알림" style="justify-content:space-between; align-items:center; gap:12px; min-height:44px;">
+        <div class="grow">
+          <div class="card-title">스트레칭 알림</div>
+          <div class="card-sub" data-demo>아침 9시 · 저녁 8시 · 끄실 수 있어요</div>
+        </div>
+        <span class="switch" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <div class="banner banner--warn">
+      <span class="b-ic">✋</span>
+      <div class="small"><b>당기는 느낌까지만</b> 하세요. 아프면 바로 멈추세요.<br>수술 뒤 언제부터 해도 되는지는 <b>수술한 병원 안내</b>를 따라요.</div>
+    </div>
+  </div>
+
+  <div class="bottomnav">
+    <a class="nav-item" href="A1-home.html"><span class="ni-ic">🏠</span><span>홈</span></a>
+    <a class="nav-item" href="06-sideeffects.html"><span class="ni-ic">📖</span><span>정보</span></a>
+    <a class="fab" href="07-chat.html"><span class="fab-btn">💬</span><span class="fab-label">상담</span></a>
+    <a class="nav-item" href="A2-checkin-arm.html"><span class="ni-ic">📈</span><span>기록</span></a>
+    <a class="nav-item" href="13-settings.html"><span class="ni-ic">👤</span><span>내 정보</span></a>
+  </div>
+</div>
+</body>
+</html>

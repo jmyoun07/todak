@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 구내염</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="06-sideeffects.html">‹</a>
+    <div><div class="appbar-title">구내염</div><div class="appbar-sub">입안 통증·염증</div></div>
+  </div>
+
+  <!-- 정보 화면 디자인 시스템 v3 (2026-09-28 · 본보기 31-detail-nausea · app.css '정보 화면 디자인 시스템 v3' · STYLE.md)
+       모든 묶음은 상자(.sec) · 제목(.sec-t)은 상자 윗선에 걸친다 · 색: 초록=하세요 / 노랑=주의 / 옅은 장미=피하세요 / 진한 빨강=응급 -->
+  <div class="content content--tight content--jump" style="padding-bottom:150px;">
+    <div class="row wrap" style="gap:8px;">
+      <span class="pill pill--brand">💉 항암화학요법</span>
+      <span class="sev sev--mod">흔함 · 중등도</span>
+    </div>
+
+    <!-- ═══ 바로 가기 — 여섯 칸 같은 크기(2열) · 누르면 그 상자로 내려간다(다른 내용을 숨기지 않는다) ═══ -->
+    <nav class="sec sec--jump" aria-label="이 화면 바로 가기">
+      <div class="sec-t">바로 가기</div>
+      <div class="jump">
+        <a class="jump-b jump-b--why" href="#s-why"><span>이게 왜 생겨요?</span></a>
+        <a class="jump-b jump-b--good" href="#s-care"><span>이렇게 관리해요</span></a>
+        <a class="jump-b jump-b--food" href="#s-food"><span>좋은 음식</span></a>
+        <a class="jump-b jump-b--avoid" href="#s-avoid"><span>피해야 할 음식</span></a>
+        <a class="jump-b jump-b--emg" href="#s-fever"><span>열이 나면</span></a>
+        <a class="jump-b jump-b--hosp" href="#s-call"><span>이럴 땐 병원에</span></a>
+      </div>
+    </nav>
+
+    <!-- ═══ ① 이게 왜 생겨요? ═══ -->
+    <section class="sec sec--why" id="s-why">
+      <h2 class="sec-t section-label">이게 왜 생겨요?</h2>
+      <p class="sec-p">입안 점막은 <b>3~5일마다 새것으로 바뀌어요.</b></p>
+      <p class="sec-p">항암제 때문에 새것으로 바뀌지 못하면<br>벗겨진 자리가 채워지지 않고 <b>헐어요.</b></p>
+      <div class="it">
+        <div class="it-t">언제 생기고, 언제 아물어요</div>
+        <div class="it-b">보통 치료 시작 <b>7~10일쯤</b> 생겨서,<br>감염이 없으면 <b>2~4주</b>에 걸쳐 아물어요.</div>
+        <div class="it-b">이 시기는 백혈구가 가장 낮아지는 때와 겹쳐요.<br>그래서 <b>이때 나는 열은 훨씬 위험해요.</b></div>
+      </div>
+    </section>
+
+    <!-- ═══ ② 이렇게 관리해요 (초록) — 시간 순서라 번호, 내내 할 일·겹칠 때는 번호 밖에 막대 표시 ═══ -->
+    <section class="sec sec--good" id="s-care">
+      <h2 class="sec-t section-label">이렇게 관리해요</h2>
+      <ol class="nsteps">
+        <li>
+          <div class="it-t">치료 시작 전~1주차</div>
+          <div class="it-b">아직 안 아플 때가 준비할 때예요.</div>
+          <div class="it-do"><span>부드러운 칫솔과 알코올 없는<br>구강청결제를 미리 준비하세요.</span></div>
+          <div class="it-do"><span>치과 진료 예정이 있다면 시기를<br>담당 의사와 먼저 상의하세요.</span></div>
+        </li>
+        <li>
+          <div class="it-t">7~10일차, 시작될 무렵</div>
+          <div class="it-b">입안이 <b>화끈거리기 시작하는 때</b>예요.</div>
+          <div class="it-b">알코올이 든 구강청결제와 진한 소금물은<br>헌 자리를 더 쏘아요.</div>
+          <div class="it-do"><span>알코올 없는 구강청결제나 생리식염수로<br>헹구는 횟수를 늘리세요.</span></div>
+          <div class="it-do"><span>헹굼물은 따뜻한 물 1컵(약 240ml)에<br>베이킹소다 1/4작은술 + 소금 1/8작은술이에요.</span></div>
+        </li>
+        <li>
+          <div class="it-t">가장 아픈 시기</div>
+          <div class="it-b">헌 자리는 세균·곰팡이가 들어오는 입구예요.<br>입안을 깨끗이 하지 않으면 감염이 겹쳐요.</div>
+          <div class="it-do"><span>아파도 양치를 멈추지 마세요.</span></div>
+          <div class="it-do"><span>식후와 자기 전에 부드럽게 닦으세요.</span></div>
+        </li>
+      </ol>
+      <div class="it">
+        <div class="it-t">치료 기간 내내</div>
+        <div class="it-do"><span>입술과 입안을 마르지 않게 하세요.</span></div>
+        <div class="it-do"><span>물을 조금씩 자주 넘기세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">메스꺼움도 같이 있다면</div>
+        <div class="it-b">메스꺼울 때 권하는 <b>신맛 사탕</b>이<br>헌 입안을 쏘아요.</div>
+        <div class="it-do"><span>입안이 헐었을 땐 빼세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ③ 이런 음식이 좋아요 (초록) ═══ -->
+    <section class="sec sec--food" id="s-food">
+      <h2 class="sec-t section-label">이런 음식이 좋아요</h2>
+      <div class="it">
+        <div class="it-t">씹을 일이 적고 미지근한 것</div>
+        <div class="it-b">흰죽·미음, 계란찜, 순두부, 으깬 감자, 호박죽</div>
+      </div>
+      <div class="it">
+        <div class="it-t">누룽지는 숭늉으로</div>
+        <div class="it-do"><span>그대로 씹지 말고 충분히 불려 드세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">국·반찬은 부드럽게</div>
+        <div class="it-do"><span>갈거나 잘게 다져 드세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ④ 이런 음식은 피하세요 (옅은 장미) — 제목 = 피할 것 / 풀이 = 까닭 / → = 대신 이렇게 ═══ -->
+    <section class="sec sec--avoid" id="s-avoid">
+      <h2 class="sec-t section-label">이런 음식은 피하세요</h2>
+      <div class="it">
+        <div class="it-t">신 김치·김치찌개</div>
+        <div class="it-b">매운맛과 신맛이 겹쳐 가장 아파요.<br>물에 헹궈도 자극이 남아요.</div>
+        <div class="it-do"><span>이 시기엔 다른 반찬으로 바꾸세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">맵고 시고 짠 것</div>
+        <div class="it-b">매운맛·신맛·짠맛이 헌 자리의 신경을<br>직접 건드려요.</div>
+        <div class="it-b">예: 귤·오렌지·레몬, 초무침, 오이지,<br>식초 넣은 냉면 육수, 토마토주스,<br>젓갈·장아찌·짠 국물</div>
+      </div>
+      <div class="it">
+        <div class="it-t">딱딱하고 모서리가 날카로운 것</div>
+        <div class="it-b">헌 점막을 긁고 찢어요.</div>
+        <div class="it-b">예: 그대로 씹는 누룽지, 튀각·부각·김부각,<br>마른오징어, 견과류, 과자, 생채소 스틱</div>
+      </div>
+      <div class="it">
+        <div class="it-t"><span><span class="nw">갓 끓인 국·찌개,</span> <span class="nw">갓 지은 밥</span></span></div>
+        <div class="it-b">뜨거우면 헌 자리를 자극해요.</div>
+        <div class="it-do"><span>한 김 식혀서 드세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">술·탄산</div>
+        <div class="it-b">알코올과 탄산이 헌 자리를 쏘아요.</div>
+        <div class="it-do"><span>이 시기엔 빼세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ⑤ 열이 나면 바로 병원에 (응급 · 진한 빨강) — 헌 자리가 감염이 들어오는 입구이고 백혈구가 가장 낮은 때와 겹쳐
+         열이 이 화면의 가장 위험한 신호라, 공통 열 기준 덩이(fever-common)를 지우지 않고 이 상자로 옮겼다(STYLE.md 4-5 예외 · 37 과 같은 짜임).
+         '열이 없어도'(오한·몸살, 귀 36.0 아래)는 응급 안내(48)에 있다. ═══ -->
+    <section class="sec sec--emg" id="s-fever">
+      <h2 class="sec-t section-label">열이 나면 바로 병원에</h2>
+      <p class="sec-p">항암치료 중에 나는 열은 원인과 상관없이<br><b>그 자체가 응급</b>이에요.</p>
+      <p class="sec-p">입안이 헐어 있으면 그 자리로<br>세균이 들어오기 쉬워 <b>더 위험해요.</b></p>
+      <div class="it">
+        <div class="it-t">재는 곳마다 기준이 달라요</div>
+      </div>
+      <ul class="dots">
+        <li>귀(고막) <b>38.0도 이상</b></li>
+        <li>겨드랑이 <b>37.5도 이상</b></li>
+        <li>입(구강) <b>38.3도 이상</b><span class="dots-b">또는 38.0도가 1시간 넘게 이어질 때</span></li>
+      </ul>
+      <div class="it">
+        <div class="it-b">귀·겨드랑이 기준과 입 38.3도는<br><b>한 번만</b> 나와도 해당돼요.</div>
+        <div class="it-b">어디로 쟀는지 헷갈리면<br><b>38.0도</b>를 기준으로 보세요.</div>
+        <div class="it-do"><span>“한 시간 더 지켜보자” 하지 마세요.</span></div>
+      </div>
+      <div class="case">
+        <div class="case-t">열이 기준을 넘으면</div>
+        <div class="case-b">밤이든 주말이든 기다리지 마세요.</div>
+        <div class="case-do">
+          <div class="case-do-h">이렇게 하세요</div>
+          <div class="it-do"><span>해열제(타이레놀·부루펜)를<br>먼저 드시지 마세요.</span></div>
+          <div class="it-do"><span>치료받는 병원에 바로 연락하세요.</span></div>
+          <div class="it-do"><span>접수할 때 <span class="nw">“항암치료 중인데</span> <span class="nw">열이 납니다”라고</span> <span class="nw">먼저 말씀하세요.</span></span></div>
+          <div class="case-note">해열제로 열이 가려지면 상황을 놓쳐요.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ⑥ 이럴 땐 병원에 — 큰 상자 하나에 세 단계(🔴·🟠·🟢) 중간 상자 ═══
+         단계 제목의 🔴·🟠·🟢 글자는 지우지 않는다(화면에서는 둥근 점으로 그림) — AI 상담 자료 색인이 이 글자로 단계를 나눈다.
+         단계 제목에는 section-label 을 붙이지 않는다 — 세 단계가 색인에서 '이럴 땐 병원에' 한 묶음으로 남아야 한다. -->
+    <section class="sec sec--group" id="s-call">
+      <h2 class="sec-t section-label">이럴 땐 병원에</h2>
+      <p class="sec-sub">세 단계로 나눴어요. 위에서부터 급한 순서예요.</p>
+
+      <!-- 🔴 1단계 — 부작용 화면마다 되풀이하던 '이럴 땐 전화 말고 119'는 응급 안내(48) 한 칸으로 바꿨다 -->
+      <div class="sec sec--lv1" id="s-119">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🔴</span> <span>지금 바로 119</span></div>
+        <a class="link-card link-card--emg" id="s-emg" href="48-emergency.html?from=36-detail-mucositis.html">
+          <span class="link-card-ic" aria-hidden="true"></span>
+          <span class="link-card-body">
+            <span class="link-card-t">응급 상황일 땐 이렇게 하세요</span>
+            <span class="link-card-s">열이 38.0도 이상일 때<br>(겨드랑이는 37.5도 이상)<br>숨이 차거나 정신이 흐릿할 때</span>
+          </span>
+        </a>
+        <a class="btn btn-danger btn-block" href="tel:119">📞 119 응급전화</a>
+      </div>
+
+      <!-- 🟠 2단계 -->
+      <div class="sec sec--lv2" id="s-today">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟠</span> <span>그날 안에 연락하세요</span></div>
+        <div class="it">
+          <div class="it-t">입안이 이런 모습이면</div>
+        </div>
+        <ul class="dots">
+          <li><b>진통제를 먹어도 아파서</b><br>2일 이상 제대로 못 드실 때</li>
+          <li><b>아파서 물도 못 넘기거나</b><br>하루 종일 아무것도 못 드셨을 때<span class="dots-b">다음 날까지 기다리지 마세요.<br>탈수가 올 수 있어요.</span></li>
+          <li>혀·볼 안쪽에 <b>하얀 막(백태)</b>이 끼거나<br><b>물집</b>이 생기거나 심하게 부을 때<span class="dots-b">곰팡이(칸디다)나 바이러스 감염이<br>겹쳤을 수 있어요. 따로 약이 필요해요.</span></li>
+          <li><b>4주가 지나도 낫지 않거나</b><br>오히려 심해질 때<span class="dots-b">보통은 2~4주면 아물어요.</span></li>
+        </ul>
+        <!-- 저장해 두신 병원 번호가 있으면 features.js(wireCallMine)가 '병원 이름 + 번호' 로 바로 걸리는 단추로 바꾼다.
+             번호가 없으면 글자를 '🏥 내 병원 번호 등록하기'로 바꾸고 84 등록 화면으로 보낸다. -->
+        <a class="btn btn-outline btn-outline--lv2 btn-block" href="84-care-contacts.html?from=36-detail-mucositis.html" data-role="call-mine">📞 내 병원으로 연락하기</a>
+        <!-- 담당 병원 바로 아래에 근처 병원 — 치과는 nearby.js DEPT '49'(치과병원·치과의원 종별로 거름) -->
+        <div class="it">
+          <div class="it-t">담당 병원이 멀거나 문 닫았다면</div>
+          <div class="it-b">열이 없고 물·죽은 넘기실 수 있으면<br>가까운 치과·구강내과도 괜찮아요.</div>
+        </div>
+        <a class="btn btn-outline btn-block" href="92-nearby-list.html?dept=49&amp;from=36-detail-mucositis.html">🏥 근처 치과 찾기</a>
+      </div>
+
+      <!-- 🟢 3단계 -->
+      <div class="sec sec--lv3" id="s-next">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟢</span> <span>다음 진료 때 말씀하세요</span></div>
+        <div class="it">
+          <div class="it-t"><span>아프긴 하지만<br>부드러운 음식은 넘길 수 있을 때</span></div>
+          <div class="it-do"><span>언제부터 아팠는지, 어떤 음식이<br>특히 힘들었는지 적어 두세요.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="tiny muted rf-src">근거: CTCAE v5.0 · 미국 국립암연구소(NCI) ·<br>대한종양간호학회 · 대한감염학회 —<br>자세한 출처는 <b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요</div>
+
+    <p class="disclaimer">본 제품은 의료기기가 아니므로 질병 유무를 판단할 수 없으며, 질병 유무 판단을 위해서는 의사의 검진이 필요합니다.</p>
+  </div>
+
+  <div class="footer-actions">
+    <div class="row gap-8">
+      <a class="btn btn-outline grow" href="10-consult-questions.html">📝 진료 질문 만들기</a>
+      <a class="btn btn-primary grow" href="07-chat.html">💬 이 증상 물어보기</a>
+    </div>
+  </div>
+
+  <!-- 전화 걸기 확인 — 실수로 눌러도 바로 걸리지 않게 -->
+  <div class="callpop" id="callpop" role="dialog" aria-modal="true" aria-label="전화 걸기 확인" hidden>
+    <div class="callpop-card">
+      <div style="font-size:34px;">📞</div>
+      <div class="strong" style="font-size:17px;" id="callpop-title">전화를 걸까요?</div>
+      <a class="btn btn-primary btn-block btn-lg" id="callpop-go" href="tel:119" data-direct="1">📞 지금 전화 걸기</a>
+      <button class="btn btn-outline btn-block" id="callpop-no" type="button">닫기</button>
+    </div>
+  </div>
+</div>
+<script>(function(){
+var NAMES={"119":"119 구급대","109":"자살예방 상담전화 109","1577-0199":"정신건강 위기상담 1577-0199"};
+var pop=document.getElementById("callpop");if(!pop)return;
+var go=document.getElementById("callpop-go"),no=document.getElementById("callpop-no"),tt=document.getElementById("callpop-title");
+document.addEventListener("click",function(e){
+  var a=e.target&&e.target.closest?e.target.closest("a"):null;if(!a)return;
+  var h=a.getAttribute("href")||"";
+  if(h.indexOf("tel:")!==0||a.hasAttribute("data-direct"))return;
+  e.preventDefault();e.stopImmediatePropagation();e.stopPropagation();
+  var num=h.slice(4);
+  pop.__opener=a;
+  /* 배선 JS 가 붙인 병원 이름(data-callname)이 있으면 그 이름으로 묻는다 — 숫자만 보면 어디로 거는지 모른다 (48 과 같은 방식) */
+  tt.textContent=(a.getAttribute("data-callname")||NAMES[num]||num)+"에 전화할까요?";
+  go.setAttribute("href","tel:"+num);
+  pop.hidden=false;no.focus();
+},true);
+function close(){pop.hidden=true;
+  if(pop.__opener&&pop.__opener.focus){pop.__opener.focus();}}
+no.addEventListener("click",close);
+go.addEventListener("click",function(){setTimeout(close,150);});
+pop.addEventListener("click",function(e){if(e.target===pop)close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!pop.hidden){e.stopPropagation();close();}},true);
+})()</script>
+</body>
+</html>

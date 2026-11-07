@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 수면장애</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="06-sideeffects.html">‹</a>
+    <div><div class="appbar-title">수면장애</div><div class="appbar-sub">잠들기·자주 깸</div></div>
+  </div>
+
+  <!-- 정보 화면 디자인 시스템 v3 (2026-09-28 · 31 오심·구토가 본보기 · STYLE.md)
+       모든 묶음은 상자(.sec) · 제목(.sec-t)은 상자 윗선에 걸친다 · 색: 초록=하세요 / 노랑=주의 / 옅은 장미=피하세요 / 진한 빨강=응급 -->
+  <div class="content content--tight content--jump" style="padding-bottom:150px;">
+    <div class="row wrap" style="gap:8px;">
+      <span class="pill pill--brand">🩺 모든 치료 공통</span>
+      <span class="sev sev--mild">흔함</span>
+    </div>
+
+    <!-- ═══ 바로 가기 — 여섯 칸 같은 크기(2열) · 누르면 그 상자로 내려간다(다른 내용을 숨기지 않는다) ═══ -->
+    <nav class="sec sec--jump" aria-label="이 화면 바로 가기">
+      <div class="sec-t">바로 가기</div>
+      <div class="jump">
+        <a class="jump-b jump-b--why" href="#s-why"><span>이게 왜 생겨요?</span></a>
+        <a class="jump-b jump-b--good" href="#s-care"><span>이렇게 관리해요</span></a>
+        <a class="jump-b jump-b--caution" href="#s-supp"><span>약·보충제 주의</span></a>
+        <a class="jump-b jump-b--info" href="#s-help"><span>도움받을 곳</span></a>
+        <a class="jump-b jump-b--hosp" href="#s-call"><span>이럴 땐 병원에</span></a>
+        <a class="jump-b jump-b--emg" href="#s-emg"><span>응급 상황일 땐</span></a>
+      </div>
+    </nav>
+
+    <!-- ═══ ① 이게 왜 생겨요? (정보) — 전에는 원인 목록이 두 곳(설명 카드 + 통계 배너)에 있었다 — 한 곳으로 합쳤다 ═══ -->
+    <section class="sec sec--why" id="s-why">
+      <h2 class="sec-t section-label">이게 왜 생겨요?</h2>
+      <p class="sec-p">암 치료를 받는 분의 <b>절반쯤</b>이<br>잠 문제를 겪어요.</p>
+      <ul class="dots">
+        <li><b>스테로이드(덱사메타손)</b><span class="dots-b">항암 주기마다 함께 쓰는 며칠 동안<br>잠이 얕아져요.</span></li>
+        <li><b>호르몬치료</b><span class="dots-b">열감 때문에 새벽에 깨는 일이 흔해요.</span></li>
+        <li><b>다른 약</b><span class="dots-b">진정제·항우울제도 잠을 방해할 수 있어요.</span></li>
+        <li><b>몸과 마음</b><span class="dots-b">통증·밤에 나는 땀·잦은 소변,<br>메스꺼움·변비·설사,<br>불안·재발 걱정</span></li>
+      </ul>
+      <div class="tip">
+        <span class="tip-lab">팁</span>
+        <div class="it-t">어떤 잠 문제인지 먼저 나눠 보세요</div>
+        <div class="it-b"><b>잠들기 어려운지, 자다가 깨는지,<br>새벽에 일찍 깨는지</b>에 따라<br>해법이 달라요.</div>
+      </div>
+    </section>
+
+    <!-- ═══ ② 이렇게 관리해요 (초록) — 순서가 아니라 막대 소제목 ═══ -->
+    <section class="sec sec--good" id="s-care">
+      <h2 class="sec-t section-label">이렇게 관리해요</h2>
+      <div class="it">
+        <div class="it-t">일어나는 시각을 매일 같게</div>
+        <div class="it-b">잠이 모자라다고 일찍 눕거나<br>늦게까지 누워 있으면 <b>얕은 잠만 길어져요.</b></div>
+        <div class="it-do"><span>눕는 시각은 졸릴 때로 두세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">침대는 잠잘 때만 쓰세요</div>
+        <div class="it-b">누운 채 휴대폰을 보거나 걱정을 하면<br>몸이 침대를 ‘깨어 있는 곳’으로 기억해요.</div>
+        <div class="it-do"><span>20분쯤 지나도 잠이 안 오면<br>일어나 거실에서 조용히 지내다<br>졸릴 때 다시 누우세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">낮잠은 30분 안쪽, 오후 3시 전에</div>
+        <div class="it-b">피로가 심할 땐 낮잠도 필요해요.<br>늦은 오후 낮잠은 밤잠을 뒤로 밀어내요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">운동은 낮에 하세요</div>
+        <div class="it-b">낮에 몸을 쓰면 밤잠이 깊어져요.<br><b>잠들기 3시간 안쪽</b> 운동은 잠을 밀어내요.</div>
+        <div class="it-do"><span>저녁 운동은 시간을 앞으로 당기세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">긴장 풀기는 눕기 전에 끝내세요</div>
+        <div class="it-b">날숨을 길게 하는 호흡이나<br>발끝부터 힘을 줬다 푸는 근육 이완이 좋아요.</div>
+        <div class="it-b">잠들려고 애쓸수록 오히려 잠이 달아나요.</div>
+        <div class="it-do"><span>침대 밖에서 마치고 누우세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">깬 이유를 며칠만 적어 보세요</div>
+        <div class="it-b">열감·통증·화장실·불안 중 무엇 때문인지 적어 두면, 수면제를 늘리기보다 <b>원인을 다룰 수 있어요.</b></div>
+        <div class="it-do"><span>적은 것을 진료 때 가져가세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">누워 있는 시간을 줄이는 방법도 있어요</div>
+        <div class="it-b">뒤척임이 길 땐 침대에 머무는 시간을 오히려 <b>줄이고</b>, 잠이 붙으면 조금씩 늘려요.</div>
+        <div class="it-do"><span>이 방법은 담당 의사나 상담사와<br>함께 정하세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ③ 약·보충제 주의 (노랑) — 약 시간은 스스로 바꾸지 않는다 · 보충제는 스스로 시작하지 않는다 ═══ -->
+    <section class="sec sec--caution" id="s-supp">
+      <h2 class="sec-t section-label">약·보충제, 이것만 주의하세요</h2>
+      <div class="it">
+        <div class="it-t">약 먹는 시간부터 살펴보세요</div>
+        <div class="it-b">저녁에 드시는 <b>스테로이드</b>와<br>늦은 시간의 <b>수액·이뇨제</b>가 잠을 끊어요.</div>
+        <div class="it-do"><span>시간을 옮길 수 있는지<br>담당 의사에게 물어보세요.</span></div>
+        <div class="it-do"><span>스스로 시간을 바꾸지는 마세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">멜라토닌·수면유도제</div>
+        <div class="it-b">보충제나 약국 수면유도제는<br><b>치료제와 겹칠 수 있어요.</b></div>
+        <div class="it-do"><span>스스로 시작하지 마세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">수면제보다 먼저 권하는 것</div>
+        <div class="it-b">암 치료 중 불면에는 수면제보다<br><b>불면증 인지행동치료</b>를 먼저 권해요.</div>
+        <div class="it-b">위의 ‘이렇게 관리해요’ 대부분이<br>그 방법이에요.</div>
+        <div class="it-do"><span>약이 필요한지는 담당 의사와<br>함께 정하세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ④ 도움받을 수 있는 곳 (정보) — 앱 밖 공공 상담 창구(앱 안 연락 창구가 아니다) ═══ -->
+    <section class="sec sec--info" id="s-help">
+      <h2 class="sec-t section-label">도움받을 수 있는 곳</h2>
+      <div class="it">
+        <div class="it-t">암생존자통합지지센터 · 1577-9740</div>
+        <div class="it-b">국립암센터와 전국 <b>13개 권역센터</b>에서<br><b>수면장애·불안</b>을 상담해 줘요.</div>
+        <div class="it-b">주요 치료(수술·항암·방사선)를 마치신 분과 <b>가족</b>이 이용할 수 있어요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">정신건강 위기상담 · 1577-0199</div>
+        <div class="it-b">사는 지역 <b>정신건강복지센터</b>로 연결돼요.</div>
+        <div class="it-b">잠 문제가 불안·우울과 얽혀 있을 때<br>대면 상담으로 이어 줘요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">밤에 견디기 힘든 생각이 들 땐 109</div>
+        <div class="it-b">자살예방 상담전화 <b>109</b>는 <b>24시간</b> 받아요.</div>
+        <div class="it-b">방법을 정해 두셨거나, 이미 시도하셨거나,<br>혼자서 안전을 지키기 어려울 때는<br><b>109가 아니라 119예요.</b></div>
+        <div class="it-do"><span>바로 119에 연락하세요.</span></div>
+      </div>
+      <a class="link-card" href="47-detail-anxiety.html?from=46-detail-sleep.html">
+        <span class="link-card-ic" aria-hidden="true"></span>
+        <span class="link-card-body">
+          <span class="link-card-t">불안·재발 걱정 돌보기</span>
+          <span class="link-card-s">마음이 불안해 잠이 안 올 때</span>
+        </span>
+      </a>
+    </section>
+
+    <!-- ═══ ⑤ 이럴 땐 병원에 — 큰 상자 하나에 두 단계(🔴·🟢) 중간 상자 ═══
+         잠 문제 자체에는 '그날 안에 연락'할 기준이 없다 — 전에 🟠 에 있던 것은 공통 열 기준 덩이뿐이었고, 그것은 응급 안내(48)로 모았다.
+         단계 제목의 🔴·🟢 글자는 지우지 않는다(화면에서는 둥근 점으로 그림) — AI 상담 자료 색인이 이 글자로 단계를 나눈다.
+         단계 제목에는 section-label 을 붙이지 않는다(_build_kb.py split_risk). -->
+    <section class="sec sec--group" id="s-call">
+      <h2 class="sec-t section-label">이럴 땐 병원에</h2>
+      <p class="sec-sub">두 단계로 나눴어요. 위에서부터 급한 순서예요.</p>
+
+      <!-- 🔴 1단계 — 잠에서 깨는 이유가 수면 문제가 아닌 경우(심장 쪽 신호) · 41 심장기능저하·48 응급 안내와 같은 기준 -->
+      <div class="sec sec--lv1" id="s-119">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🔴</span> <span>지금 바로 119</span></div>
+        <div class="case">
+          <div class="case-t">숨이 차서 잠에서 깨거나,<br>똑바로 누우면 숨쉬기 힘들어<br>베개를 높여야 잠이 올 때</div>
+          <div class="case-b">불면이 아니라 심장 쪽 신호일 수 있어요.<br>가만히 있어도 숨이 차거나<br>가슴이 아플 때도 같아요.</div>
+          <div class="case-do">
+            <div class="case-do-h">이렇게 하세요</div>
+            <div class="it-do"><span>바로 119에 연락하세요.</span></div>
+          </div>
+        </div>
+        <a class="link-card" href="41-detail-cardio.html?from=46-detail-sleep.html">
+          <span class="link-card-ic" aria-hidden="true"></span>
+          <span class="link-card-body">
+            <span class="link-card-t">심장 기능 저하 안내 보기</span>
+            <span class="link-card-s">숨참·부기·두근거림</span>
+          </span>
+        </a>
+        <!-- 응급 상황 전반(열 기준·해열제 주의·숨참·의식 흐림·소변 줄어듦)은 홈의 응급 안내(48)에 모여 있다.
+             부작용 화면마다 되풀이하던 '이럴 땐 전화 말고 119'·열 기준 덩이를 이 한 칸으로 바꿨다(31 과 같음). -->
+        <a class="link-card link-card--emg" id="s-emg" href="48-emergency.html?from=46-detail-sleep.html">
+          <span class="link-card-ic" aria-hidden="true"></span>
+          <span class="link-card-body">
+            <span class="link-card-t">응급 상황일 땐 이렇게 하세요</span>
+            <span class="link-card-s">열이 38.0도 이상일 때<br>(겨드랑이는 37.5도 이상)<br>숨이 차거나 정신이 흐릿할 때</span>
+          </span>
+        </a>
+        <a class="btn btn-danger btn-block" href="tel:119">📞 119 응급전화</a>
+      </div>
+
+      <!-- 🟢 2단계 — 근처 병원은 원래 '가벼울 땐 근처 병원' 조건 그대로. 정신건강의학과는 심평원 진료과목코드 03 -->
+      <div class="sec sec--lv3" id="s-next">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟢</span> <span>다음 진료 때 말씀하세요</span></div>
+        <div class="it">
+          <div class="it-t"><span>잠들기 어렵거나 자주 깨는 날이<br>일주일에 3일 이상, 한 달 넘게 <span class="nw">이어질 때</span></span></div>
+          <div class="it-b">낮에 지내기 힘들 만큼 피곤할 때도<br>마찬가지예요.</div>
+          <div class="it-do"><span>적어 두신 ‘깬 이유’를 가져가세요.</span></div>
+        </div>
+        <div class="it">
+          <div class="it-t">다음 진료까지 기다리기 힘들면</div>
+          <div class="it-b">가까운 정신건강의학과나<br>가정의학과에서 먼저 보셔도 돼요.</div>
+          <div class="it-do"><span>수면제를 받으실 땐<br>지금 드시는 약 목록을 꼭 보여 주세요.</span></div>
+        </div>
+        <a class="btn btn-outline btn-block" href="92-nearby-list.html?dept=03&amp;from=46-detail-sleep.html">🏥 근처 정신건강의학과 찾기</a>
+      </div>
+    </section>
+
+    <div class="tiny muted rf-src">근거: CTCAE v5.0 · 미국 국립암연구소(NCI) · 대한종양간호학회 · 미국 국립보완통합보건센터(NCCIH) · 보건복지부 · 암생존자통합지지사업 — 자세한 출처는 <b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요</div>
+
+    <p class="disclaimer">본 제품은 의료기기가 아니므로 질병 유무를 판단할 수 없으며, 질병 유무 판단을 위해서는 의사의 검진이 필요합니다.</p>
+  </div>
+
+  <div class="footer-actions">
+    <div class="row gap-8">
+      <a class="btn btn-outline grow" href="10-consult-questions.html">📝 진료 질문 만들기</a>
+      <a class="btn btn-primary grow" href="07-chat.html">💬 이 증상 물어보기</a>
+    </div>
+  </div>
+
+  <!-- 전화 걸기 확인 — 실수로 눌러도 바로 걸리지 않게 -->
+  <div class="callpop" id="callpop" role="dialog" aria-modal="true" aria-label="전화 걸기 확인" hidden>
+    <div class="callpop-card">
+      <div style="font-size:34px;">📞</div>
+      <div class="strong" style="font-size:17px;" id="callpop-title">전화를 걸까요?</div>
+      <a class="btn btn-primary btn-block btn-lg" id="callpop-go" href="tel:119" data-direct="1">📞 지금 전화 걸기</a>
+      <button class="btn btn-outline btn-block" id="callpop-no" type="button">닫기</button>
+    </div>
+  </div>
+</div>
+<script>(function(){
+var NAMES={"119":"119 구급대","109":"자살예방 상담전화 109","1577-0199":"정신건강 위기상담 1577-0199"};
+var pop=document.getElementById("callpop");if(!pop)return;
+var go=document.getElementById("callpop-go"),no=document.getElementById("callpop-no"),tt=document.getElementById("callpop-title");
+document.addEventListener("click",function(e){
+  var a=e.target&&e.target.closest?e.target.closest("a"):null;if(!a)return;
+  var h=a.getAttribute("href")||"";
+  if(h.indexOf("tel:")!==0||a.hasAttribute("data-direct"))return;
+  e.preventDefault();e.stopImmediatePropagation();e.stopPropagation();
+  var num=h.slice(4);
+  pop.__opener=a;
+  /* 배선 JS 가 붙인 병원 이름(data-callname)이 있으면 그 이름으로 묻는다 — 숫자만 보면 어디로 거는지 모른다 (48 과 같은 방식) */
+  tt.textContent=(a.getAttribute("data-callname")||NAMES[num]||num)+"에 전화할까요?";
+  go.setAttribute("href","tel:"+num);
+  pop.hidden=false;no.focus();
+},true);
+function close(){pop.hidden=true;
+  if(pop.__opener&&pop.__opener.focus){pop.__opener.focus();}}
+no.addEventListener("click",close);
+go.addEventListener("click",function(){setTimeout(close,150);});
+pop.addEventListener("click",function(e){if(e.target===pop)close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!pop.hidden){e.stopPropagation();close();}},true);
+})()</script>
+</body>
+</html>

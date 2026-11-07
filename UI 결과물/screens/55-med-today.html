@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 오늘의 복약</title>
+<link rel="stylesheet" href="app.css">
+<style>
+/* ── 오늘의 복약 표 ──
+   예전에는 시간대(아침·점심·저녁·자기전)마다 약이 따로 줄을 차지해서
+   약 다섯 종이면 열다섯 줄이 됐다. 같은 약 이름을 서너 번 보게 되니 헷갈린다.
+   왼쪽에 약을 한 줄씩 세우고, 오른쪽에는 오늘 쓰는 시간대만 그린다.
+   칸은 46px(작은 폰 44px) × 56px 이상 — 손이 떨려도 누를 수 있게. */
+.medtable { --mt-w: 46px; --mt-slots: 4; --mt-name-size: 14px; flex: 0 0 auto;
+  background: var(--white); border: 1px solid var(--outline);
+  border-radius: var(--r); box-shadow: var(--shadow-sm); }
+@media (max-width: 374px) { .medtable { --mt-w: 44px; } }
+
+.mt-head, .mt-row { display: grid; grid-template-columns: minmax(0, 1fr) repeat(var(--mt-slots), var(--mt-w)); }
+/* 시간대가 적으면 남는 폭은 모두 이름 칸으로, 이름 글자도 더 크게. */
+.medtable[data-slots="1"] { --mt-slots: 1; --mt-name-size: 17px; }
+.medtable[data-slots="2"] { --mt-slots: 2; --mt-name-size: 16px; }
+.medtable[data-slots="3"] { --mt-slots: 3; --mt-name-size: 15px; }
+
+/* 머리줄은 스크롤해도 붙어 있다 — 약이 많아도 어느 칸인지 헷갈리지 않게.
+   top:-18px 인 이유: 붙는 자리는 .content 의 위쪽 여백(18px) 안쪽이라, 0 으로 두면
+   머리줄 위 18px 틈으로 지나가는 줄이 비쳐 보인다. 여백만큼 올려 화면 위에 딱 붙인다. */
+.mt-head { position: sticky; top: -18px; z-index: 4;
+  background: var(--surface-2); border-bottom: 1px solid var(--outline);
+  border-radius: var(--r) var(--r) 0 0; box-shadow: 0 2px 6px rgba(60,20,35,.10); }
+.mt-hc { display: flex; align-items: center; justify-content: center;
+  min-height: 42px; padding: 8px 0;
+  font-size: 13px; font-weight: 800; line-height: 1.2; letter-spacing: -.045em;
+  color: var(--on-surface-variant); border-left: 1px solid var(--outline);
+  /* 시스템 글자를 크게 해도 옆 칸 글자와 붙거나 표 밖으로 나가지 않게 —
+     한 낱말은 그대로 두되(keep-all) 칸을 넘칠 때만 줄을 바꾼다(anywhere).
+     이것만으로는 글자를 많이 키우셨을 때 '자기전'이 '자기 / 전'으로, 200% 에서는
+     '아 / 침'처럼 한 글자씩 세로로 쌓여 머리줄이 110px 을 차지했다.
+     그래서 features.js 의 mtFitHead() 가 머리줄 글자만 칸 폭에 맞춰 줄인다.
+     (칸을 넓히면 약 이름 칸이 좁아져 이름이 더 잘게 끊긴다 — 체크 칸은 46px·작은 폰 44px 그대로 둔다)
+     여기 적힌 값은 줄이기 전 크기이자, 배선이 못 돌 때의 뒷길이다. */
+  word-break: keep-all; overflow-wrap: anywhere; }
+/* 머리줄 글자를 감싸는 칸 — 폭을 재고 글자만 줄이기 위해 따로 둔다 */
+.mt-hl { display: block; width: 100%; text-align: center; }
+.mt-hc--name { justify-content: flex-start; padding-left: 10px; border-left: 0; letter-spacing: 0; }
+.mt-hc--name .mt-hl { text-align: left; }
+.mt-hc:last-child { border-top-right-radius: calc(var(--r) - 1px); }
+.mt-hc.is-now { color: var(--primary-dark); background: var(--primary-tint);
+  box-shadow: inset 0 -3px 0 var(--primary); }
+
+.mt-item { border-top: 1px solid var(--outline); }
+.mt-item:first-child { border-top: 0; }
+
+/* 약 이름 칸 — 말줄임을 쓰지 않는다. 비슷한 이름의 약이 많아서 잘리면 구별을 못 한다.
+   길면 줄이 늘어나고, 눌러서 자세히(종류·시간·안내)를 펼친다.
+   대신 이름이 쓸 폭을 최대한 넓혀 둔다 — 체크 칸(46px·작은 폰 44px)은 손이 떨려도
+   누를 수 있어야 하므로 줄이지 않고, 그림과 안쪽 여백에서 폭을 되찾았다. */
+.mt-name { display: flex; flex-direction: column; justify-content: center; min-width: 0;
+  padding: 10px 5px 10px 10px; min-height: 56px;
+  background: transparent; border: 0; color: inherit; font: inherit;
+  text-align: left; cursor: pointer; }
+/* 약 그림을 이름 줄에서 뺐다.
+   예전에는 글 왼쪽에 띄웠는데(float), 그림 높이(21.75px)가 이름 한 줄(19.6px)보다 커서
+   둘째 줄까지 파고들었다. 그래서 이름이 쓸 수 있는 폭이 첫 줄·둘째 줄 모두 22px 씩 줄었다
+   (360px 에서 139px → 117px). 그 22px 때문에 '아이플루플러스점안액'·'레보플레수쉬점안액'이
+   두 줄로 끊기고 '액' 한 글자만 떨어졌다.
+   먹는 약의 💊 는 모든 줄에 똑같이 붙어 알려 주는 것이 없으니 아예 빼고,
+   눈·피부·붙이는 약만 아랫줄에 그림과 글씨를 함께 둔다. 삼키는 약이 아니라는
+   가장 중요한 표시가 설명 글씨 바로 옆에 붙어 오히려 또렷해진다. */
+.mt-nm { display: block; font-size: var(--mt-name-size); font-weight: 700; line-height: 1.4;
+  word-break: keep-all; overflow-wrap: anywhere; }
+/* 말줄임(…)은 쓰지 않는다 — 비슷한 이름의 약이 많아 잘리면 어느 약인지 모른다.
+   대신 아주 긴 이름이 두 줄로 넘어갈 때 '여기서는 끕지 마라' 하는 자리를 두 군데만 표시한다.
+   ① 숫자 덩어리(2.5/500 · 150 · 0.1) — 용량 한가운데가 갈리면 '0밀리그램'처럼 읽힐 수 있다
+   ② 마지막 두 글자 — 한 글자만 떨어지지 않게 ('…점안 / 액' → '…점 / 안액')
+   묶는 덩어리는 한글 두 글자·반각 숫자 아홉 자까지로 짧게 잡는다 — 시스템 글자를 175%까지
+   키워도 한 줄 폭을 넘지 않아 표 밖으로 솠지지 않는다. features.js 의 mtName() 이 이 표를 씨운다. */
+.mt-nb { white-space: nowrap; }
+.mt-sub { display: block; font-size: 13px; line-height: 1.35; margin-top: 2px;
+  color: var(--on-surface-variant); }
+.mt-ic { font-size: 14px; margin-right: 3px; }
+
+.mt-cell { display: flex; align-items: center; justify-content: center;
+  min-height: 56px; padding: 0; font: inherit; color: inherit;
+  background: var(--white); border: 0; border-left: 1px solid var(--outline); cursor: pointer; }
+.mt-cell--off { background: var(--surface-2); color: var(--outline-strong);
+  font-size: 18px; cursor: default; }
+/* 체크 표시 — 색만으로 구별하지 않는다. 빈 동그라미 ↔ 꽉 찬 동그라미 + ✓
+   ✓ 를 글자로 찍으면 시스템 글자 크기를 키우셨을 때 동그라미를 넘어선다
+   (150% 에서 3.8px, 200% 에서 13px 이 밖으로 나왔다 — 동그라미는 30px 로 그대로이기 때문).
+   그래서 글자가 아니라 선으로 그린다. 선의 굵기·길이는 px 이라 글자 크기를 따라 커지지 않는다.
+   빛깔은 currentColor 를 따르므로 꺼진 칸(color:transparent)에서는 그대로 보이지 않는다 —
+   features.js 가 색만 바꿔 오던 방식(필요할 때 드시는 약 줄)도 고치지 않고 그대로 쓴다. */
+.mt-mark { width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0; line-height: 1;
+  border: 2px solid var(--outline-strong); background: var(--white); color: transparent; }
+.mt-mark::after { content: ''; display: block; width: 8px; height: 14px;
+  border: solid currentColor; border-width: 0 3px 3px 0; border-radius: 1px;
+  transform: translateY(-2px) rotate(45deg); }
+.mt-cell.is-on { background: var(--safe-tint); }
+.mt-cell.is-on .mt-mark { background: var(--safe); border-color: var(--safe); color: #fff; }
+.mt-item:last-child .mt-row > *:first-child { border-bottom-left-radius: calc(var(--r) - 1px); }
+.mt-item:last-child .mt-row > *:last-child { border-bottom-right-radius: calc(var(--r) - 1px); }
+
+/* 약 이름을 누르면 펼쳐지는 자세히 */
+.mt-det { padding: 2px 12px 14px; background: var(--surface-2); }
+.mt-det[hidden] { display: none; }
+.mt-det .mt-dnm { font-size: 14px; font-weight: 700; line-height: 1.4;
+  word-break: keep-all; overflow-wrap: anywhere; padding-top: 10px; }
+.mt-det .mt-dline { font-size: 13px; line-height: 1.55; color: var(--on-surface-variant); margin-top: 4px; }
+.mt-det .mt-dacts { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.mt-det .btn { font-size: 13px; }
+.mt-help { margin: -4px 2px 0; }
+
+/* 필요할 때 드시는 약 · 네 칸에 없는 시간대 */
+.mt-prn .li-mark { flex: 0 0 auto; width: 46px; min-height: 46px; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent; border: 0; font: inherit; color: inherit; cursor: pointer; }
+
+/* 이 화면에만 두는 잔손질 —
+   ① 띄어쓰기 없는 긴 성분명이 줄 밖으로 삐져나가 끝 글자가 안 보이던 것(아래 안내 목록)
+   ② 작은 버튼 글자가 360px 에서 12.5px 까지 줄던 것 → 본문 하한 13px
+   ③ 고리 안 숫자 12px → 13px */
+.content .listitem .li-title { overflow-wrap: anywhere; text-wrap: normal; }
+.content .btn-sm { font-size: 13px; }
+.ring .ring-in { font-size: 13px; }
+/* ④ '지난 7일' 일곱 칸 — 휴대폰 글자를 크게(200%) 쓰시면 한 줄에 다 들어가지 않아
+   맨 오른쪽 '오늘'이 카드 밖으로 85px 나갔다. 칸이 모자라면 줄을 바꿔 아래로 내려오게 한다.
+   (app.css 의 .trend 는 그대로 둔다 — 이 화면 안에서만 바꾼다) */
+.content .trend { flex-wrap: wrap; row-gap: 10px; }
+.content .trend > .center { flex: 1 1 auto; min-width: 3.2em; }
+
+/* ── 한 주 날짜 줄 (2026-10-26 사용 의견) ──
+   예전 맨 아래 '지난 7일'(보기만 하던 줄)을 위 '이번 주' 카드 안으로 올리고 누를 수 있게 했다.
+   ‹ › 로 한 주(월~일)씩 넘긴다. 지난 날은 기간 없이 다 고칠 수 있고, 앞으로는 오늘이 든 주까지만.
+   표시는 색만으로 가르지 않는다 — 다 챙김 ✓ / 빈 칸 있음 반달 / 기록 없음 빈 동그라미 / 오늘 가운데 점 */
+.wk-nav { display: flex; align-items: center; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--outline); }
+.wk-arrow { flex: 0 0 44px; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--outline);
+  background: var(--white); color: var(--primary-dark); font: inherit; font-size: 22px; font-weight: 700;
+  line-height: 1; display: grid; place-items: center; padding: 0 0 3px; cursor: pointer; }
+.wk-arrow:disabled { opacity: .3; cursor: default; }
+.wk-range { flex: 1 1 auto; min-width: 0; text-align: center; font-size: 15px; font-weight: 800; line-height: 1.3; }
+.wk-range small { display: block; font-size: 13px; font-weight: 600; color: var(--on-surface-variant); }
+.wk { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 3px; margin-top: 8px; }
+.wk-d { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0;
+  min-height: 70px; padding: 7px 0 8px; border: 0; border-radius: 12px;
+  background: transparent; font: inherit; color: inherit; cursor: pointer; }
+.wk-d:disabled { cursor: default; }
+.wk-d:disabled .wk-w, .wk-d:disabled .wk-n { color: var(--outline-strong); }
+.wk-w { font-size: 13px; font-weight: 700; color: var(--on-surface-variant); line-height: 1.2; white-space: nowrap; }
+.wk-n { font-size: 15px; font-weight: 800; line-height: 1.2; }
+.wk-st { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; box-sizing: border-box; }
+.wk-st--all { background: var(--safe); }
+.wk-st--all::after { content: ''; width: 5px; height: 9px; border: solid #fff; border-width: 0 2.4px 2.4px 0;
+  transform: translateY(-1px) rotate(45deg); }
+.wk-st--part { border: 2px solid var(--warn); background: linear-gradient(90deg, var(--warn) 50%, var(--white) 50%); }
+.wk-st--none { border: 2px solid var(--outline-strong); background: var(--white); }
+.wk-st--today { border: 2px solid var(--primary); background: var(--white); }
+.wk-st--today::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
+.wk-st--off { visibility: hidden; }
+.wk-d.is-sel { background: var(--primary-tint); box-shadow: inset 0 0 0 2px var(--primary); }
+.wk-d.is-sel .wk-w, .wk-d.is-sel .wk-n { color: var(--primary-dark); }
+.wk-hint { margin-top: 8px; text-align: center; }
+
+/* ── 표 위 머리띠 — 오늘이면 날짜와 '약 목록 고치기', 지난 날이면 노란 띠와 '오늘로' ── */
+.mt-cap { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 2px; margin-bottom: -4px; }
+.mt-cap .cap-t { flex: 1 1 auto; min-width: 0; font-size: 15px; font-weight: 800; line-height: 1.35; }
+.mt-cap .cap-t small { display: block; font-size: 13px; font-weight: 500; color: var(--on-surface-variant); }
+.mt-cap .btn { flex: 0 0 auto; }
+.mt-cap .cap-ic { font-size: 20px; flex: 0 0 auto; }
+.mt-cap.is-past { padding: 10px 10px 10px 14px; border-radius: var(--r);
+  background: var(--warn-tint); border: 1px solid #f0d6ac; color: #7a4708; }
+.mt-cap.is-past .cap-t small { color: #7a4708; }
+.medtable.is-past { border-color: #e9c78f; }
+/* 지난 날을 볼 때는 오늘만의 것(약 추가·안내·이 약을 쓰시는 동안…)을 감춘다 — 배선이 data-tonly 를 붙인다 */
+.content.is-past [data-tonly] { display: none !important; }
+.yday .row { gap: 8px; margin-top: 10px; }
+.yday .btn-plain { background: transparent; border: 0; color: #7a4708; font: inherit; font-size: 13.5px;
+  font-weight: 700; min-height: 44px; padding: 0 10px; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="05-home.html">‹</a>
+    <div><div class="appbar-title">오늘의 복약</div><div class="appbar-sub" data-demo>7월 28일 · 오늘</div></div>
+    <span class="spacer"></span>
+    <a class="action" href="56-med-schedule.html" style="text-decoration:none; color:inherit;">⚙️</a>
+  </div>
+
+  <div class="content content--tight" style="padding-bottom:96px;">
+    <!-- 한 주 요약 + 날짜 줄 (2026-10-26) — 예전 맨 아래 '지난 7일'을 여기로 올리고 누를 수 있게 했다.
+         ‹ › 로 한 주씩 넘기고, 날짜를 누르면 아래 표가 그날로 바뀐다. 배선: features.js page55 -->
+    <div class="card" data-role="wk-card">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <div class="ring" style="--p:83%;" data-demo data-role="ring"><div class="ring-in" data-role="ring-in">5/6일</div></div>
+        <div class="grow">
+          <div class="card-title" style="margin-bottom:2px;" data-demo data-role="wk-title">이번 주 잘 챙기고 계세요</div>
+          <div class="card-sub" data-demo data-role="wk-sub">지난 6일 중 <b>5일</b> 다 챙기셨어요. 빠뜨린 날이 있어도 괜찮아요.</div>
+        </div>
+      </div>
+      <div class="wk-nav" data-role="wk-nav">
+        <button type="button" class="wk-arrow" data-act="wk-prev" aria-label="지난주 보기">‹</button>
+        <div class="wk-range" data-role="wk-range" data-demo>7월 22일 ~ 28일<small>이번 주</small></div>
+        <button type="button" class="wk-arrow" data-act="wk-next" aria-label="다음 주 보기" disabled>›</button>
+      </div>
+      <div class="wk" data-role="wk-days" data-demo>
+        <button type="button" class="wk-d"><span class="wk-w">월</span><span class="wk-n">22</span><span class="wk-st wk-st--all" aria-hidden="true"></span></button>
+        <button type="button" class="wk-d"><span class="wk-w">화</span><span class="wk-n">23</span><span class="wk-st wk-st--all" aria-hidden="true"></span></button>
+        <button type="button" class="wk-d"><span class="wk-w">수</span><span class="wk-n">24</span><span class="wk-st wk-st--all" aria-hidden="true"></span></button>
+        <button type="button" class="wk-d"><span class="wk-w">목</span><span class="wk-n">25</span><span class="wk-st wk-st--all" aria-hidden="true"></span></button>
+        <button type="button" class="wk-d"><span class="wk-w">금</span><span class="wk-n">26</span><span class="wk-st wk-st--all" aria-hidden="true"></span></button>
+        <button type="button" class="wk-d"><span class="wk-w">토</span><span class="wk-n">27</span><span class="wk-st wk-st--part" aria-hidden="true"></span></button>
+        <button type="button" class="wk-d is-sel"><span class="wk-w">오늘</span><span class="wk-n">28</span><span class="wk-st wk-st--today" aria-hidden="true"></span></button>
+      </div>
+      <p class="tiny muted wk-hint">날짜를 누르면 그날 체크를 보고 고칠 수 있어요</p>
+    </div>
+    <p class="small" data-kb-only>지난 날 약 체크도 고칠 수 있어요. 오늘의 복약 위 날짜 줄에서 그날을 누르시거나 ‹ › 로 지난주로 넘겨서, 드셨는데 못 누르신 칸을 눌러 주세요. 기간 제한 없이 고칠 수 있고, 오늘 뒤 날짜는 누를 수 없어요. 약 순서와 드시는 시간(아침·점심·저녁·자기 전)은 표 위 ‘약 목록 고치기’에서 바꿔요. 약 왼쪽 손잡이(▲▼)를 잡고 위아래로 끌면 순서가 바뀌어요.</p>
+
+    <!-- 어제 빈 칸 — 자기 전 약을 드시고 바로 주무시면 다음 날 체크할 길이 없었다(사용 의견). 오늘 아침에 한 번 알린다.
+         '드셨는데 못 누르셨다면'으로 써서 지금 드시라는 말로 읽히지 않게 한다. 배선이 보여 줄 때만 드러난다(data-demo-off) -->
+    <div class="banner banner--warn yday" data-role="yday" data-demo-off>
+      <span class="b-ic" aria-hidden="true">🌙</span>
+      <div class="small grow">
+        <b data-role="yday-t">어제 자기 전 칸이 비어 있어요.</b><br>드셨는데 못 누르셨다면 어제 기록에서 표시해 주세요.
+        <div class="row">
+          <button type="button" class="btn btn-outline btn-sm" data-act="yday-open">어제 기록 열기</button>
+          <button type="button" class="btn-plain" data-act="yday-close">닫기</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 표 위 머리띠 — 지난 날을 보면 노란 띠로 바뀐다 -->
+    <div class="mt-cap" data-role="mt-cap">
+      <div class="cap-t">오늘 드실 약<small data-demo>7월 28일(화)</small></div>
+      <button type="button" class="btn btn-outline btn-sm" data-act="med-list-edit">약 목록 고치기</button>
+    </div>
+
+    <!-- 오늘 드실 약 표 — 왼쪽에 약, 오른쪽에 아침·점심·저녁·자기전 -->
+    <div class="medtable" data-role="medtable">
+      <div class="mt-head">
+        <div class="mt-hc mt-hc--name"><span class="mt-hl">약</span></div>
+        <div class="mt-hc" data-slot="아침"><span class="mt-hl">아침</span></div>
+        <div class="mt-hc" data-slot="점심"><span class="mt-hl">점심</span></div>
+        <div class="mt-hc is-now" data-slot="저녁"><span class="mt-hl">저녁</span></div>
+        <div class="mt-hc" data-slot="자기전"><span class="mt-hl">자기전</span></div>
+      </div>
+      <div class="mt-body" data-role="mt-body">
+        <div class="mt-item" data-demo-off>
+          <div class="mt-row" data-med-row>
+            <button class="mt-name" type="button" aria-expanded="false">
+              <span class="mt-nm">타목시펜정 20<span class="mt-nb">mg</span></span>
+            </button>
+            <button class="mt-cell is-on" type="button" aria-pressed="true" aria-label="타목시펜정 20mg · 아침 · 드셨어요. 누르면 취소돼요"><span class="mt-mark" aria-hidden="true">✓</span></button>
+            <span class="mt-cell mt-cell--off" aria-hidden="true">·</span>
+            <span class="mt-cell mt-cell--off" aria-hidden="true">·</span>
+            <span class="mt-cell mt-cell--off" aria-hidden="true">·</span>
+          </div>
+        </div>
+        <div class="mt-item" data-demo-off>
+          <div class="mt-row" data-med-row>
+            <button class="mt-name" type="button" aria-expanded="false">
+              <span class="mt-nm">암로디핀정 5<span class="mt-nb">mg</span></span>
+            </button>
+            <button class="mt-cell is-on" type="button" aria-pressed="true" aria-label="암로디핀정 5mg · 아침 · 드셨어요. 누르면 취소돼요"><span class="mt-mark" aria-hidden="true">✓</span></button>
+            <span class="mt-cell mt-cell--off" aria-hidden="true">·</span>
+            <button class="mt-cell" type="button" aria-pressed="false" aria-label="암로디핀정 5mg · 저녁 · 드셨으면 눌러 주세요"><span class="mt-mark" aria-hidden="true">✓</span></button>
+            <span class="mt-cell mt-cell--off" aria-hidden="true">·</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="tiny muted mt-help" data-role="mt-help">약을 드셨으면 그 칸을 눌러 주세요.<br>잘못 누르셨으면 한 번 더 누르면 지워져요.<br>약 이름을 누르면 시간과 안내가 열려요.</p>
+
+    <div class="banner banner--info">
+      <span class="b-ic">💡</span>
+      <div class="small">호르몬치료제는 <b>오래 꾸준히</b> 드시는 게 중요해요.</div>
+    </div>
+
+    <!-- 약 추가하기 — 58(약 직접 입력)로 보낸다. 거기서 사진 찍기로도 갈 수 있다 (교수님 지시 2026-09-28) -->
+    <a class="listitem" href="58-med-manual.html?from=55-med-today.html" style="min-height:64px; padding-top:14px; padding-bottom:14px;">
+      <span class="li-ic" style="background:var(--primary-tint); width:44px; height:44px; font-size:24px;" aria-hidden="true">＋</span>
+      <div class="li-body"><div class="li-title" style="font-size:17px;">약 추가하기</div>
+        <div class="li-sub">사진이나 이름으로 넣으실 수 있어요</div></div>
+      <span class="li-chev" aria-hidden="true">›</span>
+    </a>
+
+    <a class="listitem" href="57-med-missed.html">
+      <span class="li-ic" style="background:var(--warn-tint);">🤔</span>
+      <div class="li-body"><div class="li-title">약 챙기기 힘든 점이 있나요?</div><div class="li-sub">이유를 고르시면 방법을 알려 드려요</div></div>
+      <span class="li-chev">›</span>
+    </a>
+
+    <!-- 등록한 약 → 부작용 안내 진입 -->
+    <div class="section-label">이 약을 쓰시는 동안</div>
+    <a class="listitem" href="74-med-effect-detail.html" data-demo-off>
+      <span class="li-ic" style="background:var(--primary-tint);">💊</span>
+      <div class="li-body">
+        <div class="li-title">타목시펜정 20mg · 부작용 안내</div>
+        <div class="li-sub">생길 수 있는 불편과 병원에 연락할 때</div>
+      </div>
+      <span class="li-chev">›</span>
+    </a>
+    <a class="listitem" href="75-med-effect-none.html" data-demo-off>
+      <span class="li-ic">🩺</span>
+      <div class="li-body">
+        <div class="li-title">암로디핀정 5mg · 확인 결과</div>
+        <div class="li-sub">유방암 치료약이 아니라서 부작용 안내는 없어요 · 겹치는 약을 볼 때 써요</div>
+      </div>
+      <span class="li-chev">›</span>
+    </a>
+    <a class="listitem" href="70-med-effects.html">
+      <span class="li-ic">📋</span>
+      <div class="li-body">
+        <div class="li-title">등록한 약 전체 보기</div>
+        <div class="li-sub">약별·증상별로 모아서 · 겹치는 증상도 함께</div>
+      </div>
+      <span class="li-chev">›</span>
+    </a>
+    <!-- 2026-09-29 — 부작용 안내 한 줄은 약이 없으면 제목 없이 목록 아래 홀로 떠서, 맨 아래 고지 한 곳으로 합쳤다 -->
+    <!-- 2026-10-26 — 맨 아래 '지난 7일'은 위 '이번 주' 카드의 날짜 줄로 합쳤다 -->
+
+    <!-- 지난 날을 볼 때만 — 오늘 표로 돌아가는 길 -->
+    <button type="button" class="btn btn-outline btn-block" data-act="to-today" style="display:none;">오늘로 돌아가기</button>
+
+    <p class="disclaimer">복약 기록과 부작용 안내는 참고용이에요.<br>약을 바꾸거나 중단하는 결정은<br>꼭 담당 의사와 상의하세요.</p>
+  </div>
+
+  <div class="bottomnav">
+    <a class="nav-item" href="05-home.html"><span class="ni-ic">🏠</span><span>홈</span></a>
+    <a class="nav-item" href="06-sideeffects.html"><span class="ni-ic">📖</span><span>정보</span></a>
+    <a class="fab" href="07-chat.html"><span class="fab-btn">💬</span><span class="fab-label">상담</span></a>
+    <a class="nav-item nav-item--on" href="16-checkin.html"><span class="ni-ic">📈</span><span>기록</span></a>
+    <a class="nav-item" href="13-settings.html"><span class="ni-ic">👤</span><span>내 정보</span></a>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 열이 날 때 응급 안내</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  /* 부위별 열 기준 표 — 48 응급 안내와 같은 모양. 한 줄 = '부위 + 숫자'(AI 상담 색인이 이 한 줄을 그대로 읽는다) */
+  .temp { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--sec-line); border-radius: 12px; overflow: hidden; }
+  .temp-row { display: flex; align-items: baseline; gap: 10px; padding: 9px 12px; }
+  .temp-row + .temp-row { border-top: 1px dashed var(--sec-line); }
+  .temp-site { flex: 0 0 5.4em; font-size: 14px; font-size: clamp(13px, 3.5897cqw, 15.4px); font-weight: 700; color: #4A3C42; }
+  .temp-val { flex: 1 1 auto; min-width: 0; font-size: 16px; font-size: clamp(14.5px, 4.1026cqw, 17.6px); font-weight: 800; line-height: 1.45; color: var(--sec-ink); }
+  .temp-note { display: block; margin-top: 1px; font-size: 13.5px; font-size: clamp(13px, 3.4615cqw, 14.9px); font-weight: 500; line-height: 1.55; color: #4A3C42; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <!-- 고정 응급 안내 화면 (대화 화면이 아님). 상담(07)의 위험 신호 카드·37 골수억제에서 들어온다.
+       ‹ 는 기본으로 07 상담으로 가고, 다른 화면에서 올 때는 주소의 ?from= 으로 그 화면에 돌아간다(app.js). -->
+  <div class="appbar">
+    <a class="back" href="07-chat.html">‹</a>
+    <div>
+      <div class="appbar-title">열이 날 때 응급 안내</div>
+    </div>
+  </div>
+
+  <!-- 2026-09-28 정보 화면 디자인 시스템 v3 (STYLE.md). 열이 이 화면의 주제라 열 기준은 지우지 않고 그대로 둔다(STYLE.md 4-5 예외).
+       숫자: 귀(고막) 38.0 · 겨드랑이 37.5 · 입(구강) 38.3 한 번 또는 38.0 이 1시간 넘게 — 대한감염학회 외 호중구감소성 발열 지침 -->
+  <div class="content content--jump">
+    <nav class="sec sec--jump" aria-label="이 화면 바로 가기">
+      <div class="sec-t">바로 가기</div>
+      <div class="jump">
+        <a class="jump-b jump-b--hosp" href="#s-temp"><span>체온 기준</span></a>
+        <a class="jump-b jump-b--emg" href="#s-119"><span>지금 바로 119</span></a>
+        <a class="jump-b jump-b--good" href="#s-do"><span>이렇게 하세요</span></a>
+        <a class="jump-b jump-b--never" href="#s-dont"><span>하지 마세요</span></a>
+        <a class="jump-b jump-b--caution" href="#s-nofever"><span>열이 없어도</span></a>
+        <a class="jump-b jump-b--emg" href="#s-emg"><span>다른 응급 신호</span></a>
+      </div>
+    </nav>
+
+    <!-- ═══ 🟠 이 체온이면 바로 병원에 — 부위별 기준 ═══ -->
+    <section class="sec sec--lv2" id="s-temp">
+      <h2 class="sec-t section-label"><span class="lv" aria-hidden="true">🟠</span> <span>이 체온이면 바로 병원에</span></h2>
+      <p class="sec-p">항암치료 중에 나는 열은<br><b>그 자체가 응급이에요.</b></p>
+      <p class="sec-p">백혈구가 줄어 생긴 열일 수 있어서,<br>혈액검사 전까지는 응급으로 다뤄요.</p>
+      <div class="temp">
+        <div class="temp-row"><span class="temp-site">귀(고막)</span> <span class="temp-val">38.0도 이상</span></div>
+        <div class="temp-row"><span class="temp-site">겨드랑이</span> <span class="temp-val">37.5도 이상</span></div>
+        <div class="temp-row"><span class="temp-site">입(구강)</span> <span class="temp-val">38.3도가 한 번 <span class="temp-note">또는 38.0도가<br>1시간 넘게 이어질 때</span></span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">기다리지 마세요</div>
+        <div class="it-b">귀·겨드랑이 기준과 입 38.3도는<br>한 번만 나와도 해당돼요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">어디로 쟀는지 헷갈리면</div>
+        <div class="it-do"><span>38.0도를 기준으로 보세요.</span></div>
+      </div>
+      <!-- 저장해 두신 병원 번호가 있으면 features.js(wireCallMine)가 '병원 이름 + 번호' 로 바로 걸리는 단추로 바꾼다.
+           번호가 없으면 글자를 '🏥 내 병원 번호 등록하기'로 바꾸고 84 등록 화면으로 보낸다. -->
+      <a class="btn btn-outline btn-outline--lv2 btn-block" href="84-care-contacts.html?from=08-redflag.html" data-role="call-mine">📞 내 병원으로 연락하기</a>
+    </section>
+
+    <!-- ═══ 🔴 지금 바로 119 — 열과 함께 이런 모습이면 (패혈증 신호) ═══ -->
+    <section class="sec sec--emg" id="s-119">
+      <h2 class="sec-t section-label">지금 바로 119</h2>
+      <p class="sec-p">병원에 전화하거나 직접 가지 말고<br><b>바로 119를 부르세요.</b></p>
+      <ul class="dots">
+        <li><b>정신이 흐릿하거나</b> 말이 어눌해질 때</li>
+        <li><b>가만히 있어도 숨이 차거나</b>,<br>똑바로 누우면 숨쉬기 힘들 때</li>
+        <li>일어서면 <b>핑 돌거나 쓰러질 것 같을 때</b></li>
+        <li>몸이 차고 축축하며 <b>손발이 파랗게 될 때</b></li>
+        <li>하루 종일 <b>소변이 거의 안 나올 때</b></li>
+      </ul>
+      <a class="btn btn-danger btn-block btn-lg" href="tel:119">📞 119 응급전화</a>
+    </section>
+
+    <!-- ═══ 이렇게 하세요 (초록) ═══ -->
+    <section class="sec sec--good" id="s-do">
+      <h2 class="sec-t section-label">이렇게 하세요</h2>
+      <div class="it">
+        <div class="it-t">밤이든 주말이든</div>
+        <div class="it-do"><span>치료받는 병원으로 연락하세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">병원에 전화하면</div>
+        <div class="it-do"><span>“항암치료 중인데 열이 납니다”라고<br>먼저 말씀하세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">체온을 잴 때마다</div>
+        <div class="it-do"><span>잰 곳과 시각을 함께 적어 두세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ 이건 하지 마세요 (옅은 장미) — 제목 = 하지 말 것 / 풀이 = 까닭 / → = 대신 이렇게 ═══ -->
+    <section class="sec sec--never" id="s-dont">
+      <h2 class="sec-t section-label">이건 하지 마세요</h2>
+      <div class="it">
+        <div class="it-t">해열제를 먼저 드시기</div>
+        <div class="it-b">타이레놀·부루펜으로 열이 가려지면<br>상황을 놓쳐요.</div>
+        <div class="it-do"><span>병원에 먼저 연락하세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">“한 시간 더 지켜보자” 하기</div>
+        <div class="it-b">열은 기다릴수록 위험해져요.</div>
+        <div class="it-do"><span>입으로 잰 38.0도만 1시간 지켜보고,<br>그 밖에는 바로 연락하세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ 열이 없어도 연락하세요 (노랑) — 해열제·스테로이드·탈수로 열이 가려질 때 ═══ -->
+    <section class="sec sec--caution" id="s-nofever">
+      <h2 class="sec-t section-label">열이 없어도 연락하세요</h2>
+      <div class="it">
+        <div class="it-t">체온이 정상이어도 감염일 수 있어요</div>
+        <div class="it-b">해열제나 스테로이드를 이미 드셨거나 몸에 수분이 부족하면 <span class="nw">열이 가려져요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t"><span>오한이 나고 몸살처럼 아프고<br>기운이 쭉 빠질 때</span></div>
+        <div class="it-do"><span>열이 없더라도 연락하세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">귀 체온이 36.0도 아래일 때</div>
+        <div class="it-do"><span>그냥 넘기지 말고 연락하세요.</span></div>
+      </div>
+    </section>
+
+    <!-- 열이 아닌 응급 신호(가슴 통증·숨참·출혈 등)는 48 응급 안내에 모여 있다 -->
+    <a class="link-card link-card--emg" id="s-emg" href="48-emergency.html?from=08-redflag.html">
+      <span class="link-card-ic" aria-hidden="true"></span>
+      <span class="link-card-body">
+        <span class="link-card-t">열이 아닌 응급 신호 보기</span>
+        <span class="link-card-s">가슴 통증, 멈추지 않는 출혈,<br>한쪽 팔다리에 힘이 빠질 때</span>
+      </span>
+    </a>
+
+    <div class="tiny muted rf-src">근거: 대한종양간호학회 · 대한감염학회 — 자세한 출처는 <b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요</div>
+    <p class="disclaimer">본 제품은 의료기기가 아니므로 질병 유무를 판단할 수 없으며, 질병 유무 판단을 위해서는 의사의 검진이 필요합니다.</p>
+  </div>
+
+  <!-- 전화 걸기 확인 — 실수로 눌러도 바로 걸리지 않게 -->
+  <div class="callpop" id="callpop" role="dialog" aria-modal="true" aria-label="전화 걸기 확인" hidden>
+    <div class="callpop-card">
+      <div style="font-size:34px;">📞</div>
+      <div class="strong" style="font-size:17px;" id="callpop-title">전화를 걸까요?</div>
+      <a class="btn btn-primary btn-block btn-lg" id="callpop-go" href="tel:119" data-direct="1">📞 지금 전화 걸기</a>
+      <button class="btn btn-outline btn-block" id="callpop-no" type="button">닫기</button>
+    </div>
+  </div>
+</div>
+<script>(function(){
+var NAMES={"119":"119 구급대","109":"자살예방 상담전화 109","1577-0199":"정신건강 위기상담 1577-0199"};
+var pop=document.getElementById("callpop");if(!pop)return;
+var go=document.getElementById("callpop-go"),no=document.getElementById("callpop-no"),tt=document.getElementById("callpop-title");
+document.addEventListener("click",function(e){
+  var a=e.target&&e.target.closest?e.target.closest("a"):null;if(!a)return;
+  var h=a.getAttribute("href")||"";
+  if(h.indexOf("tel:")!==0||a.hasAttribute("data-direct"))return;
+  e.preventDefault();e.stopImmediatePropagation();e.stopPropagation();
+  var num=h.slice(4);
+  pop.__opener=a;
+  /* 배선 JS 가 붙인 병원 이름(data-callname)이 있으면 그 이름으로 묻는다 — 숫자만 보면 어디로 거는지 모른다 (48 과 같은 방식) */
+  tt.textContent=(a.getAttribute("data-callname")||NAMES[num]||num)+"에 전화할까요?";
+  go.setAttribute("href","tel:"+num);
+  pop.hidden=false;no.focus();
+},true);
+function close(){pop.hidden=true;
+  if(pop.__opener&&pop.__opener.focus){pop.__opener.focus();}}
+no.addEventListener("click",close);
+go.addEventListener("click",function(){setTimeout(close,150);});
+pop.addEventListener("click",function(e){if(e.target===pop)close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!pop.hidden){e.stopPropagation();close();}},true);
+})()</script>
+</body>
+</html>

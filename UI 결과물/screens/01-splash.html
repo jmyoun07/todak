@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 시작</title>
+<link rel="stylesheet" href="app.css">
+<!-- 로그인해 둔 폰이면 확인이 끝날 때까지 시작 화면을 그리지 않는다 (2026-10-26 사용 의견 — 로그인 단추가 0.1초 비쳤다가 홈으로 넘어갔다).
+     기기에 남은 로그인 표시(sb-…-auth-token)가 있는지만 본다. 확인해 보니 로그인이 필요하면 app.js pageSplash 가 화면을 보인다.
+     본문이 그려지기 전에 정해야 해서 머리(head)에 둔다 -->
+<style>.boot-sess .screen > .content { visibility: hidden; }</style>
+<script>(function(){try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(/^sb-.+-auth-token$/.test(k||'')&&localStorage.getItem(k)){document.documentElement.className+=' boot-sess';break;}}}catch(e){}})();</script>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <!-- 시작 = 가입 = 로그인 (2026-09-17 단순화)
+       처음 오신 분과 다시 오신 분이 같은 버튼을 누른다. 로그인 뒤 어디로 갈지는
+       app.js goAfterLogin 이 동의·기본 정보 상태를 보고 정한다.
+       카카오·네이버·구글·이메일 네 버튼은 같은 틀(로고 왼쪽·글자 가운데). 로고는 각 회사 원본 그대로 (native.js 가 data-oauth 로 연결).
+       이메일 칸은 다른 화면(97·96)에 둔다 — 네이버 버튼과 비밀번호 칸이 한 화면에 같이 보이지 않게. -->
+  <div class="content start">
+    <div class="start-hero">
+      <img class="start-logo" src="icon-192.png" alt="토닥" width="80" height="80">
+      <div class="start-name">토닥</div>
+      <p class="start-tag">유방암 치료, 곁에서 함께 돌봐요</p>
+    </div>
+
+    <div class="auth-stack">
+      <a class="oauth-btn oauth-btn--kakao" data-oauth="kakao" href="02-consent.html"><img class="oauth-logo" src="img/oauth/kakao_symbol.svg" alt="" width="38" height="37"><span>카카오 로그인</span></a>
+      <a class="oauth-btn oauth-btn--naver" data-oauth="naver" href="02-consent.html"><img class="oauth-logo oauth-logo--naver" src="img/oauth/naver_icon.png" alt="" width="224" height="224"><span>네이버 로그인</span></a>
+      <a class="oauth-btn oauth-btn--google" data-oauth="google" href="02-consent.html"><img class="oauth-logo" src="img/oauth/google_g.png" alt="" width="120" height="120"><span>Google 계정으로 로그인</span></a>
+      <div class="auth-divider small">또는</div>
+      <a class="oauth-btn oauth-btn--email" id="emailLoginLink" href="97-email-login.html"><img class="oauth-logo" src="img/oauth/email.svg" alt="" width="24" height="24"><span>이메일로 로그인·가입</span></a>
+    </div>
+    <p style="margin-top:-12px;" class="auth-links small">
+      <a href="25-terms.html?tab=terms&amp;from=01-splash.html">이용약관</a>
+      <span class="sep" aria-hidden="true"></span>
+      <a href="25-terms.html?tab=privacy&amp;from=01-splash.html">개인정보 처리방침</a>
+    </p>
+  </div>
+</div>
+</body>
+</html>

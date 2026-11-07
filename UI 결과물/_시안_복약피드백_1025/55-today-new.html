@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 오늘의 복약 (시안 10/25)</title>
+<link rel="stylesheet" href="../screens/app.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ── 표 모양은 screens/55-med-today.html 그대로 ── */
+.medtable { --mt-w: 46px; --mt-slots: 4; --mt-name-size: 14px; flex: 0 0 auto;
+  background: var(--white); border: 1px solid var(--outline);
+  border-radius: var(--r); box-shadow: var(--shadow-sm); }
+.medtable[data-slots="1"] { --mt-slots: 1; --mt-name-size: 17px; }
+.medtable[data-slots="2"] { --mt-slots: 2; --mt-name-size: 16px; }
+.medtable[data-slots="3"] { --mt-slots: 3; --mt-name-size: 15px; }
+.mt-head, .mt-row { display: grid; grid-template-columns: minmax(0, 1fr) repeat(var(--mt-slots), var(--mt-w)); }
+.mt-head { background: var(--surface-2); border-bottom: 1px solid var(--outline);
+  border-radius: var(--r) var(--r) 0 0; }
+.mt-hc { display: flex; align-items: center; justify-content: center; min-height: 42px; padding: 8px 0;
+  font-size: 13px; font-weight: 800; line-height: 1.2; letter-spacing: -.045em;
+  color: var(--on-surface-variant); border-left: 1px solid var(--outline); word-break: keep-all; }
+.mt-hc--name { justify-content: flex-start; padding-left: 10px; border-left: 0; letter-spacing: 0; }
+.mt-hc.is-now { color: var(--primary-dark); background: var(--primary-tint); box-shadow: inset 0 -3px 0 var(--primary); }
+.mt-item { border-top: 1px solid var(--outline); }
+.mt-item:first-child { border-top: 0; }
+.mt-name { display: flex; flex-direction: column; justify-content: center; min-width: 0;
+  padding: 10px 5px 10px 10px; min-height: 56px; background: transparent; border: 0;
+  color: inherit; font: inherit; text-align: left; }
+.mt-nm { display: block; font-size: var(--mt-name-size); font-weight: 700; line-height: 1.4; word-break: keep-all; overflow-wrap: anywhere; }
+.mt-cell { display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 0;
+  font: inherit; color: inherit; background: var(--white); border: 0; border-left: 1px solid var(--outline); cursor: pointer; }
+.mt-cell--off { background: var(--surface-2); color: var(--outline-strong); font-size: 18px; cursor: default; }
+.mt-mark { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 0; border: 2px solid var(--outline-strong); background: var(--white); color: transparent; }
+.mt-mark::after { content: ''; display: block; width: 8px; height: 14px; border: solid currentColor;
+  border-width: 0 3px 3px 0; border-radius: 1px; transform: translateY(-2px) rotate(45deg); }
+.mt-cell.is-on { background: var(--safe-tint); }
+.mt-cell.is-on .mt-mark { background: var(--safe); border-color: var(--safe); color: #fff; }
+.mt-item:last-child .mt-row > *:first-child { border-bottom-left-radius: calc(var(--r) - 1px); }
+.mt-item:last-child .mt-row > *:last-child { border-bottom-right-radius: calc(var(--r) - 1px); }
+.mt-help { margin: -4px 2px 0; }
+.ring .ring-in { font-size: 13px; }
+
+/* ── 새로 ① 주 단위 날짜 줄 ── ‹ › 로 한 주씩. 앞으로는 오늘이 든 주까지만.
+   표시는 색만으로 가르지 않는다 — 다 챙김 ✓ / 빈 칸 있음 반달 / 기록 없음 빈 동그라미 */
+.wk-nav { display: flex; align-items: center; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--outline); }
+.wk-arrow { flex: 0 0 44px; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--outline);
+  background: var(--white); color: var(--primary-dark); font: inherit; font-size: 22px; font-weight: 700;
+  line-height: 1; display: grid; place-items: center; padding: 0 0 3px; cursor: pointer; }
+.wk-arrow:disabled { opacity: .3; cursor: default; }
+.wk-range { flex: 1 1 auto; min-width: 0; text-align: center; font-size: 15px; font-weight: 800; line-height: 1.3; }
+.wk-range small { display: block; font-size: 12.5px; font-weight: 600; color: var(--on-surface-variant); }
+.wk { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 3px; margin-top: 8px; }
+.wk-d { display: flex; flex-direction: column; align-items: center; gap: 4px;
+  min-height: 70px; padding: 7px 0 8px; border: 0; border-radius: 12px;
+  background: transparent; font: inherit; color: inherit; cursor: pointer; }
+.wk-d:disabled { cursor: default; }
+.wk-d:disabled .wk-w, .wk-d:disabled .wk-n { color: var(--outline-strong); }
+.wk-w { font-size: 12px; font-weight: 700; color: var(--on-surface-variant); line-height: 1.2; }
+.wk-n { font-size: 15px; font-weight: 800; line-height: 1.2; }
+.wk-st { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; box-sizing: border-box; }
+.wk-st--all { background: var(--safe); }
+.wk-st--all::after { content: ''; width: 5px; height: 9px; border: solid #fff; border-width: 0 2.4px 2.4px 0;
+  transform: translateY(-1px) rotate(45deg); }
+.wk-st--part { border: 2px solid var(--warn); background: linear-gradient(90deg, var(--warn) 50%, var(--white) 50%); }
+.wk-st--none { border: 2px solid var(--outline-strong); background: var(--white); }
+.wk-st--today { border: 2px solid var(--primary); background: var(--white); }
+.wk-st--today::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
+.wk-st--off { visibility: hidden; }
+.wk-d.is-sel { background: var(--primary-tint); box-shadow: inset 0 0 0 2px var(--primary); }
+.wk-d.is-sel .wk-w, .wk-d.is-sel .wk-n { color: var(--primary-dark); }
+.wk-hint { margin-top: 8px; text-align: center; }
+
+/* ── 새로 ② 표 위 머리띠 — 오늘이면 날짜와 '약 목록 고치기', 지난 날이면 노란 띠와 '오늘로' ── */
+.mt-cap { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 2px; margin-bottom: -4px; }
+.mt-cap .cap-t { flex: 1 1 auto; min-width: 0; font-size: 15px; font-weight: 800; line-height: 1.35; }
+.mt-cap .cap-t small { display: block; font-size: 13px; font-weight: 500; color: var(--on-surface-variant); }
+.mt-cap .btn { flex: 0 0 auto; }
+.mt-cap.is-past { padding: 10px 10px 10px 14px; border-radius: var(--r);
+  background: var(--warn-tint); border: 1px solid #f0d6ac; color: #7a4708; }
+.mt-cap.is-past .cap-t small { color: #7a4708; }
+.medtable.is-past { border-color: #e9c78f; }
+
+.yday .row { gap: 8px; margin-top: 10px; }
+.btn-plain { background: transparent; border: 0; color: #7a4708; font: inherit; font-size: 13.5px;
+  font-weight: 700; min-height: 44px; padding: 0 10px; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="#">‹</a>
+    <div><div class="appbar-title">오늘의 복약</div><div class="appbar-sub" data-role="sub"></div></div>
+    <span class="spacer"></span>
+    <a class="action" href="56-schedule-new.html" style="text-decoration:none; color:inherit;" aria-label="복약 설정">⚙️</a>
+  </div>
+
+  <div class="content content--tight" style="padding-bottom:96px;">
+    <!-- 한 주 요약 + 날짜 줄 (예전 맨 아래 '지난 7일'을 여기로, 주 단위로 넘긴다) -->
+    <div class="card">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <div class="ring" data-role="ring"><div class="ring-in" data-role="ring-in"></div></div>
+        <div class="grow">
+          <div class="card-title" style="margin-bottom:2px;" data-role="wk-title"></div>
+          <div class="card-sub" data-role="wk-sub"></div>
+        </div>
+      </div>
+      <div class="wk-nav">
+        <button type="button" class="wk-arrow" data-act="prev" aria-label="지난주">‹</button>
+        <div class="wk-range" data-role="range"></div>
+        <button type="button" class="wk-arrow" data-act="next" aria-label="다음 주">›</button>
+      </div>
+      <div class="wk" data-role="week" aria-label="날짜 고르기"></div>
+      <p class="tiny muted wk-hint">날짜를 누르면 그날 체크를 보고 고칠 수 있어요</p>
+    </div>
+
+    <!-- 어제 빈 칸이 있으면 오늘 아침에 한 번 -->
+    <div class="banner banner--warn yday" data-role="yday" style="display:none;">
+      <span class="b-ic" aria-hidden="true">🌙</span>
+      <div class="small grow">
+        <b data-role="yday-t"></b><br>드셨는데 못 누르셨다면 어제 기록에서 표시해 주세요.
+        <div class="row">
+          <button type="button" class="btn btn-outline btn-sm" data-act="open-yday">어제 기록 열기</button>
+          <button type="button" class="btn-plain" data-act="yday-close">닫기</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-cap" data-role="cap"></div>
+    <div class="medtable" data-role="medtable">
+      <div class="mt-head" data-role="head"></div>
+      <div class="mt-body" data-role="body"></div>
+    </div>
+    <p class="tiny muted mt-help" data-role="help"></p>
+
+    <div class="banner banner--info" data-today-only>
+      <span class="b-ic">💡</span>
+      <div class="small">호르몬치료제는 <b>오래 꾸준히</b> 드시는 게 중요해요.</div>
+    </div>
+    <a class="listitem" href="58-manual-new.html" style="min-height:64px; padding-top:14px; padding-bottom:14px;" data-today-only>
+      <span class="li-ic" style="background:var(--primary-tint); width:44px; height:44px; font-size:24px;" aria-hidden="true">＋</span>
+      <div class="li-body"><div class="li-title" style="font-size:17px;">약 추가하기</div>
+        <div class="li-sub">사진이나 이름으로 넣으실 수 있어요</div></div>
+      <span class="li-chev" aria-hidden="true">›</span>
+    </a>
+    <a class="listitem" href="#" data-today-only>
+      <span class="li-ic" style="background:var(--warn-tint);">🤔</span>
+      <div class="li-body"><div class="li-title">약 챙기기 힘든 점이 있나요?</div><div class="li-sub">이유를 고르시면 방법을 알려 드려요</div></div>
+      <span class="li-chev">›</span>
+    </a>
+    <div class="section-label" data-today-only>이 약을 쓰시는 동안</div>
+    <a class="listitem" href="#" data-today-only>
+      <span class="li-ic" style="background:var(--primary-tint);">💊</span>
+      <div class="li-body"><div class="li-title">타목시펜정 20mg · 부작용 안내</div><div class="li-sub">생길 수 있는 불편과 병원에 연락할 때</div></div>
+      <span class="li-chev">›</span>
+    </a>
+
+    <button type="button" class="btn btn-outline btn-block" data-past-only data-act="today" style="display:none;">오늘로 돌아가기</button>
+
+    <p class="disclaimer">복약 기록과 부작용 안내는 참고용이에요.<br>약을 바꾸거나 중단하는 결정은<br>꼭 담당 의사와 상의하세요.</p>
+  </div>
+
+  <div class="bottomnav">
+    <a class="nav-item" href="#"><span class="ni-ic">🏠</span><span>홈</span></a>
+    <a class="nav-item" href="#"><span class="ni-ic">📖</span><span>정보</span></a>
+    <a class="fab" href="#"><span class="fab-btn">💬</span><span class="fab-label">상담</span></a>
+    <a class="nav-item nav-item--on" href="#"><span class="ni-ic">📈</span><span>기록</span></a>
+    <a class="nav-item" href="#"><span class="ni-ic">👤</span><span>내 정보</span></a>
+  </div>
+</div>
+
+<script src="shared.js"></script>
+<script>
+/* 시안용 예시 — 피드백 주신 분 상황:
+   · 어젯밤 자기 전 약을 드시고 바로 주무셔서 어제 '자기 전' 칸이 비어 있다
+   · 레바미피드정은 아침·점심에 드시는데 '하루 2번'으로 넣어 아침·저녁으로 들어가 있다
+   주소 뒤에 ?today=2026-10-22 를 붙이면 주 중간(목요일)에 연 모습이 된다. */
+(function () {
+  var P = TDP, SLOTS = P.SLOTS, LBL = P.LBL;
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function ymd(d) { return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+  function addD(d, n) { return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n); }
+  function monday(d) { return addD(d, -((d.getDay() + 6) % 7)); }
+  function diff(a, b) { return Math.round((b - a) / 864e5); }
+  var WD = ['일', '월', '화', '수', '목', '금', '토'];
+  var q = location.search;
+  var mt = /[?&]today=(\d{4})-(\d{2})-(\d{2})/.exec(q);
+  var TODAY = mt ? new Date(+mt[1], +mt[2] - 1, +mt[3]) : new Date(2026, 9, 25);
+  var T = ymd(TODAY);
+
+  /* hist: 드시는 시간이 바뀐 날부터의 시간 — 지난 날 표는 그날의 시간 그대로 그린다 */
+  var MEDS = {
+    a: { name: '타목시펜정 20mg', from: '2026-10-06', hist: [{ from: '2026-10-06', slots: ['아침'] }] },
+    b: { name: '암로디핀정 5mg', from: '2026-10-06', hist: [{ from: '2026-10-06', slots: ['아침', '저녁'] }] },
+    c: { name: '마그밀정 500mg', from: '2026-10-06', hist: [{ from: '2026-10-06', slots: ['자기전'] }] },
+    d: { name: '레바미피드정 100mg', from: '2026-10-14', hist: [{ from: '2026-10-14', slots: ['아침', '저녁'] }] }
+  };
+  var order = ['a', 'b', 'c', 'd'];                 /* 지금은 넣은 순서 그대로 */
+  var FIRST = '2026-10-06';
+  function slotsOn(id, k) {
+    var s = MEDS[id].hist[0].slots;
+    MEDS[id].hist.forEach(function (h) { if (h.from <= k) s = h.slots; });
+    return s;
+  }
+  function medsOn(k) { return order.filter(function (id) { return MEDS[id].from <= k; }); }
+  function cellsOn(k) {
+    var out = [];
+    medsOn(k).forEach(function (id) { slotsOn(id, k).forEach(function (s) { out.push(k + '|' + id + '|' + s); }); });
+    return out;
+  }
+  var logs = {};
+  var MISS = { '2026-10-24|c|자기전': 1, '2026-10-16|b|저녁': 1 };
+  for (var d0 = new Date(2026, 9, 6); ymd(d0) < T; d0 = addD(d0, 1)) {
+    if (ymd(d0) === '2026-10-10') continue;                         /* 하루 통째로 기록 없는 날 */
+    cellsOn(ymd(d0)).forEach(function (k) { if (!MISS[k]) logs[k] = true; });
+  }
+  cellsOn(T).forEach(function (k) { if (/\|아침$/.test(k)) logs[k] = true; });
+  var NOW_SLOT = '아침';
+
+  var sel = TODAY;
+  if (/[?&]day=yday/.test(q)) sel = addD(TODAY, -1);
+  var md0 = /[?&]day=(\d{4})-(\d{2})-(\d{2})/.exec(q);
+  if (md0) sel = new Date(+md0[1], +md0[2] - 1, +md0[3]);
+  var ws = monday(sel);
+  var ydayClosed = /[?&]nobanner/.test(q);
+
+  function status(d) {
+    var k = ymd(d);
+    if (k > T) return 'future';
+    if (k < FIRST) return 'before';
+    if (k === T) return 'today';
+    var c = cellsOn(k), on = c.filter(function (x) { return logs[x]; }).length;
+    return on === c.length ? 'all' : on ? 'part' : 'none';
+  }
+  function dayWord(d) {
+    var n = diff(d, TODAY);
+    return n === 0 ? '오늘' : n === 1 ? '어제' : n + '일 전';
+  }
+  function md(d) { return (d.getMonth() + 1) + '월 ' + d.getDate() + '일'; }
+
+  function paintWeek() {
+    var end = addD(ws, 6);
+    var weeksAgo = diff(ws, monday(TODAY)) / 7;
+    $('[data-role="range"]').innerHTML = md(ws) + ' ~ ' + (end.getMonth() === ws.getMonth() ? end.getDate() + '일' : md(end))
+      + '<small>' + (weeksAgo === 0 ? '이번 주' : weeksAgo === 1 ? '지난주' : weeksAgo + '주 전') + '</small>';
+    $('[data-act="prev"]').disabled = ymd(addD(ws, -1)) < FIRST;          /* 처음 약을 넣은 주까지 */
+    $('[data-act="next"]').disabled = ymd(addD(ws, 7)) > T;                /* 오늘이 든 주까지 */
+    var box = $('[data-role="week"]');
+    box.innerHTML = '';
+    var full = 0, past = 0;
+    for (var i = 0; i < 7; i++) (function (d) {
+      var st = status(d), k = ymd(d), off = st === 'future' || st === 'before';
+      if (st === 'all' || st === 'part' || st === 'none') { past++; if (st === 'all') full++; }
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'wk-d' + (k === ymd(sel) ? ' is-sel' : '');
+      b.disabled = off;
+      var stTxt = { today: '오늘', all: '다 챙기셨어요', part: '빈 칸이 있어요', none: '기록 없음', future: '아직 오지 않은 날', before: '약을 넣기 전' }[st];
+      b.setAttribute('aria-label', md(d) + ' ' + WD[d.getDay()] + '요일 · ' + stTxt);
+      if (k === ymd(sel)) b.setAttribute('aria-current', 'date');
+      b.innerHTML = '<span class="wk-w">' + (k === T ? '오늘' : WD[d.getDay()]) + '</span><span class="wk-n">' + d.getDate()
+        + '</span><span class="wk-st wk-st--' + (off ? 'off' : st) + '" aria-hidden="true"></span>';
+      if (!off) b.addEventListener('click', function () { sel = d; paint(); });
+      box.appendChild(b);
+    })(addD(ws, i));
+
+    /* 이 주 요약 — 지난 날 중 다 챙긴 날 (오늘은 아직 하루가 남아 세지 않는다) */
+    var cur = weeksAgo === 0;
+    $('[data-role="ring"]').style.setProperty('--p', past ? Math.round(full / past * 100) + '%' : '0%');
+    $('[data-role="ring-in"]').textContent = past ? full + '/' + past + '일' : '－';
+    $('[data-role="wk-title"]').textContent = !past ? '이번 주가 막 시작됐어요'
+      : full === past ? (cur ? '이번 주 다 챙기고 계세요' : '이 주는 다 챙기셨어요')
+      : (cur ? '이번 주 잘 챙기고 계세요' : '이 주 기록이에요');
+    $('[data-role="wk-sub"]').innerHTML = !past ? '오늘 드실 약을 아래 표에서 챙겨 주세요.'
+      : (cur ? '지난 ' : '') + past + '일 중 <b>' + full + '일</b> 다 챙기셨어요. 빠뜨린 날이 있어도 괜찮아요.';
+  }
+
+  function paintCap() {
+    var cap = $('[data-role="cap"]'), past = ymd(sel) !== T;
+    cap.className = 'mt-cap' + (past ? ' is-past' : '');
+    if (past) {
+      cap.innerHTML = '<span aria-hidden="true" style="font-size:20px;">📅</span><div class="cap-t">' + md(sel) + '(' + WD[sel.getDay()] + ') · ' + dayWord(sel)
+        + '<small>지난 날 기록을 고치고 있어요</small></div>'
+        + '<button type="button" class="btn btn-outline btn-sm" data-act="today">오늘로 ›</button>';
+    } else {
+      cap.innerHTML = '<div class="cap-t">오늘 드실 약<small>' + md(sel) + '(' + WD[sel.getDay()] + ')</small></div>'
+        + '<button type="button" class="btn btn-outline btn-sm" data-act="order">약 목록 고치기</button>';
+    }
+    $('[data-role="sub"]').textContent = md(sel) + ' · ' + dayWord(sel) + (past ? ' 기록' : '');
+  }
+
+  function paintTable() {
+    var table = $('[data-role="medtable"]'), head = $('[data-role="head"]'), body = $('[data-role="body"]');
+    var k = ymd(sel), past = k !== T, ids = medsOn(k);
+    var used = SLOTS.filter(function (s) { return ids.some(function (id) { return slotsOn(id, k).indexOf(s) > -1; }); });
+    table.classList.toggle('is-past', past);
+    table.setAttribute('data-slots', String(used.length));
+    head.innerHTML = '<div class="mt-hc mt-hc--name">약</div>';
+    used.forEach(function (s) {
+      var hc = document.createElement('div');
+      hc.className = 'mt-hc' + (!past && s === NOW_SLOT ? ' is-now' : '');
+      hc.textContent = s;
+      head.appendChild(hc);
+    });
+    body.innerHTML = '';
+    ids.forEach(function (id) {
+      var m = MEDS[id], sl = slotsOn(id, k);
+      var item = document.createElement('div'); item.className = 'mt-item';
+      var row = document.createElement('div'); row.className = 'mt-row';
+      row.innerHTML = '<button class="mt-name" type="button"><span class="mt-nm">' + m.name + '</span></button>';
+      used.forEach(function (s) {
+        if (sl.indexOf(s) < 0) {
+          var off = document.createElement('span');
+          off.className = 'mt-cell mt-cell--off'; off.setAttribute('aria-hidden', 'true'); off.textContent = '·';
+          row.appendChild(off); return;
+        }
+        var key = k + '|' + id + '|' + s;
+        var c = document.createElement('button');
+        c.type = 'button';
+        c.className = 'mt-cell' + (logs[key] ? ' is-on' : '');
+        c.setAttribute('aria-pressed', logs[key] ? 'true' : 'false');
+        c.setAttribute('aria-label', m.name + ' · ' + (past ? md(sel) + ' ' : '') + LBL[s]
+          + (logs[key] ? ' · 드셨어요. 누르면 취소돼요' : ' · 드셨으면 눌러 주세요'));
+        c.innerHTML = '<span class="mt-mark" aria-hidden="true"></span>';
+        c.addEventListener('click', function () {
+          logs[key] = !logs[key];
+          if (past) P.toast(md(sel) + ' ' + LBL[s] + '\n' + (logs[key] ? '드셨다고 표시했어요' : '표시를 지웠어요'));
+          paint();
+        });
+        row.appendChild(c);
+      });
+      item.appendChild(row); body.appendChild(item);
+    });
+    $('[data-role="help"]').innerHTML = past
+      ? '드셨는데 못 누르신 칸만 눌러 주세요.<br>잘못 누르셨으면 한 번 더 누르면 지워져요.'
+      : '약을 드셨으면 그 칸을 눌러 주세요.<br>잘못 누르셨으면 한 번 더 누르면 지워져요.<br>약 이름을 누르면 시간과 안내가 열려요.';
+  }
+
+  function paintYday() {
+    var y = addD(TODAY, -1), k = ymd(y);
+    var em = k < FIRST ? [] : cellsOn(k).filter(function (x) { return !logs[x]; });
+    var show = ymd(sel) === T && !ydayClosed && em.length > 0;
+    $('[data-role="yday"]').style.display = show ? '' : 'none';
+    if (!show) return;
+    $('[data-role="yday-t"]').textContent = em.length === 1
+      ? '어제 ' + LBL[em[0].split('|')[2]] + ' 칸이 비어 있어요.'
+      : '어제 빈 칸이 ' + em.length + '개 있어요.';
+  }
+
+  function paint() {
+    var past = ymd(sel) !== T;
+    paintWeek(); paintCap(); paintTable(); paintYday();
+    $$('[data-today-only]').forEach(function (el) { el.style.display = past ? 'none' : ''; });
+    $$('[data-past-only]').forEach(function (el) { el.style.display = past ? '' : 'none'; });
+  }
+
+  function openOrder() {
+    return P.openSheet({
+      items: order.map(function (id) { return { id: id, name: MEDS[id].name, slots: slotsOn(id, T) }; }),
+      onSave: function (o2, slots, changed) {
+        order = o2;
+        changed.forEach(function (id) {
+          var h = MEDS[id].hist;
+          if (h[h.length - 1].from === T) h[h.length - 1].slots = slots[id];
+          else h.push({ from: T, slots: slots[id] });               /* 오늘부터 — 지난 날 표는 그대로 */
+        });
+        paint();
+        P.toast(changed.length ? '저장했어요\n드시는 시간은 오늘부터 바뀌어요' : '약 순서를 저장했어요');
+      }
+    });
+  }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('[data-act]');
+    if (!a || a.disabled) return;
+    var act = a.getAttribute('data-act');
+    if (act === 'today') { sel = TODAY; ws = monday(TODAY); paint(); }
+    else if (act === 'open-yday') { sel = addD(TODAY, -1); ws = monday(sel); paint(); }
+    else if (act === 'yday-close') { ydayClosed = true; paint(); }
+    else if (act === 'order') openOrder();
+    else if (act === 'prev' || act === 'next') {
+      var n = act === 'prev' ? -7 : 7;
+      ws = addD(ws, n);
+      /* 같은 요일로 옮겨 간다 — 오늘 뒤·처음 넣기 전이면 그 주의 끝·처음 날로 */
+      var s2 = addD(sel, n);
+      if (ymd(s2) > T) s2 = TODAY;
+      if (ymd(s2) < FIRST) s2 = new Date(2026, 9, 6);
+      sel = s2;
+      paint();
+    }
+  });
+
+  paint();
+  var sh = /[?&]sheet=(\w+)/.exec(q);
+  if (sh) {
+    var api = openOrder();
+    if (sh[1] === 'lift') api.lift(3, -118);                          /* 레바미피드를 잡고 위로 끌어 올리는 중 */
+    if (sh[1] === 'after') api.demo(3, 1, 1, '점심', '저녁');           /* 놓은 뒤 + 아침·저녁 → 아침·점심 */
+  }
+})();
+</script>
+</body>
+</html>

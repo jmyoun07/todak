@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 홈</title>
+<link rel="stylesheet" href="app.css">
+<style>
+/* ── 05 홈 전용 모양 (2026-09-28 · 교수님 두 번째 검토) ──
+   읽는 순서 = 하는 순서:
+     인사 → 지금 할 일(아래에 오늘의 복약·오늘 컨디션 줄) → 오늘 뭐가 제일 힘드셨나요?(오후 5시부터)
+     → 오늘의 한 가지 → 무엇을 도와드릴까요?(6칸) → 내가 신경 쓰는 부작용 → 응급 안내 → 고지
+   묶음마다 같은 모양의 큰 제목(.home-h)을 카드 바깥 왼쪽에 둔다 — 제목이 카드 안 작은 이름표(pill)일 때
+   '작고 오른쪽으로 밀려 보인다', 묶음끼리 구분이 흐리다는 말씀을 들었다.
+   공용 app.css 는 이번 작업에서 얼려 두었으므로 이 화면에서만 쓰는 모양을 여기 둔다.
+   글자는 공용 반응형 묶음과 같은 방식(clamp + cqw, 390px 기준)이라 360~430px 폭에서 줄 수가 같고, 13px 아래로 내려가지 않는다.
+   앞줄의 px 값은 cqw 를 모르는 옛 웹뷰용이다. */
+
+/* 인사 칸 — 알림 단추를 인사 첫 줄 오른쪽에 겹쳐 세운다 (교수님 2026-10-01: 이름 위 공간이 많이 빈다).
+   예전에는 단추(44px)가 한 줄을 따로 차지하고 그 아래를 10px 더 띄워, 이름 위로 54px 남짓이 비어 보였다.
+   단추 자리는 이름 줄(.greet-who)만 비켜 간다 — 둘째 줄('오늘 컨디션은 어떠세요?')은 예전처럼 폭을 다 써서 줄 수가 그대로다.
+   단추 높이: .greet 위 여백 4px + 첫 줄(22px × 1.35 ≈ 30px)의 가운데에 단추(44px) 가운데를 맞춘 값 */
+.brandhead .greet { position: relative; }
+/* !important: 작은 링크 누름칸 넓히기 규칙(app.css '.screen a:not(.btn):not(.listitem)…' — :not 열 개라 이 선택자보다 훨씬 세다)이
+   모든 글 링크를 position:relative 로 두기 때문. 그 규칙의 ::after 누름칸은 absolute 단추 위에서도 그대로 동작한다 */
+.brandhead .greet .bell { position: absolute !important; top: -3px; right: 22px; }
+.brandhead .greet h1 { margin-top: 0; }
+.brandhead .greet .greet-who { display: inline-block; max-width: calc(100% - 56px); }
+
+/* 묶음 = 큰 제목 + 내용. 묶음 사이는 넓게(.content 간격 16 + 10), 제목과 내용은 가깝게(10) — 어디까지가 한 묶음인지 보이게 */
+.home-grp { flex: 0 0 auto; display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+.content > .brandhead + .home-grp { margin-top: 2px; }
+/* 큰 제목 — 홈의 모든 묶음 제목이 같은 크기·같은 자리(카드 왼쪽 끝)에 선다. 카드 제목(.card-title)보다 한 단 크다 */
+.content .home-h {
+  margin: 0;
+  font-size: 18.5px;
+  font-size: clamp(16.5px, 4.7436cqw, 20.4px);
+  font-weight: 800; line-height: 1.35; letter-spacing: -.3px;
+  color: var(--on-surface);
+  overflow-wrap: normal; text-wrap: balance;
+}
+/* 제목 오른쪽 '전체 ›' — 누름칸 44px 은 지키되, 제목 줄 높이는 다른 묶음과 같게(위아래 음수 여백) */
+.home-h-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.home-h-row .home-more {
+  flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 44px; margin: -10px -4px; padding: 0 4px;
+  font-size: 14px; font-size: clamp(13px, 3.5897cqw, 15.4px);
+  font-weight: 700; color: var(--primary-dark); text-decoration: none;
+}
+
+/* 지금 할 일 — 홈에서 가장 먼저 읽히는 칸. 채운 버튼(.btn-primary)은 홈 전체에서 이 칸에만 하나 둔다.
+   윗부분(.now-main) = 지금 챙길 것 하나, 아랫부분(.now-rows) = 오늘의 복약 · 오늘 컨디션 줄 */
+.now-card { border: 1.5px solid var(--primary-light); padding-bottom: 4px; }
+.now-card .card-title { margin-bottom: 2px; }
+.now-card .now-go { margin-top: 12px; }
+/* 다 하셨을 때 — 누를 것이 없으니 조용한 글 링크 하나만(오늘의 한 가지로 내려 준다) */
+.now-card .now-more {
+  display: inline-flex; align-items: center; min-height: 44px; margin: 2px 0 -10px;
+  font-size: 13.5px;
+  font-size: clamp(13px, 3.4615cqw, 14.9px);
+  font-weight: 700; color: var(--primary-dark); text-decoration: none;
+}
+.now-rows { display: flex; flex-direction: column; margin-top: 14px; border-top: 1px solid var(--outline); }
+/* 모를 때(불러오지 못함) 윗부분을 접으면 구분선도 뺀다 (features.js 가 .now-bare 를 붙인다) */
+.now-card.now-bare .now-rows { margin-top: -4px; border-top: 0; }
+.now-rows > * + * { border-top: 1px solid var(--outline); }
+.now-row { display: flex; align-items: center; gap: 14px; padding: 12px 0; text-decoration: none; color: inherit; }
+/* 고리 안 글자도 본문 하한 13px (공용 .ring-in 은 12px). 고리 크기를 글자에 맞춰(em) 키워, 시스템 글자를 키운 폰에서도
+   '1/1 완료'가 동그라미 밖으로 삐져나오지 않게 한다(96px 까지). 보통 글자에서는 예전과 같은 66px */
+.now-row .ring { font-size: 13px; width: clamp(66px, 5.08em, 96px); height: clamp(66px, 5.08em, 96px); }
+.now-row .ring .ring-in { font-size: 13px; width: calc(100% - 14px); height: calc(100% - 14px); }
+/* 줄 두 개가 틈 없이 붙어 있어, 작은 링크용 누름칸 넓히기(app.css ::after)가 옆 줄을 덮는다 — 이 줄들은 이미 66px 넘게 커서 뺀다 */
+.now-rows > a::after { content: none !important; }
+/* 오후 5시 전(기록 전) — 컨디션 줄 자리에 한 줄 안내만. 아침에 몸이 안 좋은 분도 바로 남기실 수 있게 길은 열어 둔다 */
+.ci-hint { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 12px 0; color: var(--on-surface-variant); text-decoration: none; }
+.ci-hint .ci-hint-t { flex: 1; min-width: 0; }
+.ci-hint b { color: var(--primary-dark); white-space: nowrap; }
+
+/* 오늘 뭐가 제일 힘드셨나요? — 칩은 기록이 아니라 식사 카드로 가는 길이다 */
+.ci-card .ci-hard-sub { margin-bottom: 10px; }
+
+/* 오늘의 한 가지 — 제목(할 일 한 줄) · 풀이(할 일과 까닭 1~2문장) · 어디로 가는지 */
+#tip-card { display: block; text-decoration: none; color: inherit; }
+#tip-card .card-title { margin-bottom: 6px; line-height: 1.45; text-wrap: pretty; }
+#tip-card .card-sub {
+  font-size: 14px;
+  font-size: clamp(13px, 3.5897cqw, 15.4px);
+  line-height: 1.7; color: #4A3C42;
+}
+/* 풀이는 문장마다 한 줄로 세운다(features.js paintOne 이 문장을 .tip-l 로 나눈다) — 할 일 문장과 까닭 문장이
+   한 덩이로 이어지면 줄 끝에 '보세요.'·'쉬워요.'만 떨어졌다. pretty: 마지막 줄에 한 낱말만 남지 않게(지원하는 웹뷰에서) */
+#tip-card .card-sub .tip-l { display: block; text-wrap: pretty; }
+#tip-card .card-sub .tip-l + .tip-l { margin-top: 3px; }
+#tip-card .tip-go { margin-top: 10px; color: var(--primary-dark); }
+
+/* 무엇을 도와드릴까요? — 여섯 칸 모두 같은 높이 */
+.home-grp .feature-grid { grid-auto-rows: 1fr; }
+.home-grp .feature { align-items:center; text-align:center; }
+.home-grp .feature .f-title, .home-grp .feature .f-sub { width:100%; text-align:center; }
+/* 그림 네모를 그림 글자 크기에 맞춰(em) 키운다 — 시스템 글자를 키운 폰(200%)에서 그림 글자가 46px 네모 밖으로 나와
+   칸 제목을 덮었다(2026-09-29 검수). 보통 글자에서는 46px 그대로.
+   칸 글의 '·' 앞에는 보이지 않는 이음표(&#8288;)를 두어, 줄이 '·약 추가'처럼 가운뎃점으로 시작하지 않게 한다(점 뒤에서만 끊김) */
+.home-grp .feature .f-ic { width: clamp(46px, 1.92em, 72px); height: clamp(46px, 1.92em, 72px); }
+
+/* 응급 안내 — 묶음과 같은 간격으로 떼어 둔다 */
+.content > .link-card { margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="content">
+    <!-- 분홍 인사 칸은 .content 안 맨 위에 둔다 — 아래로 내리면 다른 내용과 함께 화면 밖으로 나간다.
+         예전에는 접었다 펴졌다 하며 화면이 떨려 그 기능을 없앴다(app.css .content > .brandhead) -->
+    <div class="brandhead">
+    <div class="statusbar statusbar--light"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+    <div class="greet">
+      <!-- 왼쪽 위 '토닥' 이름표는 뺐다(교수님 2026-09-28) — 알림 단추만 오른쪽에.
+           2026-10-01 교수님: 이름 위가 많이 빈다 → 단추가 한 줄을 따로 차지하지 않고 인사 첫 줄 오른쪽에 선다(위 .greet .bell) -->
+      <a class="bell" href="20-notifications.html?from=05-home.html" aria-label="알림">알림</a>
+      <!-- data-demo: 시안 예시 값. 앱 빌드에서는 app.css 가 가려 두고, 배선 JS(page05)가 중립 글로 바꾼 뒤 드러낸다 — 갤러리·원본 미리보기에는 그대로 보인다 -->
+      <h1 data-demo><span class="greet-who">지영님,</span><br>오늘 컨디션은 어떠세요?</h1>
+      <!-- 뒤쪽 글도 본문 하한 13px (예전 12px). 진료 일정만 적는다 — 항암 주기는 짐작하지 않는다(교수님 2026-10-01) -->
+      <a href="73-cycle-setup.html?from=05-home.html" style="display:block; text-decoration:none; margin-top:12px; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.28); border-radius:var(--r-pill); padding:10px 15px;">
+        <span style="color:#fff; font-size:13px; font-weight:700;" data-demo>다음 진료까지 16일</span>
+        <span style="color:rgba(255,255,255,.85); font-size:13px;" data-demo> · 10월 17일(금) ›</span>
+      </a>
+    </div>
+    </div>
+
+    <!-- ── 지금 할 일 ── 시각과 오늘 기록을 보고 '지금 챙길 것 하나'만 보여 준다(features.js page05 paintNow).
+         · 약 먹을 때가 됐는데 아직이면 → 오늘의 복약   · 오후 5시부터 컨디션을 아직 안 남기셨으면 → 증상 기록
+         · 약을 아직 등록하지 않으셨으면 → 약 등록        · 다 하셨으면 → 조용한 한 줄 + 오늘의 한 가지로
+         버튼 아래에 오늘의 복약 줄과 오늘 컨디션 줄을 함께 둔다(교수님: 오늘의 복약을 지금 할 일 묶음 안으로).
+         컨디션 줄은 오후 5시부터(또는 오늘 남기셨으면) 보이고, 그 전에는 같은 자리에 한 줄 안내만 선다.
+         '지금 할 일'이 이미 증상 기록을 가리키면 컨디션 줄은 접는다 — 같은 버튼이 두 번 보이지 않게.
+         아래 글·버튼은 시안 예시(data-demo · 복약 고리 1/2 와 맞춤)다. 앱에서는 불러오는 동안 중립 글만 보이고 버튼은 숨겨 둔다 -->
+    <section class="home-grp" aria-labelledby="h-now">
+      <h2 class="home-h" id="h-now">지금 할 일</h2>
+      <div class="card now-card" id="now-card" data-role="now-card">
+        <div class="now-main">
+          <div class="card-title now-t" data-demo>오늘 챙기실 약 2개 중 1개 남았어요</div>
+          <div class="card-sub now-s" data-demo>저녁 약을 챙기셨다면 눌러서 표시해 주세요</div>
+          <a class="btn btn-primary btn-block now-go" href="55-med-today.html?from=05-home.html" data-demo>💊 오늘의 복약 열기</a>
+        </div>
+        <div class="now-rows">
+          <a class="now-row" data-role="med-ring" href="55-med-today.html?from=05-home.html">
+            <div class="ring" style="--p:50%;" data-demo><div class="ring-in">1/2<br>완료</div></div>
+            <div class="grow">
+              <div class="card-title">오늘의 복약</div>
+              <div class="card-sub">오늘 챙길 약을 확인해 보세요</div>
+            </div>
+            <span class="li-chev" aria-hidden="true">›</span>
+          </a>
+          <a class="now-row" data-role="ci-ring" href="16-checkin.html?from=05-home.html">
+            <div class="ring" style="--p:50%;" data-demo><div class="ring-in">오늘<br>기록 전</div></div>
+            <div class="grow">
+              <div class="card-title">오늘 컨디션 남기기</div>
+              <div class="card-sub">증상과 기분을 남겨 주세요</div>
+            </div>
+            <span class="li-chev" aria-hidden="true">›</span>
+          </a>
+          <a class="ci-hint small" data-role="ci-hint" href="16-checkin.html?from=05-home.html" style="display:none;">
+            <span aria-hidden="true">📝</span>
+            <span class="ci-hint-t">컨디션은 저녁에 남겨 주세요 · <b>지금 남기기 ›</b></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 오늘 뭐가 제일 힘드셨나요? ── 하루를 돌아보는 물음이라 오후 5시부터 보여 준다(오늘 이미 남기셨으면 시각과 상관없이).
+         칩은 오늘 힘들었던 증상 → 식사 카드(JITAI)로 바로 간다. 기록이 아니라서 무엇이 열리는지 한 줄 적는다 -->
+    <section class="home-grp" data-role="ci-card" aria-labelledby="h-hard">
+      <h2 class="home-h" id="h-hard">오늘 뭐가 제일 힘드셨나요?</h2>
+      <div class="card ci-card" data-role="ci-hard">
+        <div class="card-sub ci-hard-sub">누르시면 먹기 편한 음식을 알려 드려요</div>
+        <div class="chips">
+          <a class="chip chip--soft" href="60-food-nausea.html?from=05-home.html" style="text-decoration:none;">🤢 속이 울렁거려요</a>
+          <a class="chip chip--soft" href="61-food-appetite.html?from=05-home.html" style="text-decoration:none;">🍽️ 입맛이 없어요</a>
+          <a class="chip chip--soft" href="62-food-mucositis.html?from=05-home.html" style="text-decoration:none;">😷 입안이 헐었어요</a>
+          <a class="chip" href="09-food-supplement.html?from=05-home.html" style="text-decoration:none;">더 보기 ›</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 오늘의 한 가지 ── 아래 글·링크는 시안 예시(data-demo)다. 앱에서는 배선 JS(features.js page05 paintOne)가 채운다.
+         고르는 순서: ① 오늘 남기신 증상 ② 오늘 약을 챙기셨으면 등록하신 치료약에서 생길 수 있는 불편
+                      ③ 관심사(요즘 잦았던 증상·상담에서 나온 화면·자주 보신 화면·신경 쓰는 부작용) ④ 날마다 바뀌는 오늘의 팁
+         고른 까닭은 적지 않고 내용을 바로 적는다(제목 = 할 일 한 줄, 아래 = 할 일과 까닭 1~2문장).
+         하루 안에서는 바뀌지 않는다 — 딱 한 번, 먼저 고른 뒤 오늘 증상 기록을 남기셨을 때만 ① 로 바뀐다. 응급 화면은 팁으로 쓰지 않는다 -->
+    <section class="home-grp" aria-labelledby="h-one">
+      <h2 class="home-h" id="h-one">오늘의 한 가지</h2>
+      <a class="card card--tint" id="tip-card" href="34-detail-arthralgia.html?from=05-home.html">
+        <div class="card-title" data-demo>관절이 뻣뻣한 아침엔 가볍게 풀고 일어나요</div>
+        <div class="card-sub" data-demo><span class="tip-l">일어나기 전에 가볍게 스트레칭하고, 따뜻한 물로 샤워해 보세요.</span> <span class="tip-l">호르몬치료 중엔 관절이 아침에 특히 뻣뻣해요.</span></div>
+        <!-- 어느 화면으로 가는지 미리 알려 준다 — 눌렀을 때 '관절통' 화면이 갑자기 나와 놀라지 않게 -->
+        <div class="small strong tip-go" data-demo>관절 뻣뻣함 자세히 보기 ›</div>
+      </a>
+    </section>
+
+    <!-- ── 무엇을 도와드릴까요? ── 예전 '궁금할 때'·'더 알아보기' 두 묶음과 AI 상담 물어보기 칸을 하나로 합쳤다(교수님 2026-09-28).
+         AI 상담은 아래 가운데 '상담' 단추가 맡는다. '이거 먹어도 되나요?'(69)는 음식·건강기능식품(09) 안에서 들어간다 —
+         그 칸을 찾던 분이 알아보시게 09 칸의 작은 글에 '먹어도 되나요?'를 남긴다(360px 에서도 한 줄).
+         근처 병원 찾기 — 위치는 92 에서 필요할 때만 한 번 확인하고, 홈에서는 위치를 읽지 않습니다 -->
+    <section class="home-grp" aria-labelledby="h-help">
+      <h2 class="home-h" id="h-help">무엇을 도와드릴까요?</h2>
+      <div class="feature-grid">
+        <a class="feature" href="55-med-today.html?from=05-home.html">
+          <span class="f-ic" aria-hidden="true">💊</span><span class="f-title">복약 관리</span><span class="f-sub">오늘 챙길 약&#8288;·약 추가</span>
+        </a>
+        <a class="feature" href="06-sideeffects.html?from=05-home.html">
+          <span class="f-ic" aria-hidden="true">📖</span><span class="f-title">부작용 정보</span><span class="f-sub">내 치료별 부작용&#8288;·관리</span>
+        </a>
+        <a class="feature" href="09-food-supplement.html?from=05-home.html">
+          <span class="f-ic" aria-hidden="true">🥗</span><span class="f-title">음식&#8288;·건강기능식품</span><span class="f-sub">식사&#8288;·먹어도 되나요?</span>
+        </a>
+        <a class="feature" href="17-selfcare-library.html?from=05-home.html">
+          <span class="f-ic" aria-hidden="true">🌿</span><span class="f-title">자가관리 가이드</span><span class="f-sub">부작용&#8288;·영양&#8288;·활동&#8288;·마음</span>
+        </a>
+        <a class="feature" href="10-consult-questions.html?from=05-home.html">
+          <span class="f-ic" aria-hidden="true">📝</span><span class="f-title">진료 준비</span><span class="f-sub">증상 요약&#8288;·질문 만들기</span>
+        </a>
+        <a class="feature" href="92-nearby-list.html?from=05-home.html">
+          <span class="f-ic" aria-hidden="true">🏥</span><span class="f-title">근처 병원 찾기</span><span class="f-sub">내 위치에서 가까운 병원</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── 내가 신경 쓰는 부작용 ── 온보딩 concerns 반영. features.js 가 '신경 쓰는'이 든 .section-label 로 이 묶음을 찾아
+         (제목 → 제목 줄 → 묶음) 안의 .chips 를 채운다 — 제목의 section-label 과 이 짜임을 지킬 것 -->
+    <section class="home-grp" aria-labelledby="h-conc">
+      <div class="home-h-row">
+        <h2 class="home-h section-label" id="h-conc">내가 신경 쓰는 부작용</h2>
+        <a class="home-more" href="06-sideeffects.html?from=05-home.html">전체 ›</a>
+      </div>
+      <div class="card">
+        <div class="chips" data-demo>
+          <a class="chip chip--soft" href="15-sideeffect-detail.html?from=05-home.html" style="text-decoration:none;">🖐️ 손발 저림</a>
+          <a class="chip chip--soft" href="34-detail-arthralgia.html?from=05-home.html" style="text-decoration:none;">🦴 관절통</a>
+          <a class="chip chip--soft" href="32-detail-hairloss.html?from=05-home.html" style="text-decoration:none;">💇‍♀️ 머리카락 빠짐</a>
+          <a class="chip chip--soft" href="47-detail-anxiety.html?from=05-home.html" style="text-decoration:none;">💭 불안·재발 걱정</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 응급 안내 — 정보 화면의 '응급 상황일 땐' 칸과 같은 모양(떠 있는 카드 + ›) -->
+    <a class="link-card link-card--emg" href="48-emergency.html?from=05-home.html">
+      <span class="link-card-ic" aria-hidden="true"></span>
+      <span class="link-card-body"><span class="link-card-t">응급 상황일 땐 이렇게 하세요</span></span>
+    </a>
+
+    <p class="disclaimer">토닥은 의료기기가 아니며, 진단·처방·치료를 제공하지 않아요. 건강정보 참고용이에요.</p>
+  </div>
+
+  <div class="bottomnav">
+    <a class="nav-item nav-item--on" href="05-home.html"><span class="ni-ic">🏠</span><span>홈</span></a>
+    <a class="nav-item" href="06-sideeffects.html?from=05-home.html"><span class="ni-ic">📖</span><span>정보</span></a>
+    <a class="fab" href="07-chat.html?from=05-home.html"><span class="fab-btn">💬</span><span class="fab-label">상담</span></a>
+    <a class="nav-item" href="16-checkin.html?from=05-home.html"><span class="ni-ic">📈</span><span>기록</span></a>
+    <a class="nav-item" href="13-settings.html?from=05-home.html"><span class="ni-ic">👤</span><span>내 정보</span></a>
+  </div>
+</div>
+</body>
+</html>

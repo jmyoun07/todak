@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 내 정보</title>
+<link rel="stylesheet" href="app.css">
+<style>
+/* 설정 묶음 상자 (2026-09-28 · 정보 화면 디자인 시스템 v3) — app.css 의 .sec 상자·걸친 제목을 그대로 쓰고,
+   목록 화면이라 제목 앞 그림만 뺀다. 상자 안 줄 사이는 조금 좁게. */
+.sec--set { gap: 8px; }
+.sec--set > .sec-t::before { display: none; }
+.sec--set > .sec-t { padding-left: .85em; }
+/* 맨 아래 앱 이름·버전 표 — 10px 이던 글자를 본문 하한 13px 로 (2026-09-29) */
+.proto-tag { font-size: 13px; }
+/* 맨 위 카드의 치료 칩은 배선(features.js page13)이 04 에서 고르신 이름을 그대로 채운다 —
+   '호르몬치료(내분비치료)'처럼 긴 이름은 한 줄로 묶여 있어, 휴대폰 글자를 200% 로 쓰시면 카드가 화면 밖으로 13px 나갔다.
+   한 줄에 다 안 들어갈 때만 칩 안에서 줄을 바꾼다(보통 글자에서는 그대로 한 줄). 04 의 긴 주사 이름 칩과 같은 방법. */
+.card > .grow { min-width: 0; }
+.card .chips .chip { white-space: normal; max-width: 100%; overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="05-home.html">‹</a>
+    <div><div class="appbar-title">내 정보</div></div>
+  </div>
+
+  <div class="content content--tight">
+    <div class="card" style="display:flex; align-items:center; gap:14px;">
+      <span style="width:54px; height:54px; border-radius:50%; background:var(--primary-tint); display:grid; place-items:center; font-size:26px;">🎀</span>
+      <div class="grow">
+        <div class="strong" style="font-size:17px;">김지영</div>
+        <div class="small muted" data-prof-sub>내 치료 정보</div>
+        <div class="chips" style="margin-top:6px;">
+          <span class="chip chip--soft" style="padding:4px 10px;">항암화학요법</span>
+          <span class="chip chip--soft" style="padding:4px 10px;">호르몬치료(내분비치료)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 로그인한 계정 카드는 계정 관리(82)로 옮겼다 — 내 정보 첫 화면에는 계정 이메일을 띄우지 않는다 -->
+
+    <!-- 2026-09-28 정보 화면 디자인 시스템 v3 — 열세 줄이 한 줄로 늘어서 어디서 갈리는지 보이지 않아
+         네 묶음 상자(.sec · 제목은 상자 윗선에 걸친다)로 나눴다. 의료기기 고지는 목록 한가운데서 맨 아래로 옮겼다(글자 그대로).
+         이용약관·처리방침은 개인정보 묶음으로 옮겼다(2026-09-29 — '도움말·자료'보다 개인정보 쪽이 찾기 쉽다). -->
+    <section class="sec sec--set">
+      <h2 class="sec-t"><span>치료와 약</span></h2>
+      <a class="listitem" href="03-profile-type.html">
+        <span class="li-ic">🩺</span>
+        <div class="li-body"><div class="li-title">내 치료 정보 수정</div><div class="li-sub">병기·유형·치료·약·신경 쓰는 부작용</div></div>
+        <span class="li-chev">›</span>
+      </a>
+      <a class="listitem" href="73-cycle-setup.html?from=13-settings.html">
+        <span class="li-ic">📅</span>
+        <div class="li-body"><div class="li-title">치료 일정</div><div class="li-sub">항암 주기 · 다음 진료일</div></div>
+        <span class="li-chev">›</span>
+      </a>
+      <a class="listitem" href="56-med-schedule.html?from=13-settings.html">
+        <span class="li-ic">💊</span>
+        <div class="li-body"><div class="li-title">복약 설정</div><div class="li-sub">약 순서·드시는 시간·알림 · 약 추가</div></div>
+        <span class="li-chev">›</span>
+      </a>
+      <a class="listitem" href="84-care-contacts.html?from=13-settings.html">
+        <span class="li-ic">🏥</span>
+        <div class="li-body"><div class="li-title">내 병원 연락처</div><div class="li-sub">급할 때 바로 전화할 번호</div></div>
+        <span class="li-chev">›</span>
+      </a>
+    </section>
+
+    <section class="sec sec--set">
+      <h2 class="sec-t"><span>알림·동의·개인정보</span></h2>
+      <a class="listitem" href="23-notif-settings.html?from=13-settings.html">
+        <span class="li-ic">🔔</span>
+        <div class="li-body"><div class="li-title">알림 설정</div><div class="li-sub">마음 건강·기록·복약·진료 전 알림</div></div>
+        <span class="li-chev">›</span>
+      </a>
+      <a class="listitem" href="02-consent.html?review=1&amp;from=13-settings.html">
+        <span class="li-ic">✅</span>
+        <div class="li-body"><div class="li-title">내가 동의한 내용 보기</div><div class="li-sub">동의하신 날짜·항목 확인<br>위치·알림 동의 철회</div></div>
+        <span class="li-chev">›</span>
+      </a>
+      <!-- 환자 확인 서류(99) — 상태 낱말은 app.js page13Verify 가 채운다(올리지 않음·확인 중·확인 완료·다시 올려 주세요).
+           이 단계가 생기기 전에 가입하신 분은 여기서 올리신다. 서류 표가 아직 없으면 줄째 감춘다. (2026-09-28) -->
+      <a class="listitem" href="99-patient-verify.html?from=13-settings.html" data-verify-row>
+        <span class="li-ic">📋</span>
+        <div class="li-body"><div class="li-title">환자 확인 서류</div><div class="li-sub">진단서·소견서 사진 · <span data-verify-state data-demo>확인 완료</span></div></div>
+        <span class="li-chev">›</span>
+      </a>
+      <a class="listitem" href="24-privacy-data.html?from=13-settings.html">
+        <span class="li-ic">🔒</span>
+        <div class="li-body"><div class="li-title">개인정보·데이터 관리</div><div class="li-sub">보관 안내 · 열람·정정·삭제 요청</div></div>
+        <span class="li-chev">›</span>
+      </a>
+      <a class="listitem" href="25-terms.html">
+        <span class="li-ic">📄</span>
+        <div class="li-body"><div class="li-title">이용약관 · 개인정보 처리방침</div><div class="li-sub">서비스 이용 조건 · 개인정보 처리 안내</div></div>
+        <span class="li-chev">›</span>
+      </a>
+    </section>
+
+    <section class="sec sec--set">
+      <h2 class="sec-t"><span>도움말·자료</span></h2>
+      <a class="listitem" href="26-help.html">
+        <span class="li-ic">❓</span>
+        <div class="li-body"><div class="li-title">도움말</div><div class="li-sub">자주 묻는 질문</div></div>
+        <span class="li-chev">›</span>
+      </a>
+      <a class="listitem" href="19-tutorial.html?from=13-settings.html">
+        <span class="li-ic">📖</span>
+        <div class="li-body"><div class="li-title">앱 사용법 다시 보기</div><div class="li-sub">가입할 때 보신 안내예요</div></div>
+        <span class="li-chev">›</span>
+      </a>
+      <a class="listitem" href="12-sources.html?from=13-settings.html">
+        <span class="li-ic">📚</span>
+        <div class="li-body">
+          <div class="li-title">이 앱이 쓰는 자료</div>
+          <div class="li-sub">출처와 이용 조건을 한곳에 모았어요</div>
+        </div>
+        <span class="li-chev">›</span>
+      </a>
+    </section>
+
+    <section class="sec sec--set">
+      <h2 class="sec-t"><span>계정</span></h2>
+      <a class="listitem" href="82-account-exit.html?from=13-settings.html">
+        <span class="li-ic">🚪</span>
+        <div class="li-body"><div class="li-title">계정 관리</div><div class="li-sub">로그아웃 · 계정·기록 삭제 요청</div></div>
+        <span class="li-chev">›</span>
+      </a>
+    </section>
+
+    <p class="disclaimer">본 제품은 의료기기가 아니므로 질병 유무를 판단할 수 없으며, 질병 유무 판단을 위해서는 의사의 검진이 필요합니다.</p>
+
+    <div class="center" style="margin-top:2px;">
+      <span class="proto-tag"><img src="icon-192.png" alt="토닥" style="width:13px; height:13px; border-radius:4px; display:inline-block; vertical-align:-2px;"> 토닥</span>
+    </div>
+  </div>
+
+  <div class="bottomnav">
+    <a class="nav-item" href="05-home.html"><span class="ni-ic">🏠</span><span>홈</span></a>
+    <a class="nav-item" href="06-sideeffects.html"><span class="ni-ic">📖</span><span>정보</span></a>
+    <a class="fab" href="07-chat.html"><span class="fab-btn">💬</span><span class="fab-label">상담</span></a>
+    <a class="nav-item" href="16-checkin.html"><span class="ni-ic">📈</span><span>기록</span></a>
+    <a class="nav-item nav-item--on" href="13-settings.html"><span class="ni-ic">👤</span><span>내 정보</span></a>
+  </div>
+</div>
+</body>
+</html>

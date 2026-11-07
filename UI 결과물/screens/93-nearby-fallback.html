@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 근처 병원 · 예외 상태</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="92-nearby-list.html">‹</a>
+    <div><div class="appbar-title">근처 병원 · 예외 상태</div><div class="appbar-sub">한 화면에 모아 둔 시안</div></div>
+  </div>
+
+  <!-- 2026-09-28 정보 화면 디자인 시스템 v3 (STYLE.md) — 예외 상태 다섯 가지를 상자 하나씩으로 나눴다.
+       앱에서는 이 화면으로 가지 않는다(features.js STUB) — 실제 안내는 병원 찾기 화면(91·92, nearby.js) 안에서 보인다. -->
+  <div class="content content--tight" style="padding-bottom:120px;">
+
+    <!-- ① 위치 권한 사전 설명(시스템 팝업 전에 뜨는 자체 다이얼로그) -->
+    <section class="sec sec--info">
+      <h2 class="sec-t">위치를 묻기 전에</h2>
+      <div class="card">
+        <div class="card-title">📍 위치를 한 번만 쓸게요</div>
+        <p class="small" style="margin-top:6px; line-height:1.7; color:var(--on-surface-variant);">가까운 병원을 찾으려고<br><b>지금 이 순간의 위치</b>만 확인해요.</p>
+        <ul class="dots" style="margin-top:8px;">
+          <li>위치값(위도·경도)은<br>병원 목록을 받아올 때 <b>보내지 않아요.</b><span class="dots-b">어느 시·도인지 고르는 것도<br>휴대폰 안에서 해요.</span></li>
+          <li><b>지도</b>로 보여 드릴 때만 <b>카카오맵</b>에<br>그 순간의 위치가 전달돼요.</li>
+          <li>앱을 쓰지 않을 때는 <b>위치를 보지 않아요.</b></li>
+        </ul>
+        <div class="row gap-8" style="margin-top:12px;">
+          <a class="btn btn-ghost grow btn-sm" href="javascript:void(0)">지금은 안 할래요</a>
+          <a class="btn btn-primary grow btn-sm" href="92-nearby-list.html">위치 확인하기</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ② 권한 거부 · 다른 지역에서 찾기 — 위에서부터 진료과 › 지역 › 병원 종류 › 병원 이름 순서 -->
+    <section class="sec sec--info">
+      <h2 class="sec-t">지역으로 찾을 때</h2>
+      <p class="sec-sub">위치 권한을 거절하셨거나<br>‘다른 지역에서 찾기’를 누르셨을 때예요.</p>
+      <div class="card">
+        <p class="small strong" style="color:var(--primary-dark);">괜찮아요. 위치 없이도 찾으실 수 있어요.</p>
+
+        <div class="small muted" style="margin:12px 0 7px;">어떤 진료과를 찾으세요?</div>
+        <a class="btn btn-outline btn-block" href="javascript:void(0)" style="justify-content:space-between;">
+          <span>전체 보기</span><span aria-hidden="true">고르기 ›</span>
+        </a>
+
+        <div class="small strong" style="color:var(--primary-dark); margin-top:14px;">어느 지역에서 찾을까요?</div>
+        <span class="input" style="display:flex; align-items:center; justify-content:space-between; margin-top:10px; font-size:15px; color:var(--on-surface);">서울특별시 <span class="tiny muted">시·도 ▾</span></span>
+        <span class="input" style="display:flex; align-items:center; justify-content:space-between; margin-top:8px; font-size:15px; color:var(--on-surface);">종로구 <span class="tiny muted">시·군·구 ▾</span></span>
+        <span class="input" style="display:flex; align-items:center; justify-content:space-between; margin-top:8px; font-size:15px; color:var(--on-surface);">읍·면·동 전체 <span class="tiny muted">읍·면·동 ▾</span></span>
+        <p class="small muted" style="margin-top:7px; line-height:1.7;">읍·면·동은 적지 않고 <b>고르시면 돼요.</b><br>시·군·구를 고르면 그 안의 동이 나와요.<br>‘읍·면·동 전체’면 시·군·구 전체예요.</p>
+        <span class="input" style="display:flex; align-items:center; justify-content:space-between; margin-top:10px; font-size:15px; color:var(--on-surface);">종류 전체 <span class="tiny muted">병원 종류 ▾</span></span>
+        <span class="input" style="display:flex; align-items:center; margin-top:8px; font-size:15px; color:var(--on-surface-variant);">병원 이름 (선택)</span>
+        <a class="btn btn-primary btn-block" href="92-nearby-list.html" style="margin-top:10px;">🔎 이 조건으로 찾기</a>
+        <p class="small muted" style="margin-top:8px; line-height:1.7;"><b>이름순</b>으로 <b>10곳</b>씩 보여 드려요.<br>나머지는 ‘더 보기’로 이어서 보세요.</p>
+        <a class="btn btn-outline btn-block btn-sm" href="javascript:void(0)" style="margin-top:10px;">설정에서 위치 권한 켜기</a>
+      </div>
+    </section>
+
+    <!-- ③ GPS 실패 -->
+    <section class="sec sec--caution">
+      <h2 class="sec-t">위치를 못 잡았을 때</h2>
+      <p class="sec-p">실내나 지하에서는 위치가 잘 안 잡힐 수 있어요.</p>
+      <div class="it">
+        <div class="it-do"><span>잠시 후 다시 해 보시거나,<br>지역으로 찾아 주세요.</span></div>
+      </div>
+      <div class="row gap-8">
+        <a class="btn btn-outline grow btn-sm" href="javascript:void(0)">다시 시도</a>
+        <a class="btn btn-primary grow btn-sm" href="javascript:void(0)">지역으로 찾기</a>
+      </div>
+    </section>
+
+    <!-- ④ 결과 0건 -->
+    <section class="sec sec--info">
+      <h2 class="sec-t">근처에 없을 때</h2>
+      <p class="sec-p"><b>이 조건에 맞는 병원을 찾지 못했어요.</b></p>
+      <div class="it">
+        <div class="it-do"><span>진료과를 ‘전체 보기’로 넓히거나<br>다른 지역에서 찾아보세요.</span></div>
+      </div>
+      <div class="col gap-8">
+        <a class="btn btn-outline btn-block btn-sm" href="javascript:void(0)">진료과 ‘전체 보기’로 넓히기</a>
+        <a class="btn btn-outline btn-block btn-sm" href="javascript:void(0)">🗺 다른 지역에서 찾기</a>
+        <a class="btn btn-ghost btn-block btn-sm" href="84-care-contacts.html">담당 병원에 물어보기</a>
+      </div>
+    </section>
+
+    <!-- ⑤ 통신 오류 -->
+    <section class="sec sec--caution">
+      <h2 class="sec-t">병원 정보를 못 불러왔을 때</h2>
+      <p class="sec-p">공공데이터 서버에서<br>병원 정보를 받아오지 못했어요.</p>
+      <div class="it">
+        <div class="it-do"><span>잠시 후 다시 해 보세요.</span></div>
+      </div>
+      <div class="row gap-8">
+        <a class="btn btn-outline grow btn-sm" href="javascript:void(0)">다시 시도</a>
+        <a class="btn btn-primary grow btn-sm" href="84-care-contacts.html">📞 담당 병원에 전화</a>
+      </div>
+    </section>
+
+    <p class="disclaimer">어떤 경우에도 <b>담당 병원 연락처는</b><br>위치 없이 항상 보여 드려요.</p>
+  </div>
+</div>
+</body>
+</html>

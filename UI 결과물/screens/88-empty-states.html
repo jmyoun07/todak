@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 첫날 화면</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="16-checkin.html">‹</a>
+    <div><div class="appbar-title">컨디션 기록</div><div class="appbar-sub">7월 28일 · 오늘</div></div>
+  </div>
+
+  <!-- 빈 상태 모음 (시안) — 앱에서는 이 화면으로 가는 링크가 안내 한 줄로 바뀐다(features.js STUB).
+       2026-09-28 정보 화면 디자인 시스템 v3 (STYLE.md) — 상태마다 상자 하나 -->
+  <div class="content content--tight" style="padding-bottom:96px;">
+    <!-- 기록 없음 -->
+    <section class="sec sec--info">
+      <h2 class="sec-t">컨디션 기록이 없을 때</h2>
+      <div class="center" style="padding:6px 6px 2px;">
+        <div style="font-size:40px;">🌱</div>
+        <div class="strong" style="font-size:16px; margin-top:10px;">아직 기록이 없어요</div>
+        <p class="small muted" style="margin-top:6px;">오늘부터 기록하시면<br><b>일주일 뒤엔 변화가 보여요.</b></p>
+      </div>
+      <a class="btn btn-primary btn-block" href="16-checkin.html">오늘 컨디션 남기기</a>
+      <div class="tip">
+        <span class="tip-lab">팁</span>
+        <div class="it-b">매일 안 하셔도 괜찮아요.<br><b>생각날 때만</b> 남겨도 진료 때 큰 도움이 돼요.</div>
+      </div>
+    </section>
+
+    <!-- 대화 기록 없음 -->
+    <section class="sec sec--info">
+      <h2 class="sec-t">대화 기록이 없을 때</h2>
+      <div class="center" style="padding:6px 6px 2px;">
+        <div style="font-size:36px;">💬</div>
+        <div class="strong" style="font-size:15px; margin-top:8px;">아직 나눈 대화가 없어요</div>
+        <p class="small muted" style="margin-top:6px;">궁금한 증상이 있으면 편하게 물어보세요.</p>
+      </div>
+      <div class="chips" style="justify-content:center;">
+        <a class="chip chip--soft" href="07-chat.html" style="text-decoration:none;">손발이 저려요</a>
+        <a class="chip chip--soft" href="07-chat.html" style="text-decoration:none;">입맛이 없어요</a>
+        <a class="chip chip--soft" href="07-chat.html" style="text-decoration:none;">홍삼 먹어도 되나요?</a>
+      </div>
+    </section>
+
+    <!-- 알림 없음 -->
+    <section class="sec sec--info">
+      <h2 class="sec-t">알림이 없을 때</h2>
+      <div class="center" style="padding:6px 6px 2px;">
+        <div style="font-size:36px;">🔔</div>
+        <div class="strong" style="font-size:15px; margin-top:8px;">새로운 알림이 없어요</div>
+        <p class="small muted" style="margin-top:6px;">복약·기록 알림을 켜 두시면<br>잊지 않으실 거예요.</p>
+      </div>
+      <a class="btn btn-outline btn-block btn-sm" href="23-notif-settings.html">알림 설정하기</a>
+    </section>
+
+    <!-- 검색 결과 없음 -->
+    <section class="sec sec--info">
+      <h2 class="sec-t">검색 결과가 없을 때</h2>
+      <div class="center" style="padding:6px 6px 2px;">
+        <div style="font-size:36px;">🔍</div>
+        <div class="strong" style="font-size:15px; margin-top:8px;">‘흑염소즙’ 결과가 없어요</div>
+        <p class="small muted" style="margin-top:6px;">아직 정리되지 않은 내용일 수 있어요.</p>
+      </div>
+      <a class="btn btn-outline btn-block btn-sm" href="72-no-info.html">왜 결과가 없나요? ›</a>
+    </section>
+  </div>
+
+  <div class="bottomnav">
+    <a class="nav-item" href="05-home.html"><span class="ni-ic">🏠</span><span>홈</span></a>
+    <a class="nav-item" href="06-sideeffects.html"><span class="ni-ic">📖</span><span>정보</span></a>
+    <a class="fab" href="07-chat.html"><span class="fab-btn">💬</span><span class="fab-label">상담</span></a>
+    <a class="nav-item nav-item--on" href="16-checkin.html"><span class="ni-ic">📈</span><span>기록</span></a>
+    <a class="nav-item" href="13-settings.html"><span class="ni-ic">👤</span><span>내 정보</span></a>
+  </div>
+</div>
+</body>
+</html>

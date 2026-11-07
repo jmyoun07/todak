@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 약 챙기기 힘든 점</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="55-med-today.html">‹</a>
+    <div><div class="appbar-title">약 챙기기 힘든 점</div></div>
+  </div>
+
+  <!-- 2026-09-28 정보 화면 디자인 시스템 v3 (STYLE.md) — 고른 이유별 안내 = 초록 상자, 늘 보이는 안전 안내 = 🟠 열 · 노랑 약 지키기.
+       features.js page57 이 칩 글자(data-reason)로 묶음을 켜고 끈다(style.display) — 칩 글자·data-reason·data-q 는 바꾸지 않는다. -->
+  <div class="content content--tight" style="padding-bottom:150px;">
+    <div>
+      <h1 style="font-size:19px; font-weight:700;">어떤 점이 힘드세요?</h1>
+      <p class="tiny muted" style="margin-top:4px;">여러 개 고르셔도 괜찮아요.</p>
+    </div>
+
+    <div class="chips" data-role="reasons" style="gap:10px;">
+      <span class="chip chip--on" style="padding:11px 15px; font-size:14px;">관절이 아파서</span>
+      <span class="chip" style="padding:11px 15px; font-size:14px;">속이 불편해서</span>
+      <span class="chip" style="padding:11px 15px; font-size:14px;">깜빡 잊어서</span>
+      <span class="chip" style="padding:11px 15px; font-size:14px;">열이 오르고 땀이 나서</span>
+      <span class="chip" style="padding:11px 15px; font-size:14px;">기분이 가라앉아서</span>
+      <span class="chip" style="padding:11px 15px; font-size:14px;">약 먹는 게 지쳐서</span>
+      <span class="chip" style="padding:11px 15px; font-size:14px;">효과가 있는지 몰라서</span>
+      <span class="chip" style="padding:11px 15px; font-size:14px;">＋ 직접 입력</span>
+    </div>
+
+    <!-- 선택에 따른 맞춤 응답 — 고른 칩에 맞는 묶음만 보인다 (features.js page57 · 고른 내용은 서버로 보내지 않음) -->
+    <p class="small muted" data-reason-empty style="display:none;">힘든 점을 고르시면<br>도움이 될 안내를 보여 드려요.</p>
+
+    <section class="sec sec--good" data-reason="관절이 아파서"
+         data-q="호르몬치료 시작하고 아침마다 관절이 많이 아파서 약 먹기가 힘들어요. 도움이 될 방법이나 다른 약이 있을까요?">
+      <h2 class="sec-t">관절이 아파서 힘드시다면</h2>
+      <p class="sec-p">호르몬치료 중 관절통은 흔해요.<br>참지 마시고 진료 때 꼭 말씀하세요.</p>
+      <a class="listitem" href="34-detail-arthralgia.html">
+        <span class="li-ic">🦴</span>
+        <div class="li-body"><div class="li-title">관절통 관리 방법 보기</div><div class="li-sub">스트레칭·온찜질·생활 요령</div></div>
+        <span class="li-chev">›</span>
+      </a>
+    </section>
+
+    <section class="sec sec--good" data-reason="속이 불편해서" style="display:none;"
+         data-q="약을 먹으면 속이 불편해서 챙기기가 힘들어요. 도움이 될 방법이 있을까요?">
+      <h2 class="sec-t">속이 불편하시다면</h2>
+      <div class="it">
+        <div class="it-t">약 먹는 때를 바꾸고 싶다면</div>
+        <div class="it-do"><span>담당 의사나 약사에게 먼저 여쭤보세요.</span></div>
+      </div>
+      <a class="listitem" href="31-detail-nausea.html">
+        <span class="li-ic">🤢</span>
+        <div class="li-body"><div class="li-title">오심·구토 관리 방법 보기</div><div class="li-sub">속이 울렁거릴 때 해 볼 수 있는 것</div></div>
+        <span class="li-chev">›</span>
+      </a>
+      <a class="listitem" href="60-food-nausea.html">
+        <span class="li-ic">🥣</span>
+        <div class="li-body"><div class="li-title">메스꺼울 때 식사 보기</div><div class="li-sub">먹기 편한 음식과 먹는 요령</div></div>
+        <span class="li-chev">›</span>
+      </a>
+    </section>
+
+    <section class="sec sec--good" data-reason="깜빡 잊어서" style="display:none;"
+         data-q="약을 자주 깜빡해요. 거른 날에는 어떻게 하면 되는지 알려 주실 수 있나요?">
+      <h2 class="sec-t">자꾸 잊으신다면</h2>
+      <p class="sec-p">평소 약을 챙기는 시간에<br><b>알림</b>이 오게 맞춰 보세요.</p>
+      <a class="listitem" href="56-med-schedule.html">
+        <span class="li-ic">⏰</span>
+        <div class="li-body"><div class="li-title">복약 시간·알림 맞추기</div><div class="li-sub">약마다 알림 시간을 정할 수 있어요</div></div>
+        <span class="li-chev">›</span>
+      </a>
+    </section>
+
+    <section class="sec sec--good" data-reason="열이 오르고 땀이 나서" style="display:none;"
+         data-q="열감과 땀 때문에 많이 힘들어요. 약과 관련이 있는지, 도움이 될 방법이 있을까요?">
+      <h2 class="sec-t">열이 오르고 땀이 난다면</h2>
+      <div class="it">
+        <div class="it-t">먼저 체온부터 재 보세요</div>
+        <div class="it-do"><span>아래 체온 기준을 넘으면<br>치료받는 병원에 바로 연락하세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">열은 없는데 얼굴이 화끈거린다면</div>
+        <div class="it-b">호르몬치료 중 흔한 안면홍조일 수 있어요.</div>
+      </div>
+      <a class="listitem" href="35-detail-hotflash.html">
+        <span class="li-ic">🔥</span>
+        <div class="li-body"><div class="li-title">안면홍조·열감 관리 방법 보기</div><div class="li-sub">얇게 껴입기·유발 요인 줄이기</div></div>
+        <span class="li-chev">›</span>
+      </a>
+    </section>
+
+    <section class="sec sec--good" data-reason="기분이 가라앉아서" style="display:none;"
+         data-q="요즘 기분이 자주 가라앉아요. 도움을 받을 수 있는 방법이 있을까요?">
+      <h2 class="sec-t">기분이 가라앉는다면</h2>
+      <p class="sec-p">치료 중에 기분이 가라앉는 건 흔한 일이에요.<br>진료 때 담당 의사에게 꼭 말씀하세요.</p>
+      <a class="listitem" href="47-detail-anxiety.html">
+        <span class="li-ic">💭</span>
+        <div class="li-body"><div class="li-title">불안한 마음 다스리기</div><div class="li-sub">마음 나누기·전문 상담</div></div>
+        <span class="li-chev">›</span>
+      </a>
+      <a class="listitem" href="11-crisis.html">
+        <span class="li-ic">🤝</span>
+        <div class="li-body"><div class="li-title">지금 많이 힘드시다면</div><div class="li-sub">24시간 상담 전화 안내</div></div>
+        <span class="li-chev">›</span>
+      </a>
+    </section>
+
+    <section class="sec sec--good" data-reason="약 먹는 게 지쳐서" style="display:none;"
+         data-q="약을 오래 챙기는 게 많이 지쳐요. 부담을 덜 방법이 있을까요?">
+      <h2 class="sec-t">오래 챙기느라 지치셨다면</h2>
+      <p class="sec-p">지친 마음도 진료 때 말씀하세요.<br>부담을 덜 방법을 함께 찾을 수 있어요.</p>
+    </section>
+
+    <section class="sec sec--good" data-reason="효과가 있는지 몰라서" style="display:none;"
+         data-q="이 약이 저에게 잘 듣고 있는지 어떻게 알 수 있을까요?">
+      <h2 class="sec-t">효과가 궁금하시다면</h2>
+      <p class="sec-p">먹어도 달라지는 느낌이 없는 약도 많아요.<br>느낌이 없다고 효과가 없는 건 아니에요.</p>
+      <p class="sec-p">궁금한 점은 진료 때 여쭤보세요.</p>
+    </section>
+
+    <section class="sec sec--good" data-reason="기타" style="display:none;"
+         data-q="약 챙기기가 힘든 점이 있어요. 도움이 될 방법이 있을까요?">
+      <h2 class="sec-t">알려 주셔서 고마워요</h2>
+      <p class="sec-p">힘든 점을 진료 때 말씀하시면<br>도움이 될 방법을 함께 찾을 수 있어요.</p>
+    </section>
+
+    <!-- ═══ 늘 보이는 안전 안내 ① 열 — 부위별 기준은 08·48 과 같다 ═══ -->
+    <section class="sec sec--lv2" id="s-fever">
+      <h2 class="sec-t section-label"><span class="lv" aria-hidden="true">🟠</span> <span>열이 나면 병원 연락이 먼저</span></h2>
+      <div class="it">
+        <div class="it-t">이 체온이면</div>
+        <div class="it-b">귀 38.0도 · 겨드랑이 37.5도 · 입 38.3도 이상,<br>또는 입 38.0도가 1시간 넘게 이어질 때</div>
+        <div class="it-do"><span>약 이야기보다 먼저<br>치료받는 병원에 바로 연락하세요.</span></div>
+        <div class="it-do"><span>해열제를 먼저 드시지 마세요.</span></div>
+        <div class="it-b">열이 가려지면 상황을 놓쳐요.</div>
+      </div>
+    </section>
+
+    <!-- ═══ 늘 보이는 안전 안내 ② 약 지키기 ═══ -->
+    <section class="sec sec--caution" id="s-keep">
+      <h2 class="sec-t section-label">약, 이것만은 지켜 주세요</h2>
+      <div class="it">
+        <div class="it-t">깜빡 거르셨다면</div>
+        <div class="it-b">건너뛸지 바로 드실지는 <b>약마다 달라요.</b></div>
+        <div class="it-do"><span>다음에 두 번 드시지 마세요.</span></div>
+        <div class="it-do"><span>약국에서 받은 복약안내문을 보시거나<br>담당 의사나 약사에게 확인하세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">그만 먹고 싶을 만큼 힘들어도</div>
+        <div class="it-do"><span>약을 스스로 끊지 마세요.</span></div>
+        <div class="it-b">담당 의사와 상의하면 도움이 될 방법을<br>함께 찾을 수 있어요.</div>
+      </div>
+    </section>
+
+    <!-- ═══ 진료 때 이렇게 여쭤보세요 — data-q-box 안은 page57 이 고른 이유의 질문으로 채운다 ═══ -->
+    <section class="sec sec--info" id="s-ask">
+      <h2 class="sec-t section-label">진료 때 이렇게 여쭤보세요</h2>
+      <div class="card card--flat" data-q-box data-q-default="약 챙기기가 힘든 점이 있어요. 도움이 될 방법이 있을까요?" style="border:1px solid var(--outline); background:var(--surface-2); display:flex; flex-direction:column; gap:8px;">
+        <p class="small">“호르몬치료 시작하고 아침마다 관절이 많이 아파서 약 먹기가 힘들어요. 도움이 될 방법이나 다른 약이 있을까요?”</p>
+      </div>
+      <a class="btn btn-primary btn-block" href="10-consult-questions.html">📝 진료 준비에서 질문 정리하기</a>
+    </section>
+
+    <p class="disclaimer">알려 주신 내용은 맞춤 안내를 드리는 데만 쓰여요.</p>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-outline btn-block" href="55-med-today.html">닫기</a>
+  </div>
+</div>
+</body>
+</html>

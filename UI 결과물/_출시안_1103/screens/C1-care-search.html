@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 병원 찾기 + 관리로 찾기 (출시안)</title>
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="launch.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="A1-home.html">‹</a>
+    <div><div class="appbar-title">병원 찾기</div></div>
+  </div>
+
+  <!-- 92 근처 병원 목록에 '관리로 찾기' 줄을 더한 출시안. 관리 태그는 토닥이 같은 질문지로 전화해 확인한 내용이고,
+       목록은 휴대폰이 통째로 받아 안에서 거리를 잰다(위치는 서버로 보내지 않는다).
+       '제휴'는 표시만 — 목록에 오르는 기준과 순서는 제휴와 상관없다(C3) -->
+  <div class="content content--tight" style="padding-bottom:150px;">
+    <div class="seg" role="tablist" aria-label="찾는 방법">
+      <span class="seg-item" role="tab" aria-selected="false">진료과로 찾기</span>
+      <span class="seg-item seg-item--on" role="tab" aria-selected="true">관리로 찾기</span>
+    </div>
+
+    <div>
+      <div class="small muted" style="margin:4px 2px 7px;">어떤 관리를 찾으세요?</div>
+      <div class="care-row">
+        <span class="chip chip--on" data-demo>림프부종 도수치료</span>
+        <span class="chip">압박 스타킹·슬리브 맞춤</span>
+        <span class="chip">스펀지 압박 패드</span>
+        <span class="chip">저출력 레이저</span>
+      </div>
+    </div>
+
+    <div class="row" style="margin:2px 2px 0; align-items:center; gap:8px;">
+      <div class="tiny muted grow">내 위치에서 가까운 순 · 토닥이 전화로 확인한 곳<br><b style="color:#5C3B00;">이 목록에는 ‘제휴·광고’ 병원이 섞여 있어요</b></div>
+      <a class="tiny strong tap" href="C3-care-criteria.html" style="color:var(--primary-dark); text-decoration:none; white-space:nowrap;">기준 보기 ›</a>
+    </div>
+
+    <div class="hosp">
+      <div class="hosp-top">
+        <div class="grow">
+          <div class="hosp-name">○○재활의학과의원</div>
+          <div class="tiny muted" style="margin-top:3px;">의원 · 재활의학과</div>
+        </div>
+        <span class="hosp-dist">1.2km</span>
+      </div>
+      <div class="ctags" style="margin-top:10px;">
+        <span class="ctag">✓ 림프부종 도수치료</span>
+        <span class="ctag">✓ 슬리브 맞춤</span>
+        <span class="ctag">✓ 스펀지 패드</span>
+        <span class="ctag ctag--off">✕ 레이저 없음</span>
+      </div>
+      <div class="checked-on" style="margin-top:8px;"><b>2026년 10월</b> 전화로 확인</div>
+      <div class="row gap-8" style="margin-top:12px;">
+        <a class="btn btn-primary grow btn-sm" href="tel:0200000000">📞 전화</a>
+        <a class="btn btn-outline grow btn-sm" href="javascript:void(0)">🗺 길찾기</a>
+        <a class="btn btn-ghost btn-sm" href="C2-care-detail.html">자세히 ›</a>
+      </div>
+    </div>
+
+    <div class="hosp">
+      <div class="hosp-top">
+        <div class="grow">
+          <div class="hosp-name"><span class="partner">제휴·광고</span> △△병원 재활의학과</div>
+          <div class="tiny muted" style="margin-top:3px;">종합병원 · 재활의학과</div>
+        </div>
+        <span class="hosp-dist">3.4km</span>
+      </div>
+      <div class="ctags" style="margin-top:10px;">
+        <span class="ctag">✓ 림프부종 도수치료</span>
+        <span class="ctag">✓ 슬리브 맞춤</span>
+        <span class="ctag">✓ 레이저</span>
+        <span class="ctag ctag--off">✕ 스펀지 패드 없음</span>
+      </div>
+      <div class="checked-on" style="margin-top:8px;"><b>2026년 10월</b> 전화로 확인</div>
+      <div class="row gap-8" style="margin-top:12px;">
+        <a class="btn btn-primary grow btn-sm" href="tel:0200000000">📞 전화</a>
+        <a class="btn btn-outline grow btn-sm" href="javascript:void(0)">🗺 길찾기</a>
+        <a class="btn btn-ghost btn-sm" href="C2-care-detail.html">자세히 ›</a>
+      </div>
+    </div>
+
+    <div class="hosp">
+      <div class="hosp-top">
+        <div class="grow">
+          <div class="hosp-name">□□외과의원</div>
+          <div class="tiny muted" style="margin-top:3px;">의원 · 외과</div>
+        </div>
+        <span class="hosp-dist">5.1km</span>
+      </div>
+      <div class="ctags" style="margin-top:10px;">
+        <span class="ctag">✓ 림프부종 도수치료</span>
+        <span class="ctag">✓ 슬리브 맞춤</span>
+        <span class="ctag">✓ 스펀지 패드</span>
+        <span class="ctag ctag--off">✕ 레이저 없음</span>
+      </div>
+      <div class="checked-on" style="margin-top:8px;"><b>2026년 9월</b> 전화로 확인</div>
+      <div class="row gap-8" style="margin-top:12px;">
+        <a class="btn btn-primary grow btn-sm" href="tel:0200000000">📞 전화</a>
+        <a class="btn btn-outline grow btn-sm" href="javascript:void(0)">🗺 길찾기</a>
+        <a class="btn btn-ghost btn-sm" href="C2-care-detail.html">자세히 ›</a>
+      </div>
+    </div>
+
+    <a class="go-row go-row--card" href="D1-products.html"><span>🧦 압박 슬리브 고르는 법<span class="gr-s">재는 법 · 바꾸는 때 · 제휴 제품</span></span></a>
+
+    <div class="banner banner--info" style="margin-top:4px;">
+      <span class="b-ic">💬</span>
+      <div class="small">헛걸음하지 않게, 전화로 먼저 물어보세요.<br><b>“팔이 무겁고 부은 것 같아요.<br>림프부종 진료를 받을 수 있나요?”</b></div>
+    </div>
+
+    <p class="disclaimer">관리 정보는 토닥이 병원에 전화로 확인한 내용이며, 확인한 뒤 바뀌었을 수 있어요. ‘제휴·광고’는 토닥에 정해진 제휴비를 내는 병원이라는 표시이고, 목록 기준·순서와는 상관없어요.</p>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-outline btn-block" href="84-care-contacts.html">📞 내 병원에 연락하기</a>
+  </div>
+</div>
+</body>
+</html>

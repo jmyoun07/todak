@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 살이 찔 때 식사</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="09-food-supplement.html">‹</a>
+    <div><div class="appbar-title">살이 쪄서 걱정될 때</div><div class="appbar-sub">식사 카드</div></div>
+  </div>
+
+  <!-- 정보 화면 디자인 시스템 v3 (2026-09-28 · 31 본보기 · STYLE.md) — 모든 묶음은 상자, 초록=하세요 / 옅은 장미=하지 마세요 / 진한 빨강=응급 -->
+  <div class="content content--tight content--jump" style="padding-bottom:150px;">
+    <div class="row wrap tx-badge" style="gap:7px;"><span class="pill" style="background:var(--surface-3); color:var(--on-surface-variant);">🩺 공통</span><span class="tiny muted">항암 중에도, 호르몬치료 중에도 생겨요</span></div>
+
+    <nav class="sec sec--jump" aria-label="이 화면 바로 가기">
+      <div class="sec-t">바로 가기</div>
+      <div class="jump">
+        <a class="jump-b jump-b--why" href="#s-why"><span>왜 늘까요?</span></a>
+        <a class="jump-b jump-b--good" href="#s-care"><span>이렇게 드세요</span></a>
+        <a class="jump-b jump-b--food" href="#s-food"><span>좋은 음식</span></a>
+        <a class="jump-b jump-b--never" href="#s-never"><span>하지 마세요</span></a>
+        <a class="jump-b jump-b--hosp" href="#s-call"><span>이럴 땐 병원에</span></a>
+        <a class="jump-b jump-b--emg" href="#s-emg"><span>응급 상황일 땐</span></a>
+      </div>
+    </nav>
+
+    <section class="sec sec--why" id="s-why">
+      <h2 class="sec-t section-label">왜 늘어날까요?</h2>
+      <p class="sec-p">여러 가지가 겹쳐요.</p>
+      <ul class="dots">
+        <li>항암 때 함께 쓰는 <b>스테로이드</b></li>
+        <li>치료로 줄어든 <b>활동량</b></li>
+        <li><b>조기 폐경</b>으로 달라진 호르몬</li>
+      </ul>
+    </section>
+
+    <section class="sec sec--good" id="s-care">
+      <h2 class="sec-t section-label">이렇게 드세요</h2>
+      <p class="sec-sub">치료 중엔 무리한 감량보다 <b>근육 지키기</b>가 먼저예요.</p>
+      <div class="it">
+        <div class="it-t">굶지 않기</div>
+        <div class="it-b">끼니를 거르면 다음 끼니에 더 먹게 돼요.<br>근육이 먼저 빠져 회복도 더뎌져요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">채소 → 단백질 → 밥 순서로</div>
+        <div class="it-b">채소로 먼저 배를 채우면<br>밥과 반찬을 덜 드시게 돼요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">스테로이드 쓰는 날</div>
+        <div class="it-b">식욕이 확 늘어요.</div>
+        <div class="it-do"><span>채소·단백질 간식을 미리 준비해 두세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">가볍게 걷기</div>
+        <div class="it-b">움직여야 근육이 덜 빠져요.</div>
+        <div class="it-do"><span>할 수 있는 만큼 걸으세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">체중은 주 1회</div>
+        <div class="it-b">매일 재지 않아도 충분해요.</div>
+      </div>
+    </section>
+
+    <section class="sec sec--food" id="s-food">
+      <h2 class="sec-t section-label">이런 음식이 좋아요</h2>
+      <div class="it">
+        <div class="it-t">단백질 먼저</div>
+        <div class="it-b">닭가슴살·생선·두부·계란</div>
+      </div>
+      <div class="it">
+        <div class="it-t">채소 넉넉히</div>
+        <div class="it-b">배를 든든하게 채워 줘요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">잡곡밥</div>
+        <div class="it-b">천천히 소화돼 덜 배고파요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">물</div>
+        <div class="it-do"><span>단 음료 대신 물로 드세요.</span></div>
+      </div>
+    </section>
+
+    <section class="sec sec--never" id="s-never">
+      <h2 class="sec-t section-label">치료 중엔 하지 마세요</h2>
+      <div class="it">
+        <div class="it-t">극단적인 다이어트·단식·해독요법</div>
+        <div class="it-b">치료 중에는 <b>위험해요.</b><br>근육과 체력이 먼저 빠져<br>치료를 견디기 어려워져요.</div>
+        <div class="it-do"><span>체중 관리 계획은<br>담당 의사나 임상영양사와 함께 세우세요.</span></div>
+      </div>
+    </section>
+
+    <!-- 이럴 땐 병원에 — 🟠 글자는 지우지 않는다(AI 상담 색인이 이 글자로 단계를 나눈다) · 단계 제목엔 section-label 을 붙이지 않는다 -->
+    <section class="sec sec--group" id="s-call">
+      <h2 class="sec-t section-label">이럴 땐 병원에</h2>
+      <div class="sec sec--lv2" id="s-today">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟠</span> <span>그날 안에 연락하세요</span></div>
+        <ul class="dots">
+          <li>며칠 사이 체중이 <b>갑자기 늘고</b><br><b>다리가 붓거나 숨이 찰 때</b><span class="dots-b">살이 아니라 물이 고인 것일 수 있어요.<br>가슴이 아프거나 가만히 있어도 숨이 차면<br>바로 119에 연락하세요.</span></li>
+          <li>일주일 만에 <b>약 2.3kg</b>이 갑자기 늘었을 때</li>
+        </ul>
+      </div>
+      <a class="link-card link-card--emg" id="s-emg" href="48-emergency.html?from=68-food-weight.html">
+        <span class="link-card-ic" aria-hidden="true"></span>
+        <span class="link-card-body">
+          <span class="link-card-t">응급 상황일 땐 이렇게 하세요</span>
+          <span class="link-card-s">숨이 차거나 정신이 흐릿할 때</span>
+        </span>
+      </a>
+      <a class="link-card" href="52-detail-weight.html?from=68-food-weight.html">
+        <span class="link-card-ic" aria-hidden="true"></span>
+        <span class="link-card-body">
+          <span class="link-card-t">체중 변화 자세히 보기</span>
+          <span class="link-card-s">왜 변하는지 · 관리 · 연락 기준</span>
+        </span>
+      </a>
+    </section>
+
+    <div class="tiny muted rf-src">근거: Cochrane · 세계암연구기금(WCRF) · 한국유방암학회 · 한국인 영양소 섭취기준 · 보건복지부 — 자세한 출처는 <b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요</div>
+    <p class="disclaimer">이건 규칙이 아니라 힌트예요. 체중 변화는 사람마다 달라요.</p>
+  </div>
+
+  <div class="footer-actions">
+    <div class="row gap-8">
+      <a class="btn btn-outline grow" href="10-consult-questions.html">📝 진료 질문 만들기</a>
+      <a class="btn btn-primary grow" href="07-chat.html">💬 음식 물어보기</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

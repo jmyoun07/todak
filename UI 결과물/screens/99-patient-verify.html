@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 환자 확인 서류</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  /* 99 환자 확인 서류 (2026-09-28) — 이 화면에서만 쓰는 모양. 공용 app.css 는 건드리지 않는다.
+     글자 크기는 본문 13px 이상 원칙 (.pill 11.5px 은 쓰지 않는다). */
+  /* hidden 속성이 .card·.banner·.footer-actions·.btn 의 display 선언에 밀리지 않게 (상태 전환용) */
+  [hidden] { display: none !important; }
+  /* 상태를 불러오는 동안(verify.js 가 .pv-wait 를 붙인다)에는 올리기 칸을 감춘다 —
+     이미 올리신 분이 잠깐이라도 '사진을 올려 주세요'를 보지 않게. 시안(스크립트 없음)에서는 그대로 보인다. */
+  .pv-wait #pvForm { display: none !important; }
+  .pv-loading { font-size: 14px; color: var(--on-surface-variant); text-align: center; padding: 18px 0; }
+  .pv-wait .pv-loading { display: block !important; }
+
+  .pv-col { display: flex; flex-direction: column; gap: 12px; flex: 0 0 auto; }
+  .pv-col > * { flex: 0 0 auto; }
+
+  /* 받는 서류 세 가지 */
+  .pv-docs { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+  .pv-doc { display: flex; align-items: center; gap: 11px; }
+  .pv-doc .pv-ic { width: 38px; height: 38px; border-radius: 11px; background: var(--primary-tint);
+    display: grid; place-items: center; font-size: 19px; flex: 0 0 auto; }
+  .pv-doc .pv-name { font-size: 15.5px; font-weight: 700; line-height: 1.4; }
+  .pv-doc .pv-desc { font-size: 13.5px; color: var(--on-surface-variant); line-height: 1.5; }
+
+  /* 주민등록번호 가리기 — 가장 눈에 띄게 */
+  .pv-rrn { border-width: 1.5px; }
+  .pv-rrn .pv-rrn-h { font-size: 15.5px; font-weight: 800; line-height: 1.45; display: block; margin-bottom: 4px; }
+  /* 가린 모습 예시는 앞자리·뒷자리 두 덩이로만 끊는다. 예전에는 한 줄 전체가 nowrap 이라, 휴대폰 글자 크기를
+     130% 이상으로 쓰시면(360px) 이 줄이 알림 칸을 화면 밖으로 밀어 제목 '주민등록번호 뒷자리는 꼭…' 끝이 잘렸다 (2026-09-28 검토).
+     .grow 의 min-width:0 — 글 칸이 제 내용 폭보다 좁아질 수 있어야 줄이 바뀐다. */
+  .pv-rrn .grow { min-width: 0; }
+  .pv-mask { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 2px 6px; max-width: 100%; margin-top: 8px; padding: 7px 11px;
+    background: var(--white); border: 1px dashed #e4a594; border-radius: 10px; font-size: 14.5px;
+    letter-spacing: 1px; color: var(--on-surface); }
+  .pv-mask > span, .pv-mask b { white-space: nowrap; }
+  .pv-mask b { color: #8f2412; letter-spacing: 0; }
+  .pv-mask-note { display: block; font-size: 13px; margin-top: 6px; }
+
+  /* 사진 고르기 — 큰 네모 두 개 (손이 불편하셔도 누르기 쉽게) */
+  .pv-pick { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pv-tile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    min-height: 96px; padding: 14px 8px; border-radius: var(--r); border: 1.5px solid var(--outline-strong);
+    background: var(--white); color: var(--primary-dark); font-family: inherit; font-size: 15.5px; font-weight: 700;
+    line-height: 1.35; text-align: center; cursor: pointer; }
+  .pv-tile .pv-tile-ic { font-size: 28px; line-height: 1; }
+  .pv-tile:active { background: var(--primary-tint); }
+  .pv-tile[aria-disabled="true"] { opacity: .55; }
+  .pv-pick-note { font-size: 13.5px; color: var(--on-surface-variant); text-align: center; line-height: 1.55; }
+  /* 사진 없이 '올리기'를 누르셨을 때 어디를 누를지 잠깐 표시 (02 의 빠진 줄 표시와 같은 색) */
+  .pv-pick.is-missing .pv-tile { border-color: var(--danger); background: var(--danger-tint); }
+
+  /* 미리보기 — 올릴 사진 그대로(줄인 뒤) 보여 드린다 */
+  .pv-prev { display: flex; flex-direction: column; gap: 10px; }
+  .pv-prev-box { border-radius: var(--r-sm); background: var(--surface-2); overflow: hidden;
+    display: grid; place-items: center; min-height: 160px; }
+  .pv-prev-box img { display: block; width: 100%; max-height: 340px; object-fit: contain; }
+  .pv-check { font-size: 14px; line-height: 1.6; color: var(--on-surface); }
+  .pv-check b { color: #8f2412; }
+  .pv-small-warn { font-size: 13.5px; line-height: 1.55; color: var(--warn); }
+
+  /* 동의 한 줄 + '보기' 로 펼치는 안내 */
+  .pv-agree-wrap { border: 1.5px solid var(--outline-strong); border-radius: var(--r); background: var(--white); padding: 2px 6px 2px 0; }
+  .pv-agree-wrap.is-missing { background: var(--danger-tint); border-color: #e4a594; }
+  .pv-agree-wrap .selectable .s-title { font-weight: 700; font-size: 15px; line-height: 1.45; }
+  .pv-terms { display: flex; flex-direction: column; gap: 10px; }
+  .pv-terms .doc-table th[scope="row"] { width: 5.6em; }
+
+  /* 상태 카드 (확인 중 · 확인 완료 · 다시 올려 주세요) */
+  .pv-state { display: flex; gap: 12px; align-items: flex-start; }
+  .pv-state .pv-st-ic { font-size: 28px; line-height: 1.1; flex: 0 0 auto; }
+  .pv-state .pv-st-t { font-size: 16.5px; font-weight: 800; line-height: 1.45; }
+  .pv-state .pv-st-b { font-size: 14px; line-height: 1.65; color: var(--on-surface-variant); margin-top: 3px; }
+  .pv-state .pv-st-b b { color: var(--on-surface); }
+  .pv-note { margin-top: 8px; padding: 10px 12px; border-radius: var(--r-sm); background: var(--surface-2);
+    font-size: 14px; line-height: 1.6; color: var(--on-surface); }
+  .pv-state-more { margin-top: 10px; }
+
+  /* 하단 — 실패 안내는 토스트로만 두지 않고 버튼 위에 남겨 둔다 */
+  /* 하단 띠는 위쪽이 투명하게 번지는 그라데이션이라, 두 줄짜리 안내가 본문 위에 겹쳐도 읽히게 바탕을 깐다 */
+  .pv-err { font-size: 14px; line-height: 1.6; color: #8f2412; text-align: center; margin: 0; white-space: pre-line;
+    background: var(--danger-tint); border: 1px solid #f2c3b6; border-radius: 12px; padding: 8px 12px; }
+  .pv-hint { font-size: 13.5px; text-align: center; margin: 0; color: var(--on-surface-variant); }
+  /* 휴대폰 글자 크기를 아주 크게(200% 등) 쓰시면 하단 띠가 화면 절반을 넘는다. 그때 verify.js(fitFoot)가 띠를
+     본문 맨 끝으로 옮겨 붙이고 이 모양을 준다 — 바닥에 고정해 두면 본문이 두세 줄 창으로만 보여 읽을 수 없었다 (2026-09-28 검토) */
+  .footer-actions.pv-foot-inline { position: static; background: none; padding: 20px 0 8px; margin: 0; max-width: none; }
+
+  /* 폭이 달라도 같은 줄 수 (2026-09-29) — 위 고정 크기를 390px 기준 비율(cqw)로 바꾼다(app.css 3번 묶음과 같은 방식).
+     고정 px 이라 412·430px 폰에서 주민등록번호 안내·동의 줄이 한 줄씩 줄었다. 본문 하한 13px. 위 고정값은 cqw 를 모르는 웹뷰용. */
+  .pv-doc .pv-name, .pv-tile, .pv-rrn .pv-rrn-h { font-size: clamp(14px, 3.9744cqw, 17.1px); }
+  .pv-doc .pv-desc, .pv-pick-note, .pv-small-warn, .pv-hint { font-size: clamp(13px, 3.4615cqw, 14.9px); }
+  .pv-mask { font-size: clamp(13px, 3.7179cqw, 16px); }
+  .pv-mask-note { font-size: clamp(13px, 3.3333cqw, 14.3px); }
+  .pv-check, .pv-state .pv-st-b, .pv-note, .pv-err, .pv-loading { font-size: clamp(13px, 3.5897cqw, 15.4px); }
+  .pv-agree-wrap .selectable .s-title { font-size: clamp(13.5px, 3.8462cqw, 16.5px); }
+  .pv-state .pv-st-t { font-size: clamp(15px, 4.2308cqw, 18.2px); }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="02-consent.html">‹</a>
+    <div><div class="appbar-title">환자 확인 서류</div></div>
+  </div>
+  <!-- 가입 도중에만 보이는 단계 표시 (내 정보에서 온 경우 verify.js 가 감춘다).
+       03·04·14 의 단계 번호를 그대로 두려고 이 화면은 1단계(약관 동의)에 딸린 확인으로 둔다. -->
+  <div style="padding:0 18px;" id="pvSteps">
+    <div class="steps"><span class="step step--on"></span><span class="step"></span><span class="step"></span><span class="step"></span></div>
+    <p class="small muted" style="margin-top:8px;">1단계 · 환자 확인 서류</p>
+  </div>
+
+  <div class="content" style="padding-bottom:190px;">
+    <div class="auth-head">
+      <h1 class="page-title" id="pvTitle">유방암 치료 중이신지<br>확인이 필요해요</h1>
+      <p class="page-sub" id="pvSub">토닥은 유방암 치료를 받고 계신 분만 쓰시는 앱이에요.<br>병원 서류 사진 <b>한 장</b>을 올려 주시면<br><b>토닥 담당자</b>가 확인해요.</p>
+    </div>
+
+    <p class="pv-loading" id="pvLoading" hidden>확인하는 중이에요…</p>
+
+    <!-- 이미 올리신 분 · 내 정보에서 오신 분께 지금 상태를 보여 드린다 (verify.js 가 채운다) -->
+    <div class="card" id="pvState" hidden>
+      <div class="pv-state">
+        <span class="pv-st-ic" id="pvStIc" aria-hidden="true">⏳</span>
+        <div class="grow">
+          <div class="pv-st-t" id="pvStT">확인 중이에요</div>
+          <div class="pv-st-b" id="pvStB">올려 주신 서류를 토닥 담당자가 확인하고 있어요.</div>
+          <div class="pv-note" id="pvStNote" hidden></div>
+          <button type="button" class="btn btn-outline btn-sm pv-state-more" id="pvStMore" hidden>다른 사진으로 다시 올리기</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pv-col" id="pvForm">
+      <div class="card">
+        <div class="card-title">이 가운데 하나를 찍어 주세요</div>
+        <div class="pv-docs">
+          <div class="pv-doc"><span class="pv-ic" aria-hidden="true">📄</span><div><div class="pv-name">진단서</div><div class="pv-desc">병원에서 떼어 주는 진단서</div></div></div>
+          <div class="pv-doc"><span class="pv-ic" aria-hidden="true">📝</span><div><div class="pv-name">소견서</div><div class="pv-desc">담당 의사가 써 준 소견서</div></div></div>
+          <div class="pv-doc"><span class="pv-ic" aria-hidden="true">🏥</span><div><div class="pv-name">진료확인서</div><div class="pv-desc">진료받은 사실을 적은 확인서</div></div></div>
+        </div>
+        <p class="small muted" style="margin-top:12px; line-height:1.6;"><b style="color:var(--on-surface);">성함과 병명(유방암)</b>이 보이게,<br>밝은 곳에서 종이 전체가 들어오게 찍어 주세요.</p>
+      </div>
+
+      <div class="banner banner--danger pv-rrn" role="note">
+        <span class="b-ic" aria-hidden="true">✋</span>
+        <div class="grow">
+          <span class="pv-rrn-h">주민등록번호 뒷자리는<br>꼭 가리고 찍어 주세요</span>
+          종이나 손가락으로 가려 주시면 돼요.<br><b>토닥은 주민등록번호를 받지 않아요.</b>
+          <span class="pv-mask" aria-label="주민등록번호 뒷자리 일곱 자리를 가린 모습"><span>○○○○○○ -</span><b>■■■■■■■</b></span>
+          <span class="pv-mask-note">뒷자리 7자리를 모두 가려 주세요</span>
+        </div>
+      </div>
+
+      <div class="pv-pick" id="pvPick">
+        <button type="button" class="pv-tile" id="pvCam"><span class="pv-tile-ic" aria-hidden="true">📷</span>사진 찍기</button>
+        <button type="button" class="pv-tile" id="pvAlb"><span class="pv-tile-ic" aria-hidden="true">🖼️</span>앨범에서 고르기</button>
+      </div>
+      <p class="pv-pick-note" id="pvPickNote">사진은 올리기 전에 휴대폰에서 알맞은 크기로 줄여요.</p>
+
+      <div class="card pv-prev" id="pvPrev" hidden>
+        <div class="card-title">이 사진을 올려요</div>
+        <div class="pv-prev-box"><img id="pvImg" alt="고르신 서류 사진"></div>
+        <p class="pv-check"><b>주민등록번호 뒷자리가 가려졌는지</b> 한 번 더 봐 주세요. 보이면 ‘다시 고르기’를 눌러 가리고 다시 찍어 주세요.</p>
+        <p class="pv-small-warn" id="pvSmall" hidden>사진이 작아서 글자가 잘 안 보일 수 있어요. 가까이에서 다시 찍어 주시면 좋아요.</p>
+        <button type="button" class="btn btn-outline btn-block" id="pvRedo">다시 고르기</button>
+      </div>
+
+      <!-- 받는 곳에서 따로 받는 동의 (민감정보가 담긴 사진이라) — '보기'는 이 화면 안에서 펼친다 -->
+      <div class="agree-row pv-agree-wrap" id="pvAgreeRow">
+        <div class="selectable" id="pvAgree" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="s-box"></span>
+          <div class="grow"><div class="s-title"><span class="agree-tag req">(필수)</span> 진단서·소견서 사진 수집·이용 동의</div></div>
+        </div>
+        <a class="agree-view" id="pvView" href="javascript:void(0)" role="button" aria-expanded="false" aria-controls="pvTerms">보기</a>
+      </div>
+      <div class="pv-terms" id="pvTerms" hidden>
+        <table class="doc-table">
+          <tbody>
+            <tr><th scope="row">모으는 것</th><td>올려 주시는 <b>서류 사진 한 장</b> — 사진에 보이는 성함·병명·병원 이름·날짜 등. <b>주민등록번호 뒷자리는 받지 않아요</b>(가리고 찍어 주세요).</td></tr>
+            <tr><th scope="row">쓰는 목적</th><td>유방암 치료를 받고 계신 분인지 <b>확인하는 데만</b> 써요.</td></tr>
+            <tr><th scope="row">보관 기간</th><td class="keep">토닥 담당자가 확인을 마치면 사진은 지체 없이 복구할 수 없는 방법으로 파기해요. 확인 결과(확인됐는지와 그 날짜)만 계정 정보와 함께 남아요.</td></tr>
+            <tr><th scope="row">보는 사람</th><td><b>토닥 담당자만</b> 봐요. 다른 곳에 주지 않아요. 사진은 잠긴 보관함(Supabase · 서울)에 저장돼요.</td></tr>
+          </tbody>
+        </table>
+        <p class="doc-refuse">동의하지 않으실 수 있어요. 다만 동의하지 않으시면 <b>가입을 이어서 하실 수 없어요.</b> 그 밖에 불이익은 없어요.</p>
+        <p class="small muted" style="line-height:1.65;">서류 사진에는 건강에 관한 정보(민감정보)가 담겨 있어 이 화면에서 따로 한 번 더 동의를 받아요.</p>
+      </div>
+
+      <p class="small muted" id="pvLater" style="line-height:1.65;">지금 서류가 없으시면 앱을 닫으셔도 괜찮아요.<br>다시 여시면 이 화면부터 이어서 하실 수 있어요.</p>
+    </div>
+  </div>
+
+  <div class="footer-actions" id="pvFooter">
+    <p class="pv-err" id="pvErr" role="alert" hidden></p>
+    <a class="btn btn-primary btn-block btn-lg" id="pvSend" href="javascript:void(0)" aria-disabled="true">사진 올리고 다음으로</a>
+    <p class="pv-hint" id="pvHint">사진을 고르고 동의해 주시면 올릴 수 있어요</p>
+    <!-- 받는 쪽 준비가 덜 돼 실패했을 때만(verify.js isSetupErr) 가입 도중에 보인다 — 새로 가입하시는 분이 막히지 않게 -->
+    <a class="btn btn-outline btn-block" id="pvSkip" href="javascript:void(0)" hidden>가입 먼저 이어서 하기</a>
+  </div>
+</div>
+<!-- 배선: js/verify.js — 앱 빌드가 이 아래에 app.js 등을 붙인다. verify.js 는 그것들이 다 실린 뒤(DOMContentLoaded) 움직인다 -->
+<script src="js/verify.js"></script>
+</body>
+</html>

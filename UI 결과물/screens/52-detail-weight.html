@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 체중 변화</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="06-sideeffects.html">‹</a>
+    <div><div class="appbar-title">체중 변화</div><div class="appbar-sub">늘 때와 줄 때</div></div>
+  </div>
+
+  <!-- 정보 화면 디자인 시스템 v3 (2026-09-28 · 본보기 31 · app.css '정보 화면 디자인 시스템 v3' · STYLE.md)
+       모든 묶음은 상자(.sec) · 제목(.sec-t)은 상자 윗선에 걸친다 · 색: 초록=하세요 / 노랑=주의 / 흰 바탕=정보 / 진한 빨강=응급 -->
+  <div class="content content--tight content--jump" style="padding-bottom:150px;">
+    <div class="row wrap" style="gap:8px;">
+      <span class="pill pill--brand">🩺 모든 치료 공통</span>
+      <span class="sev sev--mild">흔함</span>
+    </div>
+
+    <!-- ═══ 바로 가기 — 여덟 칸 같은 크기(2열) · 누르면 그 상자로 내려간다(다른 내용을 숨기지 않는다) ═══ -->
+    <nav class="sec sec--jump" aria-label="이 화면 바로 가기">
+      <div class="sec-t">바로 가기</div>
+      <div class="jump">
+        <a class="jump-b jump-b--why" href="#s-why"><span>이게 왜 생겨요?</span></a>
+        <a class="jump-b jump-b--info" href="#s-keep"><span>늘지 않게 지키기</span></a>
+        <a class="jump-b jump-b--info" href="#s-bmi"><span>국내 비만 기준</span></a>
+        <a class="jump-b jump-b--good" href="#s-care"><span>이렇게 관리해요</span></a>
+        <a class="jump-b jump-b--food" href="#s-salt"><span>소금 줄이기</span></a>
+        <a class="jump-b jump-b--caution" href="#s-doce"><span>도세탁셀 부기</span></a>
+        <a class="jump-b jump-b--info" href="#s-line"><span>알리는 기준</span></a>
+        <a class="jump-b jump-b--hosp" href="#s-call"><span>이럴 땐 병원에</span></a>
+      </div>
+    </nav>
+
+    <!-- ═══ ① 이게 왜 생겨요? — 예전 '늘어난 게 다 살은 아니에요' 상자를 합쳤다 ═══ -->
+    <section class="sec sec--why" id="s-why">
+      <h2 class="sec-t section-label">이게 왜 생겨요?</h2>
+      <p class="sec-p">일부 항암제·스테로이드·호르몬치료로<br>체중이 <b>늘 수 있어요.</b></p>
+      <p class="sec-p">입맛이 떨어지거나 메스꺼워서<br><b>줄 수도</b> 있어요.</p>
+      <div class="it">
+        <div class="it-t">늘어난 게 다 ‘살’은 아니에요</div>
+        <div class="it-b">체중이 느는 일은 다른 암보다<br>유방암에서 더 흔하고,<br>이유도 여러 가지예요.</div>
+      </div>
+      <ul class="dots">
+        <li><b>몸에 물이 고여서</b><span class="dots-b">체지방이 느는 게 아니에요.</span></li>
+        <li><b>스테로이드</b><span class="dots-b">항암 주사 전에 미리 쓰는데 식욕을 키워요.</span></li>
+        <li><b>호르몬치료</b><span class="dots-b">성호르몬을 낮추면서 체중이 늘 수 있어요.</span></li>
+        <li>식욕이 늘거나 특정 음식이 유난히 당겨서</li>
+        <li>피로와 통증으로 움직임이 줄어서</li>
+      </ul>
+      <p class="sec-p">원인이 다르면 <b>대응도 달라요.</b></p>
+    </section>
+
+    <!-- ═══ ② ‘빼기’보다 ‘늘지 않게’가 먼저예요 (정보) ═══ -->
+    <section class="sec sec--info" id="s-keep">
+      <h2 class="sec-t section-label">‘빼기’보다 ‘늘지 않게’가 먼저예요</h2>
+      <div class="it">
+        <div class="it-t">세계암연구기금 보고서가 권하는 것</div>
+        <div class="it-b">“저체중이 아니라면, 치료 중과 치료 후에<br><b>체중이 느는 것을 피할 것</b>”</div>
+        <div class="it-b">진단 뒤 체중이 늘지 않게 지키는 것이<br>오래 도움이 된다는 근거가 탄탄해요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">치료 중 다이어트는 권하지 않아요</div>
+        <div class="it-b">이미 과체중·비만인 분이 일부러 살을 빼면<br>결과가 좋아지는지는 <b>아직 불확실해요.</b></div>
+        <div class="it-do"><span>지금은 늘지 않게 지키세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">움직이면 삶의 질이 좋아져요</div>
+        <div class="it-b">특히 <b>치료가 끝난 뒤</b>의 근거가 뚜렷해요.</div>
+        <div class="it-do"><span>운동량을 늘릴 땐<br>담당 의사와 먼저 상의하세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ③ 체질량지수, 국내 기준으로 보세요 (정보) ═══ -->
+    <section class="sec sec--info" id="s-bmi">
+      <h2 class="sec-t section-label">체질량지수, 국내 기준으로 보세요</h2>
+      <p class="sec-p">인터넷 계산기의 ‘정상’ 범위를 그대로 믿지 마세요.<br>국내 기준은 미국과 달라요.</p>
+      <div class="it">
+        <div class="it-t">국내 기준</div>
+      </div>
+      <ul class="dots">
+        <li><b>18.5 아래</b> 저체중</li>
+        <li><b>18.5~22.9</b> 정상</li>
+        <li><b>23부터</b> 비만 전단계</li>
+        <li><b>25부터</b> 비만</li>
+      </ul>
+      <div class="it">
+        <div class="it-t">왜 미국 기준(25·30)과 다른가요</div>
+        <div class="it-b">같은 체질량지수라도 동양인은<br>체지방이 더 많기 때문이에요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">내 체질량지수 구하는 법</div>
+        <div class="it-b">몸무게(kg)를 키(m)로 두 번 나눠요.</div>
+        <div class="it-b">예: 키 160cm·63kg이면 24.6이에요.<br>미국 기준으로는 ‘정상’이지만<br><b>국내 기준으로는 비만 전단계</b>예요.</div>
+      </div>
+    </section>
+
+    <!-- ═══ ④ 이렇게 관리해요 (초록) — 예전 ✓ 세 줄과 아래 카드를 한 상자로 합쳤다(겹치는 줄은 뺐다) ═══ -->
+    <section class="sec sec--good" id="s-care">
+      <h2 class="sec-t section-label">이렇게 관리해요</h2>
+      <div class="it">
+        <div class="it-t">천천히 드세요</div>
+        <div class="it-b">배부른 느낌은 먹고 약 15분 뒤에 와요.<br>빨리 먹으면 그사이에 더 먹게 돼요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">식이섬유가 많은 음식</div>
+        <div class="it-do"><span>채소·과일·통곡물을 늘리세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">단백질은 나눠서</div>
+        <div class="it-do"><span>기름기 적은 살코기·생선과<br>콩·두부·견과류로 나눠 드세요.</span></div>
+        <div class="it-do"><span>닭고기는 껍질을 벗겨 드세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">단 음료와 술</div>
+        <div class="it-do"><span>마시는 양과 횟수를 줄이세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">심심해서 먹는지, 배고파서 먹는지</div>
+        <div class="it-do"><span>먹기 전에 한 번 멈춰 보세요.</span></div>
+        <div class="it-do"><span>먹는 것 말고 할 일을 하나 정해 두세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">체중은 같은 조건에서</div>
+        <div class="it-do"><span>매일 같은 시간, 같은 옷차림으로 재세요.</span></div>
+        <div class="it-do"><span>하루하루 숫자보다 일주일 흐름을 보세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ⑤ 부었을 땐 소금부터 줄여요 (초록 · 음식) ═══ -->
+    <section class="sec sec--food" id="s-salt">
+      <h2 class="sec-t section-label">부었을 땐 소금부터 줄여요</h2>
+      <p class="sec-p">스테로이드 때문에 몸이 붓고 체중이 늘었을 땐<br><b>소금을 줄이는 것</b>이 먼저예요.</p>
+      <div class="it">
+        <div class="it-t">우리 식탁에서 줄일 곳</div>
+      </div>
+      <ul class="dots">
+        <li>국·찌개는 <b>건더기 위주</b>로, 국물은 남기기</li>
+        <li>김치·장아찌·젓갈은 <b>양을 줄이기</b></li>
+        <li>라면·칼국수 국물은 <b>다 마시지 않기</b></li>
+        <li>상에서 소금·간장·쌈장을 <b>더 넣지 않기</b></li>
+        <li>즉석식품·통조림·냉동식품은 <b>횟수를 줄이기</b></li>
+      </ul>
+      <div class="tip">
+        <span class="tip-lab">팁</span>
+        <div class="it-t">싱겁다는 느낌이 들면</div>
+        <div class="it-b"><b>마늘·파·깨·후추·식초·레몬</b>으로 맛을 내면<br>싱거운 느낌이 훨씬 덜해요.</div>
+      </div>
+    </section>
+
+    <!-- ═══ ⑥ 도세탁셀을 맞고 계시다면 (노랑) ═══ -->
+    <section class="sec sec--caution" id="s-doce">
+      <h2 class="sec-t section-label">도세탁셀을 맞고 계시다면</h2>
+      <p class="sec-p">늘어난 체중을 <b>‘살’로만 보지 마세요.</b></p>
+      <div class="it">
+        <div class="it-t">몸에 물이 고일 수 있어요</div>
+        <div class="it-b">허가사항에 <b>체액 저류</b>(몸에 물이 고임)가<br>가장 강한 경고로 들어가 있어요.</div>
+        <div class="it-b">스테로이드를 미리 써도<br><b>100명 중 6~7명</b>은 심한 부기가 생겼어요.</div>
+        <div class="it-b">이런 모습으로 나타났어요.</div>
+      </div>
+      <ul class="dots">
+        <li>다리나 온몸이 심하게 부음</li>
+        <li>가슴에 물이 차서 빼야 할 정도</li>
+        <li>가만히 있어도 숨이 참</li>
+        <li>배가 심하게 불러 옴</li>
+      </ul>
+      <div class="it">
+        <div class="it-t">부기와 숨참이 함께 오면</div>
+        <div class="it-b">살이 아니라 물이에요.</div>
+        <div class="it-do"><span>그날 안에 담당 병원에 연락하세요.</span></div>
+        <div class="it-do"><span>가슴이 아프거나 가만히 있어도 숨이 차면<br>바로 119에 연락하세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ⑦ 이만큼 변하면 알리세요 (정보) — 미국 자료의 '바로 알리라'는 선 ═══ -->
+    <section class="sec sec--info" id="s-line">
+      <h2 class="sec-t section-label">이만큼 변하면 알리세요</h2>
+      <p class="sec-sub">담당 병원에 바로 알리라고<br>미국 국립암연구소가 정해 둔 기준이에요.</p>
+      <ul class="dots">
+        <li>일주일 만에 <b>약 2.3kg</b>이 갑자기 늘었을 때</li>
+        <li>일주일에 <b>약 1.4~2.3kg</b>이 빠졌을 때</li>
+        <li>체중이 멈추지 않고 <b>한 방향으로만</b> 움직일 때</li>
+      </ul>
+      <div class="it">
+        <div class="it-t">내 기준은 담당 의사에게</div>
+        <div class="it-b">치료를 시작할 때 체중이<br>사람마다 달라요.</div>
+        <div class="it-do"><span>내 기준이 몇 kg인지<br>담당 의사에게 여쭤 보세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ⑧ 이럴 땐 병원에 — 큰 상자 하나에 세 단계(🔴·🟠·🟢) 중간 상자 ═══
+         단계 제목의 🔴·🟠·🟢 글자는 지우지 않는다(화면에서는 둥근 점으로 그림) — AI 상담 자료 색인이 이 글자로 단계를 나눈다.
+         단계 제목에는 section-label 을 붙이지 않는다(_build_kb.py split_risk).
+         늘 때(🔴·🟠)와 줄 때(🟢)를 한 틀에 넣었다. 예전 '이럴 땐 전화 말고 119'·열 기준 덩이는 응급 안내(48) 칸 하나로 바꿨다. -->
+    <section class="sec sec--group" id="s-call">
+      <h2 class="sec-t section-label">이럴 땐 병원에</h2>
+      <p class="sec-sub">체중은 다른 변화가 겉으로 드러난 결과예요.<br>위에서부터 급한 순서예요.</p>
+
+      <!-- 🔴 1단계 -->
+      <div class="sec sec--lv1" id="s-119">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🔴</span> <span>지금 바로 119</span></div>
+        <div class="case">
+          <div class="case-t">몸이 붓고 체중이 늘면서<br>가슴이 아프거나<br>가만히 있어도 숨이 찰 때</div>
+          <div class="case-b">살이 아니라 물이 고인 것일 수 있어요.</div>
+          <div class="case-do">
+            <div class="case-do-h">이렇게 하세요</div>
+            <div class="it-do"><span>바로 119에 연락하세요.</span></div>
+          </div>
+        </div>
+        <!-- 응급 상황 전반은 홈의 응급 안내(48)에 모여 있다 — 열 기준(부위별)·해열제 주의·숨참·의식 흐림·소변 줄어듦 -->
+        <a class="link-card link-card--emg" id="s-emg" href="48-emergency.html?from=52-detail-weight.html">
+          <span class="link-card-ic" aria-hidden="true"></span>
+          <span class="link-card-body">
+            <span class="link-card-t">응급 상황일 땐 이렇게 하세요</span>
+            <span class="link-card-s">열이 38.0도 이상일 때<br>(겨드랑이는 37.5도 이상)<br>숨이 차거나 정신이 흐릿할 때</span>
+          </span>
+        </a>
+        <a class="btn btn-danger btn-block" href="tel:119">📞 119 응급전화</a>
+      </div>
+
+      <!-- 🟠 2단계 -->
+      <div class="sec sec--lv2" id="s-today">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟠</span> <span>그날 안에 연락하세요</span></div>
+        <div class="it">
+          <div class="it-t">체중이 늘면서 이런 모습이면</div>
+        </div>
+        <ul class="dots">
+          <li>며칠 사이 체중이 빠르게 늘면서<br><b>다리·발목이 붓고</b> 신발이 꽉 낄 때</li>
+          <li>여기에 <b>전에 없던 숨참</b>이 함께 있을 때<span class="dots-b">살이 아니라 물이 고인 것일 수 있어요.</span></li>
+        </ul>
+        <a class="link-card" href="41-detail-cardio.html?from=52-detail-weight.html">
+          <span class="link-card-ic" aria-hidden="true"></span>
+          <span class="link-card-body">
+            <span class="link-card-t">심장 기능 저하 안내 보기</span>
+            <span class="link-card-s">부기·숨참이 함께 올 때</span>
+          </span>
+        </a>
+        <!-- 저장해 두신 병원 번호가 있으면 features.js(wireCallMine)가 '병원 이름 + 번호' 로 바로 걸리는 단추로 바꾼다.
+             번호가 없으면 글자를 '🏥 내 병원 번호 등록하기'로 바꾸고 84 등록 화면으로 보낸다. -->
+        <a class="btn btn-outline btn-outline--lv2 btn-block" href="84-care-contacts.html?from=52-detail-weight.html" data-role="call-mine">📞 내 병원으로 연락하기</a>
+      </div>
+
+      <!-- 🟢 3단계 -->
+      <div class="sec sec--lv3" id="s-next">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟢</span> <span>다음 진료 때 말씀하세요</span></div>
+        <div class="it">
+          <div class="it-t"><span>먹는 양이 줄어 체중이<br>한 달 사이 5% 넘게,<br>6개월 사이 10% 넘게 줄었을 때</span></div>
+          <div class="it-b">예: 60kg → 57kg 아래(한 달)</div>
+          <div class="it-do"><span>영양 상담을 요청하세요.</span></div>
+          <div class="it-do"><span>줄어드는 속도가 빠르면<br>진료를 앞당겨 달라고 하세요.</span></div>
+        </div>
+        <div class="it">
+          <div class="it-t">다이어트 없이도 체중이 계속 줄 때</div>
+          <div class="it-do"><span>원인을 함께 찾아 달라고 하세요.</span></div>
+        </div>
+        <a class="link-card" href="50-detail-taste.html?from=52-detail-weight.html">
+          <span class="link-card-ic" aria-hidden="true"></span>
+          <span class="link-card-body">
+            <span class="link-card-t">미각·후각 변화 안내 보기</span>
+            <span class="link-card-s">입맛·맛이 변해서 못 드신다면</span>
+          </span>
+        </a>
+        <a class="link-card" href="36-detail-mucositis.html?from=52-detail-weight.html">
+          <span class="link-card-ic" aria-hidden="true"></span>
+          <span class="link-card-body">
+            <span class="link-card-t">구내염 관리 보기</span>
+            <span class="link-card-s">입안이 헐어서 못 드신다면</span>
+          </span>
+        </a>
+        <!-- 가벼울 때만 근처 병원 — 내과는 심평원 진료과목코드 01 -->
+        <div class="it">
+          <div class="it-t">담당 병원이 멀다면</div>
+          <div class="it-b">갑작스러운 체중 감소가 아니라면<br>가까운 내과·가정의학과에서 먼저 보셔도 돼요.</div>
+        </div>
+        <a class="btn btn-outline btn-outline--good btn-block" href="92-nearby-list.html?dept=01&amp;from=52-detail-weight.html">🏥 근처 내과 찾기</a>
+      </div>
+    </section>
+
+    <div class="tiny muted rf-src">근거: CTCAE v5.0 · 미국 국립암연구소(NCI) · 미국 FDA 허가사항 · 식품의약품안전처 · 질병관리청 · 대한종양간호학회 · ESPEN · 세계암연구기금(WCRF) — 자세한 출처는 <b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요</div>
+
+    <p class="disclaimer">본 제품은 의료기기가 아니므로 질병 유무를 판단할 수 없으며, 질병 유무 판단을 위해서는 의사의 검진이 필요합니다.</p>
+  </div>
+
+  <div class="footer-actions">
+    <div class="row gap-8">
+      <a class="btn btn-outline grow" href="10-consult-questions.html">📝 진료 질문 만들기</a>
+      <a class="btn btn-primary grow" href="07-chat.html">💬 이 증상 물어보기</a>
+    </div>
+  </div>
+
+  <!-- 전화 걸기 확인 — 실수로 눌러도 바로 걸리지 않게 -->
+  <div class="callpop" id="callpop" role="dialog" aria-modal="true" aria-label="전화 걸기 확인" hidden>
+    <div class="callpop-card">
+      <div style="font-size:34px;">📞</div>
+      <div class="strong" style="font-size:17px;" id="callpop-title">전화를 걸까요?</div>
+      <a class="btn btn-primary btn-block btn-lg" id="callpop-go" href="tel:119" data-direct="1">📞 지금 전화 걸기</a>
+      <button class="btn btn-outline btn-block" id="callpop-no" type="button">닫기</button>
+    </div>
+  </div>
+</div>
+<script>(function(){
+var NAMES={"119":"119 구급대","109":"자살예방 상담전화 109","1577-0199":"정신건강 위기상담 1577-0199"};
+var pop=document.getElementById("callpop");if(!pop)return;
+var go=document.getElementById("callpop-go"),no=document.getElementById("callpop-no"),tt=document.getElementById("callpop-title");
+document.addEventListener("click",function(e){
+  var a=e.target&&e.target.closest?e.target.closest("a"):null;if(!a)return;
+  var h=a.getAttribute("href")||"";
+  if(h.indexOf("tel:")!==0||a.hasAttribute("data-direct"))return;
+  e.preventDefault();e.stopImmediatePropagation();e.stopPropagation();
+  var num=h.slice(4);
+  pop.__opener=a;
+  /* 배선 JS 가 붙인 병원 이름(data-callname)이 있으면 그 이름으로 묻는다 — 숫자만 보면 어디로 거는지 모른다 (48 과 같은 방식) */
+  tt.textContent=(a.getAttribute("data-callname")||NAMES[num]||num)+"에 전화할까요?";
+  go.setAttribute("href","tel:"+num);
+  pop.hidden=false;no.focus();
+},true);
+function close(){pop.hidden=true;
+  if(pop.__opener&&pop.__opener.focus){pop.__opener.focus();}}
+no.addEventListener("click",close);
+go.addEventListener("click",function(){setTimeout(close,150);});
+pop.addEventListener("click",function(e){if(e.target===pop)close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!pop.hidden){e.stopPropagation();close();}},true);
+})()</script>
+</body>
+</html>

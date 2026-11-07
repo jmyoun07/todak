@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 이거 먹어도 되나요?</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  /* 69 이거 먹어도 되나요 (2026-09-28) — hidden 속성이 .btn·.banner 의 display 선언에 밀리지 않게 */
+  [hidden] { display: none !important; }
+  .s69-h { color: var(--primary-dark); margin-top: 14px; }
+  .s69-list { margin: 6px 0 0; padding-left: 18px; }
+  .s69-list li { font-size: 13.5px; line-height: 1.6; color: var(--on-surface-variant); margin-top: 4px; }
+  .s69-ai { margin-top: 12px; }
+  .s69-link { margin-top: 8px; padding: 10px 12px; gap: 10px; }
+  .s69-link .li-ic { width: 34px; height: 34px; font-size: 17px; }
+  .s69-link .li-title { font-size: 14px; }
+  .s69-also { margin-top: 6px; }
+  .s69-aibtn { margin-top: 12px; }
+  .s69-more { display: flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 6px;
+    font-size: 13px; font-weight: 700; color: var(--primary-dark); text-decoration: none; }
+  .s69-src { margin-top: 8px; line-height: 1.6; }
+  /* 이름 칸에 몸의 이상을 적으셨을 때 결과 카드 맨 위에 붙는 위험신호 안내 (more2.js page69 · 2026-09-28 검토) */
+  .s69-redlink { margin-top: 8px; }
+  [data-role="red"] .grow { min-width: 0; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="09-food-supplement.html">‹</a>
+    <div><div class="appbar-title">이거 먹어도 되나요?</div><div class="appbar-sub">건강기능식품·한약·음식 확인</div></div>
+  </div>
+
+  <div class="content content--tight" style="padding-bottom:150px;">
+    <div class="field">
+      <label for="q69">어떤 걸 드시려고 하세요?</label>
+      <input class="input" id="q69" type="text" enterkeyhint="search" autocomplete="off" placeholder="예: 홍삼, 오메가3, 비타민C" aria-label="제품·한약·음식 이름">
+      <p class="tiny muted" style="margin-top:5px;">건강기능식품·<b>한약·음식</b>을 찾을 수 있어요.<br>이름이 길면 <b>통 뒷면 성분표의 이름</b>으로 찾아보세요.</p>
+    </div>
+
+    <!-- 결과 카드 — 입력 전에는 감춰 두고 more2.js(page69)가 채운다. 아래 홍삼은 시안 예시.
+         2026-09-28: 찾은 결과가 입력칸 바로 아래 보이게 칩 위로 올리고, 주의할 점·식사 카드·AI 일반 정보 칸을 더했다
+         (감춘 칸[hidden]은 AI 상담 색인에 들어가지 않는다 — _build_kb.py) -->
+    <div class="card" style="border-color:var(--warn);" data-role="result" aria-live="polite">
+      <div class="row" style="justify-content:space-between; align-items:flex-start;">
+        <div>
+          <div class="strong" style="font-size:17px;">홍삼 · 인삼</div>
+          <div class="row gap-6" style="margin-top:6px; align-items:center;">
+            <span class="pill pill--warn">! 꼭 물어보고 드세요</span>
+          </div>
+          <div class="tiny muted" style="margin-top:3px;" data-role="sub">사람마다 상황이 달라요</div>
+        </div>
+      </div>
+
+      <div class="banner banner--info s69-ai" data-role="ai-note" hidden>
+        <span class="b-ic">🤖</span>
+        <div class="small"><b>AI가 정리한 일반 정보예요.</b> 토닥 자료에 없는 것이라 틀린 내용이 있을 수 있어요.</div>
+      </div>
+
+      <div class="tiny strong s69-h" data-role="known-label">알려진 내용</div>
+      <p class="small" style="margin-top:5px; color:var(--on-surface-variant);" data-role="known">
+        피가 잘 멎지 않게 할 수 있다는 보고가 있어요. 호르몬과 관련해서는 <b>세포 실험 단계의 보고</b>가 있을 뿐, 사람에서 어떤 영향을 주는지는 아직 정리되지 않았어요. <b>수술 전에는 미리 중단이 필요할 수 있고</b>, 표적항암제(예: 이마티닙)와 함께 드시면 <b>간에 부담</b>이 될 수 있다고 나와 있어요. 지금 받는 치료에 맞는지는 담당 의사에게 꼭 확인해 주세요.</p>
+      <ul class="s69-list" data-role="points" hidden></ul>
+
+      <div data-role="care-wrap" hidden>
+        <div class="tiny strong s69-h">주의할 점</div>
+        <ul class="s69-list" data-role="care"></ul>
+      </div>
+
+      <div data-role="links-wrap" hidden>
+        <div class="tiny strong s69-h">함께 보면 좋은 화면</div>
+        <div data-role="links"></div>
+      </div>
+
+      <div data-role="also-wrap" hidden>
+        <div class="tiny strong s69-h" data-role="also-label">같이 찾아볼 만한 것</div>
+        <div class="chips s69-also" data-role="also"></div>
+      </div>
+
+      <a class="btn btn-outline btn-block btn-sm s69-aibtn" data-role="ai-btn" href="javascript:void(0)" hidden>🔎 AI 상담으로 일반 정보 찾아보기</a>
+
+      <div class="tiny strong s69-h">진료 때 이렇게 여쭤보세요</div>
+      <div class="card card--flat" style="border:1px solid var(--outline); margin-top:6px; background:var(--surface-2);">
+        <p class="small" data-role="ask">“홍삼을 선물받았는데, 지금 제가 먹는 약이랑 같이 먹어도 될까요? 수술 전에는 언제부터 쉬어야 할까요?”</p>
+      </div>
+      <div class="row gap-8" style="margin-top:10px;">
+        <a class="btn btn-primary btn-sm grow" href="10-consult-questions.html">📝 이 질문 저장</a>
+        <a class="btn btn-outline btn-sm grow" href="javascript:void(0)">📋 복사</a>
+      </div>
+      <a class="s69-more" data-role="noinfo" href="72-no-info.html" hidden>성분표를 들고 여쭤보는 방법 보기 ›</a>
+      <div class="tiny muted s69-src" data-role="src" hidden></div>
+    </div>
+
+    <!-- 정적 부분만 정보 화면 디자인 시스템 v3 상자로 (2026-09-28 · STYLE.md). 결과 카드(data-role="result")는 more2.js page69 가 채우므로 짜임을 그대로 둔다 -->
+    <section class="sec sec--info">
+      <h2 class="sec-t section-label">자주 물어보시는 것</h2>
+      <div class="chips" data-role="popular">
+        <span class="chip chip--on">홍삼</span>
+        <span class="chip">경옥고</span>
+        <span class="chip">공진단</span>
+        <span class="chip">녹용</span>
+        <span class="chip">흑염소</span>
+        <span class="chip">칡즙</span>
+        <span class="chip">오메가3</span>
+        <span class="chip">비타민D</span>
+        <span class="chip">유산균</span>
+        <span class="chip">밀크씨슬</span>
+        <span class="chip">커큐민</span>
+        <span class="chip">이소플라본</span>
+        <span class="chip">상황버섯</span>
+        <span class="chip">종합비타민</span>
+        <span class="chip">자몽</span>
+        <span class="chip">＋ 직접 입력</span>
+      </div>
+    </section>
+
+    <section class="sec sec--info">
+      <h2 class="sec-t section-label">알아 두세요</h2>
+      <ul class="dots">
+        <li>토닥은 공개된 병원·기관 자료를 정리해<br>담당 의사나 약사에게 여쭤볼 수 있게 도와 드려요.</li>
+        <li>토닥 자료에 없는 것은<br><b>AI가 정리한 일반 정보</b>라고 따로 표시해요.</li>
+      </ul>
+    </section>
+
+    <div class="tiny muted rf-src">근거: 식품의약품안전처(건강기능식품 원료·의약품 병용 섭취정보·허가사항) · 국가암정보센터 · 미국 국립보완통합보건센터(NCCIH) · 미국 국립암연구소(NCI) · 메모리얼 슬론 케터링 암센터(MSKCC) · 미국 FDA 허가사항 — AI가 정리한 일반 정보는 이 자료에서 나온 것이 아니에요. 자세한 출처는 <b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요</div>
+    <p class="disclaimer">토닥은 특정 제품을 권하거나 안전성을 판정하지 않아요. 최종 판단은 담당 의사나 약사와 상의하세요.</p>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-primary btn-block btn-lg" href="07-chat.html">💬 토닥에게 물어보기</a>
+  </div>
+</div>
+</body>
+</html>

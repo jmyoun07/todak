@@ -1,0 +1,337 @@
+{
+ "home_am": {
+  "page": "05-home.html",
+  "h": 1533,
+  "errors": [],
+  "url": "/05-home.html",
+  "gaps": [
+   334,
+   826,
+   1330,
+   2320,
+   2600,
+   2752
+  ]
+ },
+ "home_pm": {
+  "page": "05-home.html",
+  "h": 1799,
+  "errors": [],
+  "url": "/05-home.html",
+  "gaps": [
+   334,
+   912,
+   1358,
+   1862,
+   2852,
+   3132,
+   3284
+  ]
+ },
+ "checkin": {
+  "page": "16-checkin.html",
+  "h": 1074,
+  "errors": [],
+  "url": "/16-checkin.html",
+  "gaps": [
+   816,
+   890,
+   1088,
+   1206,
+   1436,
+   1668,
+   1836
+  ]
+ },
+ "month": {
+  "page": "98-checkin-month.html",
+  "h": 1286,
+  "errors": [],
+  "url": "/98-checkin-month.html",
+  "gaps": [
+   984,
+   1178,
+   1290,
+   1354,
+   1786,
+   1954,
+   2172,
+   2274
+  ]
+ },
+ "medtoday": {
+  "page": "55-med-today.html",
+  "h": 1384,
+  "errors": [],
+  "url": "/55-med-today.html",
+  "gaps": [
+   756,
+   872,
+   1204,
+   1344,
+   1472,
+   1624,
+   1794,
+   1858,
+   2066,
+   2276,
+   2448
+  ]
+ },
+ "chat": {
+  "page": "07-chat.html",
+  "h": 844,
+  "errors": [],
+  "url": "/07-chat.html",
+  "gaps": [
+   258,
+   418,
+   1164
+  ]
+ },
+ "info": {
+  "page": "06-sideeffects.html",
+  "h": 844,
+  "errors": [],
+  "url": "/06-sideeffects.html",
+  "gaps": [
+   408,
+   5518,
+   8840,
+   11612
+  ]
+ },
+ "report": {
+  "page": "77-visit-report.html",
+  "h": 844,
+  "errors": [],
+  "url": "/77-visit-report.html",
+  "gaps": [
+   330,
+   1050,
+   1222
+  ]
+ },
+ "profile": {
+  "page": "03-profile-type.html",
+  "h": 2714,
+  "errors": [],
+  "url": "/03-profile-type.html",
+  "gaps": [
+   730,
+   992,
+   2476,
+   3480,
+   4990,
+   5104
+  ]
+ },
+ "treatment": {
+  "page": "04-treatment.html",
+  "h": 2032,
+  "errors": [],
+  "url": "/04-treatment.html",
+  "gaps": [
+   1106,
+   2642,
+   3752
+  ]
+ },
+ "medsched": {
+  "page": "56-med-schedule.html",
+  "h": 1594,
+  "errors": [],
+  "url": "/56-med-schedule.html",
+  "gaps": [
+   1498,
+   2670,
+   2732,
+   322
+  ]
+ },
+ "nearby": {
+  "page": "91-nearby-gate.html",
+  "h": 1925,
+  "errors": [],
+  "url": "/91-nearby-gate.html",
+  "gaps": [
+   808,
+   2724,
+   3210,
+   3332
+  ]
+ },
+ "settings": {
+  "page": "13-settings.html",
+  "h": 1735,
+  "errors": [],
+  "url": "/13-settings.html",
+  "gaps": [
+   360,
+   1156,
+   2154,
+   2786,
+   3084,
+   3188
+  ]
+ },
+ "medmanual": {
+  "page": "58-med-manual.html",
+  "h": 1210,
+  "errors": [],
+  "url": "/58-med-manual.html",
+  "gaps": [
+   526,
+   594,
+   824,
+   1112,
+   1492,
+   1736,
+   1964
+  ]
+ },
+ "consult": {
+  "page": "10-consult-questions.html",
+  "h": 947,
+  "errors": [],
+  "url": "/10-consult-questions.html",
+  "gaps": [
+   740
+  ]
+ },
+ "nearbylist": {
+  "page": "92-nearby-list.html",
+  "h": 1397,
+  "errors": [],
+  "url": "/92-nearby-list.html",
+  "gaps": [
+   374,
+   570,
+   706,
+   1734,
+   1930,
+   2174,
+   2286
+  ]
+ },
+ "emergency": {
+  "page": "48-emergency.html",
+  "h": 3724,
+  "errors": [],
+  "url": "/48-emergency.html",
+  "gaps": [
+   690,
+   2000,
+   5316,
+   5914,
+   6926,
+   7040,
+   7142
+  ]
+ },
+ "concerns": {
+  "page": "14-concerns.html",
+  "h": 844,
+  "errors": [],
+  "url": "/14-concerns.html",
+  "gaps": [
+   442
+  ]
+ },
+ "login": {
+  "page": "01-splash.html",
+  "h": 844,
+  "errors": [],
+  "url": "/01-splash.html",
+  "gaps": [
+   912,
+   1526
+  ]
+ },
+ "consent": {
+  "page": "02-consent.html",
+  "h": 962,
+  "errors": [],
+  "url": "/02-consent.html",
+  "gaps": [
+   404,
+   1008,
+   1200
+  ]
+ },
+ "verify": {
+  "page": "99-patient-verify.html",
+  "h": 1084,
+  "errors": [],
+  "url": "/99-patient-verify.html",
+  "gaps": [
+   374
+  ]
+ },
+ "cycle": {
+  "page": "73-cycle-setup.html",
+  "h": 844,
+  "errors": [],
+  "url": "/73-cycle-setup.html",
+  "gaps": [
+   394,
+   1314
+  ]
+ },
+ "medscan": {
+  "page": "53-med-scan.html",
+  "h": 844,
+  "errors": [],
+  "url": "/53-med-scan.html",
+  "gaps": []
+ },
+ "redflag": {
+  "page": "08-redflag.html",
+  "h": 844,
+  "errors": [],
+  "url": "/08-redflag.html",
+  "gaps": [
+   694,
+   1864,
+   2606,
+   3200,
+   3812,
+   4446,
+   4662,
+   4784
+  ]
+ },
+ "notifset": {
+  "page": "23-notif-settings.html",
+  "h": 844,
+  "errors": [],
+  "url": "/23-notif-settings.html",
+  "gaps": [
+   322,
+   494,
+   704,
+   876
+  ]
+ },
+ "privacy": {
+  "page": "24-privacy-data.html",
+  "h": 1270,
+  "errors": [],
+  "url": "/24-privacy-data.html",
+  "gaps": [
+   320,
+   384,
+   550,
+   720,
+   932,
+   2196
+  ]
+ },
+ "tutorial": {
+  "page": "19-tutorial.html",
+  "h": 844,
+  "errors": [],
+  "url": "/19-tutorial.html",
+  "gaps": []
+ }
+}

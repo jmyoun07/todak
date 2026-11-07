@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 치료 일정</title>
+<link rel="stylesheet" href="app.css">
+<style>
+/* 진료 일정 목록 */
+.sec--set { gap: 12px; }
+.sec--set > .sec-t::before { display: none; }
+.sec--set > .sec-t { padding-left: .85em; }
+.ring .ring-in { font-size: 13px; }
+.s73-visit-head { display:flex; align-items:center; justify-content:space-between; gap:6px; min-width:0; }
+.s73-visit-head .sec-t { min-width:0; }
+.s73-visit-head .pill { flex:0 0 auto; white-space:nowrap; text-align:center; }
+.s73-visits { display:flex; flex-direction:column; gap:8px; }
+.s73-visit-row { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(0,.85fr) 44px; gap:6px; width:100%; min-width:0; align-items:stretch; }
+.s73-visit-row.is-past { opacity:.58; }
+.s73-pick { position:relative; min-width:0; }
+.s73-pick-display { min-height:46px; display:flex; align-items:center; justify-content:center; padding:8px 6px; font-size:14px; font-weight:700; white-space:nowrap; pointer-events:none; }
+.s73-pick input { position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:.001; cursor:pointer; }
+.s73-remove { min-width:44px; min-height:46px; padding:0; border:1px solid var(--outline); border-radius:12px; background:var(--white); color:var(--text-sub); font-size:22px; line-height:1; cursor:pointer; }
+.s73-add { width:100%; border-style:dashed; }
+@container (max-width:20em) {
+  .s73-visit-row { grid-template-columns:minmax(0,1.35fr) minmax(0,.8fr) 40px; gap:4px; }
+  .s73-pick-display { min-height:44px; padding-left:3px; padding-right:3px; font-size:12px; }
+  .s73-remove { min-width:40px; min-height:44px; }   /* 누름 칸 — 2026-10-01 검증에서 38px(권장 44px)라 넓혔다 */
+  .s73-visit-head .pill { padding-left:5px; padding-right:5px; font-size:10px; }
+}
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="13-settings.html">‹</a>
+    <div><div class="appbar-title">치료 일정</div></div>
+    <span class="spacer"></span>
+    <span class="action">✏️</span>
+  </div>
+
+  <div class="content content--tight" style="padding-bottom:120px;">
+    <div class="card card--tint" data-role="visit-summary">
+      <div class="row" style="justify-content:space-between; align-items:center;">
+        <div>
+          <div class="tiny strong" style="color:var(--primary-dark);">지금</div>
+          <div class="card-title" style="margin-top:3px;">진료 일정을 불러오고 있어요</div>
+          <div class="card-sub"></div>
+        </div>
+        <div class="ring" style="--p:0%;"><div class="ring-in">－</div></div>
+      </div>
+    </div>
+
+    <section class="sec sec--caution" data-role="immune-window" style="display:none;">
+      <h2 class="sec-t section-label">항암 주사 뒤 7~14일은 면역이 낮아요</h2>
+      <p class="sec-p">이때는 <b>감염</b>에 조금 더 조심하세요.</p>
+      <a class="link-card" href="37-detail-myelo.html?from=73-cycle-setup.html">
+        <span class="link-card-ic" aria-hidden="true"></span>
+        <span class="link-card-body">
+          <span class="link-card-t">면역이 낮을 땐 이렇게 하세요</span>
+          <span class="link-card-s">피할 음식 · 열이 날 때 할 일</span>
+        </span>
+      </a>
+    </section>
+
+    <section class="sec sec--set">
+      <div class="s73-visit-head">
+        <h2 class="sec-t section-label">다음 진료</h2>
+        <span class="pill pill--brand" data-role="next-visit-badge">불러오는 중</span>
+      </div>
+      <p class="sec-sub">정해진 진료를 모두 넣어 두시면 가까운 일정부터 알려 드려요.</p>
+      <div class="s73-visits" data-role="visit-list"></div>
+      <button type="button" class="btn btn-outline s73-add" data-act="add-visit">＋ 진료 추가하기</button>
+      <div class="listitem">
+        <span class="li-ic">🔔</span>
+        <div class="li-body"><div class="li-title">진료 전 알림</div><div class="li-sub">7일 전과 하루 전에 알려 드려요</div></div>
+        <span class="switch" role="switch" tabindex="0" aria-checked="true"></span>
+      </div>
+
+      <a class="listitem" href="77-visit-report.html">
+        <span class="li-ic">📋</span>
+        <div class="li-body"><div class="li-title">진료 전 리포트 보기</div><div class="li-sub">증상 흐름·복약·질문을 한 장으로</div></div>
+        <span class="li-chev">›</span>
+      </a>
+    </section>
+
+    <p class="disclaimer">직접 입력하신 일정이에요.<br>실제 치료 계획은 담당 의사의 안내를 따라 주세요.</p>
+  </div>
+</div>
+</body>
+</html>

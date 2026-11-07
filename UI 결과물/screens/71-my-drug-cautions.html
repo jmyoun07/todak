@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 내 약 주의사항</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="09-food-supplement.html">‹</a>
+    <div><div class="appbar-title">내 약 주의사항</div><div class="appbar-sub">음식·건강기능식품</div></div>
+  </div>
+
+  <!-- 2026-09-28 정보 화면 디자인 시스템 v3 (STYLE.md). more2.js page71 이 [data-role="my-meds"] 안을 등록한 약 목록으로 채운다. -->
+  <div class="content content--tight" style="padding-bottom:120px;">
+    <section class="sec sec--info">
+      <h2 class="sec-t section-label">주의할 음식은 약마다 달라요</h2>
+      <p class="sec-p">토닥은 아직 약별로 따로 정리해 두지 않았어요.</p>
+      <div class="it">
+        <div class="it-t">가장 정확한 안내는</div>
+        <div class="it-b">약 봉투·설명서의 주의사항과<br>담당 의사나 약사의 안내예요.</div>
+      </div>
+    </section>
+
+    <!-- 등록한 약 — 앱에서는 회원님이 등록하신 약으로 바뀐다. 다른 병원·약국에서 보여 드리기 좋다 -->
+    <section class="sec sec--info">
+      <h2 class="sec-t section-label">지금 등록된 약</h2>
+      <p class="sec-sub">다른 병원·약국에 가실 때 이 목록을 보여 주세요.<br>약을 누르면 쓰시는 동안 알아 둘 것이 나와요.</p>
+      <div class="col gap-10" data-role="my-meds">
+        <a class="listitem" href="74-med-effect-detail.html">
+          <span class="li-ic">💊</span>
+          <div class="li-body"><div class="li-title">타목시펜정 20mg</div><div class="li-sub">호르몬치료제</div></div>
+          <span class="li-chev">›</span>
+        </a>
+        <a class="listitem" href="75-med-effect-none.html">
+          <span class="li-ic">💊</span>
+          <div class="li-body"><div class="li-title">암로디핀정 5mg</div><div class="li-sub">혈압약</div></div>
+          <span class="li-chev">›</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="sec sec--good">
+      <h2 class="sec-t section-label">이렇게 확인해 보세요</h2>
+      <a class="listitem" href="69-supplement-check.html">
+        <span class="li-ic">🔎</span>
+        <div class="li-body"><div class="li-title">이거 먹어도 되나요?</div><div class="li-sub">드시려는 것의 알려진 주의점 찾아보기</div></div>
+        <span class="li-chev">›</span>
+      </a>
+      <a class="listitem" href="10-consult-questions.html">
+        <span class="li-ic">📝</span>
+        <div class="li-body"><div class="li-title">진료 준비</div><div class="li-sub">담당 의사에게 여쭤볼 질문으로 정리하기</div></div>
+        <span class="li-chev">›</span>
+      </a>
+    </section>
+
+    <section class="sec sec--never">
+      <h2 class="sec-t section-label">처방받은 약은 스스로 끊지 마세요</h2>
+      <p class="sec-p">겹치는 것이 있을 때 조절할 쪽은<br>약이 아니라 <b>건강기능식품</b>이에요.</p>
+    </section>
+
+    <p class="disclaimer">토닥은 약과 음식·건강기능식품이<br>서로 맞는지 판정하지 않아요.<br>새로 무언가 드시기 전엔<br>담당 의사나 약사와 상의하세요.</p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "todak-screens",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["8_개발도구/_serve.py"],
+      "port": 8901
+    }
+  ]
+}

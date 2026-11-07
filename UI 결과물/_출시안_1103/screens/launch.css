@@ -1,0 +1,191 @@
+/* ═══ 출시안(2026-11-03) 전용 모양 — app.css(연구 앱 원본) 뒤에 붙는다 ═══
+   이 묶음은 연구 앱에 들어가지 않는 '출시 방향' 시안이다. app.css 는 고치지 않고 여기에만 더한다.
+   글자는 app.css 와 같은 방식(clamp + cqw, 390px 기준) — 360~430px 폭에서 줄 수가 같고 13px 아래로 내려가지 않는다. */
+
+/* ── 동작 그림 — 선 그림 하나로 모든 동작을 같은 모양으로 그린다 ── */
+.fig { display: block; width: 100%; height: auto; color: var(--primary-dark); }
+.fig * { fill: none; stroke: currentColor; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.fig .hl { fill: var(--primary-tint); stroke: none; }          /* 늘어나는 자리 */
+.fig .aux { stroke: var(--accent); stroke-width: 2.6; stroke-dasharray: 4 5; }   /* 움직이는 방향 */
+.fig .arw { stroke: var(--accent); stroke-width: 2.6; }       /* 방향 끝 화살 */
+.fig .base { stroke: var(--outline-strong); stroke-width: 2.5; }  /* 바닥·벽·탁자 */
+.fig .dot { fill: currentColor; stroke: none; }
+.fig .pdot { fill: var(--accent); stroke: none; }
+.fig .thin { stroke-width: 2.6; }
+
+/* ── 묶음 제목 줄 (화면 안 큰 제목) ── */
+.l-h { margin: 6px 2px -4px; font-size: 16.5px; font-size: clamp(15px, 4.2308cqw, 18.2px); font-weight: 800; line-height: 1.35; color: var(--on-surface); }
+.l-h .l-hint { display: block; margin-top: 3px; font-size: 13.5px; font-size: clamp(13px, 3.4615cqw, 14.9px); font-weight: 600; color: var(--on-surface-variant); }
+
+/* ── 팔 점검 칸 (컨디션 기록 안) ── */
+.arm-box { border: 1.5px solid var(--primary-light); background: var(--white); border-radius: var(--r); padding: 14px 14px 12px; display: flex; flex-direction: column; gap: 9px; }
+.arm-head { display: flex; align-items: flex-start; gap: 10px; }
+.arm-head .grow { min-width: 0; }
+.arm-t { font-size: 16px; font-size: clamp(14.5px, 4.1026cqw, 17.6px); font-weight: 800; color: var(--on-surface); line-height: 1.35; }
+.arm-s { margin-top: 2px; font-size: 13.5px; font-size: clamp(13px, 3.4615cqw, 14.9px); color: var(--on-surface-variant); line-height: 1.5; }
+.arm-box .selectable { padding-top: 12px; padding-bottom: 12px; }
+.or-none { display: flex; align-items: center; gap: 10px; margin: 2px 0; color: var(--on-surface-variant); font-size: 13px; }
+.or-none::before, .or-none::after { content: ""; flex: 1; height: 1px; background: var(--outline); }
+.arm-fold { display: flex; align-items: center; gap: 10px; padding: 13px 14px; border: 1px dashed var(--outline-strong); border-radius: var(--r); color: var(--on-surface-variant); text-decoration: none; font-size: 14px; font-size: clamp(13px, 3.5897cqw, 15.4px); }
+.arm-fold b { color: var(--primary-dark); }
+
+/* 지난 4주 점검 — 칸 하나 = 한 주 */
+.wk4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.wk4 > div { border-radius: 12px; padding: 9px 4px 8px; text-align: center; background: var(--surface-2); }
+.wk4 .wk-d { display: block; font-size: 13px; color: var(--on-surface-variant); }
+.wk4 .wk-v { display: block; margin-top: 4px; font-size: 13px; font-weight: 800; }
+.wk4 .ok { background: var(--safe-tint); } .wk4 .ok .wk-v { color: #24664A; }
+.wk4 .watch { background: var(--warn-tint); } .wk4 .watch .wk-v { color: var(--warn); }
+.wk4 .now { outline: 1.5px solid var(--primary); outline-offset: -1.5px; }
+
+/* ── 결과 상자 맨 위 한 줄 (점검·코칭 결과) ── */
+.res-hero { display: flex; gap: 12px; align-items: flex-start; padding: 16px; border-radius: var(--r); }
+.res-hero .rh-ic { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-size: 20px; background: var(--white); }
+.res-hero .rh-t { font-size: 17px; font-size: clamp(15.5px, 4.359cqw, 18.7px); font-weight: 800; line-height: 1.4; }
+.res-hero .rh-s { margin-top: 4px; font-size: 14px; font-size: clamp(13px, 3.5897cqw, 15.4px); line-height: 1.6; }
+.res-hero--watch { background: var(--lv2-bg); border: 1px solid var(--lv2-line); }
+.res-hero--watch .rh-t { color: var(--lv2-ink); }
+.res-hero--ok { background: var(--good-bg); border: 1px solid var(--good-line); }
+.res-hero--ok .rh-t { color: var(--good-ink); }
+.res-hero--stop { background: var(--emg-bg); border: 1px solid var(--emg-line); }
+.res-hero--stop .rh-t { color: var(--emg-ink); }
+/* 단계 색(🟠·🔴)을 빌리지 않는 중립 상자 — 🟢 '다음 진료 때' 경우의 결과 */
+.res-hero--note { background: var(--secondary-tint); border: 1px solid #C9DCDF; }
+.res-hero--note .rh-t { color: var(--info-ink); }
+
+/* ── 출시안 화면 공통 손질 — 검토(2026-11-03)에서 나온 접근성 지적 ──
+   세그먼트 단추 글자 13px 이상·높이 44px, 선택한 칸은 색 말고 ✓ 글자로도, 정도 배지 13px */
+.seg-item { font-size: 14px; font-size: clamp(13px, 3.5897cqw, 15.4px); padding: 10px 6px; min-height: 44px; display: grid; place-items: center; }
+.sev { font-size: 13px; }
+.rom > .on .rom-t::before, .pain3 > .on .p-t::before { content: "✓ "; }
+
+/* ── 동작 한 줄 (그림 · 이름 · 횟수) ── */
+.mv-list { display: flex; flex-direction: column; gap: 10px; }
+.mv { display: flex; align-items: center; gap: 12px; padding: 10px 12px 10px 10px; border: 1px solid var(--outline); border-radius: var(--r); background: var(--white); text-decoration: none; color: inherit; }
+.mv .mv-fig { flex: 0 0 auto; width: 64px; height: 64px; border-radius: 12px; background: var(--surface); padding: 4px; }
+.mv .mv-no { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--primary); color: #fff; font-size: 13px; font-weight: 800; }
+.mv .grow { min-width: 0; }
+.mv-name { font-size: 15.5px; font-size: clamp(14px, 3.9744cqw, 17px); font-weight: 800; line-height: 1.35; }
+.mv-sub { margin-top: 2px; font-size: 13px; font-size: clamp(13px, 3.3333cqw, 14.3px); color: var(--on-surface-variant); line-height: 1.45; }
+.mv-why { margin-top: 5px; font-size: 13px; font-size: clamp(13px, 3.3333cqw, 14.3px); color: var(--primary-dark); line-height: 1.45; }
+.mv .li-chev { flex: 0 0 auto; color: var(--outline-strong); font-size: 20px; }
+
+/* ── AI 코칭 — 무엇을 보고 골랐는지 ── */
+.seen { display: flex; flex-wrap: wrap; gap: 6px; }
+.seen span { display: inline-flex; align-items: center; gap: 4px; padding: 5px 10px; border-radius: var(--r-pill); background: var(--secondary-tint); color: var(--info-ink); font-size: 13px; font-weight: 700; }
+.coach { display: flex; gap: 10px; align-items: flex-start; padding: 14px; border-radius: var(--r); background: var(--primary-tint); }
+.coach .ai-dot { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--white); font-size: 17px; }
+.coach .co-t { font-size: 15px; font-size: clamp(14px, 3.8462cqw, 16.5px); font-weight: 800; color: var(--primary-dark); line-height: 1.4; }
+.coach .co-b { margin-top: 4px; font-size: 14px; font-size: clamp(13px, 3.5897cqw, 15.4px); line-height: 1.65; color: #4A3C42; }
+.coach .co-b .l { display: block; }
+.coach .co-b .l + .l { margin-top: 3px; }
+
+/* ── 팔 높이 고르기 (그림 세 칸) ── */
+.rom { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.rom > div { border: 1.5px solid var(--outline); border-radius: var(--r); background: var(--white); padding: 8px 6px 10px; text-align: center; }
+.rom > div .fig { width: 76%; margin: 0 auto; }
+.rom > div .rom-t { display: block; margin-top: 4px; font-size: 13.5px; font-size: clamp(13px, 3.4615cqw, 14.9px); font-weight: 700; line-height: 1.35; }
+.rom > .on { border-color: var(--primary); background: var(--primary-tint); }
+.rom > .on .rom-t { color: var(--primary-dark); }
+
+/* ── 따라 하기 ── */
+.do-fig { border-radius: var(--r-lg); background: var(--white); border: 1px solid var(--outline); padding: 14px 30px 10px; }
+.do-count { display: flex; align-items: center; justify-content: center; gap: 18px; }
+.do-count .big { font-size: 42px; font-weight: 900; color: var(--primary-dark); line-height: 1; letter-spacing: -1px; }
+.do-count .unit { font-size: 14px; color: var(--on-surface-variant); font-weight: 700; }
+.do-count .ring .ring-in { font-size: 13px; line-height: 1.3; }
+.do-count .ring .ring-in b { font-size: 20px; font-weight: 900; color: var(--primary-dark); }
+.do-steps { margin: 0; padding: 0; list-style: none; counter-reset: ds; display: flex; flex-direction: column; gap: 8px; }
+.do-steps li { counter-increment: ds; display: flex; gap: 10px; font-size: 15px; font-size: clamp(14px, 3.8462cqw, 16.5px); line-height: 1.55; }
+.do-steps li::before { content: counter(ds); flex: 0 0 auto; width: 24px; height: 24px; margin-top: 1px; border-radius: 50%; background: var(--primary-tint); color: var(--primary-dark); font-size: 13px; font-weight: 800; display: grid; place-items: center; }
+
+/* 통증 변화 세 칸 */
+.pain3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.pain3 > div { border: 1.5px solid var(--outline); border-radius: var(--r); padding: 12px 4px; text-align: center; background: var(--white); }
+.pain3 .p-ic { font-size: 26px; display: block; }
+.pain3 .p-t { display: block; margin-top: 4px; font-size: 14px; font-size: clamp(13px, 3.5897cqw, 15.4px); font-weight: 700; }
+.pain3 > .on { border-color: var(--primary); background: var(--primary-tint); }
+.pain3 > .on .p-t { color: var(--primary-dark); }
+
+/* ── 이번 주 스트레칭 (칸 하나 = 하루) ── */
+.wk7 { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.wk7 > div { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 7px 2px; border-radius: 12px; }
+.wk7 .d { font-size: 13px; color: var(--on-surface-variant); }
+.wk7 .m { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 14px; border: 1.5px dashed var(--outline); color: transparent; }
+.wk7 .done .m { border: 0; background: var(--primary); color: #fff; font-weight: 800; }
+.wk7 .today { background: var(--primary-tint); }
+.wk7 .today .d { color: var(--primary-dark); font-weight: 800; }
+
+/* ── 병원 카드 — 92 근처 병원 목록의 화면 전용 모양을 그대로 옮긴 것(app.css 에는 없다) ── */
+.hosp { background: var(--white); border: 1px solid var(--outline); border-radius: var(--r); padding: 14px 15px; margin-bottom: 0; box-shadow: var(--shadow-sm); }
+.hosp-top { display: flex; align-items: flex-start; gap: 10px; }
+.hosp-name { font-size: 16px; font-weight: 700; line-height: 1.35; }
+.hosp-dist { flex: 0 0 auto; font-size: 13px; font-weight: 700; color: var(--primary-dark); background: var(--primary-tint); border-radius: var(--r-pill); padding: 4px 10px; white-space: nowrap; }
+.hosp-meta { margin-top: 9px; display: flex; flex-direction: column; gap: 5px; font-size: 13px; color: var(--on-surface-variant); line-height: 1.6; }
+.hosp-meta .k { display: inline-block; width: 46px; color: var(--on-surface-variant); font-weight: 700; }
+.hosp-meta .kv-row { display: grid; grid-template-columns: 46px 1fr; }
+.hosp-open { font-weight: 700; }
+.hosp-open.on { color: var(--safe); }
+.hosp-open.off { color: var(--on-surface-variant); }
+.hosp-no { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; min-width: 26px; height: 26px; padding: 0 5px; border-radius: var(--r-pill); background: var(--primary-tint); color: var(--primary-dark); font-size: 13px; font-weight: 800; }
+.hosp-name .partner, .p-name .partner { vertical-align: 2px; margin-right: 4px; }
+
+/* ── 관리 태그 (병원찾기) ── */
+.ctags { display: flex; flex-wrap: wrap; gap: 6px; }
+.ctag { display: inline-flex; align-items: center; gap: 4px; padding: 5px 10px; border-radius: var(--r-pill); background: var(--good-bg); color: var(--good-ink); border: 1px solid var(--good-line); font-size: 13px; font-weight: 700; line-height: 1.3; }
+.ctag--off { background: var(--surface-2); color: var(--on-surface-variant); border-color: var(--outline); font-weight: 600; }
+.care-row { display: flex; flex-wrap: wrap; gap: 8px; padding: 2px 0 4px; }   /* 네 개뿐이라 두 줄로 다 보이게(옆으로 밀기 없음) */
+.care-row::-webkit-scrollbar { display: none; }
+.care-row .chip { flex: 0 0 auto; white-space: nowrap; }
+/* 광고·제휴 표시 — 회색 글 속에 묻히지 않게 채운 배지(추천·보증 심사지침: 알아보기 쉬운 크기·색) */
+.partner { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 6px; border: 1px solid #C9A24A; color: #5C3B00; font-size: 13px; font-weight: 800; line-height: 1.4; background: #FFF4D6; }
+.checked-on { font-size: 13px; color: var(--on-surface-variant); }
+.checked-on b { color: var(--good-ink); }
+
+/* ── 제휴 제품 ── */
+.prod { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid var(--outline); border-radius: var(--r); background: var(--white); text-decoration: none; color: inherit; }
+.prod .p-img { flex: 0 0 auto; width: 76px; height: 76px; border-radius: 12px; background: var(--surface-2); display: grid; place-items: center; }
+.prod .p-img svg { width: 54px; height: 54px; }
+.prod .grow { min-width: 0; }
+.prod .p-name { font-size: 15px; font-size: clamp(14px, 3.8462cqw, 16.5px); font-weight: 800; line-height: 1.4; }
+.prod .p-more { flex: 0 0 auto; font-size: 13px; font-weight: 700; color: var(--primary-dark); white-space: nowrap; }
+.prod .p-sub { margin-top: 2px; font-size: 13px; font-size: clamp(13px, 3.3333cqw, 14.3px); color: var(--on-surface-variant); line-height: 1.5; }
+.ad-line { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--on-surface-variant); }
+.ad-line .partner { flex: 0 0 auto; }
+
+/* 표 같은 두 칸 줄 (기준·확인 방법) */
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size: 14px; font-size: clamp(13px, 3.5897cqw, 15.4px); line-height: 1.55; }
+.kv .k { color: var(--on-surface-variant); font-weight: 700; white-space: nowrap; }
+
+/* ── 4차 검토(2026-11-03) 반영 ── */
+/* 이동 줄 — 상자 안에서 버튼을 줄이고 › 달린 줄로(높이 48px) */
+.go-rows { display: flex; flex-direction: column; border-top: 1px solid var(--outline); margin-top: 2px; }
+.go-row { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 9px 2px; border-bottom: 1px solid var(--outline); text-decoration: none; color: var(--on-surface); font-size: 14.5px; font-size: clamp(13.5px, 3.7179cqw, 16px); font-weight: 700; line-height: 1.45; }
+.go-row > span { flex: 1 1 auto; min-width: 0; }
+.go-row .gr-s { display: block; margin-top: 1px; font-size: 13px; font-size: clamp(13px, 3.3333cqw, 14.3px); font-weight: 500; color: var(--on-surface-variant); }
+.go-row::after { content: "›"; flex: 0 0 auto; color: var(--outline-strong); font-size: 20px; font-weight: 400; }
+.go-row--card { border: 1px solid var(--outline); border-radius: var(--r); background: var(--white); padding: 10px 14px; }
+/* 글 링크도 누름칸 44px */
+.tap { display: inline-flex !important; align-items: center; min-height: 44px; }
+/* 요일 7칸 — 칸마다 44px 넘게(카드 안쪽 여백을 조금 빌린다) · 고른 칸은 ✓ 글자도 */
+.wday { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin: 0 -10px; }
+.wday > span { min-height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px; border: 1.5px solid var(--outline); background: var(--white); font-size: 15px; font-size: clamp(13px, 3.8462cqw, 16.5px); font-weight: 700; color: var(--on-surface-variant); }
+.wday > .on { background: var(--primary); border-color: var(--primary); color: #fff; }
+.wday > .on::before { content: "✓"; margin-right: 1px; }
+/* 고른 원 — 글자(●) 대신 그린 점 */
+.selectable .s-radio { font-size: 0; }
+.selectable--on .s-radio::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+/* 아팠던 동작 — 고른 칸은 ✓ 글자도 */
+.pain-mv .chip { min-height: 44px; }
+.pain-mv .chip--on::before { content: "✓"; margin-right: 4px; }
+/* 다 답하기 전 버튼 */
+.btn.is-wait { opacity: .45; }
+/* 까닭 줄 · 줄바꿈 다듬기 */
+.why-dots { margin-top: 6px; }
+.coach .co-t { text-wrap: balance; }
+.coach .co-b, .it-b, .why-dots li { text-wrap: pretty; }
+/* 아래 탭 글자 13px — 연구 앱(12.5px)과 달리 출시안은 하한을 지킨다 */
+.bottomnav .nav-item { font-size: clamp(13px, 3.3333cqw, 14px); }
+.bottomnav .fab .fab-label { font-size: 13px; }
+/* 동작마다 시작 시점 */
+.mv-when { color: var(--primary-dark); font-weight: 700; }

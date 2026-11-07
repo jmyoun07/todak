@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 자가관리 가이드</title>
+<link rel="stylesheet" href="app.css">
+<style>
+/* ── 정보 탭(06 · 09 · 17) 전용 모양 (2026-09-28) — 공용 부품은 app.css '정보 화면 디자인 시스템 v3' 를 그대로 쓴다.
+   같은 줄이 06 · 09 에도 있다 — 고칠 땐 세 화면을 같이 고친다. */
+:root {
+  --ic-care: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Cg transform='rotate(-45 10 10)'%3E%3Crect x='3' y='6.9' width='14' height='6.2' rx='1.9' fill='%23fff'/%3E%3Crect x='7.5' y='6.9' width='5' height='6.2' fill='%23F5D9E4'/%3E%3Ccircle cx='8.9' cy='8.9' r='.55' fill='%23C43E6B'/%3E%3Ccircle cx='11.1' cy='8.9' r='.55' fill='%23C43E6B'/%3E%3Ccircle cx='8.9' cy='11.1' r='.55' fill='%23C43E6B'/%3E%3Ccircle cx='11.1' cy='11.1' r='.55' fill='%23C43E6B'/%3E%3C/g%3E%3C/svg%3E");
+  --ic-bowl: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Cpath d='M4.6 9.6h10.8a5.4 5.4 0 0 1-10.8 0z' fill='%23fff'/%3E%3Cpath d='M8 7.4c0-1 .8-1.2.8-2.2M11 7.4c0-1 .8-1.2.8-2.2' stroke='%23fff' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  --ic-walk: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Ccircle cx='11' cy='4.9' r='1.55' fill='%23fff'/%3E%3Cpath d='M10.3 7.4l-1.4 4.3 2.5 1.9.5 3M8.9 11.7l-2 3.8M7.1 9.9l2.5-2.3 2.2 2.5 2.1.5' stroke='%23fff' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --ic-heart: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C43E6B'/%3E%3Cpath d='M10 15.5s-5.4-3.2-5.4-6.9a2.8 2.8 0 0 1 5.4-1.3 2.8 2.8 0 0 1 5.4 1.3c0 3.7-5.4 6.9-5.4 6.9z' fill='%23fff'/%3E%3C/svg%3E");
+}
+.ic-care { --ic: var(--ic-care); }  .ic-bowl { --ic: var(--ic-bowl); }  .ic-walk { --ic: var(--ic-walk); }  .ic-heart { --ic: var(--ic-heart); }
+
+/* 주제 상자 — 옅은 분홍 바탕 위에 흰 타일이 떠 보이게. 제목 테두리는 브랜드 분홍 */
+.sec--tx { --sec-bg: #FBF3F6; --sec-line: #EBD6DE; --sec-mk: var(--primary); --sec-ink: var(--on-surface); }
+/* 상자 안 2열 타일 — 홈 기능 타일 그대로 */
+.sec .feature {
+  padding-left:  clamp(8px, calc(16.667cqw - 55px), 12px);
+  padding-right: clamp(8px, calc(16.667cqw - 55px), 12px);
+}
+
+/* 글자를 크게 키운 폰(대략 125% 이상) — 타일은 한 칸으로 펴고 그림 옆에 이름 */
+@container (max-width: 20em) {
+  .sec .feature-grid { grid-template-columns: 1fr; }
+  .sec .feature { flex-direction: row; align-items: center; gap: 12px; }
+  .sec .feature .f-ic { flex: 0 0 auto; width: 1.5em; height: 1.5em; }   /* 그림 글자가 커진 만큼 칸도 — 그림 글자는 1.46em 높이라 1.5em 이어야 칸 안에 든다(46px 고정이면 칸 밖으로 삐져나온다) */
+}
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="05-home.html">‹</a>
+    <div><div class="appbar-title">자가관리 가이드</div></div>
+  </div>
+
+  <!-- 자가관리 가이드 (2026-09-28 · 정보 화면 디자인 시스템 v3)
+       예전의 주제 거르기(전체·부작용·영양·활동·마음)는 뺐다 — 네 상자가 한 화면 반 남짓이라 모두 펼쳐 둔다.
+       같은 화면으로 가던 타일 둘은 하나로 합쳤다(33 피로 · 47 불안). 읽는 시간(3분 …)은 뺐다.
+       정보 탭(06)의 '자가관리 가이드' 갈래가 이 네 상자를 그대로 보여 준다 — 타일을 고치면 06 도 같이. -->
+  <div class="content content--tight" data-info="self">
+
+    <section class="sec sec--tx ic-care" id="s-se">
+      <h2 class="sec-t section-label">부작용별 관리</h2>
+      <div class="feature-grid">
+        <a class="feature" href="15-sideeffect-detail.html?from=17-selfcare-library.html"><span class="f-ic" aria-hidden="true">🖐️</span><span class="f-title">손발 저림 관리</span></a>
+        <a class="feature" href="34-detail-arthralgia.html?from=17-selfcare-library.html"><span class="f-ic" aria-hidden="true">🦴</span><span class="f-title">관절통 완화<br>스트레칭</span></a>
+        <a class="feature" href="31-detail-nausea.html?from=17-selfcare-library.html"><span class="f-ic" aria-hidden="true">🤢</span><span class="f-title">메스꺼움<br>다스리기</span></a>
+        <a class="feature" href="36-detail-mucositis.html?from=17-selfcare-library.html"><span class="f-ic" aria-hidden="true">😷</span><span class="f-title">구내염<br>입안 관리</span></a>
+        <a class="feature" href="32-detail-hairloss.html?from=17-selfcare-library.html"><span class="f-ic" aria-hidden="true">💇‍♀️</span><span class="f-title">탈모 준비와<br>두피 관리</span></a>
+        <a class="feature" href="40-detail-lymphedema.html?from=17-selfcare-library.html"><span class="f-ic" aria-hidden="true">💪</span><span class="f-title">림프부종 예방<br>팔 운동</span></a>
+      </div>
+    </section>
+
+    <section class="sec sec--tx ic-bowl" id="s-food">
+      <h2 class="sec-t section-label">영양</h2>
+      <div class="feature-grid">
+        <a class="feature" href="09-food-supplement.html?from=17-selfcare-library.html#s-meal"><span class="f-ic" aria-hidden="true">🍱</span><span class="f-title">치료에 맞춘<br>식사</span></a>
+        <a class="feature" href="61-food-appetite.html?from=17-selfcare-library.html"><span class="f-ic" aria-hidden="true">🍚</span><span class="f-title">입맛 없을 때</span></a>
+        <a class="feature" href="66-food-immune.html?from=17-selfcare-library.html"><span class="f-ic" aria-hidden="true">🧼</span><span class="f-title">안전한<br>식품 위생</span></a>
+        <a class="feature" href="09-food-supplement.html?from=17-selfcare-library.html#s-supp"><span class="f-ic" aria-hidden="true">💊</span><span class="f-title">건강기능식품<br>안전하게</span></a>
+      </div>
+    </section>
+
+    <section class="sec sec--tx ic-walk" id="s-act">
+      <h2 class="sec-t section-label">활동</h2>
+      <div class="feature-grid">
+        <a class="feature" href="33-detail-fatigue.html?from=17-selfcare-library.html"><span class="f-ic" aria-hidden="true">🚶‍♀️</span><span class="f-title">걷기·활동으로<br>피로 줄이기</span></a>
+        <a class="feature" href="44-detail-bone.html?from=17-selfcare-library.html"><span class="f-ic" aria-hidden="true">🦴</span><span class="f-title">골밀도를<br>지키는 운동</span></a>
+      </div>
+    </section>
+
+    <section class="sec sec--tx ic-heart" id="s-mind">
+      <h2 class="sec-t section-label">마음</h2>
+      <div class="feature-grid">
+        <a class="feature" href="47-detail-anxiety.html?from=17-selfcare-library.html"><span class="f-ic" aria-hidden="true">🧘‍♀️</span><span class="f-title">불안·재발 걱정<br>다스리기</span></a>
+        <a class="feature" href="46-detail-sleep.html?from=17-selfcare-library.html"><span class="f-ic" aria-hidden="true">😴</span><span class="f-title">잠 못 드는 밤<br>수면 관리</span></a>
+      </div>
+    </section>
+
+    <p class="disclaimer">교육·자가관리 참고용이에요. 나에게 맞는지는 담당 의사와 상의하세요.</p>
+  </div>
+
+  <div class="bottomnav">
+    <a class="nav-item" href="05-home.html"><span class="ni-ic">🏠</span><span>홈</span></a>
+    <a class="nav-item nav-item--on" href="06-sideeffects.html" aria-current="page"><span class="ni-ic">📖</span><span>정보</span></a>
+    <a class="fab" href="07-chat.html"><span class="fab-btn">💬</span><span class="fab-label">상담</span></a>
+    <a class="nav-item" href="16-checkin.html"><span class="ni-ic">📈</span><span>기록</span></a>
+    <a class="nav-item" href="13-settings.html"><span class="ni-ic">👤</span><span>내 정보</span></a>
+  </div>
+</div>
+<script src="js/info.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 진료 메모 보관함</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="10-consult-questions.html">‹</a>
+    <div><div class="appbar-title">진료 메모 보관함</div></div>
+  </div>
+
+  <div class="content content--tight" style="padding-bottom:120px;">
+    <!-- ↓ 시안 예시 덩이. 갤러리에는 그대로 보이고 앱·웹앱에서는 통째로 숨는다(data-demo-box).
+         배선이 이 자리를 실제 기록으로 다시 그리기 전까지 남의 기록이 비치지 않게 한다 -->
+    <div class="banner banner--info">
+      <span class="b-ic">🗂️</span>
+      <div class="small">진료 준비에서 만든 질문이<br><b>이 휴대폰에</b> 저장돼 있어요.<br>진료 때 바로 열어 보세요.</div>
+    </div>
+
+    <div data-demo-box>
+
+    <div class="section-label">다가오는 진료</div>
+    <a class="listitem" href="77-visit-report.html" style="border-color:var(--primary); background:var(--primary-tint);">
+      <span class="li-ic" style="background:var(--white);">📋</span>
+      <div class="li-body">
+        <div class="li-title">8월 13일 진료 준비</div>
+        <div class="li-sub">증상 3개 · 질문 3개 · 복약 85%</div>
+      </div>
+      <span class="pill pill--brand">D-16</span>
+    </a>
+
+    <div class="section-label">지난 메모</div>
+    <a class="listitem" href="77-visit-report.html">
+      <span class="li-ic">📝</span>
+      <div class="li-body"><div class="li-title">7월 28일 진료</div><div class="li-sub">질문 4개 · 손발 저림 중심</div></div>
+      <span class="li-chev">›</span>
+    </a>
+    <a class="listitem" href="77-visit-report.html">
+      <span class="li-ic">📝</span>
+      <div class="li-body"><div class="li-title">7월 7일 진료</div><div class="li-sub">질문 2개 · 메스꺼움 중심</div></div>
+      <span class="li-chev">›</span>
+    </a>
+    <a class="listitem" href="77-visit-report.html">
+      <span class="li-ic">📝</span>
+      <div class="li-body"><div class="li-title">6월 16일 진료</div><div class="li-sub">질문 3개 · 첫 항암 후</div></div>
+      <span class="li-chev">›</span>
+    </a>
+
+    <a class="btn btn-outline btn-block" href="10-consult-questions.html">＋ 새 진료 메모 만들기</a>
+
+    </div><!-- /시안 예시 -->
+  </div>
+</div>
+</body>
+</html>

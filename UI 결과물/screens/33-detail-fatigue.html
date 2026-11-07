@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 피로</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="06-sideeffects.html">‹</a>
+    <div><div class="appbar-title">피로</div><div class="appbar-sub">암 관련 피로</div></div>
+  </div>
+
+  <!-- 정보 화면 디자인 시스템 v3 (2026-09-28 · 본보기 31-detail-nausea · app.css '정보 화면 디자인 시스템 v3' · STYLE.md)
+       모든 묶음은 상자(.sec) · 제목(.sec-t)은 상자 윗선에 걸친다 · 색: 초록=하세요 / 노랑=주의 / 옅은 장미=피하세요 / 진한 빨강=응급 -->
+  <div class="content content--tight content--jump" style="padding-bottom:150px;">
+    <div class="row wrap" style="gap:8px;">
+      <span class="pill pill--brand">🩺 모든 치료 공통</span>
+      <span class="sev sev--mod">매우 흔함</span>
+    </div>
+
+    <!-- ═══ 바로 가기 — 여섯 칸 같은 크기(2열) · 누르면 그 상자로 내려간다(다른 내용을 숨기지 않는다) ═══ -->
+    <nav class="sec sec--jump" aria-label="이 화면 바로 가기">
+      <div class="sec-t">바로 가기</div>
+      <div class="jump">
+        <a class="jump-b jump-b--why" href="#s-why"><span>이게 왜 생겨요?</span></a>
+        <a class="jump-b jump-b--info" href="#s-cause"><span>다른 원인</span></a>
+        <a class="jump-b jump-b--good" href="#s-care"><span>이렇게 관리해요</span></a>
+        <a class="jump-b jump-b--good" href="#s-move"><span>몸 움직이기</span></a>
+        <a class="jump-b jump-b--caution" href="#s-supp"><span>건강기능<wbr>식품</span></a>
+        <a class="jump-b jump-b--hosp" href="#s-call"><span>이럴 땐 병원에</span></a>
+      </div>
+    </nav>
+
+    <!-- ═══ ① 이게 왜 생겨요? ═══ -->
+    <section class="sec sec--why" id="s-why">
+      <h2 class="sec-t section-label">이게 왜 생겨요?</h2>
+      <p class="sec-p">암 관련 피로는 <b>쉬어도 잘 풀리지 않고<br>계속 지치는</b> 느낌이에요.</p>
+      <p class="sec-p">암 자체와 치료, 잠·마음 상태가<br>겹쳐서 생겨요.</p>
+      <p class="sec-p">항암화학요법이나 방사선치료를 받는 분의<br><b>10명 중 8명 넘게</b> 겪는,<br>치료 중 가장 흔한 반응이에요.</p>
+    </section>
+
+    <!-- ═══ ② 피로를 키우는 것도 살펴보세요 (정보) — 드시는 약에 따른 안내는 모든 분께 같은 문장(개인 약을 단정하지 않는다) ═══ -->
+    <section class="sec sec--info" id="s-cause">
+      <h2 class="sec-t section-label">피로를 키우는 것도 살펴보세요</h2>
+      <p class="sec-p">미국 국립암연구소가 꼽은<br>피로를 키우는 것들이에요.</p>
+      <ul class="dots">
+        <li>빈혈, 감염</li>
+        <li>식욕저하, 구역, 설사와 탈수</li>
+        <li>통증과 진통제</li>
+        <li>수면 문제, 열감으로 끊기는 잠</li>
+        <li>우울과 불안</li>
+      </ul>
+      <p class="sec-p">이 중에는 <b>치료로 나아질 수 있는 것</b>도 있어요.</p>
+      <div class="it">
+        <div class="it-t">드시는 약 때문일 수도 있어요</div>
+        <div class="it-b"><b>혈압약(예: 암로디핀)</b>이나 <b>팍실정(파록세틴)</b> 같은 약으로도 이런 피로가 생길 수 있어요.</div>
+        <div class="it-b">갑상선 수치가 낮아도 똑같이 느껴질 수 있어요.</div>
+        <div class="it-b">어느 쪽 때문인지는 <b>진료에서 확인해야 해요.</b></div>
+        <div class="it-do"><span>다음 진료 때 피로와 드시는 약을<br>함께 말씀하세요.</span></div>
+      </div>
+      <a class="btn btn-outline btn-block" href="70-med-effects.html?from=33-detail-fatigue.html">💊 내 약과 부작용 보기</a>
+    </section>
+
+    <!-- ═══ ③ 이렇게 관리해요 (초록) ═══ -->
+    <section class="sec sec--good" id="s-care">
+      <h2 class="sec-t section-label">이렇게 관리해요</h2>
+      <div class="it">
+        <div class="it-t">가볍게, 꾸준히 움직이기</div>
+        <div class="it-b">걷기 같은 규칙적인 활동이<br>오히려 피로를 줄여 줘요.</div>
+        <div class="it-do"><span>무리하지 않는 만큼만 하세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">기운이 좋은 시간대에</div>
+        <div class="it-do"><span>중요한 일은 그때 해 두세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">낮잠은 20~30분, 오후 3시 전에</div>
+        <div class="it-b">낮에 오래 자거나 늦게 자면 밤잠이 밀려서<br>다음 날 피로가 더 커져요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">자고 일어나는 시간은 일정하게</div>
+        <div class="it-do"><span>날마다 같은 시간을 지키세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">먹고 마시는 것</div>
+        <div class="it-do"><span>세 끼를 크게 드시기보다<br>조금씩 여러 번 나눠 드세요.</span></div>
+        <div class="it-do"><span>단백질과 물을 충분히 드세요.</span></div>
+        <div class="it-do"><span>카페인과 술은 줄이세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ④ 쉬는 것보다 움직이는 쪽이 나아요 (초록) ═══ -->
+    <section class="sec sec--good" id="s-move">
+      <h2 class="sec-t section-label">쉬는 것보다 움직이는 쪽이 나아요</h2>
+      <p class="sec-sub">미국 국립보완통합보건센터(NCCIH)가<br>연구들을 모아 정리한 내용이에요.</p>
+      <div class="it">
+        <div class="it-t">요가</div>
+        <div class="it-b">가만히 쉬는 것보다 <b>피로가 눈에 띄게 줄었어요.</b></div>
+      </div>
+      <div class="it">
+        <div class="it-t">기공·태극권</div>
+        <div class="it-b">피로가 <b>느껴질 만큼</b> 줄었다는 결과가<br>여러 번 나왔어요.</div>
+      </div>
+      <div class="it">
+        <div class="it-t">지금 받는 관리에 ‘더하세요’</div>
+        <div class="it-b">받고 계신 관리에 <b>더했을 때</b>만 나아졌고,<br><b>대신했을 때</b>는 그렇지 않았어요.</div>
+        <div class="it-do"><span>지금 받는 관리를 빼고<br>이것만 하시면 안 돼요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ⑤ 건강기능식품은 먼저 상의하세요 (노랑) ═══ -->
+    <section class="sec sec--caution" id="s-supp">
+      <h2 class="sec-t section-label">건강기능식품은 먼저 상의하세요</h2>
+      <div class="it">
+        <div class="it-t">인삼(캡슐)·생강 뿌리 가루</div>
+        <div class="it-b">미국 국립암연구소 자료에<br>피로에 시도해 볼 수 있다고 나와 있어요.</div>
+        <div class="it-b">다만 호르몬치료제·항암제와 함께 드실 때의<br><b>안전성은 따로 확인돼 있지 않아요.</b></div>
+        <div class="it-b">인삼은 피가 잘 멎지 않게 할 수 있어<br>수술·항암 시기엔 특히 조심해야 해요.</div>
+        <div class="it-do"><span>드시기 전에 담당 의사와 먼저 정하세요.</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ ⑥ 이럴 땐 병원에 — 큰 상자 하나에 세 단계(🔴·🟠·🟢) 중간 상자 ═══
+         단계 제목의 🔴·🟠·🟢 글자는 지우지 않는다(화면에서는 둥근 점으로 그림) — AI 상담 자료 색인이 이 글자로 단계를 나눈다.
+         단계 제목에는 section-label 을 붙이지 않는다 — 세 단계가 색인에서 '이럴 땐 병원에' 한 묶음으로 남아야 한다. -->
+    <section class="sec sec--group" id="s-call">
+      <h2 class="sec-t section-label">이럴 땐 병원에</h2>
+      <p class="sec-sub">세 단계로 나눴어요. 위에서부터 급한 순서예요.</p>
+
+      <!-- 🔴 1단계 — 부작용 화면마다 되풀이하던 '이럴 땐 전화 말고 119'·열 기준 덩이는 응급 안내(48) 한 칸으로 바꿨다 -->
+      <div class="sec sec--lv1" id="s-119">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🔴</span> <span>지금 바로 119</span></div>
+        <a class="link-card link-card--emg" id="s-emg" href="48-emergency.html?from=33-detail-fatigue.html">
+          <span class="link-card-ic" aria-hidden="true"></span>
+          <span class="link-card-body">
+            <span class="link-card-t">응급 상황일 땐 이렇게 하세요</span>
+            <span class="link-card-s">열이 38.0도 이상일 때<br>(겨드랑이는 37.5도 이상)<br>숨이 차거나 정신이 흐릿할 때</span>
+          </span>
+        </a>
+        <a class="btn btn-danger btn-block" href="tel:119">📞 119 응급전화</a>
+      </div>
+
+      <!-- 🟠 2단계 -->
+      <div class="sec sec--lv2" id="s-today">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟠</span> <span>그날 안에 연락하세요</span></div>
+        <div class="it">
+          <div class="it-t">피로가 이런 모습이면</div>
+        </div>
+        <ul class="dots">
+          <li><b>쉬어도 회복되지 않고</b><br>세수·화장실 같은 기본적인 일도 힘들 때</li>
+          <li><b>깨어 있는 시간의 절반 이상</b>을<br>침대나 의자에서 보낼 때</li>
+          <li><b>갑자기 심해진 무기력</b>에<br>어지럼·두근거림이 함께 있을 때<span class="dots-b">빈혈이 진행됐을 때 나타나는 모습이에요.</span></li>
+          <li><b>오한이 나고 몸살처럼 아프면서</b><br>기운이 쭉 빠질 때<span class="dots-b">열이 없어도 감염일 수 있어요.</span></li>
+        </ul>
+        <div class="it">
+          <div class="it-t"><span>면역항암제(키트루다 등)를<br>맞고 계시다면</span></div>
+          <div class="it-b">갑상선 같은 호르몬 쪽 변화로도<br>이런 피로가 생길 수 있어요.</div>
+          <div class="it-do"><span>평소와 다른 심한 피로가<br>며칠 이어지면 바로 연락하세요.</span></div>
+        </div>
+        <!-- 저장해 두신 병원 번호가 있으면 features.js(wireCallMine)가 '병원 이름 + 번호' 로 바로 걸리는 단추로 바꾼다.
+             번호가 없으면 글자를 '🏥 내 병원 번호 등록하기'로 바꾸고 84 등록 화면으로 보낸다. -->
+        <a class="btn btn-outline btn-outline--lv2 btn-block" href="84-care-contacts.html?from=33-detail-fatigue.html" data-role="call-mine">📞 내 병원으로 연락하기</a>
+        <!-- 담당 병원 바로 아래에 근처 병원 — 내과는 심평원 진료과목코드 01 -->
+        <div class="it">
+          <div class="it-t">담당 병원이 멀거나 문 닫았다면</div>
+          <div class="it-b">숨이 차거나 두근거리지 않는 피로라면<br>가까운 내과·가정의학과에서<br>먼저 보셔도 돼요.</div>
+        </div>
+        <a class="btn btn-outline btn-block" href="92-nearby-list.html?dept=01&amp;from=33-detail-fatigue.html">🏥 근처 내과 찾기</a>
+      </div>
+
+      <!-- 🟢 3단계 -->
+      <div class="sec sec--lv3" id="s-next">
+        <div class="sec-t"><span class="lv" aria-hidden="true">🟢</span> <span>다음 진료 때 말씀하세요</span></div>
+        <div class="it">
+          <div class="it-t"><span>예전보다 쉽게 지치지만<br>일상은 유지될 때</span></div>
+          <div class="it-do"><span>하루 중 언제 가장 힘든지 적어 두세요.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="tiny muted rf-src">근거: CTCAE v5.0 · 미국 국립암연구소(NCI) ·<br>대한종양간호학회 · 대한감염학회 ·<br>미국 국립보완통합보건센터(NCCIH) —<br>자세한 출처는 <b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요</div>
+
+    <p class="disclaimer">본 제품은 의료기기가 아니므로 질병 유무를 판단할 수 없으며, 질병 유무 판단을 위해서는 의사의 검진이 필요합니다.</p>
+  </div>
+
+  <div class="footer-actions">
+    <div class="row gap-8">
+      <a class="btn btn-outline grow" href="10-consult-questions.html">📝 진료 질문 만들기</a>
+      <a class="btn btn-primary grow" href="07-chat.html">💬 이 증상 물어보기</a>
+    </div>
+  </div>
+
+  <!-- 전화 걸기 확인 — 실수로 눌러도 바로 걸리지 않게 -->
+  <div class="callpop" id="callpop" role="dialog" aria-modal="true" aria-label="전화 걸기 확인" hidden>
+    <div class="callpop-card">
+      <div style="font-size:34px;">📞</div>
+      <div class="strong" style="font-size:17px;" id="callpop-title">전화를 걸까요?</div>
+      <a class="btn btn-primary btn-block btn-lg" id="callpop-go" href="tel:119" data-direct="1">📞 지금 전화 걸기</a>
+      <button class="btn btn-outline btn-block" id="callpop-no" type="button">닫기</button>
+    </div>
+  </div>
+</div>
+<script>(function(){
+var NAMES={"119":"119 구급대","109":"자살예방 상담전화 109","1577-0199":"정신건강 위기상담 1577-0199"};
+var pop=document.getElementById("callpop");if(!pop)return;
+var go=document.getElementById("callpop-go"),no=document.getElementById("callpop-no"),tt=document.getElementById("callpop-title");
+document.addEventListener("click",function(e){
+  var a=e.target&&e.target.closest?e.target.closest("a"):null;if(!a)return;
+  var h=a.getAttribute("href")||"";
+  if(h.indexOf("tel:")!==0||a.hasAttribute("data-direct"))return;
+  e.preventDefault();e.stopImmediatePropagation();e.stopPropagation();
+  var num=h.slice(4);
+  pop.__opener=a;
+  /* 배선 JS 가 붙인 병원 이름(data-callname)이 있으면 그 이름으로 묻는다 — 숫자만 보면 어디로 거는지 모른다 (48 과 같은 방식) */
+  tt.textContent=(a.getAttribute("data-callname")||NAMES[num]||num)+"에 전화할까요?";
+  go.setAttribute("href","tel:"+num);
+  pop.hidden=false;no.focus();
+},true);
+function close(){pop.hidden=true;
+  if(pop.__opener&&pop.__opener.focus){pop.__opener.focus();}}
+no.addEventListener("click",close);
+go.addEventListener("click",function(){setTimeout(close,150);});
+pop.addEventListener("click",function(e){if(e.target===pop)close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!pop.hidden){e.stopPropagation();close();}},true);
+})()</script>
+</body>
+</html>

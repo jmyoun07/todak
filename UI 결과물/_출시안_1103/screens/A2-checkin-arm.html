@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 컨디션 기록 + 팔 점검 (출시안)</title>
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="launch.css">
+<style>
+/* 16 컨디션 기록의 제목 모양을 그대로 쓴다 */
+.content > .section-label { margin: 8px 0 -2px; font-size: 16.5px; font-size: clamp(15px, 4.2308cqw, 18.2px); font-weight: 800; line-height: 1.35; color: var(--on-surface); }
+.content > .section-label .lab-hint { display: block; margin-top: 3px; font-size: 13.5px; font-size: clamp(13px, 3.4615cqw, 14.9px); font-weight: 600; color: var(--on-surface-variant); }
+.int-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; font-size: 13px; }
+.int-row .chip { flex: 1 1 auto; justify-content: center; text-align: center; padding: 11px 2px; font-size: 1em; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="A1-home.html">‹</a>
+    <div><div class="appbar-title">컨디션 기록</div><div class="appbar-sub" data-demo>11월 4일 수요일</div></div>
+  </div>
+
+  <div class="content content--tight" style="padding-bottom:96px;">
+    <div class="section-label">오늘 기분은 어떠셨어요?</div>
+    <div class="row mood-row">
+      <div class="center"><div style="font-size:30px;">😊</div><div class="tiny muted">아주 좋음</div></div>
+      <div class="center"><div style="font-size:30px;">🙂</div><div class="tiny muted">좋음</div></div>
+      <div class="center" style="transform:scale(1.15);" data-demo><div style="font-size:30px;">😐</div><div class="tiny strong" style="color:var(--primary-dark);">보통</div></div>
+      <div class="center"><div style="font-size:30px;">😔</div><div class="tiny muted">힘듦</div></div>
+      <div class="center"><div style="font-size:30px;">😢</div><div class="tiny muted">아주 힘듦</div></div>
+    </div>
+
+    <div class="section-label">오늘 겪은 증상 <span class="lab-hint">여러 개 고를 수 있어요</span></div>
+    <div class="chips">
+      <span class="chip chip--on" data-demo>관절통</span>
+      <span class="chip">피로</span>
+      <span class="chip">손발 저림</span>
+      <span class="chip">안면홍조</span>
+      <span class="chip">수면 문제</span>
+      <span class="chip">＋ 추가</span>
+    </div>
+
+    <div class="card" data-demo>
+      <div class="row" style="justify-content:space-between;">
+        <span class="strong small">관절통 강도</span>
+        <span class="sev sev--mild">약함</span>
+      </div>
+      <div class="int-row">
+        <span class="chip">없음</span>
+        <span class="chip chip--on">약함</span>
+        <span class="chip">보통</span>
+        <span class="chip">심함</span>
+        <span class="chip">매우 심함</span>
+      </div>
+      <!-- 컨디션에서 관절통을 고르면 스트레칭으로 잇는다 (호르몬치료약을 드시는 분께 흔하다) -->
+      <a class="small strong tap" href="B2-stretch-ask.html" style="display:inline-flex; margin-top:4px; color:var(--primary-dark); text-decoration:none;">🤸 관절이 뻣뻣할 때 맞는 스트레칭 받기 ›</a>
+    </div>
+
+    <!-- ── 팔 점검 — 매주 정한 요일(수요일)에만 펼친다. 다른 날은 아래 .arm-fold 한 줄로 접혀 있다.
+         BWA 앱 자가진단처럼 해당하는 것만 누르고, 없으면 '이상 없어요' 하나. 어떤 답이든 저장하면 같은 A3(세 단계, 순서 고정)로 간다 ── -->
+    <div class="arm-box">
+      <div class="arm-head">
+        <div class="grow">
+          <div class="arm-t">수술한 왼쪽 팔은 어떠세요?</div>
+          <div class="arm-s">수요일은 팔 점검하는 날이에요.<br>해당하는 것만 눌러 주세요.</div>
+        </div>
+        <span class="pill pill--brand">주 1회</span>
+      </div>
+      <div class="selectable selectable--on" role="checkbox" tabindex="0" aria-checked="true" data-demo>
+        <span class="s-box">✓</span>
+        <div class="grow"><div class="s-title">팔이 무겁거나 뻐근해요</div></div>
+      </div>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box"></span>
+        <div class="grow"><div class="s-title">반지·시계·소매가 전보다 조여요</div></div>
+      </div>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box"></span>
+        <div class="grow"><div class="s-title">반대쪽 팔보다 부어 보여요</div></div>
+      </div>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box"></span>
+        <div class="grow"><div class="s-title">팔이 갑자기 붉어지고 뜨거워졌어요</div><div class="s-sub">오늘 안에 진료가 필요할 수 있어요</div></div>
+      </div>
+      <div class="or-none">또는</div>
+      <div class="selectable" role="radio" tabindex="0" aria-checked="false">
+        <span class="s-box s-radio"></span>
+        <div class="grow"><div class="s-title">이상 없어요</div></div>
+      </div>
+      <div class="row" style="justify-content:space-between; align-items:center; margin-top:2px;">
+        <span class="tiny muted">지난주(10월 28일) · 이상 없어요</span>
+        <a class="tiny strong tap" href="A6-lymphedema.html" style="color:var(--primary-dark); text-decoration:none;">왜 팔을 보나요? ›</a>
+      </div>
+    </div>
+
+    <!-- 오늘 스트레칭도 같은 기록에 함께 남는다 -->
+    <div class="arm-fold">
+      <span aria-hidden="true">🤸</span>
+      <span class="grow">오늘 스트레칭은 아직이에요. 하시면 이 기록에 함께 남아요.</span>
+    </div>
+
+    <div class="field">
+      <label>메모 <span class="muted small">(선택)</span></label>
+      <textarea class="textarea" rows="2" placeholder="팔이 언제부터 그랬는지 적어 두면 진료 때 도움이 돼요" maxlength="500"></textarea>
+    </div>
+
+    <div class="banner banner--info">
+      <span class="b-ic">💡</span>
+      <div class="small">기록은 <b>내 변화를 살펴보고 진료를 준비</b>하는 데 쓰여요. 진단·처방 목적이 아니에요.</div>
+    </div>
+
+    <a class="btn btn-primary btn-block btn-lg" href="A3-arm-result.html">오늘 기록 저장</a>
+  </div>
+
+  <div class="bottomnav">
+    <a class="nav-item" href="A1-home.html"><span class="ni-ic">🏠</span><span>홈</span></a>
+    <a class="nav-item" href="06-sideeffects.html"><span class="ni-ic">📖</span><span>정보</span></a>
+    <a class="fab" href="07-chat.html"><span class="fab-btn">💬</span><span class="fab-label">상담</span></a>
+    <a class="nav-item nav-item--on" href="A2-checkin-arm.html"><span class="ni-ic">📈</span><span>기록</span></a>
+    <a class="nav-item" href="13-settings.html"><span class="ni-ic">👤</span><span>내 정보</span></a>
+  </div>
+</div>
+</body>
+</html>

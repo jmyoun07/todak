@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 팔 점검 결과 (출시안)</title>
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="launch.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="A1-home.html">‹</a>
+    <div><div class="appbar-title">오늘 기록을 남겼어요</div><div class="appbar-sub" data-demo>11월 4일 수요일</div></div>
+  </div>
+
+  <!-- 점검 결과 — 새 의학 기준을 만들지 않고 40 림프부종 화면의 세 단계를 그대로 잇는다.
+       맨 위 상자는 고르신 답을 그대로 되짚을 뿐 판정하지 않는다. 세 단계는 어떤 답이든 같은 순서(🔴→🟠→🟢)로 늘 보여 준다 —
+       입력으로 단계를 고르거나 진료과를 정해 주면 증상 판정 소프트웨어로 볼 수 있어서(식약처 웰니스 판단기준) -->
+  <div class="content content--tight" style="padding-bottom:150px;">
+    <div class="res-hero res-hero--note" data-demo>
+      <span class="rh-ic" aria-hidden="true">🫶</span>
+      <div class="grow">
+        <div class="rh-t">왼팔이 무겁고 뻐근하다고 하셨어요</div>
+        <div class="rh-s">고르신 답에 붓기·붉어짐·열감은 없었어요.<br>지난 3주는 이상이 없었어요.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="margin-bottom:10px;">최근 4주 팔 점검</div>
+      <div class="wk4" data-demo>
+        <div class="ok"><span class="wk-d">10월 14일</span><span class="wk-v">이상 없음</span></div>
+        <div class="ok"><span class="wk-d">10월 21일</span><span class="wk-v">이상 없음</span></div>
+        <div class="ok"><span class="wk-d">10월 28일</span><span class="wk-v">이상 없음</span></div>
+        <div class="watch now"><span class="wk-d">11월 4일</span><span class="wk-v">무거움</span></div>
+      </div>
+    </div>
+
+    <section class="sec sec--lv1">
+      <div class="sec-t"><span class="lv" aria-hidden="true">🔴</span> <span>이럴 땐 바로 119</span></div>
+      <ul class="dots">
+        <li>한쪽 팔이나 다리가 붓는데<br><b>갑자기 숨이 차거나 가슴이 아플 때</b><span class="dots-b">피가 굳어 막혔을 수 있어요(혈전).</span></li>
+      </ul>
+      <a class="link-card link-card--emg" href="48-emergency.html">
+        <span class="link-card-ic" aria-hidden="true"></span>
+        <span class="link-card-body"><span class="link-card-t">응급 상황일 땐 이렇게 하세요</span></span>
+      </a>
+    </section>
+    <section class="sec sec--lv2">
+      <div class="sec-t"><span class="lv" aria-hidden="true">🟠</span> <span>이럴 땐 그날 연락하세요</span></div>
+      <ul class="dots">
+        <li>팔이 <b>갑자기</b> 붓고 붉어지며<br><b>열감·통증</b>이 생길 때<span class="dots-b">봉와직염이나 혈전일 수 있어요.</span><span class="dots-b">열이 없어도 오늘 안에 진료를 받으세요. 열&#8288;·&#8288;오한이 나거나 몸이 많이 안 좋으면 밤·주말엔 응급실로 가세요.</span></li>
+      </ul>
+      <a class="btn btn-outline btn-outline--lv2 btn-block" href="84-care-contacts.html">📞 내 병원에 연락하기</a>
+    </section>
+    <section class="sec sec--lv3">
+      <div class="sec-t"><span class="lv" aria-hidden="true">🟢</span> <span>팔이 서서히 무거워지거나 조일 때</span></div>
+      <div class="it">
+        <div class="it-t">쉴 때는 팔을 조금 높게</div>
+        <div class="it-do"><span>쿠션을 받쳐 팔을 심장보다 약간 높게 두세요.</span></div>
+      </div>
+      <div class="it">
+        <div class="it-t">가볍게 움직여 주세요</div>
+        <div class="it-b">팔을 아예 안 쓰는 것보다 가볍게 움직이는 편이 나아요.</div>
+        <a class="btn btn-outline btn-outline--good btn-block" href="B2-stretch-ask.html">🤸 오늘 맞는 스트레칭 받기</a>
+      </div>
+      <div class="go-rows">
+        <a class="go-row" href="A5-visit-report.html"><span>📝 다음 진료 때 말씀하세요<span class="gr-s">11월 13일 진료 리포트에 오늘 기록이 들어가요</span></span></a>
+        <a class="go-row" href="84-care-contacts.html"><span>📞 처음 느끼셨다면 내 병원에 미리 알려 두기</span></a>
+        <a class="go-row" href="C1-care-search.html"><span>🏥 담당 의사가 관리를 권했다면<span class="gr-s">관리해 주는 병원을 가까운 순으로 보여 드려요</span></span></a>
+      </div>
+    </section>
+
+    <p class="disclaimer">이 안내는 어떤 답을 고르셔도 같아요.<br>림프부종인지는 진료로 확인해요.</p>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-primary btn-block btn-lg" href="A1-home.html">홈으로</a>
+  </div>
+</div>
+</body>
+</html>

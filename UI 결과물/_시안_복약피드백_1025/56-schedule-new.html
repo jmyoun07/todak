@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 복약 설정 (시안 10/25)</title>
+<link rel="stylesheet" href="../screens/app.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+.when-t { font-size: 13.5px; font-weight: 700; margin: 14px 0 8px; }
+.chg { margin-top: 10px; padding: 9px 12px; border-radius: 12px; background: var(--primary-tint);
+  color: var(--primary-dark); font-size: 13px; line-height: 1.5; font-weight: 600; }
+.card.is-focus { box-shadow: 0 0 0 2px var(--primary); }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+  <div class="appbar">
+    <a class="back" href="13-settings-new.html">‹</a>
+    <div><div class="appbar-title">복약 설정</div></div>
+  </div>
+
+  <div class="content content--tight" style="padding-bottom:150px;">
+    <div class="banner banner--info">
+      <span class="b-ic">⏰</span>
+      <div class="small">약마다 <b>드시는 시간</b>과 알림을 고치실 수 있어요. 오늘의 복약 화면에서도 같이 바뀌어요.</div>
+    </div>
+    <a class="listitem" href="#">
+      <span class="li-ic">➕</span>
+      <div class="li-body"><div class="li-title">약 추가하기</div><div class="li-sub">사진이나 이름으로 넣으실 수 있어요</div></div>
+      <span class="li-chev">›</span>
+    </a>
+    <a class="listitem" href="#" data-act="order">
+      <span class="li-ic">⇅</span>
+      <div class="li-body"><div class="li-title">약 목록 고치기</div><div class="li-sub">끌어서 순서를 바꾸고, 드시는 시간도 한 번에 고쳐요</div></div>
+      <span class="li-chev">›</span>
+    </a>
+    <div data-role="cards" style="display:flex; flex-direction:column; gap:14px;"></div>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-primary btn-block btn-lg" href="#" data-act="save">저장</a>
+  </div>
+</div>
+<script src="shared.js"></script>
+<script>
+(function () {
+  var P = TDP, SLOTS = P.SLOTS, LBL = P.LBL;
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  /* 피드백 주신 분 상황: 아침·점심에 드시는 약을 '하루 2번'으로 넣었더니 아침·저녁으로 들어갔다.
+     지금 앱의 56 에서는 시각만 바꿀 수 있어 드시는 시간을 고칠 길이 없다 → 여기서 고친다(오늘의 복약 창과 같은 자료). */
+  var MEDS = {
+    a: { name: '타목시펜정 20mg', days: '60일분 · 12월 14일까지', was: ['아침'], now: ['아침'] },
+    b: { name: '암로디핀정 5mg', days: '30일분 · 11월 14일까지', was: ['아침', '저녁'], now: ['아침', '저녁'] },
+    c: { name: '마그밀정 500mg', days: '', was: ['자기전'], now: ['자기전'] },
+    d: { name: '레바미피드정 100mg', days: '30일분 · 11월 23일까지', was: ['아침', '저녁'], now: ['아침', '점심'] }
+  };
+  var order = ['a', 'b', 'c', 'd'];
+  var FOCUS = /[?&]plain/.test(location.search) ? null : 'd';
+  if (!FOCUS) MEDS.d.now = MEDS.d.was.slice();
+
+  function paint() {
+    var box = $('[data-role="cards"]');
+    box.innerHTML = '';
+    order.forEach(function (id) {
+      var m = MEDS[id], list = P.sortSlots(m.now);
+      var changed = list.join() !== P.sortSlots(m.was).join();
+      var c = document.createElement('div');
+      c.className = 'card' + (id === FOCUS ? ' is-focus' : '');
+      c.setAttribute('data-med', id);
+      c.innerHTML =
+        '<div class="row" style="justify-content:space-between; align-items:center; gap:10px;">'
+        + '<div><div class="strong" style="font-size:16px;">' + m.name + '</div>'
+        + '<div class="tiny muted">💊 먹는 약 · 하루 ' + list.length + '번</div></div>'
+        + (m.days ? '<span class="tiny muted" style="text-align:right;">' + m.days + '</span>' : '') + '</div>'
+        + '<div class="chips" style="margin-top:10px;"><span class="chip chip--on">먹는 약</span><span class="chip">눈에 넣는 약</span>'
+        + '<span class="chip">바르는 약</span><span class="chip">붙이는 약</span><span class="chip">기타</span></div>'
+        + '<div class="when-t">드시는 시간</div>'
+        + '<div class="when-grid">' + SLOTS.map(function (s) {
+            var on = m.now.indexOf(s) > -1;
+            return '<span class="chip' + (on ? ' chip--on' : '') + '" role="checkbox" tabindex="0" aria-checked="' + on + '" data-slot="' + s + '">' + LBL[s] + '</span>';
+          }).join('') + '</div>'
+        + (changed ? '<div class="chg">' + P.whenTxt(m.was) + ' → <b>' + P.whenTxt(list) + '</b> · 오늘부터 바뀌어요. 저장을 누르시면 알림도 바뀌어요.</div>' : '')
+        + '<div class="when-t">알림 시간</div>'
+        + list.map(function (s) {
+            return '<div class="listitem" style="margin-top:10px;"><span class="li-ic">' + P.IC[s] + '</span><div class="li-body"><div class="li-title">'
+              + LBL[s] + '</div><div class="li-sub">눌러서 시간 바꾸기</div></div><div class="input tbox">' + P.TM[s] + '</div></div>';
+          }).join('')
+        + '<button type="button" class="btn btn-outline btn-sm btn-block" style="margin-top:12px;">이 약 그만 쓰기</button>';
+      $$('.when-grid .chip', c).forEach(function (ch) {
+        ch.addEventListener('click', function () {
+          var s = ch.getAttribute('data-slot'), i = m.now.indexOf(s);
+          if (i > -1) { if (m.now.length === 1) return P.toast('드시는 시간을 하나 이상\n골라 주세요'); m.now.splice(i, 1); }
+          else m.now.push(s);
+          paint();
+        });
+      });
+      box.appendChild(c);
+    });
+  }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('[data-act]');
+    if (!a) return;
+    e.preventDefault();
+    var act = a.getAttribute('data-act');
+    if (act === 'order') {
+      P.openSheet({
+        items: order.map(function (id) { return { id: id, name: MEDS[id].name, slots: MEDS[id].now }; }),
+        onSave: function (o2, slots, changed) {
+          order = o2;
+          /* 창의 '저장'은 바로 저장한다(55 에서 연 것과 똑같이) — 저장을 두 번 누르게 하지 않는다 */
+          changed.forEach(function (id) { MEDS[id].now = slots[id].slice(); MEDS[id].was = slots[id].slice(); });
+          FOCUS = null;
+          paint();
+          P.toast(changed.length ? '저장했어요\n드시는 시간은 오늘부터 바뀌어요' : '약 순서를 저장했어요');
+        }
+      });
+    } else if (act === 'save') {
+      order.forEach(function (id) { MEDS[id].was = MEDS[id].now.slice(); });
+      FOCUS = null; paint();
+      P.toast('복약 설정을 저장했어요 ⏰');
+    }
+  });
+
+  paint();
+  var fc = FOCUS && $('[data-med="' + FOCUS + '"]'), ct = $('.content');
+  if (fc && ct) ct.scrollTop = fc.offsetTop - ct.offsetTop - 10;
+})();
+</script>
+</body>
+</html>

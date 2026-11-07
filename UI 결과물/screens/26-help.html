@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 도움말</title>
+<link rel="stylesheet" href="app.css">
+<style>
+/* 자주 묻는 질문 (2026-09-28) — 질문 글자를 폭에 맞춰(390px 에서 14px · 13px 아래로 내려가지 않게).
+   예전엔 줄마다 14px 고정이라 폭에 따라 줄 수가 달라졌다. 상자 안 질문 사이는 조금 좁게. */
+.sec--faq { gap: 8px; }
+.faq .li-title { font-size: 14px; font-size: clamp(13px, 3.5897cqw, 15.4px); }
+/* 답은 생각 하나씩 문단으로 (2026-09-29) — 문단 사이만 조금 띄운다 */
+.faq-a p + p { margin-top: 7px; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="13-settings.html">‹</a>
+    <div><div class="appbar-title">도움말</div></div>
+  </div>
+
+  <div class="content content--tight" style="padding-bottom:28px;">
+    <div class="row" style="background:var(--white); border:1.5px solid var(--outline); border-radius:var(--r-pill); padding:7px 12px 7px 16px; align-items:center;">
+      <span aria-hidden="true">🔍</span>
+      <input class="grow" id="faq-search" type="search" inputmode="search" aria-label="도움말 검색" placeholder="궁금한 점을 검색해 보세요"
+             style="min-height:44px; min-width:0; border:0; outline:0; background:transparent; font-size:14px; padding:6px 4px;">
+    </div>
+
+    <!-- 2026-09-28 정보 화면 디자인 시스템 v3 — 질문 목록을 제목 걸친 상자 하나로 묶었다.
+         제목에 section-label 을 같이 둔다: more2.js page26 이 이 이름으로 제목을 찾아 검색 중엔 '검색 결과'로 바꾸고,
+         _build_kb.py 도 section-label·faq-q 로 섹션을 나눈다. -->
+    <section class="sec sec--why sec--faq">
+      <h2 class="sec-t section-label">자주 묻는 질문</h2>
+      <div class="faq">
+        <div class="listitem faq-q" role="button" tabindex="0" aria-expanded="false">
+          <div class="li-body"><div class="li-title">토닥은 병원 진료를 대체하나요?</div><div class="li-sub">아니요. 참고용이며 의료기기가 아니에요</div></div>
+          <span class="li-chev">＋</span>
+        </div>
+        <div class="faq-a small" hidden><p>토닥은 치료 중 겪는 불편을<br>기록하고 관리하시도록 돕는 앱이에요.</p><p>의료기기가 아니라서<br>병이 있는지 판단하지 않고,<br>약을 바꾸라는 안내도 드리지 않아요.</p><p>진단과 치료 결정은 담당 의사가 해요.<br>기록을 진료 때 보여 주시면<br>대화가 수월해져요.</p></div>
+      </div>
+      <div class="faq">
+        <div class="listitem faq-q" role="button" tabindex="0" aria-expanded="false">
+          <div class="li-body"><div class="li-title">AI 답변을 믿어도 되나요?</div><div class="li-sub">국내외 암 전문기관·학회 지침으로 답해요</div></div>
+          <span class="li-chev">＋</span>
+        </div>
+        <div class="faq-a small" hidden><p>국제 암 전문기관과 국내 학회가 공개한<br>지침을 바탕으로 답해요.</p><p>회원님의 검사 결과나 진료 기록을<br>보고 답하는 게 아니라서<br><b>일반적인 안내</b>로 받아 주세요.</p><p>증상이 평소와 다르거나 점점 심해지면<br>답변과 상관없이 치료받는 병원에 연락하세요.</p><p>출처는 <b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요.</p></div>
+      </div>
+      <div class="faq">
+        <div class="listitem faq-q" role="button" tabindex="0" aria-expanded="false">
+          <div class="li-body"><div class="li-title">제 정보는 안전한가요?</div><div class="li-sub">암호화해 보관해요.<br>삭제는 내 정보 › 계정 관리에서 요청하세요</div></div>
+          <span class="li-chev">＋</span>
+        </div>
+        <div class="faq-a small" hidden><p>기록하신 내용은 회원님 계정에만<br>암호화해 보관해요.<br>다른 분이 볼 수 없고,<br>다른 용도로 쓰지 않아요.</p><p><b>위치</b>는 ‘근처 병원 찾기’를 누르신<br>그 순간에만 한 번 확인하고<br>토닥 서버로 보내지 않아요.</p><p><b>약 봉투 사진</b>은 글자를 읽는 동안에만<br>쓰고 바로 지워요.</p><p>계정과 기록을 지우고 싶으시면<br><b>내 정보 › 계정 관리</b>에서 요청하세요.</p></div>
+      </div>
+      <div class="faq">
+        <div class="listitem faq-q" role="button" tabindex="0" aria-expanded="false">
+          <div class="li-body"><div class="li-title">응급할 땐 어떻게 하나요?</div><div class="li-sub">119나 치료받는 병원에 바로 연락하세요</div></div>
+          <span class="li-chev">＋</span>
+        </div>
+        <div class="faq-a small" hidden><p>가만히 있어도 숨이 차거나,<br>가슴이 아프거나, 의식이 흐려지면<br><b>119</b>로 바로 연락하세요.</p><p>항암치료 중에 열이 나면<br><b>그 자체가 응급이에요.</b><br>밤이든 주말이든 <b>치료받는 병원</b>에 연락하고,<br>연락이 안 되면 가까운 응급실로 가세요.</p><p><b>해열제를 먼저 드시지 마세요.</b><br>열이 가려지면 상황을 놓쳐요.</p><p><b>열 기준</b><br>귀(고막) 38.0도 이상<br>겨드랑이 37.5도 이상<br>입(구강) 38.3도가 한 번,<br>또는 38.0도가 1시간 넘게 이어질 때</p><p><a href="48-emergency.html?from=26-help.html" style="color:var(--primary-dark); font-weight:700;">응급 안내 자세히 보기 ›</a></p></div>
+      </div>
+      <div class="faq">
+        <div class="listitem faq-q" role="button" tabindex="0" aria-expanded="false">
+          <div class="li-body"><div class="li-title">부작용 정보는 어떻게 만들어졌나요?</div><div class="li-sub">국내외 암 전문기관·학회 자료로 만들어요</div></div>
+          <span class="li-chev">＋</span>
+        </div>
+        <div class="faq-a small" hidden><p>국제 암 전문기관과 국내 학회가 공개한 자료,<br>보건복지부·암생존자통합지지사업 자료를<br>근거로 정리했어요.</p><p>특정 제품이나 병원을 홍보하지 않아요.<br>근거가 확실하지 않은 내용은 싣지 않았어요.</p><p>출처는 모두<br><b>내 정보 › 이 앱이 쓰는 자료</b>에 있어요.</p></div>
+      </div>
+      <div class="faq">
+        <div class="listitem faq-q" role="button" tabindex="0" aria-expanded="false">
+          <div class="li-body"><div class="li-title">건강기능식품도 확인할 수 있나요?</div><div class="li-sub">드시는 약과 겹치는지 알려 드려요.<br>드실지는 담당 의사·약사와 정하세요</div></div>
+          <span class="li-chev">＋</span>
+        </div>
+        <div class="faq-a small" hidden><p>알려진 주의점과, 약과 겹쳤을 때<br>생길 수 있는 문제를 알려 드려요.<br>드셔도 되는지는 토닥이 판단하지 않아요.</p><p>화면 아래 <b>‘진료 때 이렇게 여쭤보세요’</b>를<br>담당 의사나 약사에게 그대로 보여 주세요.</p><p>수술이나 시술을 앞두고 계시면<br>꼭 미리 말씀하세요.</p></div>
+      </div>
+      <div class="faq">
+        <div class="listitem faq-q" role="button" tabindex="0" aria-expanded="false">
+          <div class="li-body"><div class="li-title">대화 내용은 저장되나요?</div><div class="li-sub">회원님 계정에만 암호화해 보관돼요</div></div>
+          <span class="li-chev">＋</span>
+        </div>
+        <div class="faq-a small" hidden><p>네, 다시 열어 보실 수 있게<br>회원님 계정에만 암호화해 보관해요.<br>다른 분이 볼 수 없고,<br>다른 용도로 쓰지 않아요.</p><p>지우고 싶으시면<br><b>내 정보 › 계정 관리</b>에서 요청하세요.<br>10일 안에 처리해 드려요.</p></div>
+      </div>
+      <div class="faq">
+        <div class="listitem faq-q" role="button" tabindex="0" aria-expanded="false">
+          <div class="li-body"><div class="li-title">알림을 끄거나 시간을 바꾸고 싶어요</div><div class="li-sub">내 정보 › 알림 설정에서 바꿀 수 있어요</div></div>
+          <span class="li-chev">＋</span>
+        </div>
+        <div class="faq-a small" hidden><p><b>내 정보 › 알림 설정</b>에서 켜고 끄세요.<br>컨디션 기록·마음 건강 체크 알림은<br>그 줄을 누르면 시간도 바꿀 수 있어요.</p><p>약 먹는 시간은<br><b>내 정보 › 복약 설정</b>에서 바꾸세요.<br>오늘의 복약 표 위 ‘약 목록 고치기’에서도<br>바꿀 수 있어요.</p><p>휴대폰에서 알림이 막혀 있으면<br>앱에서 켜도 오지 않아요.<br>그때는 휴대폰 설정도 확인해 주세요.<br><b>설정 › 애플리케이션 › 토닥 › 알림</b></p></div>
+      </div>
+      <div class="faq">
+        <div class="listitem faq-q" role="button" tabindex="0" aria-expanded="false">
+          <div class="li-body"><div class="li-title">비밀번호를 잊었어요</div><div class="li-sub">‘이메일로 로그인’ › ‘비밀번호 찾기’에서<br>새로 만드실 수 있어요</div></div>
+          <span class="li-chev">＋</span>
+        </div>
+        <div class="faq-a small" hidden><p>시작 화면의 <b>이메일로 로그인·가입</b>에서<br><b>비밀번호 찾기</b>를 누르세요.<br>가입하신 이메일을 넣으시면<br>새 비밀번호를 만드는 링크를 보내 드려요.</p><p>메일이 안 보이면 스팸함도 확인해 주세요.</p><p>카카오·네이버·구글로 시작하셨다면<br>비밀번호가 없어요.<br>시작 화면에서 같은 버튼으로 다시 들어오세요.</p></div>
+      </div>
+      <div class="faq">
+        <div class="listitem faq-q" role="button" tabindex="0" aria-expanded="false">
+          <div class="li-body"><div class="li-title">마음이 많이 힘들 때는요?</div><div class="li-sub">24시간 전화 상담 109 · 1577-0199<br>위급할 땐 119로 연락하세요</div></div>
+          <span class="li-chev">＋</span>
+        </div>
+        <div class="faq-a small" hidden><p>혼자 견디지 않으셔도 돼요.<br>언제든 전화로 이야기하실 수 있어요.<br><b>자살예방상담 109</b><br><b>정신건강상담 1577-0199</b><br>둘 다 24시간, 무료예요.</p><p>위급한 상황이라면 <b>119</b>로 연락하세요.</p><p>불안과 재발 걱정이 오래간다면<br>진료 때 꼭 말씀하세요.</p><p><a href="47-detail-anxiety.html?from=26-help.html" style="color:var(--primary-dark); font-weight:700;">불안·재발 걱정 관리 보기 ›</a></p></div>
+      </div>
+
+      <!-- '화면이 잘 안 나올 때' — 예전에는 시안 화면(87·88)으로 이어졌는데, 그 화면들은 예시 대화·고정 날짜만 있고
+           버튼이 움직이지 않아 링크 없는 질문·답으로 바꿨다 (검색에도 함께 걸린다). -->
+      <div class="faq">
+        <div class="listitem faq-q" role="button" tabindex="0" aria-expanded="false">
+          <div class="li-body"><div class="li-title">화면이 안 나오거나<br>‘연결이 원활하지 않아요’가 떠요</div><div class="li-sub">인터넷을 확인하고 앱을 다시 열어 보세요</div></div>
+          <span class="li-chev">＋</span>
+        </div>
+        <div class="faq-a small" hidden><p>와이파이나 모바일 데이터가<br>켜져 있는지 먼저 확인해 주세요.<br>앱을 완전히 닫았다가 다시 여시면<br>대부분 괜찮아져요.</p><p>저장하다가 이 안내가 떴다면<br>저장되지 않았을 수 있어요.<br>연결된 뒤 한 번 더 저장해 주세요.</p><p>증상이 급하실 때는 앱을 기다리지 마세요.<br><b>119</b>나 치료받는 병원에 바로 연락하세요.</p></div>
+      </div>
+      <div class="faq">
+        <div class="listitem faq-q" role="button" tabindex="0" aria-expanded="false">
+          <div class="li-body"><div class="li-title">기록 화면이 비어 있어요</div><div class="li-sub">기록이 없으면 빈 화면으로 보여요</div></div>
+          <span class="li-chev">＋</span>
+        </div>
+        <div class="faq-a small" hidden><p>아직 남기신 기록이 없으면<br>기록·약 화면이 비어 있어요.<br>기록을 남기시면 그날부터 날짜별로 쌓여요.</p><p>전에 남기신 기록이 안 보이면<br>그때와 <b>같은 방법</b>으로 로그인하셨는지<br><b>내 정보 › 계정 관리</b>에서 확인해 주세요.<br>(이메일·카카오·네이버·구글)</p><p>로그인 방법이 다르면<br>다른 계정으로 보일 수 있어요.</p></div>
+      </div>
+    </section>
+
+    <a class="listitem" href="12-sources.html?from=26-help.html">
+      <span class="li-ic">📚</span>
+      <div class="li-body">
+        <div class="li-title">이 앱이 쓰는 자료</div>
+        <div class="li-sub">출처와 이용 조건을 한곳에 모았어요</div>
+      </div>
+      <span class="li-chev">›</span>
+    </a>
+
+  </div>
+
+</div>
+</body>
+</html>

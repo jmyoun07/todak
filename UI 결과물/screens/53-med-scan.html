@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 약 봉투 찍기</title>
+<link rel="stylesheet" href="app.css">
+<style>
+/* 어두운 촬영 화면의 ‹ (2026-09-29) — 예전 인라인 background 가 app.css 의 화살표 그림까지 덮어써 ‹ 가 보이지 않았다.
+   바탕색만 밝게 바꾸고 흰 화살표를 다시 그린다. */
+.appbar--cam .back {
+  background: rgba(255,255,255,.15)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 5l-7 7 7 7'/%3E%3C/svg%3E")
+    center / 20px 20px no-repeat;
+  color: #fff;
+}
+</style>
+</head>
+<body>
+<div class="screen" style="background:#1c1416;">
+  <div class="statusbar statusbar--light"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar appbar--cam" style="color:#fff;">
+    <a class="back" href="58-med-manual.html">‹</a>
+    <div><div class="appbar-title">약 봉투 찍기</div></div>
+  </div>
+
+  <!-- 카메라 뷰 -->
+  <div style="flex:1; position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:18px;">
+    <div style="width:100%; aspect-ratio:3/4; border-radius:18px; background:linear-gradient(160deg,#2e2226,#241a1d); position:relative; display:grid; grid-template-rows:1fr auto;">
+      <!-- 가이드 프레임 -->
+      <div style="position:absolute; inset:34px 20px 72px; border:2px dashed rgba(255,255,255,.45); border-radius:14px;"></div>
+      <div style="align-self:center; justify-self:center; text-align:center; color:rgba(255,255,255,.75); padding:0 30px;">
+        <div style="font-size:40px;">💊</div>
+        <p style="font-size:13px; margin-top:10px; line-height:1.6;">약 봉투나 처방전의<br><b style="color:#fff;">표 전체가 들어오게</b> 맞춰 주세요</p>
+      </div>
+      <div style="padding:12px 14px; border-radius:0 0 18px 18px; background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.55));">
+        <p style="font-size:13px; line-height:1.5; color:rgba(255,255,255,.9); text-align:center;">📸 약 이름 오른쪽의 <b style="color:#fff;">횟수·일수 칸까지</b><br>흐리지 않게 찍어 주세요</p>
+      </div>
+    </div>
+
+    <div class="row" style="width:100%; justify-content:space-around; align-items:center; margin-top:22px;">
+      <a href="59-med-scan-fail.html" style="text-align:center; color:rgba(255,255,255,.9); text-decoration:none;">
+        <div style="width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.12);display:grid;place-items:center;font-size:24px;margin:0 auto;">🖼️</div>
+        <div class="tiny" style="margin-top:6px;">앨범</div>
+      </a>
+      <a href="54-med-confirm.html" style="width:74px;height:74px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 0 0 4px rgba(255,255,255,.25);">
+        <span style="width:60px;height:60px;border-radius:50%;background:var(--primary);display:grid;place-items:center;font-size:26px;">📷</span>
+      </a>
+      <a href="58-med-manual.html" style="text-align:center; color:rgba(255,255,255,.9); text-decoration:none;">
+        <div style="width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.12);display:grid;place-items:center;font-size:24px;margin:0 auto;">⌨️</div>
+        <div class="tiny" style="margin-top:6px;">직접 입력</div>
+      </a>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

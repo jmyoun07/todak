@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 약관 동의</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  /* hidden 속성이 .footer-actions·.selectable·.btn 의 display 선언에 밀리지 않게 (열람 모드 전환용) */
+  [hidden] { display: none !important; }
+  /* 열람 모드에서 필수 3항목은 눌러도 바뀌지 않아요 */
+  .agree-row .selectable[aria-disabled="true"] { cursor: default; }
+  .agree-row .selectable[aria-disabled="true"] .s-box { opacity: .55; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="01-splash.html">‹</a>
+  </div>
+  <div style="padding:0 18px;" id="consentSteps">
+    <div class="steps"><span class="step step--on"></span><span class="step"></span><span class="step"></span><span class="step"></span></div>
+    <p class="small muted" style="margin-top:8px;">1단계 · 약관 동의</p>
+  </div>
+
+  <div class="content" style="padding-bottom:130px;">
+    <div class="auth-head">
+      <h1 class="page-title" id="consentTitle">토닥을 이용하시려면<br>동의가 필요해요</h1>
+      <p class="page-sub" id="consentSub" hidden></p>
+    </div>
+
+    <!-- ── 열람 모드(02-consent.html?review=1) 전용 · 평소에는 감춰져 있어요 ──
+         대전대학교 IRB 승인 연구 동의서 8항: 전자적 동의 완료 후 동의 내용을 확인할 수 있도록 한다.
+         아래 카드는 app.js 가 DB(consent_records)에서 읽어 채워 넣어요.
+         (2026-09-20 교수님 피드백: 파일로 내려받는 '동의 확인서' 카드는 뺐어요. 화면에서 항목과
+          동의하신 때를 그대로 보실 수 있고, 각 항목의 '보기'로 전문을 여실 수 있어요.) -->
+    <div class="card" id="consentReview" hidden>
+      <div class="card-title">동의하신 기록</div>
+      <div class="col gap-6" style="margin-top:8px;">
+        <div class="small" id="crWhen">동의하신 기록을 불러오는 중이에요…</div>
+        <div class="small muted" id="crVersion"></div>
+      </div>
+      <div class="col gap-6" id="crItems" style="margin-top:12px;"></div>
+      <div class="small muted" id="crEditNote" style="margin-top:11px; line-height:1.75;">
+        <b>필수 3가지</b>는 여기서 바꾸실 수 없어요.<br>
+        <b>선택 2가지(위치·알림)</b>는 아래 목록에서 <b>지금 바로 켜고 끄실 수 있어요.</b>
+        끄셔도 토닥 이용에 <b>어떤 불이익도 없어요.</b>
+      </div>
+      <div class="small muted" id="crHistory" style="margin-top:11px; line-height:1.8;" hidden></div>
+    </div>
+
+    <!-- 동의 목록 — app.js pageConsent() 가 읽는다.
+         · 만 19세 확인(data-gate="age")은 기록 칸이 없는 '확인' 항목이라 저장 순서에 들어가지 않는다.
+           (나이는 03 기본 정보의 생년월일로 한 번 더 확인한다)
+         · 그 밖의 .selectable[role=checkbox] 는 순서대로 약관 · 개인정보 · 민감정보 (필수 3) · 위치 · 알림 (선택 2).
+           순서를 바꾸면 consent_records 컬럼 짝이 어긋나므로 바꾸지 말 것.
+         · 전체 동의(.agree-all)는 목록 아래에 둔다 — 항목을 먼저 읽고 누르게 (교수님 참고 캡처 _10).
+         · '보기'는 체크 영역 밖(오른쪽)에 두어, 눌러도 체크가 바뀌지 않는다. -->
+    <div class="agree-list">
+      <div class="agree-row">
+        <div class="selectable" data-gate="age" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="s-box"></span>
+          <div class="grow"><div class="s-title"><span class="agree-tag req">(필수)</span> 만 19세 이상이에요</div></div>
+        </div>
+      </div>
+      <div class="agree-row">
+        <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="s-box"></span>
+          <div class="grow"><div class="s-title"><span class="agree-tag req">(필수)</span> 서비스 이용약관</div></div>
+        </div>
+        <a class="agree-view" href="25-terms.html?tab=terms&amp;from=02-consent.html">보기</a>
+      </div>
+      <div class="agree-row">
+        <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="s-box"></span>
+          <div class="grow"><div class="s-title"><span class="agree-tag req">(필수)</span> 개인정보 수집·이용</div></div>
+        </div>
+        <a class="agree-view" href="25-terms.html?tab=collect&amp;from=02-consent.html">보기</a>
+      </div>
+      <div class="agree-row">
+        <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="s-box"></span>
+          <div class="grow"><div class="s-title"><span class="agree-tag req">(필수)</span> 민감정보(건강정보) 처리</div></div>
+        </div>
+        <a class="agree-view" href="25-terms.html?tab=health&amp;from=02-consent.html">보기</a>
+      </div>
+      <div class="agree-row">
+        <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="s-box"></span>
+          <div class="grow"><div class="s-title"><span class="agree-tag opt">(선택)</span> 위치정보 이용</div></div>
+        </div>
+        <a class="agree-view" href="25-terms.html?tab=location&amp;from=02-consent.html">보기</a>
+      </div>
+      <div class="agree-row">
+        <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="s-box"></span>
+          <div class="grow"><div class="s-title"><span class="agree-tag opt">(선택)</span> 맞춤 정보·알림 수신</div></div>
+        </div>
+        <a class="agree-view" href="25-terms.html?tab=notify&amp;from=02-consent.html">보기</a>
+      </div>
+    </div>
+
+    <div class="selectable agree-all" role="checkbox" tabindex="0" aria-checked="false">
+      <span class="s-box"></span>
+      <div class="grow"><div class="s-title">전체 동의하기</div><div class="s-sub">선택 항목(위치·알림)도 포함돼요</div></div>
+    </div>
+
+    <div class="agree-note" id="consentNote">
+      <p>동의하지 않으실 수 있어요. 필수 항목에 동의하지 않으시면 토닥을 이용하실 수 없고, 선택 항목은 동의하지 않으셔도 불이익이 없어요.</p>
+      <p>AI 상담에 질문하실 때마다 <b>이번 질문과 최근 대화(최대 12개), 부작용 유형</b>을 OpenAI(미국)로 보내 답변을 만들어요. 이름·연락처는 보내지 않아요. <a href="25-terms.html?tab=collect&amp;from=02-consent.html#overseas">자세히 보기</a></p>
+      <p><b>본 제품은 의료기기가 아니므로 질병 유무를 판단할 수 없으며, 질병 유무 판단을 위해서는 의사의 검진이 필요합니다.</b></p>
+    </div>
+  </div>
+
+  <div class="footer-actions" id="consentFooter">
+    <a class="btn btn-primary btn-block btn-lg" href="javascript:void(0)" aria-disabled="true">동의하고 시작하기</a>
+  </div>
+
+  <!-- 열람 모드 전용 하단 (app.js 가 켜고 끕니다) -->
+  <div class="footer-actions" id="reviewFooter" hidden>
+    <p class="small muted" id="reviewChangeNote" style="text-align:center; margin:0; line-height:1.6;" hidden></p>
+    <div style="display:flex; gap:8px;">
+      <a class="btn btn-outline btn-lg grow" id="reviewBack" href="13-settings.html" style="justify-content:center;">돌아가기</a>
+      <a class="btn btn-lg grow" id="reviewSave" href="javascript:void(0)" hidden style="background:var(--primary); color:#fff; justify-content:center;">바꾼 내용 저장</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

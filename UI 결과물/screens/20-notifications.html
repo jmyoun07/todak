@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 알림</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="05-home.html">‹</a>
+    <div><div class="appbar-title">알림</div></div>
+  </div>
+
+  <!-- 이 화면은 '받은 알림함'이 아니라 '앞으로 울릴 알림' 목록이다 — 켜 두신 항목을 지금 설정한 시각으로 풀어서 보여 준다.
+       (앱은 기기에 예약된 알림을, 웹앱은 서버가 보내는 규칙을 그대로 읽는다 · more2.js page20/page20web)
+       그래서 읽음 표시도, '모두 읽음'도 두지 않는다. 아래 줄은 시안 예시(data-demo-box)이고 앱에서는 통째로 지우고 다시 그린다.
+       글·시각은 실제로 울리는 것과 같게 적는다: native.js 의 알림 문구 · 23 알림 설정의 기본 시각(매일 오후 8:00 · 매주 월요일 오전 10:00) -->
+  <div class="content content--tight">
+    <div data-demo-box>
+    <div class="section-label">예약된 알림 6개</div>
+    <div class="listitem">
+      <span class="li-ic">📈</span>
+      <div class="li-body"><div class="li-title">오늘 하루 어떠셨어요? — 컨디션과 증상을 1분만 기록해 보세요 🌷</div><div class="li-sub">매일 오후 8:00</div></div>
+    </div>
+    <div class="listitem">
+      <span class="li-ic">🌤️</span>
+      <div class="li-body"><div class="li-title">마음 건강 체크 — 이번 주 마음은 어떠세요? 기록에 남겨 보세요</div><div class="li-sub">매주 월요일 오전 10:00</div></div>
+    </div>
+    <div class="listitem">
+      <span class="li-ic">📅</span>
+      <div class="li-body"><div class="li-title">진료가 다가와요 — 일주일 뒤 진료예요. 여쭤볼 것을 미리 정리해 보세요</div><div class="li-sub">8월 6일 (목) 오전 9:00</div></div>
+    </div>
+    <div class="listitem">
+      <span class="li-ic">📅</span>
+      <div class="li-body"><div class="li-title">진료가 다가와요 — 내일 진료예요. 진료 준비에서 질문을 확인해 보세요</div><div class="li-sub">8월 12일 (수) 오전 9:00</div></div>
+    </div>
+    <div class="listitem">
+      <span class="li-ic">💊</span>
+      <div class="li-body"><div class="li-title">토닥 — 아침 약 드실 시간이에요</div><div class="li-sub">매일 오전 8:00</div></div>
+    </div>
+    <div class="listitem">
+      <span class="li-ic">💊</span>
+      <div class="li-body"><div class="li-title">토닥 — 저녁 약 드실 시간이에요</div><div class="li-sub">매일 오후 7:00</div></div>
+    </div>
+    </div><!-- /시안 예시 -->
+
+    <a class="listitem" href="23-notif-settings.html?from=20-notifications.html">
+      <span class="li-ic">⚙️</span>
+      <div class="li-body"><div class="li-title">알림 설정 바꾸기</div></div>
+      <span class="li-chev">›</span>
+    </a>
+  </div>
+</div>
+</body>
+</html>

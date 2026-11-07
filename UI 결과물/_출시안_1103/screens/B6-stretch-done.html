@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 스트레칭 끝 (출시안)</title>
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="launch.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="B5-stretch-do.html">‹</a>
+    <div><div class="appbar-title">다 하셨어요</div></div>
+  </div>
+
+  <!-- 끝 — 했어요 + 통증 변화. 이 기록은 오늘 컨디션과 진료 전 리포트에 남는다. 다음 코칭(AI)에는 아팠던 동작만 쓴다.
+       시안은 다 마친 경우. B5 '아파서 멈출게요'로 오면 머리 상자가 'N동작 하고 멈추셨어요'가 되고 멈춘 동작이 미리 표시된다.
+       '더 아파요'가 두 번 이어지면 스트레칭을 쉬고 치료받는 병원에 여쭤보시라고 알린다(진료과를 정해 주지 않는다).
+       아팠던 동작은 동작 이름으로 남아 진료 전 리포트(A5)에 들어가고, '빼기'를 고르면 다음 코칭(B4)이 그 동작을 고르지 않는다 -->
+  <div class="content content--tight" style="padding-bottom:150px;">
+    <div class="res-hero res-hero--ok" data-demo>
+      <span class="rh-ic" aria-hidden="true">🎉</span>
+      <div class="grow">
+        <div class="rh-t">오늘 5동작을 다 하셨어요</div>
+        <div class="rh-s">이번 주 3일째예요.</div>
+      </div>
+    </div>
+
+    <div class="l-h">하고 나서 어떠세요?</div>
+    <div class="pain3" role="radiogroup" aria-label="하고 난 뒤 통증 변화">
+      <div class="on" role="radio" aria-checked="true" data-demo><span class="p-ic" aria-hidden="true">🙂</span><span class="p-t">나아졌어요</span></div>
+      <div role="radio" aria-checked="false"><span class="p-ic" aria-hidden="true">😐</span><span class="p-t">비슷해요</span></div>
+      <div role="radio" aria-checked="false"><span class="p-ic" aria-hidden="true">😣</span><span class="p-t">더 아파요</span></div>
+    </div>
+    <p class="tiny muted">‘더 아파요’가 두 번 이어지면 스트레칭을 잠시 쉬고 치료받는 병원에 여쭤보시라고 알려 드려요.</p>
+
+    <div class="l-h">아팠던 동작이 있었나요? <span class="l-hint">있으면 눌러 주세요 · 여러 개 골라도 돼요</span></div>
+    <div class="chips pain-mv" role="group" aria-label="아팠던 동작">
+      <span class="chip" role="checkbox" aria-checked="false">1 막대 들어 올리기</span>
+      <span class="chip" role="checkbox" aria-checked="false">2 손 쥐었다 펴기</span>
+      <span class="chip" role="checkbox" aria-checked="false">3 깊게 숨쉬기</span>
+      <span class="chip" role="checkbox" aria-checked="false">4 탁자에 팔 밀기</span>
+      <span class="chip chip--on" role="checkbox" aria-checked="true" data-demo>5 벽 짚고 손가락 오르기</span>
+    </div>
+    <div class="selectable selectable--on" role="checkbox" tabindex="0" aria-checked="true" data-demo>
+      <span class="s-box">✓</span>
+      <div class="grow"><div class="s-title">다음 코칭에서 고른 동작 빼기</div><div class="s-sub">동작 모음에서 언제든 다시 넣을 수 있어요</div></div>
+    </div>
+    <p class="tiny muted">아픈 게 하루 넘게 가면 치료받는 병원에 여쭤보세요. 팔이 붉어지고 뜨거워지면 열이 없어도 오늘 안에 진료를 받으세요.</p>
+
+    <div class="field">
+      <label>메모 <span class="muted small">(선택)</span></label>
+      <textarea class="textarea" rows="2" placeholder="예: 5번 동작을 할 때 겨드랑이가 아팠어요" maxlength="300"></textarea>
+    </div>
+
+    <div class="banner banner--info">
+      <span class="b-ic">📈</span>
+      <div class="small">오늘 컨디션 기록에 <b>스트레칭 함</b>으로 함께 남아요.<br>진료 전 리포트에도 들어가요.</div>
+    </div>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-primary btn-block btn-lg" href="B1-stretch-home.html">저장</a>
+  </div>
+</div>
+</body>
+</html>

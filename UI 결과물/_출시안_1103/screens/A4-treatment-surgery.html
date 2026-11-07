@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토닥 · 받으신 치료 + 수술 정보 (출시안)</title>
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="launch.css">
+</head>
+<body>
+<div class="screen">
+  <div class="statusbar statusbar--dark"><span>9:41</span><span class="sb-icons">📶 🔋</span></div>
+
+  <div class="appbar">
+    <a class="back" href="13-settings.html">‹</a>
+    <div><div class="appbar-title">받으신 치료</div><div class="appbar-sub">내 정보 › 치료 정보</div></div>
+  </div>
+
+  <!-- 04 현재 받는 치료에 '받으신 수술'을 더한 출시안. 수술한 쪽 = 팔 점검이 볼 팔 · 스트레칭 그림의 팔, 수술한 때 = 아직 이른 동작 거르기,
+       림프절 수술 = 림프부종 안내 문구(스트레칭 AI 에는 보내지 않는다).
+       ‹ 와 저장 뒤 돌아갈 곳은 들어온 곳(내 정보 또는 B4 '치료 정보 고치기') — 시안은 내 정보로 고정 -->
+  <div class="content">
+    <div class="field sec sec--q">
+      <label class="sec-t"><span>받으신 수술</span></label>
+      <p class="sec-sub">팔 점검과 스트레칭을 <b>수술한 쪽에 맞추는 데</b> 써요.</p>
+
+      <div class="it-t">수술한 쪽</div>
+      <div class="seg" role="radiogroup" aria-label="수술한 쪽">
+        <span class="seg-item seg-item--on" role="radio" aria-checked="true">왼쪽</span>
+        <span class="seg-item" role="radio" aria-checked="false">오른쪽</span>
+        <span class="seg-item" role="radio" aria-checked="false">양쪽</span>
+      </div>
+      <p class="tiny muted">아직 수술 전이시면 비워 두세요.</p>
+
+      <div class="it-t" style="margin-top:6px;">겨드랑이 림프절 수술</div>
+      <div class="selectable selectable--on" role="radio" tabindex="0" aria-checked="true">
+        <span class="s-box s-radio">●</span>
+        <div class="grow"><div class="s-title">감시림프절만 떼었어요</div><div class="s-sub">림프절 1~3개쯤 · ‘감시림프절 생검’</div></div>
+      </div>
+      <div class="selectable" role="radio" tabindex="0" aria-checked="false">
+        <span class="s-box s-radio"></span>
+        <div class="grow"><div class="s-title">겨드랑이 림프절을 여러 개 떼었어요</div><div class="s-sub">‘액와부 림프절 곽청술’</div></div>
+      </div>
+      <div class="selectable" role="radio" tabindex="0" aria-checked="false">
+        <span class="s-box s-radio"></span>
+        <div class="grow"><div class="s-title">잘 모르겠어요</div></div>
+      </div>
+      <div class="tip">
+        <span class="tip-lab">팁</span>
+        <div class="it-t">어디서 확인하나요?</div>
+        <div class="it-b">퇴원 안내문이나 수술 기록지에<br>위의 말로 적혀 있어요.</div>
+        <div class="it-do"><span>모르시면 ‘잘 모르겠어요’로 두고<br>다음 진료 때 여쭤보세요.</span></div>
+      </div>
+
+      <div class="it-t" style="margin-top:6px;">수술한 때</div>
+      <div class="row gap-8">
+        <span class="input" style="flex:1; display:flex; align-items:center;" data-demo>2026년</span>
+        <span class="input" style="flex:1; display:flex; align-items:center;" data-demo>5월</span>
+      </div>
+      <p class="tiny muted">수술 뒤 얼마나 지났는지에 따라 스트레칭 동작이 달라요.</p>
+
+      <div class="it-t" style="margin-top:6px;">팔 점검하는 날</div>
+      <div class="wday" role="radiogroup" aria-label="팔 점검하는 요일"><span role="radio" aria-checked="false">월</span><span role="radio" aria-checked="false">화</span><span role="radio" aria-checked="true" class="on" data-demo>수</span><span role="radio" aria-checked="false">목</span><span role="radio" aria-checked="false">금</span><span role="radio" aria-checked="false">토</span><span role="radio" aria-checked="false">일</span></div>
+      <p class="tiny muted">이날 저녁 컨디션 기록에 팔 점검 칸이 펼쳐져요.</p>
+    </div>
+
+    <div class="field sec sec--q">
+      <label class="sec-t"><span>받고 있거나 최근 받은 치료</span></label>
+      <p class="sec-sub">여러 개 고르셔도 돼요.</p>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box"></span>
+        <div class="grow"><div class="s-title">💉 항암화학요법</div><div class="s-sub">메스꺼움·탈모·피로·손발 저림 등</div></div>
+      </div>
+      <div class="selectable selectable--on" role="checkbox" tabindex="0" aria-checked="true">
+        <span class="s-box">✓</span>
+        <div class="grow"><div class="s-title">📡 방사선치료</div><div class="s-sub">피부 반응·피로·림프부종 등</div></div>
+      </div>
+      <div class="seg" role="radiogroup" aria-label="방사선치료는" style="margin:-2px 0 4px 34px;"><span class="seg-item" role="radio" aria-checked="false">방사선 받는 중</span><span class="seg-item seg-item--on" role="radio" aria-checked="true" data-demo>방사선 끝났어요</span></div>
+      <div class="selectable" role="checkbox" tabindex="0" aria-checked="false">
+        <span class="s-box"></span>
+        <div class="grow"><div class="s-title">🎯 표적치료</div><div class="s-sub">심장 기능 저하·설사·피부 반응 등</div></div>
+      </div>
+      <div class="selectable selectable--on" role="checkbox" tabindex="0" aria-checked="true">
+        <span class="s-box">✓</span>
+        <div class="grow"><div class="s-title">💊 호르몬치료(내분비치료)</div><div class="s-sub">관절통·안면홍조·골밀도 감소 등</div></div>
+      </div>
+    </div>
+
+    <div class="banner banner--info">
+      <span class="b-ic">🔗</span>
+      <div class="small"><b>수술한 쪽</b>으로 팔 점검을 맞추고, <b>수술한 쪽·수술한 때</b>로 스트레칭 동작을 골라요. 바꾸시면 다음 점검부터 맞춰져요.</div>
+    </div>
+
+    <p class="disclaimer">진단·처방 목적이 아니에요.</p>
+  </div>
+
+  <div class="footer-actions">
+    <a class="btn btn-primary btn-block btn-lg" href="A1-home.html">저장</a>
+  </div>
+</div>
+</body>
+</html>
